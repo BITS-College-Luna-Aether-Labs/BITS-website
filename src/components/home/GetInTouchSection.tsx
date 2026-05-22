@@ -9,7 +9,7 @@ import {
 } from "@/components/icons/FeatureIcons";
 import { useInteractionMotion } from "@/hooks/useInteractionMotion";
 import { useMotionSafe } from "@/hooks/useMotionSafe";
-import { SPRING_SMOOTH, DURATION } from "@/lib/motion-presets";
+import { SPRING_GENTLE, SPRING_HOVER, STAGGER_SLOW, EASE_PREMIUM } from "@/lib/motion-presets";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 
 function ContactIcon({ type }: { type: "phone" | "location" | "email" }) {
@@ -31,8 +31,8 @@ export function GetInTouchSection() {
       <motion.div
         className="pointer-events-none absolute inset-0 opacity-40"
         aria-hidden="true"
-        animate={enabled ? { opacity: [0.25, 0.4, 0.25] } : undefined}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        animate={enabled ? { opacity: [0.2, 0.4, 0.25, 0.35, 0.2] } : undefined}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       >
         <svg className="h-full w-full" viewBox="0 0 1200 400" preserveAspectRatio="none">
           <path
@@ -67,18 +67,17 @@ export function GetInTouchSection() {
             className="mx-auto flex max-w-5xl flex-col items-center gap-6 md:flex-row md:items-stretch md:justify-center md:gap-0"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-40px" }}
+            viewport={{ once: true, margin: "-60px" }}
             variants={{
               hidden: {},
-              visible: { transition: { staggerChildren: 0.15 } },
+              visible: { transition: STAGGER_SLOW },
             }}
           >
             {CONTACT_CARDS.map((card, index) => {
               const content = (
                 <>
                   <motion.div
-                    whileHover={{ scale: 1.12 }}
-                    transition={{ duration: 0.2 }}
+                    whileHover={{ scale: 1.15, transition: SPRING_HOVER }}
                   >
                     <ContactIcon type={card.type} />
                   </motion.div>
@@ -99,33 +98,38 @@ export function GetInTouchSection() {
                 </>
               );
 
-              const cardClasses = card.featured
-                ? "contact-card-featured relative z-10 flex min-h-[220px] w-full max-w-sm flex-col items-center justify-center rounded-2xl bg-bits-green px-8 py-10 text-white shadow-lg md:-my-4 md:min-h-[260px] md:w-[340px]"
-                : "contact-card-side";
+              const isFeatured = card.featured ?? false;
+              const cardHover = {
+                y: isFeatured ? -8 : -6,
+                boxShadow: isFeatured
+                  ? "var(--shadow-card-hover-featured)"
+                  : "var(--shadow-card-hover-lift)",
+                transition: { duration: 0.3, ease: EASE_PREMIUM },
+              };
 
-              const inner = card.href ? (
-                <a href={card.href} className={cardClasses}>
-                  {content}
-                </a>
-              ) : (
-                <div className={cardClasses}>{content}</div>
-              );
+              const CardTag = card.href ? motion.a : motion.div;
 
               return (
                 <motion.div
                   key={`${card.type}-${card.label}`}
                   className={`flex w-full justify-center px-2 ${index === 1 ? "md:px-0" : ""}`}
                   variants={{
-                    hidden: { opacity: 0, y: 28, scale: 0.94 },
-                    visible: { opacity: 1, y: 0, scale: 1, transition: SPRING_SMOOTH },
+                    hidden: { opacity: 0, y: 32, scale: 0.93 },
+                    visible: { opacity: 1, y: 0, scale: 1, transition: SPRING_GENTLE },
                   }}
-                  whileHover={{
-                    y: card.featured ? -8 : -6,
-                    transition: { duration: 0.25 },
-                  }}
-                  whileTap={tapSm}
                 >
-                  {inner}
+                  <CardTag
+                    className={
+                      isFeatured
+                        ? "contact-card-featured gpu"
+                        : "contact-card-side gpu"
+                    }
+                    {...(card.href ? { href: card.href } : {})}
+                    whileHover={cardHover}
+                    whileTap={tapSm}
+                  >
+                    {content}
+                  </CardTag>
                 </motion.div>
               );
             })}
@@ -133,20 +137,18 @@ export function GetInTouchSection() {
         ) : (
           <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 md:flex-row md:items-stretch md:justify-center md:gap-0">
             {CONTACT_CARDS.map((card, index) => {
-              const cardClasses = card.featured
-                ? "contact-card-featured relative z-10 flex min-h-[220px] w-full max-w-sm flex-col items-center justify-center rounded-2xl bg-bits-green px-8 py-10 text-white shadow-lg md:-my-4 md:min-h-[260px] md:w-[340px]"
-                : "contact-card-side";
+              const isFeatured = card.featured ?? false;
               const inner = card.href ? (
-                <a href={card.href} className={cardClasses}>
+                <a href={card.href} className={`${isFeatured ? "contact-card-featured contact-card-featured-fallback" : "contact-card-side contact-card-side-fallback"}`}>
                   <ContactIcon type={card.type} />
-                  <p className={`mt-4 text-sm font-semibold ${card.featured ? "text-white" : "text-bits-heading"}`}>{card.value}</p>
-                  <p className={`mt-2 text-base font-bold ${card.featured ? "text-white" : "text-bits-heading"}`}>{card.label}</p>
+                  <p className={`mt-4 text-sm font-semibold ${isFeatured ? "text-white" : "text-bits-heading"}`}>{card.value}</p>
+                  <p className={`mt-2 text-base font-bold ${isFeatured ? "text-white" : "text-bits-heading"}`}>{card.label}</p>
                 </a>
               ) : (
-                <div className={cardClasses}>
+                <div className={`${isFeatured ? "contact-card-featured contact-card-featured-fallback" : "contact-card-side contact-card-side-fallback"}`}>
                   <ContactIcon type={card.type} />
-                  <p className={`mt-4 text-sm font-semibold ${card.featured ? "text-white" : "text-bits-heading"}`}>{card.value}</p>
-                  <p className={`mt-2 text-base font-bold ${card.featured ? "text-white" : "text-bits-heading"}`}>{card.label}</p>
+                  <p className={`mt-4 text-sm font-semibold ${isFeatured ? "text-white" : "text-bits-heading"}`}>{card.value}</p>
+                  <p className={`mt-2 text-base font-bold ${isFeatured ? "text-white" : "text-bits-heading"}`}>{card.label}</p>
                 </div>
               );
               return (

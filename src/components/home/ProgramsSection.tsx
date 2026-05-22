@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { PROGRAM_CARDS } from "@/lib/constants/site";
 import { useInteractionMotion } from "@/hooks/useInteractionMotion";
 import { useMotionSafe } from "@/hooks/useMotionSafe";
-import { SPRING_SMOOTH, STAGGER_NORMAL } from "@/lib/motion-presets";
+import { SPRING_GENTLE, SPRING_HOVER, STAGGER_NORMAL, EASE_PREMIUM } from "@/lib/motion-presets";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 
 const graduateProgram = PROGRAM_CARDS[0];
@@ -15,7 +15,7 @@ const undergradPrograms = PROGRAM_CARDS.slice(1);
 function ProgramCardsList() {
   return (
     <div className="mt-8 space-y-4">
-      <Link href={graduateProgram.href} className="program-card block pl-6">
+      <Link href={graduateProgram.href} className="program-card program-card-fallback block pl-6">
         <h3 className="text-sm font-bold uppercase tracking-wide text-bits-heading">
           {graduateProgram.title}
         </h3>
@@ -26,7 +26,7 @@ function ProgramCardsList() {
           <Link
             key={program.title}
             href={program.href}
-            className="program-card block h-full pl-6"
+            className="program-card program-card-fallback block h-full pl-6"
           >
             <h3 className="text-sm font-bold uppercase tracking-wide text-bits-heading">
               {program.title}
@@ -40,28 +40,33 @@ function ProgramCardsList() {
 }
 
 function ProgramCardsAnimated() {
-  const { hoverLiftSm, tapSm } = useInteractionMotion();
+  const { tapSm } = useInteractionMotion();
 
   return (
     <motion.div
       className="mt-8 space-y-4"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "-60px" }}
       variants={{
         hidden: {},
-        visible: { transition: { staggerChildren: 0.12 } },
+        visible: { transition: STAGGER_NORMAL },
       }}
     >
       <motion.div
+        className="program-card gpu block pl-6"
         variants={{
-          hidden: { opacity: 0, x: 16 },
-          visible: { opacity: 1, x: 0, transition: SPRING_SMOOTH },
+          hidden: { opacity: 0, x: 20, scale: 0.97 },
+          visible: { opacity: 1, x: 0, scale: 1, transition: SPRING_GENTLE },
         }}
-        whileHover={hoverLiftSm}
+        whileHover={{
+          y: -4,
+          boxShadow: "var(--shadow-card-hover-rise)",
+          transition: SPRING_HOVER,
+        }}
         whileTap={tapSm}
       >
-        <Link href={graduateProgram.href} className="program-card block pl-6">
+        <Link href={graduateProgram.href} className="block">
           <h3 className="text-sm font-bold uppercase tracking-wide text-bits-heading">
             {graduateProgram.title}
           </h3>
@@ -72,14 +77,19 @@ function ProgramCardsAnimated() {
         {undergradPrograms.map((program) => (
           <motion.div
             key={program.title}
+            className="program-card gpu block h-full pl-6"
             variants={{
-              hidden: { opacity: 0, x: 16 },
-              visible: { opacity: 1, x: 0, transition: SPRING_SMOOTH },
+              hidden: { opacity: 0, x: 20, scale: 0.97 },
+              visible: { opacity: 1, x: 0, scale: 1, transition: SPRING_GENTLE },
             }}
-            whileHover={hoverLiftSm}
+            whileHover={{
+              y: -4,
+              boxShadow: "var(--shadow-card-hover-rise)",
+              transition: SPRING_HOVER,
+            }}
             whileTap={tapSm}
           >
-            <Link href={program.href} className="program-card block h-full pl-6">
+            <Link href={program.href} className="block h-full">
               <h3 className="text-sm font-bold uppercase tracking-wide text-bits-heading">
                 {program.title}
               </h3>
@@ -109,10 +119,10 @@ export function ProgramsSection() {
             />
             {enabled ? (
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55 }}
+                initial={{ opacity: 0, x: -24, scale: 0.97 }}
+                whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ ...SPRING_GENTLE, ease: EASE_PREMIUM }}
               >
                 <Image
                   src="/images/programs-student.webp"

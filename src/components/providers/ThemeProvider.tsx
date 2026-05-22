@@ -68,7 +68,9 @@ export function ThemeProvider({
   const [theme, setThemeState] = useState<Theme>(
     initialTheme === "system" ? "light" : initialTheme,
   );
-  const [resolved, setResolved] = useState<"light" | "dark">("light");
+  const [resolved, setResolved] = useState<"light" | "dark">(
+    resolveTheme(initialTheme),
+  );
 
   const setTheme = useCallback((next: Theme) => {
     const normalized =

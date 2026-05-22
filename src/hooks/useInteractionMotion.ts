@@ -9,6 +9,9 @@ import {
   HOVER_SCALE_SM,
   TAP_SCALE,
   TAP_SCALE_SM,
+  CARD_HOVER_LIGHT,
+  ACCENT_GLOW_GREEN,
+  SPRING_HOVER,
 } from "@/lib/motion-presets";
 
 /** Returns Framer hover/tap props only when motion is enabled and allowed */
@@ -25,5 +28,7 @@ export function useInteractionMotion() {
     hoverScaleSm: on ? HOVER_SCALE_SM : undefined,
     tap: on ? TAP_SCALE : undefined,
     tapSm: on ? TAP_SCALE_SM : undefined,
+    hoverCard: on ? { ...CARD_HOVER_LIGHT, transition: SPRING_HOVER } : undefined,
+    hoverGlow: on ? { boxShadow: ACCENT_GLOW_GREEN.boxShadow } : undefined,
   };
 }

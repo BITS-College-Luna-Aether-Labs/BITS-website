@@ -15,3 +15,8 @@ export function resolveTheme(theme: Theme): "light" | "dark" {
   if (theme === "light" || theme === "dark") return theme;
   return "light";
 }
+
+/** Minimal inline script to prevent theme flash — injected before first paint */
+export const THEME_SCRIPT = `
+(function(){try{var c=document.cookie.split('; ').find(function(c){return c.startsWith('bits_theme=')});var v=c?c.split('=')[1]:'system';document.documentElement.classList.toggle('dark',v==='dark'||(v==='system'&&window.matchMedia('(prefers-color-scheme:dark)').matches))}catch(e){}})()
+`;

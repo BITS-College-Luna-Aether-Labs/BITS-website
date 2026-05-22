@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { APPLY_URL } from "@/lib/constants/navigation";
 import { useInteractionMotion } from "@/hooks/useInteractionMotion";
 import { useMotionSafe } from "@/hooks/useMotionSafe";
-import { DURATION, EASE_OUT } from "@/lib/motion-presets";
+import { DURATION, EASE_PREMIUM, SPRING_GENTLE } from "@/lib/motion-presets";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 
 function HeroContent({ animate }: { animate?: boolean }) {
@@ -17,18 +17,17 @@ function HeroContent({ animate }: { animate?: boolean }) {
       <div className="relative inline-block">
         <h1
           id="hero-heading"
-          className="text-4xl font-bold leading-tight text-bits-heading sm:text-5xl md:text-[3.25rem]"
+          className="font-display text-4xl font-bold leading-tight text-bits-heading sm:text-5xl md:text-[3.25rem]"
         >
           <span className="block">Join the</span>
           <span className="block">Vision</span>
         </h1>
-        {/* Subtle accent underline on heading */}
         {animate && on && (
           <motion.div
             className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-bits-green to-bits-gold/0"
             initial={{ width: 0, opacity: 0 }}
             animate={{ width: "60px", opacity: 0.6 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
+            transition={{ delay: 0.5, duration: 0.7, ease: EASE_PREMIUM }}
           />
         )}
       </div>
@@ -46,7 +45,7 @@ function HeroContent({ animate }: { animate?: boolean }) {
           ? {
               whileHover: hoverScaleSm,
               whileTap: tapSm,
-              transition: { duration: DURATION.fast },
+              transition: { duration: DURATION.fast, ease: "easeOut" },
             }
           : {})}
       >
@@ -66,8 +65,8 @@ function HeroImage({ animate }: { animate?: boolean }) {
         aria-hidden="true"
         {...(animate
           ? {
-              animate: { scale: [1, 1.05, 1], opacity: [0.25, 0.35, 0.25] },
-              transition: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+              animate: { scale: [1, 1.06, 1, 0.98, 1], opacity: [0.25, 0.35, 0.2, 0.3, 0.25] },
+              transition: { duration: 10, repeat: Infinity, ease: "easeInOut" },
             }
           : {})}
       />
@@ -76,19 +75,29 @@ function HeroImage({ animate }: { animate?: boolean }) {
         aria-hidden="true"
         {...(animate
           ? {
-              animate: { scale: [1, 1.06, 1] },
-              transition: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 },
+              animate: { scale: [1, 1.08, 0.96, 1.04, 1] },
+              transition: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.5 },
             }
           : {})}
       />
-      <Image
-        src="/images/hero-student.webp"
-        alt="BITS student holding Software Architecture in Practice textbook"
-        width={550}
-        height={1088}
-        priority
-        className="relative z-10 h-auto w-full max-w-[280px] object-contain sm:max-w-[340px] md:max-w-[400px] lg:max-w-[440px]"
-      />
+      <motion.div
+        className="relative z-10"
+        {...(animate
+          ? {
+              animate: { y: [0, -4, 0] },
+              transition: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+            }
+          : {})}
+      >
+        <Image
+          src="/images/hero-student.webp"
+          alt="BITS student holding Software Architecture in Practice textbook"
+          width={550}
+          height={1088}
+          priority
+          className="h-auto w-full max-w-[280px] object-contain sm:max-w-[340px] md:max-w-[400px] lg:max-w-[440px]"
+        />
+      </motion.div>
     </>
   );
 }
@@ -108,7 +117,7 @@ export function HeroSection() {
               className="z-10 max-w-xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: DURATION.slow, ease: EASE_OUT }}
+              transition={{ ...SPRING_GENTLE, delay: 0.1 }}
             >
               <HeroContent animate />
             </motion.div>
@@ -121,9 +130,9 @@ export function HeroSection() {
           {enabled ? (
             <motion.div
               className="relative flex justify-center lg:justify-end"
-              initial={{ opacity: 0, x: 24 }}
+              initial={{ opacity: 0, x: 32 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: DURATION.slow, delay: 0.12, ease: EASE_OUT }}
+              transition={{ ...SPRING_GENTLE, delay: 0.25 }}
             >
               <HeroImage animate />
             </motion.div>

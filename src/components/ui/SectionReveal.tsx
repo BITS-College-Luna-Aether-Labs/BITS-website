@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 import { useMotionSafe } from "@/hooks/useMotionSafe";
-import { EASE_OUT, SPRING_SMOOTH, DURATION } from "@/lib/motion-presets";
+import { SPRING_GENTLE, EASE_PREMIUM } from "@/lib/motion-presets";
 
 type SectionRevealProps = {
   children: ReactNode;
@@ -27,10 +27,10 @@ export function SectionReveal({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ ...SPRING_SMOOTH, delay, ease: EASE_OUT }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ ...SPRING_GENTLE, delay, ease: EASE_PREMIUM }}
     >
       {withAccent ? (
         <motion.div
@@ -42,7 +42,7 @@ export function SectionReveal({
               "0 0 0 0 rgba(125, 194, 67, 0)",
             ],
           }}
-          transition={{ delay: delay + 0.3, duration: DURATION.slow }}
+          transition={{ delay: delay + 0.3, duration: 0.55 }}
           style={{ borderRadius: "inherit" }}
         >
           {children}

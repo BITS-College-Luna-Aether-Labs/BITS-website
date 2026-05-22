@@ -4,6 +4,8 @@
 export const EASE_OUT = [0.4, 0, 0.2, 1] as const;
 export const EASE_IN = [0.4, 0, 1, 1] as const;
 export const EASE_SMOOTH = [0.25, 0.46, 0.45, 0.94] as const;
+export const EASE_PREMIUM = [0.16, 1, 0.3, 1] as const;
+export const EASE_OUT_QUART = [0.25, 1, 0.5, 1] as const;
 
 // SPRING PHYSICS
 export const SPRING_SMOOTH = {
@@ -18,11 +20,37 @@ export const SPRING_BOUNCY = {
   damping: 20,
 };
 
+export const SPRING_GENTLE = {
+  type: "spring" as const,
+  stiffness: 200,
+  damping: 28,
+};
+
+export const SPRING_STIFF = {
+  type: "spring" as const,
+  stiffness: 400,
+  damping: 30,
+};
+
+export const SPRING_HOVER = {
+  type: "spring" as const,
+  stiffness: 350,
+  damping: 22,
+};
+
+export const SPRING_BOUNCE_IN = {
+  type: "spring" as const,
+  stiffness: 260,
+  damping: 18,
+};
+
 // DURATION TOKENS
 export const DURATION = {
+  instant: 0.1,
   fast: 0.2,
   normal: 0.35,
   slow: 0.55,
+  slower: 0.7,
 };
 
 // INTERACTION TRANSFORMS
@@ -32,6 +60,17 @@ export const HOVER_SCALE = { scale: 1.03 };
 export const HOVER_SCALE_SM = { scale: 1.02 };
 export const TAP_SCALE = { scale: 0.97 };
 export const TAP_SCALE_SM = { scale: 0.98 };
+
+// ENHANCED CARD HOVER
+export const CARD_HOVER = {
+  y: -6,
+  boxShadow: "var(--shadow-card-hover-lift)",
+};
+
+export const CARD_HOVER_LIGHT = {
+  y: -3,
+  boxShadow: "var(--shadow-card-hover-rise)",
+};
 
 // ACCENT ANIMATION TOKENS (GREEN + GOLD SYSTEM)
 export const ACCENT_GLOW_GREEN = {
@@ -61,6 +100,37 @@ export const PULSE_ACCENT = {
 
 export const SHIMMER_BRIEF = {
   backgroundPosition: ["0% 0%", "100% 0%"],
+};
+
+// REVEAL VARIANTS (for stagger containers)
+export const FADE_UP = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
+
+export const FADE_UP_SCALE = {
+  hidden: { opacity: 0, y: 16, scale: 0.97 },
+  visible: { opacity: 1, y: 0, scale: 1 },
+};
+
+export const FADE_SCALE = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { opacity: 1, scale: 1 },
+};
+
+export const FADE_IN = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
+export const SLIDE_RIGHT = {
+  hidden: { opacity: 0, x: -24 },
+  visible: { opacity: 1, x: 0 },
+};
+
+export const SLIDE_LEFT = {
+  hidden: { opacity: 0, x: 24 },
+  visible: { opacity: 1, x: 0 },
 };
 
 // REVEAL STAGGER (for scroll-triggered animations)

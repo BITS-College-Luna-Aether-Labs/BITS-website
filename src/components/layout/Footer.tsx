@@ -51,7 +51,7 @@ export function Footer() {
               alt=""
               width={160}
               height={52}
-              className="mb-4 h-auto w-[140px] brightness-0 invert"
+              className="mb-4 h-auto w-[140px] brightness-0 invert transition-opacity duration-300 hover:opacity-80"
             />
             <p className="text-sm italic text-bits-footer-text/90">
               from collecting . . . to connecting . . .
@@ -90,7 +90,7 @@ export function Footer() {
                 <a
                   key={social.label}
                   href={social.href}
-                  className="footer-social flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white hover:text-bits-green"
+                  className="footer-social flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-all duration-300 ease-out hover:bg-white hover:text-bits-green hover:shadow-lg hover:-translate-y-1 active:translate-y-0"
                   aria-label={social.label}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -109,7 +109,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="footer-link hover:text-bits-green"
+                    className="footer-link inline-block transition-all duration-200 ease-out hover:text-bits-green hover:translate-x-1"
                   >
                     {link.label}
                   </Link>

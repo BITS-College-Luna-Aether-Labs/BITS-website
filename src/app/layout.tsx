@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Open_Sans, Roboto_Slab } from "next/font/google";
+import { Open_Sans, Roboto_Slab, Playfair_Display } from "next/font/google";
 import { cookies } from "next/headers";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MotionProvider } from "@/components/providers/MotionProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { THEME_COOKIE, parseTheme } from "@/lib/theme";
+import { THEME_COOKIE, THEME_SCRIPT, parseTheme, resolveTheme } from "@/lib/theme";
 import { SITE } from "@/lib/constants/site";
 import "./globals.css";
 
@@ -20,6 +20,13 @@ const robotoSlab = Roboto_Slab({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
   variable: "--font-roboto-slab",
+  display: "swap",
+});
+
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["700", "800"],
+  variable: "--font-playfair",
   display: "swap",
 });
 
@@ -68,11 +75,15 @@ export default async function RootLayout({
   const cookieStore = await cookies();
   const themeCookie = cookieStore.get(THEME_COOKIE)?.value;
   const initialTheme = parseTheme(themeCookie);
+  const ssrClass = resolveTheme(initialTheme);
 
   return (
-    <html lang="en" className="light" suppressHydrationWarning>
+    <html lang="en" className={ssrClass} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body
-        className={`${openSans.variable} ${robotoSlab.variable} font-sans`}
+        className={`${openSans.variable} ${robotoSlab.variable} ${playfairDisplay.variable} font-sans`}
       >
         <ThemeProvider initialTheme={initialTheme}>
           <MotionProvider>

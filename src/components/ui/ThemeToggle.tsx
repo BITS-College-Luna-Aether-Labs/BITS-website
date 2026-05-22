@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "@/components/providers/ThemeProvider";
+import { SPRING_HOVER } from "@/lib/motion-presets";
 
 function MoonIcon() {
   return (
@@ -52,7 +53,7 @@ export function ThemeToggle() {
       className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200 text-bits-gray transition-colors hover:border-bits-green hover:text-bits-green dark:border-gray-600 dark:text-gray-300 dark:hover:border-bits-green dark:hover:text-bits-green"
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       whileTap={shouldReduce ? undefined : { scale: 0.92 }}
-      whileHover={shouldReduce ? undefined : { scale: 1.06 }}
+      whileHover={shouldReduce ? undefined : { scale: 1.06, transition: SPRING_HOVER }}
       transition={{ duration: 0.2 }}
     >
       <motion.span
@@ -60,9 +61,9 @@ export function ThemeToggle() {
         {...(shouldReduce
           ? {}
           : {
-              initial: { opacity: 0, rotate: -30 },
-              animate: { opacity: 1, rotate: 0 },
-              transition: { duration: 0.25 },
+              initial: { opacity: 0, rotate: -30, scale: 0.8 },
+              animate: { opacity: 1, rotate: 0, scale: 1 },
+              transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
             })}
       >
         {isDark ? <SunIcon /> : <MoonIcon />}

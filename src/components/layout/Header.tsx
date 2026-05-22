@@ -8,7 +8,7 @@ import { useInteractionMotion } from "@/hooks/useInteractionMotion";
 import { useCallback, useEffect, useState } from "react";
 import { APPLY_URL, NAV_ITEMS } from "@/lib/constants/navigation";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { DURATION } from "@/lib/motion-presets";
+import { SPRING_GENTLE, SPRING_STIFF, EASE_PREMIUM } from "@/lib/motion-presets";
 
 function ChevronDown({ open }: { open?: boolean }) {
   return (
@@ -23,7 +23,6 @@ function ChevronDown({ open }: { open?: boolean }) {
   );
 }
 
-/** Enhanced nav link with sliding underline animation */
 function NavLink({
   href,
   children,
@@ -44,13 +43,12 @@ function NavLink({
       >
         {children}
       </Link>
-      {/* Animated underline accent */}
       <motion.div
         className="absolute bottom-[-6px] left-0 h-0.5 bg-bits-green"
         initial={{ scaleX: 0, opacity: 0 }}
         animate={isActive && !shouldReduce ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }}
         whileHover={!shouldReduce ? { scaleX: 1, opacity: 1 } : {}}
-        transition={{ duration: DURATION.fast, ease: "easeOut" }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
         style={{ originX: 0 }}
       />
     </div>
@@ -93,11 +91,11 @@ function NavDropdown({
             {...(shouldReduce
               ? {}
               : {
-                  initial: { opacity: 0, y: 6 },
-                  animate: { opacity: 1, y: 0 },
-                  exit: { opacity: 0, y: 6 },
+                  initial: { opacity: 0, y: 8, scale: 0.97 },
+                  animate: { opacity: 1, y: 0, scale: 1 },
+                  exit: { opacity: 0, y: 8, scale: 0.97 },
                 })}
-            transition={{ duration: 0.18 }}
+            transition={{ ...SPRING_GENTLE, ease: EASE_PREMIUM }}
             role="menu"
           >
             {items.map((child, i) => (
@@ -107,14 +105,14 @@ function NavDropdown({
                 {...(shouldReduce
                   ? {}
                   : {
-                      initial: { opacity: 0, x: -6 },
+                      initial: { opacity: 0, x: -8 },
                       animate: { opacity: 1, x: 0 },
-                      transition: { delay: i * 0.04 },
+                      transition: { delay: i * 0.035, duration: 0.2 },
                     })}
               >
                 <Link
                   href={child.href}
-                  className="block px-5 py-2.5 text-sm text-bits-muted transition-[color,transform] duration-200 ease-out hover:translate-x-0.5 hover:text-bits-green dark:text-gray-300 dark:hover:text-bits-green"
+                  className="block px-5 py-2.5 text-sm text-bits-muted transition-[color,transform] duration-200 ease-out hover:translate-x-0.5 hover:text-bits-green dark:text-gray-200 dark:hover:text-bits-green"
                   role="menuitem"
                   onClick={() => setOpen(false)}
                 >
@@ -157,14 +155,13 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 z-50 w-full border-b border-transparent transition-all duration-300 dark:border-gray-800 ${
+      className={`fixed top-0 z-50 w-full border-b transition-all duration-500 ease-out ${
         scrolled
-          ? "border-gray-100 bg-white/98 shadow-sm dark:border-gray-800 dark:bg-[#0a0a0a]/98"
-          : "bg-white dark:bg-[#0a0a0a]"
+          ? "border-gray-100/80 bg-[var(--bits-page)] shadow-sm backdrop-blur-sm dark:border-gray-800"
+          : "border-transparent bg-[var(--bits-page)]"
       }`}
     >
       <div className="site-container">
-        {/* Desktop/tablet: matches bitscollege.edu.et — logo | horizontal nav | theme + Apply */}
         <div className="hidden h-[72px] items-center gap-4 md:flex lg:h-[76px]">
           <MotionLink
             href="/"
@@ -179,7 +176,7 @@ export function Header() {
               width={160}
               height={52}
               priority
-              className="h-auto w-[130px] transition-opacity duration-200 hover:opacity-90 lg:w-[150px]"
+              className="h-auto w-[130px] transition-opacity duration-200 hover:opacity-85 lg:w-[150px]"
             />
           </MotionLink>
 
@@ -210,9 +207,9 @@ export function Header() {
                     {...(shouldReduce
                       ? {}
                       : {
-                          initial: { opacity: 0, y: -6 },
+                          initial: { opacity: 0, y: -8 },
                           animate: { opacity: 1, y: 0 },
-                          transition: { delay: index * 0.04, duration: 0.3 },
+                          transition: { delay: index * 0.05, ...SPRING_GENTLE },
                         })}
                   >
                     <NavLink href={item.href ?? "/"} isActive={isActive}>
@@ -239,7 +236,6 @@ export function Header() {
           </div>
         </div>
 
-        {/* Mobile only: compact bar + hamburger */}
         <div className="flex h-[64px] items-center justify-between gap-3 md:hidden">
           <Link href="/" className="shrink-0" aria-label="BITS College home">
             <Image
@@ -287,16 +283,21 @@ export function Header() {
         {mobileOpen && (
           <motion.div
             id="mobile-menu"
-            className="border-t border-gray-100 bg-white md:hidden dark:border-gray-800 dark:bg-[#0a0a0a]"
+            className="border-t border-gray-100 bg-[var(--bits-page)] md:hidden dark:border-gray-800"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ ...SPRING_GENTLE, ease: EASE_PREMIUM }}
           >
             <nav className="site-container max-h-[70vh] overflow-y-auto py-4" aria-label="Mobile navigation">
               <ul className="space-y-1">
                 {NAV_ITEMS.map((item) => (
-                  <li key={item.label}>
+                  <motion.li
+                    key={item.label}
+                    initial={shouldReduce ? {} : { opacity: 0, x: -12 }}
+                    animate={shouldReduce ? {} : { opacity: 1, x: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     {item.href ? (
                       <Link
                         href={item.href}
@@ -308,26 +309,31 @@ export function Header() {
                         {item.label}
                       </Link>
                     ) : (
-                      <span className="block px-3 py-2 text-sm font-semibold text-bits-heading dark:text-white">
+                      <span className="block px-3 py-2 text-sm font-semibold text-bits-heading">
                         {item.label}
                       </span>
                     )}
                     {item.children && (
                       <ul className="mb-2 ml-4 space-y-1">
-                        {item.children.map((child) => (
-                          <li key={child.href}>
+                        {item.children.map((child, ci) => (
+                          <motion.li
+                            key={child.href}
+                            initial={shouldReduce ? {} : { opacity: 0, x: -8 }}
+                            animate={shouldReduce ? {} : { opacity: 1, x: 0 }}
+                            transition={{ delay: 0.05 + ci * 0.03, duration: 0.2 }}
+                          >
                             <Link
                               href={child.href}
-                              className="block rounded-lg px-3 py-2 text-sm text-bits-muted hover:text-bits-green dark:text-gray-400"
+                              className="block rounded-lg px-3 py-2 text-sm text-bits-muted hover:text-bits-green dark:text-gray-200"
                               onClick={() => setMobileOpen(false)}
                             >
                               {child.label}
                             </Link>
-                          </li>
+                          </motion.li>
                         ))}
                       </ul>
                     )}
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
             </nav>

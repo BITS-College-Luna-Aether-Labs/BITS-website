@@ -6,13 +6,13 @@ import { WHY_BITS_CARDS } from "@/lib/constants/site";
 import { FeatureIcon } from "@/components/icons/FeatureIcons";
 import { useInteractionMotion } from "@/hooks/useInteractionMotion";
 import { useMotionSafe } from "@/hooks/useMotionSafe";
-import { SPRING_SMOOTH } from "@/lib/motion-presets";
+import { SPRING_GENTLE, SPRING_HOVER, STAGGER_FAST } from "@/lib/motion-presets";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 
 export function WhyBitsSection() {
   const { enabled } = useMotionSafe();
-  const { on, tapSm, hoverScaleSm } = useInteractionMotion();
+  const { on, tapSm } = useInteractionMotion();
 
   return (
     <section
@@ -26,8 +26,8 @@ export function WhyBitsSection() {
             <motion.div
               className="pointer-events-none absolute -left-8 -top-8 h-[120%] w-[110%] opacity-90"
               aria-hidden="true"
-              animate={enabled ? { x: [0, 6, 0] } : undefined}
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+              animate={enabled ? { x: [0, 8, 2, 6, 0] } : undefined}
+              transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
             >
               <svg
                 viewBox="0 0 400 400"
@@ -67,23 +67,27 @@ export function WhyBitsSection() {
               viewport={{ once: true, margin: "-60px" }}
               variants={{
                 hidden: {},
-                visible: { transition: { staggerChildren: 0.1 } },
+                visible: { transition: STAGGER_FAST },
               }}
             >
               {WHY_BITS_CARDS.map((card) => (
                 <motion.article
                   key={card.title}
-                  className="feature-card"
+                  className="feature-card gpu"
                   variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0, transition: SPRING_SMOOTH },
+                    hidden: { opacity: 0, y: 24, scale: 0.95 },
+                    visible: { opacity: 1, y: 0, scale: 1, transition: SPRING_GENTLE },
+                  }}
+                  whileHover={{
+                    y: -4,
+                    boxShadow: "var(--shadow-card-hover-rise)",
+                    transition: SPRING_HOVER,
                   }}
                   whileTap={tapSm}
                 >
                   <motion.div
                     className="text-bits-green"
-                    whileHover={on ? hoverScaleSm : undefined}
-                    transition={{ duration: 0.2 }}
+                    whileHover={on ? { scale: 1.15, transition: SPRING_HOVER } : undefined}
                   >
                     <FeatureIcon name={card.icon} />
                   </motion.div>
@@ -96,7 +100,7 @@ export function WhyBitsSection() {
           ) : (
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
               {WHY_BITS_CARDS.map((card) => (
-                <article key={card.title} className="feature-card">
+                <article key={card.title} className="feature-card feature-card-fallback">
                   <FeatureIcon name={card.icon} />
                   <h3 className="mt-4 text-center text-sm font-bold leading-snug text-bits-heading">
                     {card.title}

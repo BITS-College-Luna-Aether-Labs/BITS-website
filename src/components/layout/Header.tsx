@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useInteractionMotion } from "@/hooks/useInteractionMotion";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { APPLY_URL, NAV_ITEMS } from "@/lib/constants/navigation";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { SPRING_GENTLE, SPRING_STIFF, EASE_PREMIUM } from "@/lib/motion-presets";
@@ -58,23 +58,36 @@ function NavLink({
 function NavDropdown({
   label,
   items,
+  isActive,
 }: {
   label: string;
   items: { label: string; href: string }[];
+  isActive?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const shouldReduce = useReducedMotion();
   const { hoverScaleSm } = useInteractionMotion();
+  const hoverTimer = useRef<number | undefined>(undefined);
+
+  const handleMouseEnter = useCallback(() => {
+    window.clearTimeout(hoverTimer.current);
+    hoverTimer.current = window.setTimeout(() => setOpen(true), 80);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    window.clearTimeout(hoverTimer.current);
+    setOpen(false);
+  }, []);
 
   return (
     <li
       className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <motion.button
         type="button"
-        className="nav-link inline-flex items-center gap-0.5 whitespace-nowrap"
+        className={`nav-link inline-flex items-center gap-0.5 whitespace-nowrap ${isActive ? "nav-link-active" : ""}`}
         aria-expanded={open}
         aria-haspopup="true"
         onClick={() => setOpen((v) => !v)}
@@ -192,11 +205,16 @@ export function Header() {
                     : Boolean(item.href && pathname.startsWith(item.href));
 
                 if (item.children) {
+                  const childActive = item.children.some(
+                    (child) => child.href && pathname.startsWith(child.href)
+                  );
+
                   return (
                     <NavDropdown
                       key={item.label}
                       label={item.label}
                       items={item.children}
+                      isActive={isActive || childActive}
                     />
                   );
                 }

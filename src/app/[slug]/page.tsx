@@ -1,5 +1,8 @@
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
+import { WhoWeAreContent } from "@/components/about/WhoWeAreContent";
+import { FacilitiesContent } from "@/components/about/FacilitiesContent";
+import { PartnersAndClientsContent } from "@/components/about/PartnersAndClientsContent";
 
 const PAGE_TITLES: Record<string, { title: string; description: string }> = {
   "who-we-are": {
@@ -89,10 +92,22 @@ export async function generateMetadata({ params }: Props) {
   return { title: page.title, description: page.description };
 }
 
+const ABOUT_PAGES = ["who-we-are", "facilities", "partners-and-clients"];
+
 export default async function DynamicPage({ params }: Props) {
   const { slug } = await params;
   const page = PAGE_TITLES[slug];
   if (!page) notFound();
+
+  if (ABOUT_PAGES.includes(slug)) {
+    return (
+      <>
+        {slug === "who-we-are" && <WhoWeAreContent />}
+        {slug === "facilities" && <FacilitiesContent />}
+        {slug === "partners-and-clients" && <PartnersAndClientsContent />}
+      </>
+    );
+  }
 
   return (
     <PageShell title={page.title} description={page.description}>

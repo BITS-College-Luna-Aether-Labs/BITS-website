@@ -16,7 +16,7 @@ export function WhyBitsSection() {
 
   return (
     <section
-      className="section-surface relative overflow-hidden py-14 md:py-20"
+      className="section-surface relative overflow-hidden py-8 md:py-12"
       aria-labelledby="why-bits-heading"
     >
       <WaveDivider flip />

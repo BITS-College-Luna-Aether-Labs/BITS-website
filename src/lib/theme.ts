@@ -8,7 +8,7 @@ export function parseTheme(value: string | undefined): Theme {
   if (value === "light" || value === "dark" || value === "system") {
     return value;
   }
-  return "system";
+  return "light";
 }
 
 export function resolveTheme(theme: Theme): "light" | "dark" {
@@ -18,5 +18,5 @@ export function resolveTheme(theme: Theme): "light" | "dark" {
 
 /** Minimal inline script to prevent theme flash — injected before first paint */
 export const THEME_SCRIPT = `
-(function(){try{var c=document.cookie.split('; ').find(function(c){return c.startsWith('bits_theme=')});var v=c?c.split('=')[1]:'system';document.documentElement.classList.toggle('dark',v==='dark'||(v==='system'&&window.matchMedia('(prefers-color-scheme:dark)').matches))}catch(e){}})()
+(function(){try{var c=document.cookie.split('; ').find(function(c){return c.startsWith('bits_theme=')});var v=c?c.split('=')[1]:'light';document.documentElement.classList.toggle('dark',v==='dark')}catch(e){})()
 `;

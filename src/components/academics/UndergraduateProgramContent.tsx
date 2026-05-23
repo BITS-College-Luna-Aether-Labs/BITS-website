@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -8,6 +9,8 @@ import {
   Code2,
   MonitorSmartphone,
 } from "lucide-react";
+
+const IMG = "/images/Academics%5CUndergraduateAdmission/";
 
 const programs = [
   {
@@ -19,6 +22,7 @@ const programs = [
     accent: "from-emerald-500/20 via-emerald-400/10 to-transparent",
     icon: Code2,
     badge: "SE",
+    image: `${IMG}Software%20Engineering.jpg`,
   },
   {
     title: "IT and Systems",
@@ -29,6 +33,7 @@ const programs = [
     accent: "from-sky-500/20 via-cyan-400/10 to-transparent",
     icon: MonitorSmartphone,
     badge: "ITS",
+    image: `${IMG}IT%20and%20Systems.webp`,
   },
 ];
 
@@ -89,35 +94,26 @@ function ProgramCard({ program }: { program: (typeof programs)[number] }) {
             </Link>
           </div>
 
-          <div className="relative min-h-[240px] overflow-hidden rounded-[1.5rem] border border-white/60 bg-slate-950/90 p-5 text-white shadow-inner">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.34),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(34,197,94,0.22),transparent_35%)]" />
-            <div className="relative flex h-full flex-col justify-between">
+          <div className="group relative min-h-[240px] overflow-hidden rounded-[1.5rem] border border-white/60 shadow-inner">
+            {program.image && (
+              <Image
+                src={program.image}
+                alt={program.title}
+                fill
+                className="object-cover transition duration-700 group-hover:scale-110"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+            <div className="relative flex h-full flex-col justify-end p-5">
               <div className="flex items-center justify-between">
-                <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-semibold tracking-[0.22em] uppercase text-emerald-200">
+                <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold tracking-[0.22em] uppercase text-white/90 backdrop-blur-sm">
                   BITS
                 </span>
-                <span className="rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-200">
+                <span className="rounded-full bg-emerald-500/30 px-3 py-1 text-xs font-semibold text-emerald-100 backdrop-blur-sm">
                   {program.badge}
                 </span>
               </div>
-
-              <div className="space-y-4">
-                <div className="h-2 w-24 rounded-full bg-emerald-400/70" />
-                <div className="h-2 w-40 rounded-full bg-white/20" />
-                <div className="h-2 w-32 rounded-full bg-white/15" />
-                <div className="mt-8 grid grid-cols-3 gap-3">
-                  {[1, 2, 3].map((pill) => (
-                    <div key={pill} className="rounded-2xl border border-white/10 bg-white/5 p-3 text-center text-xs text-slate-300">
-                      <div className="mx-auto h-8 w-8 rounded-xl bg-white/10" />
-                      <div className="mt-2 h-2 rounded-full bg-white/15" />
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <p className="text-xs uppercase tracking-[0.28em] text-slate-400">
-                Academic Excellence
-              </p>
             </div>
           </div>
         </div>
@@ -128,7 +124,7 @@ function ProgramCard({ program }: { program: (typeof programs)[number] }) {
 
 export function UndergraduateProgramContent() {
   return (
-    <div className="min-h-screen bg-[#f6f8f6] text-bits-heading">
+    <div className="min-h-screen bg-[var(--bits-page)] text-bits-heading">
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(16,185,129,0.08),rgba(255,255,255,0)_30%,rgba(255,255,255,0))]" />
         <div className="mx-auto max-w-site px-4 py-14 sm:px-6 lg:px-8 lg:py-20">

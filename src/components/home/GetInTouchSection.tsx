@@ -25,7 +25,7 @@ export function GetInTouchSection() {
 
   return (
     <section
-      className="section-surface relative overflow-hidden py-16 md:py-24"
+      className="section-surface relative overflow-hidden py-10 md:py-14"
       aria-labelledby="contact-heading"
     >
       <motion.div

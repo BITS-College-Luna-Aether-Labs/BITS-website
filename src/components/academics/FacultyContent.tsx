@@ -57,7 +57,7 @@ function Card({ item, index }: { item: FacultyCard; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.55, delay: index * 0.03, ease: EASE_PREMIUM }}
-      className="group relative aspect-[3/4] overflow-hidden rounded-[1.75rem] border border-slate-200 bg-[var(--bits-surface)] shadow-[0_12px_40px_rgba(15,23,42,0.06)] transition"
+      className="group relative aspect-[3/4] overflow-hidden rounded-[1.75rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_12px_40px_rgba(15,23,42,0.06)] transition"
     >
       {item.image ? (
         <Image
@@ -113,9 +113,9 @@ function Card({ item, index }: { item: FacultyCard; index: number }) {
 
 export function FacultyContent() {
   return (
-    <div className="min-h-screen bg-[#f8faf9] text-bits-heading">
-      <section className="relative overflow-hidden border-b border-emerald-950/10 bg-[linear-gradient(135deg,rgba(6,95,70,0.08),rgba(255,255,255,1)_38%,rgba(6,95,70,0.04))]">
-        <div className="absolute inset-0 opacity-50 [background:radial-gradient(circle_at_top_left,rgba(6,95,70,0.2),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.16),transparent_28%)]" />
+    <div className="min-h-screen bg-[var(--bits-page)] text-bits-heading">
+      <section className="relative overflow-hidden border-b border-emerald-950/10 bg-[var(--bits-surface)]">
+        <div className="absolute inset-0 opacity-30 [background:radial-gradient(circle_at_top_left,rgba(6,95,70,0.3),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.2),transparent_35%)]" />
         <div className="relative mx-auto max-w-site px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

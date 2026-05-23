@@ -27,24 +27,17 @@ function applyResolved(resolved: "light" | "dark") {
   document.documentElement.classList.toggle("dark", resolved === "dark");
 }
 
-function readSystemPreference(): "light" | "dark" {
-  if (typeof window === "undefined") return "light";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-}
-
 function readStoredTheme(): Theme {
-  if (typeof window === "undefined") return "system";
+  if (typeof window === "undefined") return "light";
   try {
     const stored = localStorage.getItem(THEME_STORAGE_KEY);
-    if (stored === "light" || stored === "dark" || stored === "system") {
+    if (stored === "light" || stored === "dark") {
       return stored;
     }
   } catch {
     /* localStorage unavailable */
   }
-  return "system";
+  return "light";
 }
 
 function persistTheme(theme: Theme) {
@@ -60,7 +53,7 @@ function persistTheme(theme: Theme) {
 
 export function ThemeProvider({
   children,
-  initialTheme = "system",
+  initialTheme = "light",
 }: {
   children: React.ReactNode;
   initialTheme?: Theme;
@@ -73,33 +66,19 @@ export function ThemeProvider({
   );
 
   const setTheme = useCallback((next: Theme) => {
-    const normalized =
-      next === "system" ? readSystemPreference() : resolveTheme(next);
-    const themeValue = normalized === "dark" ? "dark" : "light";
-    setThemeState(themeValue);
-    persistTheme(themeValue);
-    setResolved(themeValue);
-    applyResolved(themeValue);
+    const value = next === "dark" ? "dark" : "light";
+    setThemeState(value);
+    persistTheme(value);
+    setResolved(value);
+    applyResolved(value);
   }, []);
 
   useEffect(() => {
     const stored = readStoredTheme();
-    setThemeState(stored);
-    const resolvedNext =
-      stored === "system" ? readSystemPreference() : resolveTheme(stored);
-    setResolved(resolvedNext);
-    applyResolved(resolvedNext);
-
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
-    const onChange = () => {
-      if (stored === "system") {
-        const sys = readSystemPreference();
-        setResolved(sys);
-        applyResolved(sys);
-      }
-    };
-    media.addEventListener("change", onChange);
-    return () => media.removeEventListener("change", onChange);
+    const resolvedValue = stored === "dark" ? "dark" : "light";
+    setThemeState(resolvedValue);
+    setResolved(resolvedValue);
+    applyResolved(resolvedValue);
   }, []);
 
   const value = useMemo(

@@ -6,7 +6,7 @@ export function middleware(request: NextRequest) {
   const existing = request.cookies.get(THEME_COOKIE)?.value;
 
   if (!existing) {
-    response.cookies.set(THEME_COOKIE, "system", {
+    response.cookies.set(THEME_COOKIE, "light", {
       maxAge: THEME_COOKIE_MAX_AGE,
       sameSite: "lax",
       secure: process.env.NODE_ENV === "production",

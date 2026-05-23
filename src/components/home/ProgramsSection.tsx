@@ -107,7 +107,7 @@ export function ProgramsSection() {
 
   return (
     <section
-      className="section-surface py-14 md:py-20"
+      className="section-surface py-8 md:py-12"
       aria-labelledby="programs-heading"
     >
       <div className="site-container">
@@ -129,7 +129,7 @@ export function ProgramsSection() {
                   alt="BITS student with backpack"
                   width={762}
                   height={1024}
-                  className="relative z-10 mx-auto h-auto w-full max-w-[320px] object-contain md:max-w-[380px]"
+                  className="relative z-10 mx-auto h-auto w-full max-w-[640px] object-contain md:max-w-[760px]"
                 />
               </motion.div>
             ) : (
@@ -138,7 +138,7 @@ export function ProgramsSection() {
                 alt="BITS student with backpack"
                 width={762}
                 height={1024}
-                className="relative z-10 mx-auto h-auto w-full max-w-[320px] object-contain md:max-w-[380px]"
+                className="relative z-10 mx-auto h-auto w-full max-w-[640px] object-contain md:max-w-[760px]"
               />
             )}
           </SectionReveal>

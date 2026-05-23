@@ -12,7 +12,7 @@ export function AnnouncementSection() {
   const { tapSm } = useInteractionMotion();
 
   return (
-    <section className="section-surface py-10 md:py-14" aria-label="College announcement">
+    <section className="section-surface py-12 md:py-16" aria-label="College announcement">
       <SectionReveal className="site-container flex justify-center">
         {enabled ? (
           <motion.div
@@ -33,7 +33,7 @@ export function AnnouncementSection() {
               alt="BITS College is proud to announce that all students of Class of 2025 have passed their National Exit Examination"
               width={498}
               height={461}
-              className="h-auto w-full max-w-lg rounded-lg object-contain md:max-w-xl"
+              className="h-auto w-full max-w-3xl rounded-lg object-contain md:max-w-4xl"
             />
           </motion.div>
         ) : (
@@ -42,7 +42,7 @@ export function AnnouncementSection() {
             alt="BITS College is proud to announce that all students of Class of 2025 have passed their National Exit Examination"
             width={498}
             height={461}
-            className="h-auto w-full max-w-lg object-contain md:max-w-xl"
+            className="h-auto w-full max-w-3xl object-contain md:max-w-4xl"
           />
         )}
       </SectionReveal>

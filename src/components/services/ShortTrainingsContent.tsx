@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -10,8 +9,6 @@ import {
   ExternalLink,
   Globe,
   GraduationCap,
-  Mail,
-  Phone,
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
@@ -329,47 +326,6 @@ export function ShortTrainingsContent() {
           </div>
         </section>
       </main>
-
-      <footer className="bg-bits-green-dark text-white">
-        <div className="mx-auto max-w-site px-4 py-14 sm:px-6 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr_0.8fr]">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-white/60">Contact info</p>
-              <p className="mt-4 max-w-xl text-2xl font-semibold leading-tight text-white/95">
-                from collecting . . . to connecting . . .
-              </p>
-              <div className="mt-6 space-y-3 text-sm text-white/78">
-                <div className="flex items-center gap-3"><Mail className="h-4 w-4" /> info@bitscollege.edu.et</div>
-                <div className="flex items-center gap-3"><Phone className="h-4 w-4" /> +251-982-363636</div>
-                <div className="flex items-center gap-3"><Globe className="h-4 w-4" /> Yeka Sub-city, Woreda 05, next to Yeka Park</div>
-              </div>
-            </div>
-
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-white/60">Quick links</p>
-              <div className="mt-4 grid gap-3">
-                {["Tuition", "Undergraduate Program Admission", "Graduate Program Admission", "Undergraduate Accreditation", "Graduate Accreditation"].map((link) => (
-                  <Link key={link} href={`/${link.toLowerCase().replace(/\s+/g, "-").replace(/&/g, "and")}`} className="text-sm text-white/80 transition hover:text-white">
-                    {link}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-white/60">Summary</p>
-              <div className="mt-4 rounded-[1.5rem] border border-white/10 bg-white/5 p-5 text-sm leading-7 text-white/78 backdrop-blur">
-                The visual language remains consistent with the source page: compact header, two primary training blocks, a reference-download layer, and a concise footer.
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-white/55 md:flex-row md:items-center md:justify-between">
-            <p>Copyright &copy; 2026 BITS College</p>
-            <p>Recreated interface with upgraded motion, spacing, and information hierarchy.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

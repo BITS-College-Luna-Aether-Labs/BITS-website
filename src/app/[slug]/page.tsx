@@ -12,6 +12,7 @@ import { GraduateAdmissionContent } from "@/components/admissions/GraduateAdmiss
 import { ScholarshipAidContent } from "@/components/admissions/ScholarshipAidContent";
 import { StudentSupportContent } from "@/components/services/StudentSupportContent";
 import { ShortTrainingsContent } from "@/components/services/ShortTrainingsContent";
+import { NewsEventsContent } from "@/components/news/NewsEventsContent";
 
 const PAGE_TITLES: Record<string, { title: string; description: string }> = {
   "who-we-are": {
@@ -105,6 +106,7 @@ const ABOUT_PAGES = ["who-we-are", "facilities", "partners-and-clients"];
 const ACADEMICS_PAGES = ["faculty", "undergraduate-program", "graduate-program", "research"];
 const ADMISSIONS_PAGES = ["undergrad-admission", "graduate-admission", "scholarship-aid"];
 const SERVICES_PAGES = ["student-support", "short-trainings"];
+const NEWS_PAGES = ["college-news"];
 
 export default async function DynamicPage({ params }: Props) {
   const { slug } = await params;
@@ -149,6 +151,10 @@ export default async function DynamicPage({ params }: Props) {
         {slug === "short-trainings" && <ShortTrainingsContent />}
       </>
     );
+  }
+
+  if (NEWS_PAGES.includes(slug)) {
+    return <NewsEventsContent />;
   }
 
   return (

@@ -3,6 +3,10 @@ import { PageShell } from "@/components/layout/PageShell";
 import { WhoWeAreContent } from "@/components/about/WhoWeAreContent";
 import { FacilitiesContent } from "@/components/about/FacilitiesContent";
 import { PartnersAndClientsContent } from "@/components/about/PartnersAndClientsContent";
+import { FacultyContent } from "@/components/academics/FacultyContent";
+import { UndergraduateProgramContent } from "@/components/academics/UndergraduateProgramContent";
+import { GraduateProgramContent } from "@/components/academics/GraduateProgramContent";
+import { ResearchContent } from "@/components/academics/ResearchContent";
 
 const PAGE_TITLES: Record<string, { title: string; description: string }> = {
   "who-we-are": {
@@ -93,6 +97,7 @@ export async function generateMetadata({ params }: Props) {
 }
 
 const ABOUT_PAGES = ["who-we-are", "facilities", "partners-and-clients"];
+const ACADEMICS_PAGES = ["faculty", "undergraduate-program", "graduate-program", "research"];
 
 export default async function DynamicPage({ params }: Props) {
   const { slug } = await params;
@@ -105,6 +110,17 @@ export default async function DynamicPage({ params }: Props) {
         {slug === "who-we-are" && <WhoWeAreContent />}
         {slug === "facilities" && <FacilitiesContent />}
         {slug === "partners-and-clients" && <PartnersAndClientsContent />}
+      </>
+    );
+  }
+
+  if (ACADEMICS_PAGES.includes(slug)) {
+    return (
+      <>
+        {slug === "faculty" && <FacultyContent />}
+        {slug === "undergraduate-program" && <UndergraduateProgramContent />}
+        {slug === "graduate-program" && <GraduateProgramContent />}
+        {slug === "research" && <ResearchContent />}
       </>
     );
   }

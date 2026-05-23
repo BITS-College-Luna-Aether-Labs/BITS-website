@@ -1,0 +1,164 @@
+"use client";
+
+import Link from "next/link";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  BookOpen,
+  Code2,
+  MonitorSmartphone,
+} from "lucide-react";
+
+const programs = [
+  {
+    title: "Software Engineering",
+    eyebrow: "Undergraduate Program",
+    description: "Pursue an undergraduate degree in software engineering if you want to design software systems, develop applications, and manage software development projects.",
+    points: ["design software systems", "develop applications", "manage software development projects"],
+    href: "https://www.bitscollege.edu.et/software-engineering/",
+    accent: "from-emerald-500/20 via-emerald-400/10 to-transparent",
+    icon: Code2,
+    badge: "SE",
+  },
+  {
+    title: "IT and Systems",
+    eyebrow: "Undergraduate Program",
+    description: "Pursue an undergraduate degree in information technology and systems if you want to be involved in network administration, database administration, and IT security and software application support.",
+    points: ["network administration", "database administration", "IT security and software application support"],
+    href: "https://www.bitscollege.edu.et/information-technology-and-systems/",
+    accent: "from-sky-500/20 via-cyan-400/10 to-transparent",
+    icon: MonitorSmartphone,
+    badge: "ITS",
+  },
+];
+
+const container = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.12 } },
+};
+
+const itemAnim = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
+};
+
+function ProgramCard({ program }: { program: (typeof programs)[number] }) {
+  const Icon = program.icon;
+
+  return (
+    <motion.article
+      variants={itemAnim}
+      className="group overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_60px_-28px_rgba(15,23,42,0.28)]"
+    >
+      <div className={`bg-gradient-to-br ${program.accent} p-6 sm:p-8`}>
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold tracking-[0.28em] text-bits-green-dark uppercase">
+              {program.eyebrow}
+            </p>
+            <h3 className="mt-3 text-2xl font-semibold tracking-tight text-bits-heading sm:text-3xl">
+              {program.title}
+            </h3>
+          </div>
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--bits-surface)]/80 text-bits-green-dark shadow-sm">
+            <Icon className="h-6 w-6" />
+          </div>
+        </div>
+
+        <div className="mt-6 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="rounded-[1.5rem] border border-white/60 bg-[var(--bits-surface)]/75 p-5 backdrop-blur">
+            <p className="max-w-xl text-sm leading-7 text-bits-text sm:text-base">
+              {program.description}
+            </p>
+
+            <ul className="mt-5 space-y-3">
+              {program.points.map((point) => (
+                <li key={point} className="flex items-start gap-3 text-sm text-bits-text">
+                  <span className="mt-2 h-2.5 w-2.5 rounded-full bg-bits-green" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+
+            <Link
+              href={program.href}
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-bits-green-dark px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-bits-green"
+            >
+              Read More
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="relative min-h-[240px] overflow-hidden rounded-[1.5rem] border border-white/60 bg-slate-950/90 p-5 text-white shadow-inner">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.34),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(34,197,94,0.22),transparent_35%)]" />
+            <div className="relative flex h-full flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-semibold tracking-[0.22em] uppercase text-emerald-200">
+                  BITS
+                </span>
+                <span className="rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-200">
+                  {program.badge}
+                </span>
+              </div>
+
+              <div className="space-y-4">
+                <div className="h-2 w-24 rounded-full bg-emerald-400/70" />
+                <div className="h-2 w-40 rounded-full bg-white/20" />
+                <div className="h-2 w-32 rounded-full bg-white/15" />
+                <div className="mt-8 grid grid-cols-3 gap-3">
+                  {[1, 2, 3].map((pill) => (
+                    <div key={pill} className="rounded-2xl border border-white/10 bg-white/5 p-3 text-center text-xs text-slate-300">
+                      <div className="mx-auto h-8 w-8 rounded-xl bg-white/10" />
+                      <div className="mt-2 h-2 rounded-full bg-white/15" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <p className="text-xs uppercase tracking-[0.28em] text-slate-400">
+                Academic Excellence
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
+export function UndergraduateProgramContent() {
+  return (
+    <div className="min-h-screen bg-[#f6f8f6] text-bits-heading">
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(16,185,129,0.08),rgba(255,255,255,0)_30%,rgba(255,255,255,0))]" />
+        <div className="mx-auto max-w-site px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="space-y-10"
+          >
+            <motion.div variants={itemAnim} className="text-center">
+              <p className="text-sm font-semibold tracking-[0.3em] text-bits-green-dark uppercase">
+                Undergraduate Programs
+              </p>
+              <h1 className="mt-4 text-4xl font-semibold tracking-tight text-bits-heading sm:text-5xl lg:text-6xl">
+                Undergraduate Programs
+              </h1>
+              <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-bits-text sm:text-lg">
+                Two focused undergraduate pathways designed for students who want a
+                practical, industry-oriented computing education.
+              </p>
+            </motion.div>
+
+            <div className="grid gap-8">
+              {programs.map((program) => (
+                <ProgramCard key={program.title} program={program} />
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+}

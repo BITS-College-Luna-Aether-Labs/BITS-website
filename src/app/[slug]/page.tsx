@@ -7,6 +7,11 @@ import { FacultyContent } from "@/components/academics/FacultyContent";
 import { UndergraduateProgramContent } from "@/components/academics/UndergraduateProgramContent";
 import { GraduateProgramContent } from "@/components/academics/GraduateProgramContent";
 import { ResearchContent } from "@/components/academics/ResearchContent";
+import { UndergradAdmissionContent } from "@/components/admissions/UndergradAdmissionContent";
+import { GraduateAdmissionContent } from "@/components/admissions/GraduateAdmissionContent";
+import { ScholarshipAidContent } from "@/components/admissions/ScholarshipAidContent";
+import { StudentSupportContent } from "@/components/services/StudentSupportContent";
+import { ShortTrainingsContent } from "@/components/services/ShortTrainingsContent";
 
 const PAGE_TITLES: Record<string, { title: string; description: string }> = {
   "who-we-are": {
@@ -98,6 +103,8 @@ export async function generateMetadata({ params }: Props) {
 
 const ABOUT_PAGES = ["who-we-are", "facilities", "partners-and-clients"];
 const ACADEMICS_PAGES = ["faculty", "undergraduate-program", "graduate-program", "research"];
+const ADMISSIONS_PAGES = ["undergrad-admission", "graduate-admission", "scholarship-aid"];
+const SERVICES_PAGES = ["student-support", "short-trainings"];
 
 export default async function DynamicPage({ params }: Props) {
   const { slug } = await params;
@@ -121,6 +128,25 @@ export default async function DynamicPage({ params }: Props) {
         {slug === "undergraduate-program" && <UndergraduateProgramContent />}
         {slug === "graduate-program" && <GraduateProgramContent />}
         {slug === "research" && <ResearchContent />}
+      </>
+    );
+  }
+
+  if (ADMISSIONS_PAGES.includes(slug)) {
+    return (
+      <>
+        {slug === "undergrad-admission" && <UndergradAdmissionContent />}
+        {slug === "graduate-admission" && <GraduateAdmissionContent />}
+        {slug === "scholarship-aid" && <ScholarshipAidContent />}
+      </>
+    );
+  }
+
+  if (SERVICES_PAGES.includes(slug)) {
+    return (
+      <>
+        {slug === "student-support" && <StudentSupportContent />}
+        {slug === "short-trainings" && <ShortTrainingsContent />}
       </>
     );
   }

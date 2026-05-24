@@ -148,10 +148,10 @@ function FeaturedCard() {
   return (
     <motion.article
       variants={fadeUp}
-      className="overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_18px_50px_rgba(15,23,42,0.08)]"
+      className="overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_18px_50px_rgba(15,23,42,0.08)] dark:border-white/10"
     >
       <div className="grid gap-0 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="relative flex min-h-[320px] items-center justify-center bg-gradient-to-br from-bits-green-dark/20 via-emerald-100 to-lime-50">
+        <div className="relative flex min-h-[320px] items-center justify-center bg-gradient-to-br from-bits-green-dark/20 via-emerald-100 to-lime-50 dark:from-bits-green-dark/30 dark:via-emerald-900/30 dark:to-emerald-950/40">
           <CalendarDays className="h-20 w-20 text-bits-green-dark/30" />
         </div>
         <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-12">
@@ -182,11 +182,11 @@ function NewsCard({ item, index }: { item: (typeof newsItems)[number]; index: nu
     <motion.article
       variants={fadeUp}
       custom={index}
-      className="group overflow-hidden rounded-[1.75rem] border border-slate-200 bg-[var(--bits-surface)] shadow-sm transition-shadow hover:shadow-[0_18px_45px_rgba(15,23,42,0.10)]"
+      className="group overflow-hidden rounded-[1.75rem] border border-slate-200 bg-[var(--bits-surface)] shadow-sm transition-shadow hover:shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:border-white/10"
     >
-      <div className="relative flex h-52 items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--bits-surface-muted)] to-emerald-50">
+      <div className="relative flex h-52 items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--bits-surface-muted)] to-emerald-50 dark:to-emerald-950/40">
         <CalendarDays className="h-16 w-16 text-bits-green/30 transition duration-700 group-hover:scale-110" />
-        <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-bits-text backdrop-blur">
+        <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-bits-text backdrop-blur dark:bg-gray-800/90">
           News item
         </div>
       </div>
@@ -211,7 +211,7 @@ function NewsCard({ item, index }: { item: (typeof newsItems)[number]; index: nu
 
 export function NewsEventsContent() {
   return (
-    <div className="min-h-screen bg-[#f7faf8] text-bits-heading">
+    <div className="min-h-screen bg-[var(--bits-page)] text-bits-heading">
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.12),_transparent_35%),radial-gradient(circle_at_top_right,_rgba(20,184,166,0.08),_transparent_40%)]" />
         <div className="mx-auto max-w-site px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
@@ -221,7 +221,7 @@ export function NewsEventsContent() {
             animate="visible"
             className="max-w-3xl"
           >
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-medium text-bits-green-dark shadow-sm">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-medium text-bits-green-dark shadow-sm dark:border-white/10 dark:bg-gray-900">
               <CalendarDays className="h-4 w-4" />
               Archive of institutional announcements
             </div>
@@ -241,7 +241,7 @@ export function NewsEventsContent() {
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-bits-green-dark">Archive</p>
             <h2 className="mt-2 text-3xl font-semibold tracking-tight text-bits-heading">Recent campus stories</h2>
           </div>
-          <div className="hidden items-center gap-3 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-bits-text shadow-sm md:flex">
+          <div className="hidden items-center gap-3 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-bits-text shadow-sm dark:border-white/10 dark:bg-gray-900 md:flex">
             <Search className="h-4 w-4" />
             Search stories
           </div>

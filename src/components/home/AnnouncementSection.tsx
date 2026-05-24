@@ -33,7 +33,7 @@ export function AnnouncementSection() {
               alt="BITS College is proud to announce that all students of Class of 2025 have passed their National Exit Examination"
               width={498}
               height={461}
-              className="h-auto w-full max-w-3xl rounded-lg object-contain md:max-w-4xl"
+              className="h-auto w-full max-w-6xl rounded-lg object-contain"
             />
           </motion.div>
         ) : (
@@ -42,7 +42,7 @@ export function AnnouncementSection() {
             alt="BITS College is proud to announce that all students of Class of 2025 have passed their National Exit Examination"
             width={498}
             height={461}
-            className="h-auto w-full max-w-3xl object-contain md:max-w-4xl"
+            className="h-auto w-full max-w-6xl object-contain"
           />
         )}
       </SectionReveal>

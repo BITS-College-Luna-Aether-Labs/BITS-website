@@ -57,14 +57,14 @@ export const FOOTER_QUICK_LINKS = [
   { label: "Graduate Program Admission", href: "/graduate-admission" },
   {
     label: "Undergraduate Accreditation",
-    href: "/undergraduate-accreditation",
+    href: "/who-we-are?section=accreditation",
   },
-  { label: "Graduate Accreditation", href: "/graduate-accreditation" },
+  { label: "Graduate Accreditation", href: "/who-we-are?section=accreditation" },
 ];
 
 export const SOCIAL_LINKS = [
-  { label: "Facebook", href: "https://facebook.com", icon: "facebook" },
-  { label: "Twitter", href: "https://twitter.com", icon: "twitter" },
-  { label: "Instagram", href: "https://instagram.com", icon: "instagram" },
-  { label: "YouTube", href: "https://youtube.com", icon: "youtube" },
+  { label: "Facebook", href: "https://web.facebook.com/bitsethiopia", icon: "facebook" },
+  { label: "Twitter", href: "https://x.com/bitsethiopia", icon: "twitter" },
+  { label: "Instagram", href: "https://www.instagram.com/bitscollege/", icon: "instagram" },
+  { label: "YouTube", href: "https://www.youtube.com/@bitscollege2230", icon: "youtube" },
 ];

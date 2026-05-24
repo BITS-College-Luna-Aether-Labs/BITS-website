@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import {
   Award,
   BookOpen,
@@ -10,12 +11,11 @@ import {
   Target,
   Users,
   ShieldCheck,
+  X,
 } from "lucide-react";
-import {
-  FADE_UP,
-  EASE_PREMIUM,
-} from "@/lib/motion-presets";
-import { useState } from "react";
+import { EASE_PREMIUM } from "@/lib/motion-presets";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 const sections = [
   { id: "overview", label: "Overview" },
@@ -45,12 +45,12 @@ const accreditationItems = [
   {
     title: "Graduate Accreditation",
     description: "Documented recognition for graduate-level study and academic compliance.",
-    href: "/graduate-accreditation",
+    pdfUrl: "/api/pdf?file=graduate_accreditation.pdf",
   },
   {
     title: "Undergraduate Accreditation",
     description: "Documented recognition for undergraduate-level programs and standards.",
-    href: "/undergraduate-accreditation",
+    pdfUrl: "/api/pdf?file=undergraduate_accreditation.pdf",
   },
 ];
 
@@ -70,19 +70,16 @@ function SectionHeader({ icon: Icon, label, title }: { icon: React.ElementType; 
 
 function ContentCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.22 }}
-      transition={{ duration: 0.55 }}
-      className={`scroll-mt-24 rounded-[2rem] border border-emerald-950/8 bg-[var(--bits-surface)] p-6 shadow-[0_18px_50px_rgba(15,23,42,0.06)] sm:p-8 ${className}`}
+    <section
+      className={`scroll-mt-24 rounded-[2rem] border border-emerald-950/8 bg-[var(--bits-surface)] p-6 shadow-[0_18px_50px_rgba(15,23,42,0.06)] sm:p-8 dark:border-white/10 ${className}`}
     >
       {children}
-    </motion.section>
+    </section>
   );
 }
 
-const contentMap: Record<string, React.ReactNode> = {
+function buildContentMap(selectedPdf: string | null, setSelectedPdf: (v: string | null) => void): Record<string, React.ReactNode> {
+  return {
   overview: (
     <ContentCard key="overview">
       <SectionHeader icon={BookOpen} label="Overview" title="Overview" />
@@ -94,6 +91,16 @@ const contentMap: Record<string, React.ReactNode> = {
               The brand identity is built around the meaning of BITS, the visual logic of the logo, and a color
               pairing that communicates freshness, energy, creativity, and determination.
             </p>
+          </div>
+
+          <div className="flex justify-center py-4">
+            <Image
+              src="/images/logo.png"
+              alt="BITS College Logo"
+              width={400}
+              height={400}
+              className="h-auto w-80 object-contain"
+            />
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
@@ -199,7 +206,7 @@ const contentMap: Record<string, React.ReactNode> = {
   dean: (
     <ContentCard key="dean">
       <SectionHeader icon={Users} label="Message from the Dean" title="Message from the Dean" />
-      <blockquote className="rounded-3xl border-l-4 border-bits-green bg-[linear-gradient(135deg,rgba(125,194,67,0.06),rgba(255,255,255,1))] p-6 sm:p-8">
+      <blockquote className="rounded-3xl border-l-4 border-bits-green bg-[linear-gradient(135deg,rgba(125,194,67,0.06),var(--bits-surface))] p-6 sm:p-8">
         <p className="text-sm leading-7 text-bits-text sm:text-base">
           On behalf of our faculty and staff and on my own behalf, I warmly welcome you to our website.
         </p>
@@ -220,7 +227,15 @@ const contentMap: Record<string, React.ReactNode> = {
         </p>
 
         <div className="mt-6 flex items-center gap-4">
-          <div className="h-14 w-14 rounded-full bg-gradient-to-br from-bits-green to-bits-green-dark" />
+          <div className="h-14 w-14 overflow-hidden rounded-full">
+            <Image
+              src="/images/Faculty Members/Dr Tesfaye Biru.png"
+              alt="Dr Tesfaye Biru"
+              width={56}
+              height={56}
+              className="h-full w-full object-cover"
+            />
+          </div>
           <div>
             <p className="font-semibold text-bits-heading">Tesfaye Biru (PHD),</p>
             <p className="text-sm text-bits-muted">Dean</p>
@@ -234,35 +249,75 @@ const contentMap: Record<string, React.ReactNode> = {
       <SectionHeader icon={Award} label="Accreditation" title="Accreditation" />
       <div className="grid gap-4 md:grid-cols-2">
         {accreditationItems.map((item) => (
-          <a
+          <button
             key={item.title}
-            href={item.href}
-            className="group rounded-3xl border border-slate-200 bg-[linear-gradient(180deg,var(--bits-surface),var(--bits-surface-muted))] p-5 transition hover:-translate-y-1 hover:border-emerald-900/15 hover:shadow-lg hover:shadow-emerald-900/10"
+            type="button"
+            onClick={() => setSelectedPdf(item.pdfUrl)}
+            className="group w-full rounded-3xl border border-slate-200 bg-[linear-gradient(180deg,var(--bits-surface),var(--bits-surface-muted))] p-5 text-left transition hover:-translate-y-1 hover:border-emerald-900/15 hover:shadow-lg hover:shadow-emerald-900/10"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-lg font-semibold text-bits-heading">{item.title}</p>
                 <p className="mt-2 max-w-md text-sm leading-6 text-bits-text">{item.description}</p>
               </div>
-              <ChevronRight className="mt-1 h-5 w-5 text-bits-muted transition group-hover:translate-x-1 group-hover:text-bits-green" />
+              <ChevronRight className="mt-1 h-5 w-5 shrink-0 text-bits-muted transition group-hover:translate-x-1 group-hover:text-bits-green" />
             </div>
             <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-bits-green-dark">
               View document
             </div>
-          </a>
+          </button>
         ))}
       </div>
+
+      {selectedPdf && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
+          onClick={() => setSelectedPdf(null)}
+        >
+          <div
+            className="relative flex h-[80vh] w-full max-w-5xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between border-b px-6 py-4">
+              <p className="text-sm font-semibold text-bits-heading">Accreditation Document</p>
+              <button
+                type="button"
+                onClick={() => setSelectedPdf(null)}
+                className="flex h-8 w-8 items-center justify-center rounded-full text-bits-muted transition hover:bg-bits-surface-muted hover:text-bits-heading"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <iframe
+              src={selectedPdf}
+              className="h-full w-full"
+              title="Accreditation PDF"
+            />
+          </div>
+        </div>
+      )}
     </ContentCard>
   ),
-};
+  };
+}
 
 export function WhoWeAreContent() {
+  const searchParams = useSearchParams();
   const [activeSection, setActiveSection] = useState("overview");
+  const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
+  const contentMap = buildContentMap(selectedPdf, setSelectedPdf);
+
+  useEffect(() => {
+    const section = searchParams.get("section");
+    if (section && sections.some((s) => s.id === section)) {
+      setActiveSection(section);
+    }
+  }, [searchParams]);
 
   return (
     <div className="bg-[var(--bits-surface-muted)]">
       <section className="relative overflow-hidden border-b border-emerald-950/5 bg-[radial-gradient(circle_at_top_left,rgba(125,194,67,0.08),transparent_35%),linear-gradient(180deg,var(--bits-surface),var(--bits-surface-muted))]">
-        <div className="mx-auto max-w-site px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
+        <div className="mx-auto max-w-site px-4 pt-24 pb-8 sm:px-6 lg:px-8 lg:pt-28 lg:pb-10">
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
@@ -277,27 +332,23 @@ export function WhoWeAreContent() {
               Who We Are
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-bits-text sm:text-lg">
-              Learn about BITS College — our mission, vision, and community.
+              Learn about BITS College
             </p>
           </motion.div>
         </div>
       </section>
 
-      <div className="mx-auto max-w-site px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
+      <div className="mx-auto max-w-site px-4 pt-4 pb-10 sm:px-6 lg:px-8 lg:pt-6 lg:pb-12">
         <div className="grid gap-8 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-10">
           <aside className="lg:sticky lg:top-24 lg:h-fit">
             <div className="rounded-3xl border border-emerald-950/8 bg-[var(--bits-surface)] p-5 shadow-[0_18px_50px_rgba(15,23,42,0.06)]">
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-bits-muted">On this page</p>
               <div className="mt-4 space-y-2">
-                {sections.map((section, index) => (
-                  <motion.button
+                {sections.map((section) => (
+                  <button
                     key={section.id}
                     type="button"
                     onClick={() => setActiveSection(section.id)}
-                    variants={{ ...FADE_UP, hidden: { opacity: 0, y: 24 } }}
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ delay: index * 0.08, duration: 0.55, ease: EASE_PREMIUM }}
                     className={`flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-sm font-medium text-bits-text transition hover:border-emerald-900/10 hover:bg-emerald-50 hover:text-bits-green ${
                       activeSection === section.id
                         ? "border-emerald-900/10 bg-emerald-50 text-bits-green"
@@ -306,12 +357,12 @@ export function WhoWeAreContent() {
                   >
                     <span>{section.label}</span>
                     <ChevronRight className={`h-4 w-4 shrink-0 transition ${activeSection === section.id ? "text-bits-green" : ""}`} />
-                  </motion.button>
+                  </button>
                 ))}
               </div>
 
               <div className="mt-6 rounded-2xl bg-[var(--bits-surface-muted)] p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-bits-muted">Snapshot</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-bits-muted">About BITS COLLEGE</p>
                 <div className="mt-4 grid gap-3">
                   <div className="rounded-2xl bg-[var(--bits-surface)] p-4 shadow-sm">
                     <div className="flex items-center gap-3">
@@ -337,7 +388,7 @@ export function WhoWeAreContent() {
           </aside>
 
           <div className="space-y-8">
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={activeSection}
                 initial={{ opacity: 0, y: 16 }}

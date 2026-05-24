@@ -108,6 +108,7 @@ export function GetInTouchSection() {
               };
 
               const CardTag = card.href ? motion.a : motion.div;
+              const isExternal = card.href?.startsWith("http");
 
               return (
                 <motion.div
@@ -125,6 +126,7 @@ export function GetInTouchSection() {
                         : "contact-card-side gpu"
                     }
                     {...(card.href ? { href: card.href } : {})}
+                    {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     whileHover={cardHover}
                     whileTap={tapSm}
                   >
@@ -139,7 +141,10 @@ export function GetInTouchSection() {
             {CONTACT_CARDS.map((card, index) => {
               const isFeatured = card.featured ?? false;
               const inner = card.href ? (
-                <a href={card.href} className={`${isFeatured ? "contact-card-featured contact-card-featured-fallback" : "contact-card-side contact-card-side-fallback"}`}>
+                <a
+                  href={card.href}
+                  {...(card.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className={`${isFeatured ? "contact-card-featured contact-card-featured-fallback" : "contact-card-side contact-card-side-fallback"}`}>
                   <ContactIcon type={card.type} />
                   <p className={`mt-4 text-sm font-semibold ${isFeatured ? "text-white" : "text-bits-heading"}`}>{card.value}</p>
                   <p className={`mt-2 text-base font-bold ${isFeatured ? "text-white" : "text-bits-heading"}`}>{card.label}</p>

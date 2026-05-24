@@ -53,17 +53,18 @@ function Card({ item, index }: { item: FacultyCard; index: number }) {
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      initial={{ y: 32, scale: 0.97 }}
+      animate={{ y: 0, scale: 1 }}
       transition={{ duration: 0.55, delay: index * 0.03, ease: EASE_PREMIUM }}
-      className="group relative aspect-[3/4] overflow-hidden rounded-[1.75rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_12px_40px_rgba(15,23,42,0.06)] transition"
+      className="group relative aspect-[4/5] overflow-hidden rounded-[1.75rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_12px_40px_rgba(15,23,42,0.06)] transition"
     >
       {item.image ? (
         <Image
           src={item.image}
           alt={item.name}
           fill
+          loading="eager"
+          priority={index < 4}
           className="object-cover transition duration-700 group-hover:scale-110"
           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
         />
@@ -141,7 +142,7 @@ export function FacultyContent() {
       </section>
 
       <section className="mx-auto max-w-site px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-3 lg:grid-cols-4">
           {faculty.map((item, index) => (
             <Card key={item.name} item={item} index={index} />
           ))}

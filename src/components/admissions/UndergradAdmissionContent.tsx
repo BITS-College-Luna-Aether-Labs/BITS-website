@@ -51,17 +51,15 @@ export function UndergradAdmissionContent() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-sm font-medium text-bits-muted">229A3537-(2)</p>
             </div>
 
             <div className="overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.08)]">
               <Image
                 src={`${IMG}Undergraduate%201.webp`}
                 alt="Undergraduate Admission"
-                width={0}
-                height={0}
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="w-full h-auto"
+                width={600}
+                height={450}
+                className="w-3/5 h-auto mx-auto"
               />
             </div>
           </div>

@@ -61,7 +61,7 @@ export const CONTACT_CARDS = [
     type: "location" as const,
     value: SITE.address,
     label: "Visit Us",
-    href: undefined,
+    href: "https://maps.app.goo.gl/qrWmP4XnyXEYtK6g6",
     featured: true,
   },
   {

@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { PageShell } from "@/components/layout/PageShell";
 import { WhoWeAreContent } from "@/components/about/WhoWeAreContent";
 import { FacilitiesContent } from "@/components/about/FacilitiesContent";
@@ -10,6 +11,7 @@ import { ResearchContent } from "@/components/academics/ResearchContent";
 import { UndergradAdmissionContent } from "@/components/admissions/UndergradAdmissionContent";
 import { GraduateAdmissionContent } from "@/components/admissions/GraduateAdmissionContent";
 import { ScholarshipAidContent } from "@/components/admissions/ScholarshipAidContent";
+import { TuitionContent } from "@/components/admissions/TuitionContent";
 import { StudentSupportContent } from "@/components/services/StudentSupportContent";
 import { ShortTrainingsContent } from "@/components/services/ShortTrainingsContent";
 import { NewsEventsContent } from "@/components/news/NewsEventsContent";
@@ -104,7 +106,7 @@ export async function generateMetadata({ params }: Props) {
 
 const ABOUT_PAGES = ["who-we-are", "facilities", "partners-and-clients"];
 const ACADEMICS_PAGES = ["faculty", "undergraduate-program", "graduate-program", "research"];
-const ADMISSIONS_PAGES = ["undergrad-admission", "graduate-admission", "scholarship-aid"];
+const ADMISSIONS_PAGES = ["undergrad-admission", "graduate-admission", "scholarship-aid", "tuition"];
 const SERVICES_PAGES = ["student-support", "short-trainings"];
 const NEWS_PAGES = ["college-news"];
 
@@ -116,7 +118,7 @@ export default async function DynamicPage({ params }: Props) {
   if (ABOUT_PAGES.includes(slug)) {
     return (
       <>
-        {slug === "who-we-are" && <WhoWeAreContent />}
+        {slug === "who-we-are" && <Suspense><WhoWeAreContent /></Suspense>}
         {slug === "facilities" && <FacilitiesContent />}
         {slug === "partners-and-clients" && <PartnersAndClientsContent />}
       </>
@@ -140,6 +142,7 @@ export default async function DynamicPage({ params }: Props) {
         {slug === "undergrad-admission" && <UndergradAdmissionContent />}
         {slug === "graduate-admission" && <GraduateAdmissionContent />}
         {slug === "scholarship-aid" && <ScholarshipAidContent />}
+        {slug === "tuition" && <TuitionContent />}
       </>
     );
   }

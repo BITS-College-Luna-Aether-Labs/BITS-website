@@ -55,6 +55,16 @@ const nextConfig: NextConfig = {
               ]),
         ],
       },
+      {
+        source: "/api/pdf",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: csp.replace("frame-ancestors 'none'", "frame-ancestors 'self'"),
+          },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+        ],
+      },
     ];
   },
 };

@@ -1,11 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   ArrowRight,
   BookOpen,
   Building2,
   CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
   Cpu,
   Landmark,
   MonitorSmartphone,
@@ -24,31 +27,31 @@ const highlights = [
   },
   {
     title: "Computer Labs",
-    text: "Dedicated labs with workstation density suitable for applied computing sessions.",
+    text: "Full-fledged computer labs on each floor accommodating up to 50 users at a time.",
     icon: Cpu,
     image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "IT Infrastructure",
-    text: "Campus connectivity, networked services, and infrastructure oriented toward digital learning.",
+    text: "State-of-the-art infrastructure with high bandwidth internet connectivity.",
     icon: Wifi,
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "Library",
-    text: "Reading and reference areas with print and digital study support.",
+    text: "Two libraries well equipped with the most current printed and electronic materials.",
     icon: BookOpen,
     image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "College Building",
-    text: "A purpose-built academic environment with vertical circulation and accessible positioning.",
+    text: "A purpose built five story building, situated at an accessible location.",
     icon: Landmark,
     image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "Online Learning",
-    text: "Remote access, self-paced study, and flexible delivery outside the physical campus.",
+    text: "Students can learn any place / any time at their own pace and convenience. Less crowded learning sessions / less crowded classrooms / less crowded campus",
     icon: MonitorSmartphone,
     image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
   },
@@ -60,6 +63,35 @@ const stats = [
   { label: "Digital access", value: "High" },
   { label: "Student support", value: "Active" },
 ];
+
+const facilityImages: Record<string, string[]> = {
+  Classrooms: [
+    "/images/About%5CFacilities/Class%20Room%201.jpg",
+    "/images/About%5CFacilities/Class%20Room%202.jpg",
+    "/images/About%5CFacilities/Class%20Room%203.jpg",
+  ],
+  "Computer Labs": [
+    "/images/About%5CFacilities/Computer%20Labs%201.jpg",
+    "/images/About%5CFacilities/Computer%20Labs%202.jpg",
+  ],
+  "IT Infrastructure": [
+    "/images/About%5CFacilities/IT%20INFRASTRUCTURE%201.jpg",
+    "/images/About%5CFacilities/IT%20INFRASTRUCTURE%202.jpg",
+  ],
+  Library: [
+    "/images/About%5CFacilities/Library%201.webp",
+    "/images/About%5CFacilities/Library%202.webp",
+    "/images/About%5CFacilities/Library%203.webp",
+  ],
+  "College Building": [
+    "/images/About%5CFacilities/College%201.webp",
+    "/images/About%5CFacilities/COllege%202.webp",
+  ],
+  "Online Learning": [
+    "/images/About%5CFacilities/Online%20Learning%201.webp",
+    "/images/About%5CFacilities/Online%20Learning%202.webp",
+  ],
+};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -80,6 +112,12 @@ function FacilityCard({
   index: number;
 }) {
   const Icon = item.icon;
+  const images = facilityImages[item.title] ?? [];
+  const [current, setCurrent] = useState(0);
+
+  const prev = () => setCurrent((c) => (c === 0 ? images.length - 1 : c - 1));
+  const next = () => setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
+
   return (
     <motion.article
       variants={fadeUp}
@@ -91,14 +129,44 @@ function FacilityCard({
         reverse ? "lg:[direction:rtl]" : ""
       }`}
     >
-      <div className={`${reverse ? "lg:[direction:ltr]" : ""} p-4 sm:p-6`}>
+      <div className={`relative ${reverse ? "lg:[direction:ltr]" : ""} p-4 sm:p-6`}>
         <div className="relative overflow-hidden rounded-[1.6rem]">
           <img
-            src={item.image}
+            src={images[current]}
             alt={item.title}
-            className="h-72 w-full object-cover transition duration-700 hover:scale-105"
+            className="h-72 w-full object-cover transition duration-500"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent" />
+
+          {images.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={prev}
+                className="absolute left-3 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-slate-800 shadow transition hover:bg-white"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={next}
+                className="absolute right-3 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-slate-800 shadow transition hover:bg-white"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+
+              <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
+                {images.map((_, i) => (
+                  <span
+                    key={i}
+                    className={`h-1.5 rounded-full transition ${
+                      i === current ? "w-4 bg-white" : "w-1.5 bg-white/50"
+                    }`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
 
@@ -122,18 +190,13 @@ export function FacilitiesContent() {
   return (
     <div className="bg-[var(--bits-page)]">
       <section className="relative overflow-hidden border-b border-emerald-950/10 bg-gradient-to-b from-emerald-50 to-[var(--bits-page)]">
-        <div className="absolute inset-0 -z-0 opacity-70">
-          <div className="absolute left-[-8rem] top-10 h-72 w-72 rounded-full bg-emerald-200 blur-3xl" />
-          <div className="absolute right-[-8rem] top-24 h-72 w-72 rounded-full bg-emerald-100 blur-3xl" />
-        </div>
-
-        <div className="mx-auto grid max-w-site gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-20">
+        <div className="mx-auto max-w-site px-4 pt-24 pb-16 sm:px-6 lg:px-8 lg:pt-28 lg:pb-20">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             animate="show"
             custom={0}
-            className="max-w-3xl"
+            className="mx-auto max-w-3xl text-center"
           >
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-[var(--bits-surface)]/80 px-4 py-2 text-sm font-medium text-bits-green-dark shadow-sm">
               <ShieldCheck className="h-4 w-4" />
@@ -142,7 +205,7 @@ export function FacilitiesContent() {
             <h1 className="text-4xl font-semibold tracking-tight text-bits-heading sm:text-5xl lg:text-6xl">
               Facilities
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-bits-text">
+            <p className="mt-6 text-lg leading-8 text-bits-text">
               BITS&apos;s estimated cost of attendance is based on tuition fees and modest contribution to
               technology and other facilities that exist in the college. For more information on cost of
               attendance, you may visit the online application and select the program you would like to join.
@@ -162,36 +225,6 @@ export function FacilitiesContent() {
                   <p className="mt-2 text-sm text-bits-text">{stat.label}</p>
                 </motion.div>
               ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            custom={0.15}
-            className="relative"
-          >
-            <div className="rounded-[2rem] border border-slate-200 bg-[var(--bits-surface)] p-4 shadow-2xl shadow-slate-900/10">
-              <div className="overflow-hidden rounded-[1.5rem]">
-                <img
-                  src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80"
-                  alt="BITS facilities campus"
-                  className="h-[420px] w-full object-cover"
-                />
-              </div>
-              <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                {["Classrooms", "Computer labs", "Online learning"].map((label) => (
-                  <div key={label} className="rounded-2xl bg-emerald-50 px-4 py-3 text-sm font-medium text-bits-green-dark">
-                    {label}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="absolute -bottom-6 -left-4 hidden rounded-2xl border border-emerald-200 bg-[var(--bits-surface)] px-4 py-3 shadow-lg shadow-emerald-900/10 md:block">
-              <p className="text-xs uppercase tracking-[0.3em] text-bits-green-dark">Built for</p>
-              <p className="mt-1 font-semibold text-bits-heading">Focused academic delivery</p>
             </div>
           </motion.div>
         </div>

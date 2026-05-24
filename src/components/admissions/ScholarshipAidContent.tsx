@@ -96,10 +96,9 @@ export function ScholarshipAidContent() {
                     <Image
                       src={item.image}
                       alt={item.title}
-                      width={0}
-                      height={0}
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="w-full h-auto"
+                      width={400}
+                      height={300}
+                      className={`${index === scholarships.length - 1 ? "w-[30%]" : "w-3/5"} h-auto mx-auto`}
                     />
                   </div>
                   <div className="rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] p-8 shadow-[0_20px_80px_rgba(16,24,40,0.06)] sm:p-10">
@@ -143,7 +142,7 @@ export function ScholarshipAidContent() {
           <div className="text-center">
             <button
               onClick={() => setShowPdf(true)}
-              className="inline-flex items-center gap-2 rounded-full bg-bits-green-dark px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/20 transition hover:-translate-y-0.5 hover:bg-bits-green"
+              className="inline-flex items-center gap-3 rounded-full bg-bits-green-dark px-16 py-8 text-2xl font-bold text-white shadow-lg shadow-emerald-900/20 transition hover:-translate-y-0.5 hover:bg-bits-green"
             >
               For More Information
             </button>

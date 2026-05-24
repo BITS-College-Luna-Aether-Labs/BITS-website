@@ -49,9 +49,9 @@ export function Footer() {
             <Image
               src="/images/logo.png"
               alt=""
-              width={160}
-              height={52}
-              className="mb-4 h-auto w-[140px] brightness-0 invert transition-opacity duration-300 hover:opacity-80"
+              width={240}
+              height={78}
+              className="mb-4 h-auto w-[220px] brightness-0 invert transition-opacity duration-300 hover:opacity-80"
             />
             <p className="text-sm italic text-bits-footer-text/90">
               from collecting . . . to connecting . . .

@@ -10,7 +10,7 @@ import {
   MonitorSmartphone,
 } from "lucide-react";
 
-const IMG = "/images/Academics%5CUndergraduateAdmission/";
+const IMG = "/images/Academics-UndergraduateAdmission/";
 
 const programs = [
   {

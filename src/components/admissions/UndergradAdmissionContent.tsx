@@ -10,7 +10,7 @@ const requirements = [
   "A graduate of an accredited higher education and the necessary pass mark in the College Entrance Examination.",
 ];
 
-const IMG = "/images/Admissions%5CUndergraduate/";
+const IMG = "/images/Admissions-Undergraduate/";
 
 export function UndergradAdmissionContent() {
   return (

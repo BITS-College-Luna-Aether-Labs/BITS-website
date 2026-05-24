@@ -53,7 +53,7 @@ export function GraduateAdmissionContent() {
 
             <div className="overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.08)]">
               <Image
-                src="/images/Academics%5CGraduateAdmissions/Information%20Technology%20Management.webp"
+                src="/images/Academics-GraduateAdmissions/Information%20Technology%20Management.webp"
                 alt="Graduate Admission"
                 width={0}
                 height={0}

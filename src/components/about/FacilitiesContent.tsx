@@ -66,30 +66,30 @@ const stats = [
 
 const facilityImages: Record<string, string[]> = {
   Classrooms: [
-    "/images/About%5CFacilities/Class%20Room%201.jpg",
-    "/images/About%5CFacilities/Class%20Room%202.jpg",
-    "/images/About%5CFacilities/Class%20Room%203.jpg",
+    "/images/About-Facilities/Class%20Room%201.jpg",
+    "/images/About-Facilities/Class%20Room%202.jpg",
+    "/images/About-Facilities/Class%20Room%203.jpg",
   ],
   "Computer Labs": [
-    "/images/About%5CFacilities/Computer%20Labs%201.jpg",
-    "/images/About%5CFacilities/Computer%20Labs%202.jpg",
+    "/images/About-Facilities/Computer%20Labs%201.jpg",
+    "/images/About-Facilities/Computer%20Labs%202.jpg",
   ],
   "IT Infrastructure": [
-    "/images/About%5CFacilities/IT%20INFRASTRUCTURE%201.jpg",
-    "/images/About%5CFacilities/IT%20INFRASTRUCTURE%202.jpg",
+    "/images/About-Facilities/IT%20INFRASTRUCTURE%201.jpg",
+    "/images/About-Facilities/IT%20INFRASTRUCTURE%202.jpg",
   ],
   Library: [
-    "/images/About%5CFacilities/Library%201.webp",
-    "/images/About%5CFacilities/Library%202.webp",
-    "/images/About%5CFacilities/Library%203.webp",
+    "/images/About-Facilities/Library%201.webp",
+    "/images/About-Facilities/Library%202.webp",
+    "/images/About-Facilities/Library%203.webp",
   ],
   "College Building": [
-    "/images/About%5CFacilities/College%201.webp",
-    "/images/About%5CFacilities/COllege%202.webp",
+    "/images/About-Facilities/College%201.webp",
+    "/images/About-Facilities/COllege%202.webp",
   ],
   "Online Learning": [
-    "/images/About%5CFacilities/Online%20Learning%201.webp",
-    "/images/About%5CFacilities/Online%20Learning%202.webp",
+    "/images/About-Facilities/Online%20Learning%201.webp",
+    "/images/About-Facilities/Online%20Learning%202.webp",
   ],
 };
 

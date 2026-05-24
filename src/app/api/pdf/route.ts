@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const PDF_DIR = path.join(process.cwd(), "public", "images", "About\\Who we are");
+const PDF_DIR = path.join(process.cwd(), "public", "images", "About-Who we are");
 
 const ALLOWED_FILES = new Set([
   "graduate_accreditation.pdf",

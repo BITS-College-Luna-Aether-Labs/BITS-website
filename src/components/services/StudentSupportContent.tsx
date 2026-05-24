@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GraduationCap } from "lucide-react";
 import { useState } from "react";
 
-const IMG = "/images/Services%5Cstudent%20support/";
+const IMG = "/images/Services-student%20support/";
 
 const activities = [
   {

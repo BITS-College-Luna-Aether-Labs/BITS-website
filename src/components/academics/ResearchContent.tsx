@@ -14,7 +14,7 @@ const coreAreas = [
   "E-health, Education, E-commerce, etc.",
 ];
 
-const IMG = "/images/Academics%5CResearch/";
+const IMG = "/images/Academics-Research/";
 
 export function ResearchContent() {
   return (

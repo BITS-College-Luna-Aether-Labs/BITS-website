@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GraduationCap, X } from "lucide-react";
 import { useState } from "react";
 
-const PDF_URL = "/images/Admissions%5CScholarship/BITS%20SCHOLARSHIPS_INFORMATION_BROCHURE_2023.pdf";
+const PDF_URL = "/images/Admissions-Scholarship/BITS%20SCHOLARSHIPS_INFORMATION_BROCHURE_2023.pdf";
 
-const IMG = "/images/Admissions%5CScholarship/";
+const IMG = "/images/Admissions-Scholarship/";
 
 const scholarships = [
   {

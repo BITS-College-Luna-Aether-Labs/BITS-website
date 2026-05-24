@@ -14,22 +14,22 @@ const partners: Partner[] = [
   {
     name: "MKS Addis",
     href: "https://mksaddis.com",
-    logo: "/images/About%5Cpartner/Mk%20Adiss%20Logo.png",
+    logo: "/images/About-partner/Mk%20Adiss%20Logo.png",
   },
   {
     name: "Bunna Bank",
     href: "https://bunnabanksc.com",
-    logo: "/images/About%5Cpartner/Buna%20Bank%20Logo.png",
+    logo: "/images/About-partner/Buna%20Bank%20Logo.png",
   },
   {
     name: "Serianu",
     href: "https://serianu.com",
-    logo: "/images/About%5Cpartner/serianu-logoo.png",
+    logo: "/images/About-partner/serianu-logoo.png",
   },
   {
     name: "British Council",
     href: "https://ethiopia.britishcouncil.org",
-    logo: "/images/About%5Cpartner/British%20Council%20logo.jpg",
+    logo: "/images/About-partner/British%20Council%20logo.jpg",
   },
 ];
 

@@ -24,6 +24,8 @@
 }
 
 .dark {
+  --bits-green: #5db95f;
+  --bits-green-dark: #4ade80;
   --bits-heading: #f1f5f9;
   --bits-text: #e2e8f0;
   --bits-muted: #cbd5e1;
@@ -34,8 +36,8 @@
   --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.45);
   --shadow-card-hover-rise: 0 12px 40px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(180, 140, 30, 0.2);
   --shadow-card-hover-lift: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(180, 140, 30, 0.25);
-  --shadow-card-hover-featured: 0 20px 60px rgba(125, 194, 67, 0.45);
-  --shadow-card-hover-announce: 0 8px 32px rgba(125, 194, 67, 0.25), 0 0 0 1px rgba(180, 140, 30, 0.15);
+  --shadow-card-hover-featured: 0 20px 60px rgba(93, 185, 95, 0.45);
+  --shadow-card-hover-announce: 0 8px 32px rgba(93, 185, 95, 0.25), 0 0 0 1px rgba(180, 140, 30, 0.15);
 }
 
 @layer base {

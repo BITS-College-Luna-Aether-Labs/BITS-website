@@ -111,7 +111,7 @@ export function HeroSection() {
       aria-labelledby="hero-heading"
     >
       <div className="site-container relative pb-8 pt-10 md:pb-12 md:pt-16 lg:pt-20">
-        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+        <div className="grid items-center gap-7 lg:grid-cols-2 lg:gap-10">
           {enabled ? (
             <motion.div
               className="z-10 max-w-xl"

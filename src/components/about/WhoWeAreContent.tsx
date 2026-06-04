@@ -229,7 +229,7 @@ function buildContentMap(selectedPdf: string | null, setSelectedPdf: (v: string 
         <div className="mt-6 flex items-center gap-4">
           <div className="h-14 w-14 overflow-hidden rounded-full">
             <Image
-              src="/images/Faculty Members/Dr Tesfaye Biru.png"
+              src="/images/Faculty%20Members/Dr%20Tesfaye%20Biru.png"
               alt="Dr Tesfaye Biru"
               width={56}
               height={56}

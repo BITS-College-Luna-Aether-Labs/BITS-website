@@ -98,6 +98,8 @@ export function ScholarshipAidContent() {
                       alt={item.title}
                       width={400}
                       height={300}
+                      loading="lazy"
+                      sizes="(max-width: 768px) 80vw, (max-width: 1024px) 50vw, 45vw"
                       className={`${index === scholarships.length - 1 ? "w-[30%]" : "w-3/5"} h-auto mx-auto`}
                     />
                   </div>
@@ -128,10 +130,11 @@ export function ScholarshipAidContent() {
                     <Image
                       src={item.image}
                       alt={item.title}
-                      width={0}
-                      height={0}
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="w-full h-auto"
+                      width={400}
+                      height={300}
+                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 45vw"
+                      className="w-full h-auto object-cover"
                     />
                   </div>
                 </>

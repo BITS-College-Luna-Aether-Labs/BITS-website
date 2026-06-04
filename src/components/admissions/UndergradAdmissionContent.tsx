@@ -55,11 +55,13 @@ export function UndergradAdmissionContent() {
 
             <div className="overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.08)]">
               <Image
-                src={`${IMG}Undergraduate%201.webp`}
+                src={`${IMG}Undergraduate 1.webp`}
                 alt="Undergraduate Admission"
                 width={600}
                 height={450}
-                className="w-3/5 h-auto mx-auto"
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
+                className="w-full h-auto mx-auto object-contain"
               />
             </div>
           </div>
@@ -67,11 +69,12 @@ export function UndergradAdmissionContent() {
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.08)] lg:order-first">
               <Image
-                src={`${IMG}Undergraduate%202.webp`}
+                src={`${IMG}Undergraduate 2.webp`}
                 alt="Undergraduate Admission"
                 fill
+                loading="lazy"
                 className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 50vw"
               />
             </div>
 

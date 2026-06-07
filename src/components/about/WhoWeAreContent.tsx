@@ -6,6 +6,7 @@ import {
   Award,
   BookOpen,
   ChevronRight,
+  ExternalLink,
   GraduationCap,
   HeartHandshake,
   Sparkles,
@@ -280,13 +281,24 @@ function buildContentMap(selectedPdf: string | null, setSelectedPdf: (v: string 
           >
             <div className="flex items-center justify-between border-b px-6 py-4">
               <p className="text-sm font-semibold text-bits-heading">Accreditation Document</p>
-              <button
-                type="button"
-                onClick={() => setSelectedPdf(null)}
-                className="flex h-8 w-8 items-center justify-center rounded-full text-bits-muted transition hover:bg-bits-surface-muted hover:text-bits-heading"
-              >
-                <X className="h-5 w-5" />
-              </button>
+              <div className="flex items-center gap-2">
+                <a
+                  href={selectedPdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-bits-green-dark px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-bits-green"
+                >
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  Open PDF
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setSelectedPdf(null)}
+                  className="flex h-8 w-8 items-center justify-center rounded-full text-bits-muted transition hover:bg-bits-surface-muted hover:text-bits-heading"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
             </div>
             <iframe
               src={selectedPdf}

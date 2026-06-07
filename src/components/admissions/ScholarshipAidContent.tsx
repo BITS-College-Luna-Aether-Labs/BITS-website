@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { GraduationCap, X } from "lucide-react";
+import { GraduationCap, X, ExternalLink } from "lucide-react";
 import { useState } from "react";
 
 const PDF_URL = "/images/Admissions-Scholarship/BITS%20SCHOLARSHIPS_INFORMATION_BROCHURE_2023.pdf";
@@ -169,18 +169,32 @@ export function ScholarshipAidContent() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="relative h-full w-full max-w-5xl overflow-hidden rounded-2xl bg-white dark:bg-gray-900"
+              className="relative flex h-full w-full max-w-5xl flex-col overflow-hidden rounded-2xl bg-white dark:bg-gray-900"
               onClick={(e) => e.stopPropagation()}
             >
-              <button
-                onClick={() => setShowPdf(false)}
-                className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white transition hover:bg-black/70"
-              >
-                <X className="h-5 w-5" />
-              </button>
+              <div className="flex items-center justify-between border-b px-4 py-3 dark:border-gray-700">
+                <p className="text-sm font-semibold text-bits-heading">Scholarship Brochure</p>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={PDF_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-bits-green-dark px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-bits-green"
+                  >
+                    <ExternalLink className="h-3.5 w-3.5" />
+                    Open PDF
+                  </a>
+                  <button
+                    onClick={() => setShowPdf(false)}
+                    className="flex h-8 w-8 items-center justify-center rounded-full text-bits-muted transition hover:bg-gray-100 hover:text-bits-heading dark:hover:bg-gray-800"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
+              </div>
               <iframe
                 src={PDF_URL}
-                className="h-full w-full"
+                className="min-h-0 flex-1"
                 title="Scholarship Brochure"
               />
             </motion.div>

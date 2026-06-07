@@ -27,7 +27,7 @@ const scholarships = [
   },
   {
     title: "Work Study Program",
-    body: "This Program provides on-campus employment opportunities for already enrolled students. It is granted to students based on out standing academic performance and has a competitive grade requirement for eligibility.\n\nStudents will be given maximum of 12 work hours per week.",
+    body: "This Program provides on-campus employment opportunities for already enrolled students. It is granted to students based on outstanding academic performance and has a competitive grade requirement for eligibility.\n\nStudents will be given maximum of 12 work hours per week.",
     image: `${IMG}Scholarships%204.webp`,
   },
 ];

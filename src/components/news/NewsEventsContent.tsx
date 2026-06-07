@@ -19,7 +19,7 @@ const newsItems: NewsItem[] = [
     title: "Data Analytics Workshop by the ITS Department",
     date: "March 22, 2025",
     excerpt:
-      "Showcasing the life cycle of data analytics, starting from data processing, cleaning visualizing and gaining insight on data and making informed discissions",
+      "Showcasing the life cycle of data analytics, starting from data processing, cleaning visualizing and gaining insight on data and making informed decisions",
     image: {
       src: "/images/News%20&%20Events/Data%20Analytics%20Workshop%20by%20the%20ITS%20Department.jpg",
       alt: "BITS College data analytics workshop audience",

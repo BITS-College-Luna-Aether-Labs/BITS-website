@@ -15,7 +15,7 @@ import {
   X,
 } from "lucide-react";
 import { EASE_PREMIUM } from "@/lib/motion-presets";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 const sections = [
@@ -344,6 +344,14 @@ function buildContentMap(selectedPdf: string | null, setSelectedPdf: (v: string 
 }
 
 export function WhoWeAreContent() {
+  return (
+    <Suspense fallback={null}>
+      <WhoWeAreContentInner />
+    </Suspense>
+  );
+}
+
+function WhoWeAreContentInner() {
   const searchParams = useSearchParams();
   const [activeSection, setActiveSection] = useState("overview");
   const [selectedPdf, setSelectedPdf] = useState<string | null>(null);

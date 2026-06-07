@@ -44,13 +44,23 @@ function NavLink({
         {children}
       </Link>
       <motion.div
-        className="absolute bottom-[-6px] left-0 h-0.5 bg-bits-green"
-        initial={{ scaleX: 0, opacity: 0 }}
-        animate={isActive && !shouldReduce ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }}
-        whileHover={!shouldReduce ? { scaleX: 1, opacity: 1 } : {}}
-        transition={{ duration: 0.25, ease: "easeOut" }}
+        className="absolute bottom-[-6px] left-0 h-0.5 bg-black/80 dark:bg-white/70"
+        initial={shouldReduce ? { opacity: isActive ? 1 : 0 } : { scaleX: 0, opacity: 0 }}
+        animate={isActive
+          ? { scaleX: 1, opacity: 1 }
+          : shouldReduce ? { opacity: 0 } : { scaleX: 0, opacity: 0 }}
+        transition={{ duration: 0.35, ease: "easeOut" }}
         style={{ originX: 0 }}
       />
+      {!shouldReduce && (
+        <motion.div
+          className="absolute bottom-[-6px] left-0 h-0.5 bg-bits-green/40"
+          initial={{ scaleX: 0, opacity: 0 }}
+          whileHover={{ scaleX: 1, opacity: 1 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          style={{ originX: 0 }}
+        />
+      )}
     </div>
   );
 }

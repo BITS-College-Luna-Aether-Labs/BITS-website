@@ -80,9 +80,16 @@ export function Footer() {
                   {SITE.phone}
                 </a>
               </li>
-              <li className="inline-flex items-start gap-2">
-                <LocationIcon className="mt-0.5 h-4 w-4 shrink-0" />
-                <span>{SITE.address}</span>
+              <li>
+                <a
+                  href="https://maps.app.goo.gl/qrWmP4XnyXEYtK6g6"
+                  className="footer-link inline-flex items-start gap-2 hover:opacity-80"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <LocationIcon className="mt-0.5 h-4 w-4 shrink-0" />
+                  {SITE.address}
+                </a>
               </li>
             </ul>
             <div className="mt-5 flex gap-3">

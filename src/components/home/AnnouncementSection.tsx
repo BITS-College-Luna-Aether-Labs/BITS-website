@@ -13,10 +13,10 @@ export function AnnouncementSection() {
 
   return (
     <section className="section-surface py-12 md:py-16" aria-label="College announcement">
-      <SectionReveal className="site-container flex justify-center">
+      <SectionReveal className="flex justify-center px-4 sm:px-6 lg:px-8">
         {enabled ? (
           <motion.div
-            className="gpu"
+            className="gpu w-full max-w-sm"
             initial={{ opacity: 0, scale: 0.95, y: 12 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
@@ -33,17 +33,19 @@ export function AnnouncementSection() {
               alt="BITS College is proud to announce that all students of Class of 2025 have passed their National Exit Examination"
               width={498}
               height={461}
-              className="h-auto w-full max-w-full rounded-lg object-contain"
+              className="h-auto w-full rounded-lg object-contain"
             />
           </motion.div>
         ) : (
-          <Image
-            src="/images/announcement.png"
-            alt="BITS College is proud to announce that all students of Class of 2025 have passed their National Exit Examination"
-            width={498}
-            height={461}
-            className="h-auto w-full max-w-full object-contain"
-          />
+          <div className="w-full max-w-sm">
+            <Image
+              src="/images/announcement.png"
+              alt="BITS College is proud to announce that all students of Class of 2025 have passed their National Exit Examination"
+              width={498}
+              height={461}
+              className="h-auto w-full object-contain"
+            />
+          </div>
         )}
       </SectionReveal>
     </section>

@@ -42,7 +42,7 @@ function SocialIcon({ icon }: { icon: string }) {
 
 export function Footer() {
   return (
-    <footer className="bg-bits-footer text-bits-footer-text transition-colors duration-300 dark:bg-black dark:ring-1 dark:ring-gray-900" role="contentinfo">
+    <footer className="bg-bits-footer text-bits-footer-text transition-colors duration-300 dark:bg-black dark:ring-1 dark:ring-green-950" role="contentinfo">
       <div className="site-container py-10 md:py-12">
         <div className="grid gap-10 md:grid-cols-3 md:gap-8">
           <div>

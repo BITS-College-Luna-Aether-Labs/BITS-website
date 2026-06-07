@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GraduationCap, X } from "lucide-react";
 import { useState } from "react";
 
-const PDF_URL = "/images/Admissions-Scholarship/BITS%20SCHOLARSHIPS_INFORMATION_BROCHURE_2023.pdf";
+const PDF_URL = "/api/pdf?file=scholarship_brochure.pdf";
 
 const IMG = "/images/Admissions-Scholarship/";
 
@@ -92,15 +92,16 @@ export function ScholarshipAidContent() {
             >
               {index % 2 === 1 ? (
                 <>
-                  <div className="overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.08)] lg:order-first">
+                  <div className="lg:order-first">
                     <Image
                       src={item.image}
                       alt={item.title}
-                      width={400}
-                      height={300}
-                      loading="lazy"
-                      sizes="(max-width: 768px) 80vw, (max-width: 1024px) 50vw, 45vw"
-                      className={`${index === scholarships.length - 1 ? "w-[30%]" : "w-3/5"} h-auto mx-auto`}
+                      width={800}
+                      height={600}
+                      priority={index === 0}
+                      loading={index === 0 ? undefined : "lazy"}
+                      sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 45vw"
+                      className={`${index === scholarships.length - 1 ? "w-full sm:w-[30%]" : "w-full sm:w-3/5"} h-auto mx-auto`}
                     />
                   </div>
                   <div className="rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] p-8 shadow-[0_20px_80px_rgba(16,24,40,0.06)] sm:p-10">
@@ -126,15 +127,16 @@ export function ScholarshipAidContent() {
                       </p>
                     ))}
                   </div>
-                  <div className="overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.08)]">
+                  <div>
                     <Image
                       src={item.image}
                       alt={item.title}
-                      width={400}
-                      height={300}
-                      loading="lazy"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 45vw"
-                      className="w-full h-auto object-cover"
+                      width={800}
+                      height={600}
+                      priority={index === 0}
+                      loading={index === 0 ? undefined : "lazy"}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 45vw"
+                      className="w-full h-auto"
                     />
                   </div>
                 </>
@@ -145,7 +147,7 @@ export function ScholarshipAidContent() {
           <div className="text-center">
             <button
               onClick={() => setShowPdf(true)}
-              className="inline-flex items-center gap-3 rounded-full bg-bits-green-dark px-16 py-8 text-2xl font-bold text-white shadow-lg shadow-emerald-900/20 transition hover:-translate-y-0.5 hover:bg-bits-green"
+              className="inline-flex items-center gap-3 rounded-xl bg-bits-green-dark px-12 py-6 text-xl font-bold text-white shadow-lg shadow-emerald-900/20 transition hover:-translate-y-0.5 hover:bg-bits-green"
             >
               For More Information
             </button>
@@ -167,7 +169,7 @@ export function ScholarshipAidContent() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="relative h-full w-full max-w-5xl overflow-hidden rounded-2xl bg-white"
+              className="relative h-full w-full max-w-5xl overflow-hidden rounded-2xl bg-white dark:bg-gray-900"
               onClick={(e) => e.stopPropagation()}
             >
               <button

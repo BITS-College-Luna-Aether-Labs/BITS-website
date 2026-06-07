@@ -23,37 +23,31 @@ const highlights = [
     title: "Classrooms",
     text: "Flexible teaching rooms designed for lectures, discussions, and blended delivery.",
     icon: Building2,
-    image: "https://images.unsplash.com/photo-1523230410928-7a1f4a6d3c6d?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "Computer Labs",
     text: "Full-fledged computer labs on each floor accommodating up to 50 users at a time.",
     icon: Cpu,
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "IT Infrastructure",
     text: "State-of-the-art infrastructure with high bandwidth internet connectivity.",
     icon: Wifi,
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "Library",
     text: "Two libraries well equipped with the most current printed and electronic materials.",
     icon: BookOpen,
-    image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "College Building",
     text: "A purpose built five story building, situated at an accessible location.",
     icon: Landmark,
-    image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "Online Learning",
     text: "Students can learn any place / any time at their own pace and convenience. Less crowded learning sessions / less crowded classrooms / less crowded campus",
     icon: MonitorSmartphone,
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
   },
 ];
 
@@ -125,12 +119,12 @@ function FacilityCard({
       whileInView="show"
       viewport={{ once: true, amount: 0.25 }}
       custom={0.08 * index}
-      className={`grid gap-6 overflow-hidden rounded-[2rem] border border-slate-200 bg-[var(--bits-surface)] shadow-sm lg:grid-cols-2 ${
+      className={`grid gap-6 overflow-hidden rounded-[2rem] border border-slate-200 bg-[var(--bits-surface)] shadow-sm lg:grid-cols-2 dark:border-gray-700 ${
         reverse ? "lg:[direction:rtl]" : ""
       }`}
     >
       <div className={`relative ${reverse ? "lg:[direction:ltr]" : ""} p-4 sm:p-6`}>
-        <div className="relative overflow-hidden rounded-[1.6rem]">
+        <div className="relative overflow-hidden">
           <img
             src={images[current]}
             alt={item.title}
@@ -171,7 +165,7 @@ function FacilityCard({
       </div>
 
       <div className={`flex flex-col justify-center p-6 sm:p-8 ${reverse ? "lg:[direction:ltr]" : ""}`}>
-        <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-emerald-50 px-3 py-2 text-sm font-medium text-bits-green-dark">
+        <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-emerald-50 px-3 py-2 text-sm font-medium text-bits-green-dark dark:bg-gray-800">
           <Icon className="h-4 w-4" />
           {item.title}
         </div>
@@ -189,7 +183,7 @@ function FacilityCard({
 export function FacilitiesContent() {
   return (
     <div className="bg-[var(--bits-page)]">
-      <section className="relative overflow-hidden border-b border-emerald-950/10 bg-gradient-to-b from-emerald-50 to-[var(--bits-page)]">
+      <section className="relative overflow-hidden border-b border-emerald-950/10 bg-gradient-to-b from-emerald-50 to-[var(--bits-page)] dark:from-gray-900 dark:to-black">
         <div className="mx-auto max-w-site px-4 pt-24 pb-16 sm:px-6 lg:px-8 lg:pt-28 lg:pb-20">
           <motion.div
             variants={fadeUp}
@@ -198,7 +192,7 @@ export function FacilitiesContent() {
             custom={0}
             className="mx-auto max-w-3xl text-center"
           >
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-[var(--bits-surface)]/80 px-4 py-2 text-sm font-medium text-bits-green-dark shadow-sm">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-[var(--bits-surface)]/80 px-4 py-2 text-sm font-medium text-bits-green-dark shadow-sm dark:border-gray-700">
               <ShieldCheck className="h-4 w-4" />
               Facilities overview
             </div>
@@ -219,7 +213,7 @@ export function FacilitiesContent() {
                   initial="hidden"
                   animate="show"
                   custom={0.1 * idx}
-                  className="rounded-3xl border border-slate-200 bg-[var(--bits-surface)]/80 p-5 shadow-sm backdrop-blur"
+                  className="rounded-3xl border border-slate-200 bg-[var(--bits-surface)]/80 p-5 shadow-sm backdrop-blur dark:border-gray-700"
                 >
                   <p className="text-3xl font-semibold text-bits-green">{stat.value}</p>
                   <p className="mt-2 text-sm text-bits-text">{stat.label}</p>
@@ -240,7 +234,7 @@ export function FacilitiesContent() {
               Core learning infrastructure
             </h2>
           </div>
-          <div className="hidden items-center gap-2 rounded-full border border-slate-200 bg-[var(--bits-surface-muted)] px-4 py-2 text-sm text-bits-text md:flex">
+          <div className="hidden items-center gap-2 rounded-full border border-slate-200 bg-[var(--bits-surface-muted)] px-4 py-2 text-sm text-bits-text md:flex dark:border-gray-700">
             <Sparkles className="h-4 w-4 text-bits-green" />
             Structured campus overview
           </div>
@@ -253,7 +247,7 @@ export function FacilitiesContent() {
         </div>
       </section>
 
-      <section className="border-y border-emerald-950/10 bg-emerald-50/70">
+      <section className="border-y border-emerald-950/10 bg-emerald-50/70 dark:bg-gray-900/70">
         <div className="mx-auto max-w-site px-4 py-16 sm:px-6 lg:flex lg:items-center lg:justify-between lg:px-8">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-bits-green-dark">

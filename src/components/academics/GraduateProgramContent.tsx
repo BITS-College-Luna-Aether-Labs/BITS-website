@@ -43,7 +43,7 @@ export function GraduateProgramContent() {
             </ul>
           </div>
 
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.08)]">
+          <div className="relative aspect-[4/3]">
             <Image
               src="/images/Academics-GraduateAdmissions/Information%20Technology%20Management.webp"
               alt="Information Technology Management"

@@ -8,7 +8,7 @@ import { useInteractionMotion } from "@/hooks/useInteractionMotion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { APPLY_URL, NAV_ITEMS } from "@/lib/constants/navigation";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { SPRING_GENTLE, SPRING_STIFF, EASE_PREMIUM } from "@/lib/motion-presets";
+import { SPRING_GENTLE, EASE_PREMIUM } from "@/lib/motion-presets";
 
 function ChevronDown({ open }: { open?: boolean }) {
   return (
@@ -170,8 +170,8 @@ export function Header() {
     <header
       className={`fixed top-0 z-50 w-full border-b transition-all duration-500 ease-out ${
         scrolled
-          ? "border-gray-100/80 bg-[var(--bits-page)] shadow-sm backdrop-blur-sm dark:border-gray-800"
-          : "border-transparent bg-[var(--bits-page)]"
+          ? "border-gray-100/80 bg-[var(--bits-page)] shadow-sm backdrop-blur-sm dark:border-green-950 dark:bg-[#010a05]"
+          : "border-transparent bg-[var(--bits-page)] dark:bg-[#010a05]"
       }`}
     >
       <div className="site-container">
@@ -301,7 +301,7 @@ export function Header() {
         {mobileOpen && (
           <motion.div
             id="mobile-menu"
-            className="border-t border-gray-100 bg-[var(--bits-page)] md:hidden dark:border-gray-800"
+            className="border-t border-gray-100 bg-[var(--bits-page)] md:hidden dark:border-green-950 dark:bg-[#010a05]"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}

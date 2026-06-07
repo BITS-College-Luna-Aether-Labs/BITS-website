@@ -29,7 +29,6 @@ Also set via `next.config.ts`:
 ## Rendering Safety
 
 - No `dangerouslySetInnerHTML` for user content.
-- **Exception:** A minimal inline boot script in `layout.tsx` applies theme class before paint to prevent flash. It reads only `bits_theme` from `localStorage` / server default — no external input.
 - React auto-escapes all dynamic text.
 - No third-party analytics or chat widgets bundled.
 

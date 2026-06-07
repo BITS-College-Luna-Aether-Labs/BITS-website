@@ -5,7 +5,6 @@ const isDev = process.env.NODE_ENV !== "production";
 /**
  * Next.js App Router requires inline scripts for hydration/RSC.
  * 'unsafe-inline' is required unless nonce middleware is wired to every script tag.
- * See SECURITY.md for CSP rationale.
  */
 const csp = [
   "default-src 'self'",
@@ -17,21 +16,13 @@ const csp = [
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self' https://applications.bitscollege.edu.et",
+  "frame-src https://www.youtube.com https://www.youtube-nocookie.com",
   "frame-ancestors 'none'",
   ...(isDev ? [] : ["upgrade-insecure-requests"]),
 ].join("; ");
 
 const nextConfig: NextConfig = {
   outputFileTracingRoot: process.cwd(),
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "www.bitscollege.edu.et",
-        pathname: "/wp-content/uploads/**",
-      },
-    ],
-  },
   async headers() {
     return [
       {

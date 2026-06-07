@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { APPLY_URL } from "@/lib/constants/navigation";
 import { useInteractionMotion } from "@/hooks/useInteractionMotion";
 import { useMotionSafe } from "@/hooks/useMotionSafe";
-import { DURATION, EASE_PREMIUM, SPRING_GENTLE } from "@/lib/motion-presets";
+import { EASE_PREMIUM, SPRING_GENTLE } from "@/lib/motion-presets";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 
 function HeroContent({ animate }: { animate?: boolean }) {
@@ -36,21 +36,29 @@ function HeroContent({ animate }: { animate?: boolean }) {
         Management. We provide world-class education facilities, and use
         cutting-edge technology to realize our educational vision.
       </p>
-      <Cta
-        href={APPLY_URL}
-        className="btn-solid-green mt-8 inline-flex relative overflow-hidden"
-        target="_blank"
-        rel="noopener noreferrer"
-        {...(animate
-          ? {
-              whileHover: hoverScaleSm,
-              whileTap: tapSm,
-              transition: { duration: DURATION.fast, ease: "easeOut" },
-            }
-          : {})}
-      >
-        Apply Now
-      </Cta>
+      {animate ? (
+        <motion.a
+          href={APPLY_URL}
+          className="btn-solid-green mt-8 inline-flex relative overflow-hidden !px-10 !py-4 !text-xl"
+          target="_blank"
+          rel="noopener noreferrer"
+          animate={{ rotate: [0, 2, -2, 0] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.97 }}
+        >
+          Apply Now
+        </motion.a>
+      ) : (
+        <a
+          href={APPLY_URL}
+          className="btn-solid-green mt-8 inline-flex relative overflow-hidden !px-10 !py-4 !text-xl"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Apply Now
+        </a>
+      )}
     </>
   );
 }

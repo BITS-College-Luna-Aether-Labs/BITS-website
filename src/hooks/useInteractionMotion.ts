@@ -10,7 +10,6 @@ import {
   TAP_SCALE,
   TAP_SCALE_SM,
   CARD_HOVER_LIGHT,
-  ACCENT_GLOW_GREEN,
   SPRING_HOVER,
 } from "@/lib/motion-presets";
 
@@ -29,6 +28,5 @@ export function useInteractionMotion() {
     tap: on ? TAP_SCALE : undefined,
     tapSm: on ? TAP_SCALE_SM : undefined,
     hoverCard: on ? { ...CARD_HOVER_LIGHT, transition: SPRING_HOVER } : undefined,
-    hoverGlow: on ? { boxShadow: ACCENT_GLOW_GREEN.boxShadow } : undefined,
   };
 }

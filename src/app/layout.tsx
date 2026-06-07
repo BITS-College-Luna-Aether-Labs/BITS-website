@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Open_Sans, Roboto_Slab, Playfair_Display } from "next/font/google";
-import { cookies } from "next/headers";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MotionProvider } from "@/components/providers/MotionProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { THEME_COOKIE, THEME_SCRIPT, parseTheme, resolveTheme } from "@/lib/theme";
+import { THEME_SCRIPT } from "@/lib/theme";
 import { SITE } from "@/lib/constants/site";
 import "./globals.css";
 
@@ -67,25 +66,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
-  const themeCookie = cookieStore.get(THEME_COOKIE)?.value;
-  const initialTheme = parseTheme(themeCookie);
-  const ssrClass = resolveTheme(initialTheme);
-
   return (
-    <html lang="en" className={ssrClass} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       <body
-        className={`${openSans.variable} ${robotoSlab.variable} ${playfairDisplay.variable} font-sans`}
+        className={`${openSans.variable} ${robotoSlab.variable} ${playfairDisplay.variable} flex min-h-screen flex-col font-sans`}
       >
-        <ThemeProvider initialTheme={initialTheme}>
+        <ThemeProvider>
           <MotionProvider>
             <a
               href="#main-content"
@@ -94,7 +88,7 @@ export default async function RootLayout({
               Skip to main content
             </a>
             <Header />
-            <main id="main-content">{children}</main>
+            <main id="main-content" className="flex-1">{children}</main>
             <Footer />
           </MotionProvider>
         </ThemeProvider>

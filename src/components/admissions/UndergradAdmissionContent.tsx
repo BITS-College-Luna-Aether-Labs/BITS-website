@@ -53,7 +53,7 @@ export function UndergradAdmissionContent() {
               </ul>
             </div>
 
-            <div className="overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.08)]">
+            <div>
               <Image
                 src={`${IMG}Undergraduate 1.webp`}
                 alt="Undergraduate Admission"
@@ -67,7 +67,7 @@ export function UndergradAdmissionContent() {
           </div>
 
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.08)] lg:order-first">
+            <div className="relative aspect-[4/3] lg:order-first">
               <Image
                 src={`${IMG}Undergraduate 2.webp`}
                 alt="Undergraduate Admission"

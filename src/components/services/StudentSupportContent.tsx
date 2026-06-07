@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { GraduationCap } from "lucide-react";
+import { ChevronRight, GraduationCap } from "lucide-react";
 import { useState } from "react";
 
 const IMG = "/images/Services-student%20support/";
@@ -178,7 +178,7 @@ export function StudentSupportContent() {
               </p>
             </div>
 
-            <div className="overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.08)]">
+            <div>
               <Image
                 src={`${IMG}Student%20support%201.png`}
                 alt="Academic Support"
@@ -191,7 +191,7 @@ export function StudentSupportContent() {
           </div>
 
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div className="overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.08)] lg:order-first">
+            <div className="lg:order-first">
               <Image
                 src={`${IMG}Student%20support%202.webp`}
                 alt="Disability Support"
@@ -228,11 +228,11 @@ export function StudentSupportContent() {
                     className={`flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm font-medium transition ${
                       activeActivity === activity.id
                         ? "border-emerald-900/10 bg-emerald-50 text-bits-green-dark"
-                        : "border-transparent text-bits-text hover:border-emerald-900/10 hover:bg-emerald-50/50 hover:text-bits-green-dark"
+                        : "border-gray-200 text-bits-text hover:border-emerald-900/10 hover:bg-emerald-50/50 hover:text-bits-green-dark dark:border-gray-700"
                     }`}
                   >
                     <span>{activity.label}</span>
-                    <span className={`h-2 w-2 rounded-full transition ${activeActivity === activity.id ? "bg-bits-green-dark" : "bg-transparent"}`} />
+                    <ChevronRight className={`h-4 w-4 shrink-0 text-bits-muted transition duration-300 ${activeActivity === activity.id ? "rotate-90 text-bits-green-dark" : ""}`} />
                   </button>
                 ))}
               </div>

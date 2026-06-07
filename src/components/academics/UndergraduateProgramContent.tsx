@@ -18,7 +18,7 @@ const programs = [
     eyebrow: "Undergraduate Program",
     description: "Pursue an undergraduate degree in software engineering if you want to design software systems, develop applications, and manage software development projects.",
     points: ["design software systems", "develop applications", "manage software development projects"],
-    href: "https://www.bitscollege.edu.et/software-engineering/",
+    href: "/software-engineering",
     accent: "from-emerald-500/20 via-emerald-400/10 to-transparent",
     icon: Code2,
     badge: "SE",
@@ -29,7 +29,7 @@ const programs = [
     eyebrow: "Undergraduate Program",
     description: "Pursue an undergraduate degree in information technology and systems if you want to be involved in network administration, database administration, and IT security and software application support.",
     points: ["network administration", "database administration", "IT security and software application support"],
-    href: "https://www.bitscollege.edu.et/information-technology-and-systems/",
+    href: "/information-technology-and-systems",
     accent: "from-sky-500/20 via-cyan-400/10 to-transparent",
     icon: MonitorSmartphone,
     badge: "ITS",
@@ -94,7 +94,7 @@ function ProgramCard({ program }: { program: (typeof programs)[number] }) {
             </Link>
           </div>
 
-          <div className="group relative min-h-[240px] overflow-hidden rounded-[1.5rem] border border-white/60 shadow-inner">
+          <div className="group relative min-h-[240px]">
             {program.image && (
               <Image
                 src={program.image}

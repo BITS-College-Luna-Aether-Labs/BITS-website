@@ -50,7 +50,7 @@ export function ResearchContent() {
               </p>
             </div>
 
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.08)]">
+            <div className="relative aspect-[4/3]">
               <Image
                 src={`${IMG}Research%201.png`}
                 alt="Research"
@@ -62,7 +62,7 @@ export function ResearchContent() {
           </div>
 
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.08)] lg:order-first">
+            <div className="relative aspect-[4/3] lg:order-first">
               <Image
                 src={`${IMG}Research%202.png`}
                 alt="Research"

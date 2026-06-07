@@ -7,6 +7,7 @@ import {
   BookOpen,
   ChevronRight,
   GraduationCap,
+  HeartHandshake,
   Sparkles,
   Target,
   Users,
@@ -22,6 +23,7 @@ const sections = [
   { id: "mission", label: "Mission & Vision" },
   { id: "dean", label: "Message from the Dean" },
   { id: "accreditation", label: "Accreditation" },
+  { id: "student-support", label: "Student Support" },
 ];
 
 const missionPoints = [
@@ -161,8 +163,8 @@ function buildContentMap(selectedPdf: string | null, setSelectedPdf: (v: string 
   mission: (
     <ContentCard key="mission">
       <SectionHeader icon={Target} label="Mission and Vision" title="Mission and Vision" />
-      <div className="grid gap-6 xl:grid-cols-2">
-        <div className="rounded-3xl bg-[var(--bits-surface-muted)] p-5 sm:p-6">
+      <div className="grid gap-4">
+        <div className="rounded-3xl border border-emerald-950/8 bg-[var(--bits-surface)] p-5 sm:p-6">
           <p className="text-lg font-semibold text-bits-heading">Mission</p>
           <p className="mt-3 leading-7 text-bits-text">
             The purpose of BITS College is to enable its community to grow, thrive, and prosper through continual
@@ -178,26 +180,24 @@ function buildContentMap(selectedPdf: string | null, setSelectedPdf: (v: string 
           </ul>
         </div>
 
-        <div className="space-y-6">
-          <div className="overflow-hidden rounded-3xl border border-emerald-950/8 bg-[linear-gradient(135deg,rgba(125,194,67,0.08),rgba(255,255,255,1))] p-5 sm:p-6">
-            <p className="text-lg font-semibold text-bits-heading">Vision</p>
-            <p className="mt-3 leading-7 text-bits-text">
-              By 2030, BITS College aspires to grow in reputation nationally as a model of academic excellence and
-              innovative student support in an environment strengthened by industry partnerships and technology
-              enablement.
-            </p>
-          </div>
+        <div className="rounded-3xl border border-emerald-950/8 bg-[linear-gradient(135deg,rgba(125,194,67,0.08),var(--bits-surface))] p-5 sm:p-6">
+          <p className="text-lg font-semibold text-bits-heading">Vision</p>
+          <p className="mt-3 leading-7 text-bits-text">
+            By 2030, BITS College aspires to grow in reputation nationally as a model of academic excellence and
+            innovative student support in an environment strengthened by industry partnerships and technology
+            enablement.
+          </p>
+        </div>
 
-          <div className="rounded-3xl border border-slate-200 bg-[var(--bits-surface)] p-5 sm:p-6">
-            <p className="text-lg font-semibold text-bits-heading">Values</p>
-            <div className="mt-4 grid gap-3">
-              {values.map((value) => (
-                <div key={value} className="flex items-start gap-3 rounded-2xl bg-[var(--bits-surface-muted)] p-4">
-                  <Sparkles className="mt-0.5 h-4 w-4 text-bits-green" />
-                  <p className="text-sm leading-6 text-bits-text">{value}</p>
-                </div>
-              ))}
-            </div>
+        <div className="rounded-3xl border border-emerald-950/8 bg-[var(--bits-surface)] p-5 sm:p-6">
+          <p className="text-lg font-semibold text-bits-heading">Values</p>
+          <div className="mt-4 grid gap-3">
+            {values.map((value) => (
+              <div key={value} className="flex items-start gap-3 rounded-2xl bg-[var(--bits-surface-muted)] p-4">
+                <Sparkles className="mt-0.5 h-4 w-4 text-bits-green" />
+                <p className="text-sm leading-6 text-bits-text">{value}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -227,18 +227,18 @@ function buildContentMap(selectedPdf: string | null, setSelectedPdf: (v: string 
         </p>
 
         <div className="mt-6 flex items-center gap-4">
-          <div className="h-14 w-14 overflow-hidden rounded-full">
+          <div className="h-20 w-20 overflow-hidden rounded-full">
             <Image
               src="/images/Faculty%20Members/Dr%20Tesfaye%20Biru.png"
               alt="Dr Tesfaye Biru"
-              width={56}
-              height={56}
+              width={80}
+              height={80}
               className="h-full w-full object-cover"
             />
           </div>
           <div>
-            <p className="font-semibold text-bits-heading">Tesfaye Biru (PHD),</p>
-            <p className="text-sm text-bits-muted">Dean</p>
+            <p className="font-semibold text-bits-heading text-xl">Tesfaye Biru (PHD),</p>
+            <p className="text-base text-bits-muted">Dean</p>
           </div>
         </div>
       </blockquote>
@@ -296,6 +296,48 @@ function buildContentMap(selectedPdf: string | null, setSelectedPdf: (v: string 
           </div>
         </div>
       )}
+    </ContentCard>
+  ),
+  "student-support": (
+    <ContentCard key="student-support">
+      <SectionHeader icon={HeartHandshake} label="Student Support" title="Student Support" />
+      <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+        <div className="space-y-5">
+          <p className="leading-7 text-bits-text">
+            BITS College is committed to providing comprehensive support services that help students thrive
+            academically, professionally, and personally throughout their educational journey.
+          </p>
+          <div className="grid gap-3">
+            {[
+              { title: "Academic Support", desc: "Peer-to-peer mentoring and advisor guidance for academic success." },
+              { title: "Disability Support", desc: "Advice, guidance, and accommodations for students with physical disabilities." },
+              { title: "Extra Curricular Activities", desc: "Hackathons, leadership programs, charity clubs, Toastmasters, media, and more." },
+            ].map((item) => (
+              <div key={item.title} className="flex items-start gap-3 rounded-2xl bg-[var(--bits-surface-muted)] p-4">
+                <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-bits-green" />
+                <div>
+                  <p className="text-sm font-semibold text-bits-heading">{item.title}</p>
+                  <p className="mt-0.5 text-sm leading-6 text-bits-text">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="rounded-3xl bg-[linear-gradient(135deg,rgba(125,194,67,0.07),rgba(84,89,95,0.04))] p-6 text-center">
+          <HeartHandshake className="mx-auto h-16 w-16 text-bits-green" />
+          <p className="mt-4 text-lg font-semibold text-bits-heading">We&apos;re Here to Help</p>
+          <p className="mt-2 text-sm leading-6 text-bits-text">
+            Explore our full range of student support services designed to help you succeed.
+          </p>
+          <a
+            href="/student-support"
+            className="mt-5 inline-flex items-center gap-2 rounded-full bg-bits-green-dark px-6 py-3 text-sm font-semibold text-white transition hover:bg-bits-green"
+          >
+            View All Services
+            <ChevronRight className="h-4 w-4" />
+          </a>
+        </div>
+      </div>
     </ContentCard>
   ),
   };

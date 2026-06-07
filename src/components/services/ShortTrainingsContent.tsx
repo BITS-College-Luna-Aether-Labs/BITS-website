@@ -4,7 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
 
-const IMG = "/images/Services-profesisonal%20Training%20/";
+const IMG = "/images/Services-professional%20Training/";
 
 const trainings = [
   {
@@ -62,7 +62,7 @@ export function ShortTrainingsContent() {
                 key={item.title}
                 className="overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.06)]"
               >
-                <div className="overflow-hidden border-b border-emerald-900/10">
+                <div>
                   <Image
                     src={item.image}
                     alt={item.title}

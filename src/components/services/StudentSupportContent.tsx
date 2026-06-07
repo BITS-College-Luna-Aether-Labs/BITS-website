@@ -227,12 +227,12 @@ export function StudentSupportContent() {
                     onClick={() => setActiveActivity(activity.id)}
                     className={`flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm font-medium transition ${
                       activeActivity === activity.id
-                        ? "border-emerald-900/10 bg-emerald-50 text-bits-green-dark"
+                        ? "border-black/20 bg-black/5 text-black font-semibold dark:border-white/30 dark:bg-white/10 dark:text-white"
                         : "border-gray-200 text-bits-text hover:border-emerald-900/10 hover:bg-emerald-50/50 hover:text-bits-green-dark dark:border-gray-700"
                     }`}
                   >
                     <span>{activity.label}</span>
-                    <ChevronRight className={`h-4 w-4 shrink-0 text-bits-muted transition duration-300 ${activeActivity === activity.id ? "rotate-90 text-bits-green-dark" : ""}`} />
+                    <ChevronRight className={`h-4 w-4 shrink-0 text-bits-muted transition duration-300 ${activeActivity === activity.id ? "rotate-90 text-black dark:text-white" : ""}`} />
                   </button>
                 ))}
               </div>

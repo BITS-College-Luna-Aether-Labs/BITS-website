@@ -399,14 +399,14 @@ function WhoWeAreContentInner() {
                     key={section.id}
                     type="button"
                     onClick={() => setActiveSection(section.id)}
-                    className={`flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-sm font-medium text-bits-text transition hover:border-emerald-900/10 hover:bg-emerald-50 hover:text-bits-green ${
+                    className={`flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-sm font-medium transition hover:border-emerald-900/10 hover:bg-emerald-50 hover:text-bits-green ${
                       activeSection === section.id
-                        ? "border-emerald-900/10 bg-emerald-50 text-bits-green"
-                        : "border-transparent"
+                        ? "border-black/20 bg-black/5 text-black dark:border-white/30 dark:bg-white/10 dark:text-white font-semibold"
+                        : "border-transparent text-bits-text"
                     }`}
                   >
                     <span>{section.label}</span>
-                    <ChevronRight className={`h-4 w-4 shrink-0 transition ${activeSection === section.id ? "text-bits-green" : ""}`} />
+                    <ChevronRight className={`h-4 w-4 shrink-0 transition ${activeSection === section.id ? "text-black dark:text-white" : ""}`} />
                   </button>
                 ))}
               </div>

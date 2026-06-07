@@ -1,5 +1,5 @@
 export const SITE = {
-  name: "BITS College",
+  name: "BITS COLLEGE",
   tagline: "School of Systems and Technology",
   description:
     "BITS College offers well-designed academic programs in software engineering and IT Management with world-class facilities.",

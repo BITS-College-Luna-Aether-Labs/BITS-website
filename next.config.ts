@@ -16,7 +16,7 @@ const csp = [
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self' https://applications.bitscollege.edu.et",
-  "frame-src https://www.youtube.com https://www.youtube-nocookie.com",
+  "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
   "frame-ancestors 'none'",
   ...(isDev ? [] : ["upgrade-insecure-requests"]),
 ].join("; ");
@@ -30,7 +30,7 @@ const nextConfig: NextConfig = {
         headers: [
           { key: "Content-Security-Policy", value: csp },
           { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "X-Frame-Options", value: "DENY" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           {
             key: "Permissions-Policy",
@@ -44,16 +44,6 @@ const nextConfig: NextConfig = {
                   value: "max-age=63072000; includeSubDomains; preload",
                 },
               ]),
-        ],
-      },
-      {
-        source: "/api/pdf",
-        headers: [
-          {
-            key: "Content-Security-Policy",
-            value: csp.replace("frame-ancestors 'none'", "frame-ancestors 'self'"),
-          },
-          { key: "X-Frame-Options", value: "SAMEORIGIN" },
         ],
       },
     ];

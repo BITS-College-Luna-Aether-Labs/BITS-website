@@ -6,7 +6,6 @@ import {
   Award,
   BookOpen,
   ChevronRight,
-  ExternalLink,
   GraduationCap,
   HeartHandshake,
   Sparkles,
@@ -18,6 +17,7 @@ import {
 import { EASE_PREMIUM } from "@/lib/motion-presets";
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { PDFViewer } from "@/components/ui/PDFViewer";
 
 const sections = [
   { id: "overview", label: "Overview" },
@@ -94,6 +94,20 @@ function buildContentMap(selectedPdf: string | null, setSelectedPdf: (v: string 
               The brand identity is built around the meaning of BITS, the visual logic of the logo, and a color
               pairing that communicates freshness, energy, creativity, and determination.
             </p>
+            <div className="mt-4 flex flex-wrap gap-4">
+              <div className="flex items-center gap-2 rounded-xl bg-white/60 px-3 py-2 dark:bg-gray-800/60">
+                <span className="h-4 w-4 rounded-full bg-[#7DC243]" />
+                <span className="text-sm text-bits-text">
+                  Green for <strong>freshness</strong>, <strong>energy</strong>, and <strong>online</strong>
+                </span>
+              </div>
+              <div className="flex items-center gap-2 rounded-xl bg-white/60 px-3 py-2 dark:bg-gray-800/60">
+                <span className="h-4 w-4 rounded-full bg-[#54595F]" />
+                <span className="text-sm text-bits-text">
+                  Gray for <strong>creativity</strong> & <strong>determination</strong>
+                </span>
+              </div>
+            </div>
           </div>
 
           <div className="flex justify-center py-4">
@@ -276,35 +290,20 @@ function buildContentMap(selectedPdf: string | null, setSelectedPdf: (v: string 
           onClick={() => setSelectedPdf(null)}
         >
           <div
-            className="relative flex h-[80vh] w-full max-w-5xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl"
+            className="relative flex h-[80vh] w-full max-w-5xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl dark:bg-gray-900"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b px-6 py-4">
+            <div className="flex items-center justify-between border-b px-6 py-4 dark:border-gray-700">
               <p className="text-sm font-semibold text-bits-heading">Accreditation Document</p>
-              <div className="flex items-center gap-2">
-                <a
-                  href={selectedPdf}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-lg bg-bits-green-dark px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-bits-green"
-                >
-                  <ExternalLink className="h-3.5 w-3.5" />
-                  Open PDF
-                </a>
-                <button
-                  type="button"
-                  onClick={() => setSelectedPdf(null)}
-                  className="flex h-8 w-8 items-center justify-center rounded-full text-bits-muted transition hover:bg-bits-surface-muted hover:text-bits-heading"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedPdf(null)}
+                className="flex h-8 w-8 items-center justify-center rounded-full text-bits-muted transition hover:bg-bits-surface-muted hover:text-bits-heading"
+              >
+                <X className="h-5 w-5" />
+              </button>
             </div>
-            <iframe
-              src={selectedPdf}
-              className="h-full w-full"
-              title="Accreditation PDF"
-            />
+            <PDFViewer pdfUrl={selectedPdf} title="Accreditation Document" />
           </div>
         </div>
       )}

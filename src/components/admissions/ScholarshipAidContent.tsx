@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { GraduationCap, X, ExternalLink } from "lucide-react";
+import { GraduationCap, X } from "lucide-react";
 import { useState } from "react";
+import { PDFViewer } from "@/components/ui/PDFViewer";
 
 const PDF_URL = "/images/Admissions-Scholarship/BITS%20SCHOLARSHIPS_INFORMATION_BROCHURE_2023.pdf";
 
@@ -174,29 +175,14 @@ export function ScholarshipAidContent() {
             >
               <div className="flex items-center justify-between border-b px-4 py-3 dark:border-gray-700">
                 <p className="text-sm font-semibold text-bits-heading">Scholarship Brochure</p>
-                <div className="flex items-center gap-2">
-                  <a
-                    href={PDF_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-lg bg-bits-green-dark px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-bits-green"
-                  >
-                    <ExternalLink className="h-3.5 w-3.5" />
-                    Open PDF
-                  </a>
-                  <button
-                    onClick={() => setShowPdf(false)}
-                    className="flex h-8 w-8 items-center justify-center rounded-full text-bits-muted transition hover:bg-gray-100 hover:text-bits-heading dark:hover:bg-gray-800"
-                  >
-                    <X className="h-5 w-5" />
-                  </button>
-                </div>
+                <button
+                  onClick={() => setShowPdf(false)}
+                  className="flex h-8 w-8 items-center justify-center rounded-full text-bits-muted transition hover:bg-gray-100 hover:text-bits-heading dark:hover:bg-gray-800"
+                >
+                  <X className="h-5 w-5" />
+                </button>
               </div>
-              <iframe
-                src={PDF_URL}
-                className="min-h-0 flex-1"
-                title="Scholarship Brochure"
-              />
+              <PDFViewer pdfUrl={PDF_URL} title="Scholarship Brochure" />
             </motion.div>
           </motion.div>
         )}

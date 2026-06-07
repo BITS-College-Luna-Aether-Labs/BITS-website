@@ -48,21 +48,6 @@ src/
 public/images/      # Optimized assets from live site
 ```
 
-## Documentation
-
-| File | Purpose |
-|------|---------|
-| `SECURITY.md` | CSP, headers, XSS practices |
-| `COOKIE_POLICY.md` | Theme preference storage |
-| `MOTION_GUIDELINES.md` | Framer Motion rules |
-| `ACCESSIBILITY_GUIDELINES.md` | WCAG checklist |
-| `FRONTEND_RULES.md` | Engineering + fidelity rules |
-| `DEPLOYMENT_RULES.md` | Production checklist |
-| `policies and rules.md` | Source policy reference |
-
-## Visual Reference
-
-Screenshots: `public/sample image/`
 
 ## Build
 

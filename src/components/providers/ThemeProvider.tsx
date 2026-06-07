@@ -4,86 +4,46 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
-  useState,
+  useSyncExternalStore,
 } from "react";
-import {
-  THEME_COOKIE,
-  THEME_STORAGE_KEY,
-  type Theme,
-  resolveTheme,
-} from "@/lib/theme";
+import { subscribeToTheme, getDOMTheme, applyTheme, persistTheme, notifyThemeChange } from "@/lib/theme";
+
+type Theme = "light" | "dark";
 
 type ThemeContextValue = {
   theme: Theme;
-  resolved: "light" | "dark";
+  resolved: Theme;
   setTheme: (theme: Theme) => void;
 };
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
-function applyResolved(resolved: "light" | "dark") {
-  document.documentElement.classList.toggle("dark", resolved === "dark");
+/** Reads theme from <html> class — avoids React state getting out of sync during navigation */
+function getSnapshot(): Theme {
+  return getDOMTheme();
 }
 
-function readStoredTheme(): Theme {
-  if (typeof window === "undefined") return "light";
-  try {
-    const stored = localStorage.getItem(THEME_STORAGE_KEY);
-    if (stored === "light" || stored === "dark") {
-      return stored;
-    }
-  } catch {
-    /* localStorage unavailable */
-  }
+function getServerSnapshot(): Theme {
   return "light";
-}
-
-function persistTheme(theme: Theme) {
-  try {
-    localStorage.setItem(THEME_STORAGE_KEY, theme);
-  } catch {
-    /* ignore */
-  }
-  document.cookie = `${THEME_COOKIE}=${theme}; path=/; max-age=31536000; SameSite=Lax${
-    window.location.protocol === "https:" ? "; Secure" : ""
-  }`;
 }
 
 export function ThemeProvider({
   children,
-  initialTheme = "light",
 }: {
   children: React.ReactNode;
-  initialTheme?: Theme;
 }) {
-  const [theme, setThemeState] = useState<Theme>(
-    initialTheme === "system" ? "light" : initialTheme,
-  );
-  const [resolved, setResolved] = useState<"light" | "dark">(
-    resolveTheme(initialTheme),
-  );
+  const theme = useSyncExternalStore(subscribeToTheme, getSnapshot, getServerSnapshot);
 
   const setTheme = useCallback((next: Theme) => {
-    const value = next === "dark" ? "dark" : "light";
-    setThemeState(value);
-    persistTheme(value);
-    setResolved(value);
-    applyResolved(value);
-  }, []);
-
-  useEffect(() => {
-    const stored = readStoredTheme();
-    const resolvedValue = stored === "dark" ? "dark" : "light";
-    setThemeState(resolvedValue);
-    setResolved(resolvedValue);
-    applyResolved(resolvedValue);
+    applyTheme(next);
+    persistTheme(next);
+    notifyThemeChange();
   }, []);
 
   const value = useMemo(
-    () => ({ theme, resolved, setTheme }),
-    [theme, resolved, setTheme],
+    () => ({ theme, resolved: theme, setTheme }),
+    [theme, setTheme],
   );
 
   return (

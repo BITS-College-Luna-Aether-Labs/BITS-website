@@ -1,22 +1,34 @@
-export const THEME_COOKIE = "bits_theme";
-export const THEME_STORAGE_KEY = "bits_theme";
-export type Theme = "light" | "dark" | "system";
+export type Theme = "light" | "dark";
 
-export const THEME_COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 year
+export const STORAGE_KEY = "bits_theme";
 
-export function parseTheme(value: string | undefined): Theme {
-  if (value === "light" || value === "dark" || value === "system") {
-    return value;
-  }
-  return "light";
+export function getDOMTheme(): Theme {
+  if (typeof window === "undefined") return "light";
+  return document.documentElement.classList.contains("dark") ? "dark" : "light";
 }
 
-export function resolveTheme(theme: Theme): "light" | "dark" {
-  if (theme === "light" || theme === "dark") return theme;
-  return "light";
+let themeListeners: Set<() => void> = new Set();
+
+export function subscribeToTheme(cb: () => void): () => void {
+  themeListeners.add(cb);
+  return () => themeListeners.delete(cb);
 }
 
-/** Minimal inline script to prevent theme flash — injected before first paint */
+export function notifyThemeChange() {
+  themeListeners.forEach((fn) => fn());
+}
+
+export function applyTheme(theme: Theme) {
+  document.documentElement.classList.toggle("dark", theme === "dark");
+}
+
+export function persistTheme(theme: Theme) {
+  try {
+    localStorage.setItem(STORAGE_KEY, theme);
+  } catch { /* ignore */ }
+}
+
+/** Runs before React hydration to prevent dark/light flash */
 export const THEME_SCRIPT = `
-(function(){try{var c=document.cookie.split('; ').find(function(c){return c.startsWith('bits_theme=')});var v=c?c.split('=')[1]:'light';document.documentElement.classList.toggle('dark',v==='dark')}catch(e){})()
+(function(){try{var v=localStorage.getItem('bits_theme');document.documentElement.classList.toggle('dark',v==='dark')}catch(e){}})()
 `;

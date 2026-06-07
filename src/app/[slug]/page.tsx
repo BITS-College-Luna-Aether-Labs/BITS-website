@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 import { PageShell } from "@/components/layout/PageShell";
 import { WhoWeAreContent } from "@/components/about/WhoWeAreContent";
 import { FacilitiesContent } from "@/components/about/FacilitiesContent";
@@ -8,6 +7,8 @@ import { FacultyContent } from "@/components/academics/FacultyContent";
 import { UndergraduateProgramContent } from "@/components/academics/UndergraduateProgramContent";
 import { GraduateProgramContent } from "@/components/academics/GraduateProgramContent";
 import { ResearchContent } from "@/components/academics/ResearchContent";
+import { SoftwareEngineeringContent } from "@/components/academics/SoftwareEngineeringContent";
+import { InformationTechnologySystemsContent } from "@/components/academics/InformationTechnologySystemsContent";
 import { UndergradAdmissionContent } from "@/components/admissions/UndergradAdmissionContent";
 import { GraduateAdmissionContent } from "@/components/admissions/GraduateAdmissionContent";
 import { ScholarshipAidContent } from "@/components/admissions/ScholarshipAidContent";
@@ -15,6 +16,12 @@ import { TuitionContent } from "@/components/admissions/TuitionContent";
 import { StudentSupportContent } from "@/components/services/StudentSupportContent";
 import { ShortTrainingsContent } from "@/components/services/ShortTrainingsContent";
 import { NewsEventsContent } from "@/components/news/NewsEventsContent";
+import { InaugurationContent } from "@/components/news/InaugurationContent";
+import { StudentAppreciationNightContent } from "@/components/news/StudentAppreciationNightContent";
+import { WorkshopContent } from "@/components/news/WorkshopContent";
+import { CollegeDayContent } from "@/components/news/CollegeDayContent";
+import { BootcampContent } from "@/components/news/BootcampContent";
+import { ScholarshipRecipientsContent } from "@/components/news/ScholarshipRecipientsContent";
 
 const PAGE_TITLES: Record<string, { title: string; description: string }> = {
   "who-we-are": {
@@ -89,6 +96,32 @@ const PAGE_TITLES: Record<string, { title: string; description: string }> = {
     title: "Graduate Accreditation",
     description: "Graduate program accreditation details.",
   },
+  inauguration: {
+    title: "BITS College Inauguration",
+    description: "BITS College celebrated its inauguration on January 02, 2021.",
+  },
+  "student-appreciation-night": {
+    title: "Student Appreciation Night",
+    description:
+      "BITS College hosted a Student Appreciation Night on Friday, December 12, 2021, to honor the accomplishments and contributions of its postgraduate students.",
+  },
+  workshop: {
+    title: "Workshop",
+    description:
+      "BITS College hosted a workshop on preparing for the tech industry through higher education.",
+  },
+  "college-day": {
+    title: "BITS College Day",
+    description: "BITS College celebrated its College Day with demonstrations, discussions, and games.",
+  },
+  bootcamp: {
+    title: "Summer Bootcamp",
+    description: "Bootcamp program designed to help trainees gain practical knowledge on industry standards, best practices, tools and technologies.",
+  },
+  "scholarship-recepients": {
+    title: "Merit Based Scholarship Recipients 2023/24",
+    description: "BITS College awarded Merit-based Scholarships to three outstanding students.",
+  },
 };
 
 type Props = { params: Promise<{ slug: string }> };
@@ -104,6 +137,7 @@ export async function generateMetadata({ params }: Props) {
   return { title: page.title, description: page.description };
 }
 
+/** Page-group slugs used for content routing below */
 const ABOUT_PAGES = ["who-we-are", "facilities", "partners-and-clients"];
 const ACADEMICS_PAGES = ["faculty", "undergraduate-program", "graduate-program", "research"];
 const ADMISSIONS_PAGES = ["undergrad-admission", "graduate-admission", "scholarship-aid", "tuition"];
@@ -118,7 +152,7 @@ export default async function DynamicPage({ params }: Props) {
   if (ABOUT_PAGES.includes(slug)) {
     return (
       <>
-        {slug === "who-we-are" && <Suspense><WhoWeAreContent /></Suspense>}
+        {slug === "who-we-are" && <WhoWeAreContent />}
         {slug === "facilities" && <FacilitiesContent />}
         {slug === "partners-and-clients" && <PartnersAndClientsContent />}
       </>
@@ -160,12 +194,42 @@ export default async function DynamicPage({ params }: Props) {
     return <NewsEventsContent />;
   }
 
+  if (slug === "software-engineering") {
+    return <SoftwareEngineeringContent />;
+  }
+
+  if (slug === "information-technology-and-systems") {
+    return <InformationTechnologySystemsContent />;
+  }
+
+  if (slug === "inauguration") {
+    return <InaugurationContent />;
+  }
+
+  if (slug === "student-appreciation-night") {
+    return <StudentAppreciationNightContent />;
+  }
+
+  if (slug === "workshop") {
+    return <WorkshopContent />;
+  }
+
+  if (slug === "college-day") {
+    return <CollegeDayContent />;
+  }
+
+  if (slug === "bootcamp") {
+    return <BootcampContent />;
+  }
+
+  if (slug === "scholarship-recepients") {
+    return <ScholarshipRecipientsContent />;
+  }
+
   return (
     <PageShell title={page.title} description={page.description}>
       <p className="text-bits-muted dark:text-gray-400">
-        This page route is scaffolded for navigation fidelity. Full page content
-        replication from the live site can be added using the reference screenshots
-        in <code className="text-sm">public/sample image</code>.
+        This page route is scaffolded for navigation fidelity.
       </p>
     </PageShell>
   );

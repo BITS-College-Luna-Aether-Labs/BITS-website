@@ -1,7 +1,7 @@
 "use client";
 
-import { ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
+import { ExternalLink } from "lucide-react";
 
 export function PDFViewer({ pdfUrl, title }: { pdfUrl: string; title?: string }) {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
@@ -13,13 +13,19 @@ export function PDFViewer({ pdfUrl, title }: { pdfUrl: string; title?: string })
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  useEffect(() => {
+    if (isMobile) {
+      window.open(pdfUrl, "_blank");
+    }
+  }, [isMobile, pdfUrl]);
+
   if (isMobile === null) return null;
 
   if (isMobile) {
     return (
       <div className="flex flex-col items-center gap-3 rounded-lg bg-[var(--bits-surface-muted)] p-6">
         <p className="text-center text-sm text-bits-muted">
-          PDF files open best in full screen on mobile
+          Opening document in full screen...
         </p>
         <a
           href={pdfUrl}
@@ -28,7 +34,7 @@ export function PDFViewer({ pdfUrl, title }: { pdfUrl: string; title?: string })
           className="btn-solid-green inline-flex items-center gap-2"
         >
           <ExternalLink className="h-4 w-4" />
-          View Full Document
+          Open Again
         </a>
       </div>
     );

@@ -17,7 +17,7 @@ const csp = [
   "base-uri 'self'",
   "form-action 'self' https://applications.bitscollege.edu.et",
   "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
-  "frame-ancestors 'none'",
+  "frame-ancestors 'self'",
   ...(isDev ? [] : ["upgrade-insecure-requests"]),
 ].join("; ");
 

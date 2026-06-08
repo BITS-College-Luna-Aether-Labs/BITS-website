@@ -1,3 +1,4 @@
+/** API route — serves PDF files from /public/images by mapping short keys to file paths */
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";

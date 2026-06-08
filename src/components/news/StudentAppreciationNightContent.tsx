@@ -1,3 +1,4 @@
+/** Student Appreciation Night — December 2021 award ceremony content */
 "use client";
 
 import { motion } from "framer-motion";
@@ -32,6 +33,7 @@ export function StudentAppreciationNightContent() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          style={{ fontFamily: "'Times New Roman', Times, serif" }}
           className="space-y-10"
         >
           <div className="overflow-hidden rounded-2xl shadow-lg">
@@ -44,12 +46,12 @@ export function StudentAppreciationNightContent() {
             />
           </div>
 
-          <p className="text-center text-lg leading-8 text-bits-text sm:text-xl sm:leading-9">
+          <p className="text-center text-xl leading-[2rem] text-bits-text sm:text-2xl sm:leading-[2.4rem]">
             BITS College hosted a Student Appreciation Night on Friday, December 12, 2021, to honor the
             accomplishments and contributions of its postgraduate students.
           </p>
 
-          <p className="text-center text-lg leading-8 text-bits-text sm:text-xl sm:leading-9">
+          <p className="text-center text-xl leading-[2rem] text-bits-text sm:text-2xl sm:leading-[2.4rem]">
             The highlight of the night was the presentation of awards to exemplary students who have demonstrated
             outstanding performance in their respective fields, and awards for organizations that provided a great
             deal of cooperation for the students.

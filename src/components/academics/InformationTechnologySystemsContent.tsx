@@ -1,3 +1,4 @@
+/** IT & Systems — overview, courses, graduation requirements, and career paths */
 "use client";
 
 import { motion, Variants } from "framer-motion";
@@ -156,47 +157,48 @@ export function InformationTechnologySystemsContent() {
           </div>
         </motion.section>
 
-        {/* Graduation Image */}
-        <motion.img
-          src={`${IMG}%203.png`}
-          alt="ITS Graduation"
-          className="mb-16 w-full max-w-lg rounded-2xl shadow-lg"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true, margin: "-100px" }}
-        />
-
-        {/* Career Paths */}
+        {/* Graduation Image + Career Paths */}
         <motion.section
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
+          className="mb-16 grid gap-12 md:grid-cols-2 md:items-center"
         >
-          <h2 className="text-3xl font-bold text-bits-heading sm:text-4xl">Career Paths</h2>
-          <p className="mt-4 text-lg leading-relaxed text-bits-text">
-            Many career opportunities exist for graduates of the Information Technology and Systems undergraduate program. They will have the potential to work as:
-          </p>
-          <ul className="mt-6 grid list-inside list-disc gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              "Information Technology Managers",
-              "Network Administrators",
-              "Network Architects",
-              "Systems Analysts",
-              "Database Administrators",
-              "System Administrators",
-              "Information Security Analysts",
-            ].map((career) => (
-              <motion.li
-                key={career}
-                variants={itemVariants}
-                className="text-lg text-bits-text"
-              >
-                <strong>{career}</strong>
-              </motion.li>
-            ))}
-          </ul>
+          <motion.img
+            src={`${IMG}%203.png`}
+            alt="ITS Graduation"
+            className="w-4/5 rounded-2xl shadow-lg"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true, margin: "-100px" }}
+          />
+          <div>
+            <h2 className="text-3xl font-bold text-bits-heading sm:text-4xl">Career Paths</h2>
+            <p className="mt-4 text-lg leading-relaxed text-bits-text">
+              Many career opportunities exist for graduates of the Information Technology and Systems undergraduate program. They will have the potential to work as:
+            </p>
+            <ul className="mt-6 list-inside list-disc space-y-2 text-lg text-bits-text">
+              {[
+                "Information Technology Managers",
+                "Network Administrators",
+                "Network Architects",
+                "Systems Analysts",
+                "Database Administrators",
+                "System Administrators",
+                "Information Security Analysts",
+              ].map((career) => (
+                <motion.li
+                  key={career}
+                  variants={itemVariants}
+                  className="text-lg text-bits-text"
+                >
+                  <strong>{career}</strong>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
         </motion.section>
       </main>
     </div>

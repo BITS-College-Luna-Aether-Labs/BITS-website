@@ -1,3 +1,4 @@
+/** Summer Bootcamp — workshop recap with image gallery and speaker highlights */
 "use client";
 
 import { motion } from "framer-motion";
@@ -51,6 +52,7 @@ export function BootcampContent() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          style={{ fontFamily: "'Times New Roman', Times, serif" }}
           className="space-y-10"
         >
           <div className="overflow-hidden rounded-2xl shadow-lg">
@@ -63,7 +65,7 @@ export function BootcampContent() {
             />
           </div>
 
-          <p className="text-center text-lg leading-8 text-bits-text sm:text-xl sm:leading-9">
+          <p className="text-center text-xl leading-[2rem] text-bits-text sm:text-2xl sm:leading-[2.4rem]">
             The experience-sharing session with Bruck Wubete provided valuable insights into his successful career
             in software engineering and data science. Currently leading the development of a platform for machine
             learning applications, he emphasized the importance of leveraging IT knowledge for professional growth.

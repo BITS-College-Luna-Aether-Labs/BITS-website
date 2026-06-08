@@ -1,3 +1,4 @@
+/** Hero — main CTA section with animated content, floating blob effects, and wave divider */
 "use client";
 
 import Image from "next/image";

@@ -1,3 +1,4 @@
+/** College Day — June 2023 student demonstration and celebration event */
 "use client";
 
 import { motion } from "framer-motion";
@@ -32,6 +33,7 @@ export function CollegeDayContent() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          style={{ fontFamily: "'Times New Roman', Times, serif" }}
           className="space-y-10"
         >
           <div className="overflow-hidden rounded-2xl shadow-lg">
@@ -44,7 +46,7 @@ export function CollegeDayContent() {
             />
           </div>
 
-          <p className="text-center text-lg leading-8 text-bits-text sm:text-xl sm:leading-9">
+          <p className="text-center text-xl leading-[2rem] text-bits-text sm:text-2xl sm:leading-[2.4rem]">
             BITS College celebrated its College Day on Saturday, June 19, 2023. The event was a display of the
             talents and achievements of the students, as well as an opportunity for learning and entertainment. The
             event featured various demonstrations, discussions, and games that highlighted the diverse and innovative

@@ -1,3 +1,4 @@
+/** Why BITS — feature cards grid with staggered entrance, ambient SVG blob, and CTA link */
 "use client";
 
 import Link from "next/link";

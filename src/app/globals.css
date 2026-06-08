@@ -1,3 +1,4 @@
+/** BITS Design System — CSS custom properties for theming, component classes, and motion utilities */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -162,10 +163,6 @@
 }
 
 @layer utilities {
-  .gpu-accelerated {
-    will-change: transform;
-  }
-
   .gpu {
     transform: translateZ(0);
   }

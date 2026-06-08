@@ -1,3 +1,4 @@
+/** Professional Trainings — software development and IT management training cards */
 "use client";
 
 import Image from "next/image";

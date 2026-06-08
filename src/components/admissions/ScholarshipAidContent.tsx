@@ -1,3 +1,4 @@
+/** Scholarship & Aid — four scholarship types with alternating layout, info brochure PDF modal */
 "use client";
 
 import Image from "next/image";

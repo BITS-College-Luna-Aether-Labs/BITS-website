@@ -1,3 +1,4 @@
+/** Home page — stacks five sections (hero, announcement, why-bits, programs, contact) */
 import { HeroSection } from "@/components/home/HeroSection";
 import { AnnouncementSection } from "@/components/home/AnnouncementSection";
 import { WhyBitsSection } from "@/components/home/WhyBitsSection";

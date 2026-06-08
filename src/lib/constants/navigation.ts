@@ -1,4 +1,5 @@
-export type NavItem = {
+/** Nav tree, footer quick-links, and external social media URLs */
+type NavItem = {
   label: string;
   href?: string;
   children?: { label: string; href: string }[];

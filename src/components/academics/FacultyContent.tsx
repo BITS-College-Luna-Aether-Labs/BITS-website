@@ -1,3 +1,4 @@
+/** Faculty — image cards with hover/touch overlay showing name, role, and courses taught */
 "use client";
 
 import Image from "next/image";

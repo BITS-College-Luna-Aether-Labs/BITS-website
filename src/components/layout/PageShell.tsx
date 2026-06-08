@@ -1,3 +1,4 @@
+/** Reusable page layout — wraps title, optional description, and children with motion entrance */
 "use client";
 
 import { motion } from "framer-motion";

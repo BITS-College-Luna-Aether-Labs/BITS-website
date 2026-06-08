@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 
+/** BITS College design tokens — CSS custom properties for dynamic theming, plus Tailwind utilities */
 const config: Config = {
   content: [
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",

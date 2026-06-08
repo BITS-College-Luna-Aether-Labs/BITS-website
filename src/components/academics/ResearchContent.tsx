@@ -1,3 +1,4 @@
+/** Research — two-column layout: focus description and core areas list with images */
 "use client";
 
 import Image from "next/image";

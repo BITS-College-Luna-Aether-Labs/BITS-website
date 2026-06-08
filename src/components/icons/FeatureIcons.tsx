@@ -1,7 +1,7 @@
-
+/** SVG icon set — individual icons are private, exported via FeatureIcon(name) with dynamic lookup */
 type IconProps = { className?: string };
 
-export function BookIcon({ className = "h-10 w-10" }: IconProps) {
+function BookIcon({ className = "h-10 w-10" }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 41 46" fill="none" aria-hidden="true">
       <path
@@ -12,7 +12,7 @@ export function BookIcon({ className = "h-10 w-10" }: IconProps) {
   );
 }
 
-export function GraduationIcon({ className = "h-10 w-10" }: IconProps) {
+function GraduationIcon({ className = "h-10 w-10" }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 48 36" fill="none" aria-hidden="true">
       <path
@@ -23,7 +23,7 @@ export function GraduationIcon({ className = "h-10 w-10" }: IconProps) {
   );
 }
 
-export function BuildingIcon({ className = "h-10 w-10" }: IconProps) {
+function BuildingIcon({ className = "h-10 w-10" }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 40 40" fill="none" aria-hidden="true">
       <path
@@ -34,7 +34,7 @@ export function BuildingIcon({ className = "h-10 w-10" }: IconProps) {
   );
 }
 
-export function CommunityIcon({ className = "h-10 w-10" }: IconProps) {
+function CommunityIcon({ className = "h-10 w-10" }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 48 32" fill="none" aria-hidden="true">
       <path

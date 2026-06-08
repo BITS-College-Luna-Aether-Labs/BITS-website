@@ -1,3 +1,4 @@
+/** News & Events — card grid with video, image, and fallback content types */
 "use client";
 
 import { motion } from "framer-motion";

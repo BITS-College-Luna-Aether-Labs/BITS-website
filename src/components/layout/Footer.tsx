@@ -1,3 +1,4 @@
+/** Site footer — contact info, quick links, social icons with SVG sprite */
 import Image from "next/image";
 import Link from "next/link";
 import {

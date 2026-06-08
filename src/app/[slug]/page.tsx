@@ -1,3 +1,4 @@
+/** Dynamic page router — maps slugs to content components via PAGE_TITLES and category arrays */
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
 import { WhoWeAreContent } from "@/components/about/WhoWeAreContent";

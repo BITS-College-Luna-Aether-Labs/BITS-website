@@ -8,6 +8,7 @@ import { THEME_SCRIPT } from "@/lib/theme";
 import { SITE } from "@/lib/constants/site";
 import "./globals.css";
 
+/** Google Fonts loaded as CSS variables for Tailwind font-family tokens */
 const openSans = Open_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],

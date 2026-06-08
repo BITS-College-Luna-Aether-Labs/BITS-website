@@ -1,3 +1,4 @@
+/** Software Engineering — overview, courses, graduation requirements, and career paths */
 "use client";
 
 import { motion, Variants } from "framer-motion";
@@ -154,47 +155,48 @@ export function SoftwareEngineeringContent() {
               </motion.div>
             ))}
           </div>
-          <div className="mt-8 grid gap-8 md:grid-cols-2">
-            <motion.img
-              src={`${IMG}%203.webp`}
-              alt="Graduation Requirements"
-              className="w-full rounded-2xl shadow-lg"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true, margin: "-100px" }}
-            />
-          </div>
         </motion.section>
 
-        {/* Career Paths */}
+        {/* Graduation Image + Career Paths */}
         <motion.section
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
+          className="mb-16 grid gap-12 md:grid-cols-2 md:items-center"
         >
-          <h2 className="text-3xl font-bold text-bits-heading sm:text-4xl">Career Paths</h2>
-          <p className="mt-4 text-lg leading-relaxed text-bits-text">
-            Many career opportunities exist for graduates of the Software Engineering undergraduate program. They will have the potential to work as:
-          </p>
-          <ul className="mt-6 grid list-inside list-disc gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              "Software Designers",
-              "Software Developers",
-              "Requirement Analysts",
-              "Software Project Managers",
-              "Usability Experts",
-            ].map((career) => (
-              <motion.li
-                key={career}
-                variants={itemVariants}
-                className="text-lg text-bits-text"
-              >
-                <strong>{career}</strong>
-              </motion.li>
-            ))}
-          </ul>
+          <motion.img
+            src={`${IMG}%203.webp`}
+            alt="Graduation Requirements"
+            className="w-full rounded-2xl shadow-lg"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true, margin: "-100px" }}
+          />
+          <div>
+            <h2 className="text-3xl font-bold text-bits-heading sm:text-4xl">Career Paths</h2>
+            <p className="mt-4 text-lg leading-relaxed text-bits-text">
+              Many career opportunities exist for graduates of the Software Engineering undergraduate program. They will have the potential to work as:
+            </p>
+            <ul className="mt-6 list-inside list-disc space-y-2 text-lg text-bits-text">
+              {[
+                "Software Designers",
+                "Software Developers",
+                "Requirement Analysts",
+                "Software Project Managers",
+                "Usability Experts",
+              ].map((career) => (
+                <motion.li
+                  key={career}
+                  variants={itemVariants}
+                  className="text-lg text-bits-text"
+                >
+                  <strong>{career}</strong>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
         </motion.section>
       </main>
     </div>

@@ -1,3 +1,4 @@
+/** Programs — graduate + undergraduate program cards with staggered entrance and fallback static variant */
 "use client";
 
 import Image from "next/image";

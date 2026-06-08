@@ -1,3 +1,4 @@
+/** Tuition — price-per-credit-hour tables for undergrad and graduate programs */
 "use client";
 
 import { motion } from "framer-motion";

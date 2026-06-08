@@ -1,3 +1,4 @@
+/** Scroll-triggered entrance animation wrapper — skips animation when motion is disabled */
 "use client";
 
 import { motion } from "framer-motion";

@@ -1,3 +1,4 @@
+/** Student Support — academic/disability support + extracurricular tab panel with animated content */
 "use client";
 
 import Image from "next/image";

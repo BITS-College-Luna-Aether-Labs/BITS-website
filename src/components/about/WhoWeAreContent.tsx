@@ -1,3 +1,4 @@
+/** Who We Are — tabbed subpage: overview, mission & vision, dean's message, accreditation (PDF), student support */
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -110,7 +111,7 @@ function buildContentMap(selectedPdf: string | null, setSelectedPdf: (v: string 
             </div>
           </div>
 
-          <div className="flex justify-center py-4">
+          <div className="flex justify-center py-4 dark:rounded-xl dark:bg-white/90 dark:p-4">
             <Image
               src="/images/logo.png"
               alt="BITS College Logo"

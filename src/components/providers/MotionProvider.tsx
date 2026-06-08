@@ -1,3 +1,4 @@
+/** Sets global Framer Motion defaults — respects user reduced-motion preference */
 "use client";
 
 import { MotionConfig } from "framer-motion";

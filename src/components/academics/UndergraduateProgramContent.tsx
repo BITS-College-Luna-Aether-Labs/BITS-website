@@ -1,3 +1,4 @@
+/** Undergraduate Programs — two program cards (SE, ITS) with staggered entrance and CTA links */
 "use client";
 
 import Image from "next/image";

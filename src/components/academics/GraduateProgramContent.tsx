@@ -1,3 +1,4 @@
+/** Graduate Program — MSc in IT Management with focus areas list and hero image */
 "use client";
 
 import Image from "next/image";

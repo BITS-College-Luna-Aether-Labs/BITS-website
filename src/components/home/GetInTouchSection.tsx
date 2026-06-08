@@ -1,3 +1,4 @@
+/** Get In Touch — three contact cards (phone, location featured, email) with staggered entrance */
 "use client";
 
 import { motion } from "framer-motion";

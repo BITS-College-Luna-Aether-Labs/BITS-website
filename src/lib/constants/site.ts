@@ -1,3 +1,4 @@
+/** Site-wide metadata, contact info, and structured content data (cards, programs, contact) */
 export const SITE = {
   name: "BITS COLLEGE",
   tagline: "School of Systems and Technology",

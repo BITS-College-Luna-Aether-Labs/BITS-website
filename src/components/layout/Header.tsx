@@ -1,3 +1,4 @@
+/** Site header — fixed top nav with dropdowns, mobile menu, theme toggle, and scroll-aware styling */
 "use client";
 
 import Image from "next/image";

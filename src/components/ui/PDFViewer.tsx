@@ -1,3 +1,4 @@
+/** Responsive PDF viewer — opens in new tab on mobile, inline iframe on desktop */
 "use client";
 
 import { useEffect, useState } from "react";

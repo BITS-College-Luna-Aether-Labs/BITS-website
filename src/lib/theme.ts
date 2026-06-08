@@ -1,6 +1,7 @@
+/** Theme utilities — syncs <html> class with localStorage so dark mode survives refresh without flash */
 export type Theme = "light" | "dark";
 
-export const STORAGE_KEY = "bits_theme";
+const STORAGE_KEY = "bits_theme";
 
 export function getDOMTheme(): Theme {
   if (typeof window === "undefined") return "light";

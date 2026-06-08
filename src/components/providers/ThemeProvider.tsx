@@ -1,3 +1,4 @@
+/** Theme context — uses useSyncExternalStore to read <html> class without React state drift */
 "use client";
 
 import {

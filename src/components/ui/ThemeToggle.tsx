@@ -1,3 +1,4 @@
+/** Dark/light toggle button — animated icon swap with spring physics */
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";

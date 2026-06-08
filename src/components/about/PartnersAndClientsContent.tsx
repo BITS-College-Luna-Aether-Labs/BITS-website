@@ -1,3 +1,4 @@
+/** Partners & Clients — partner logo cards with staggered entrance and hover effects */
 "use client";
 
 import { motion } from "framer-motion";
@@ -50,7 +51,7 @@ function PartnerCard({ partner, index, enabled }: { partner: Partner; index: num
       className="group relative flex flex-col items-center overflow-hidden rounded-[26px] border border-emerald-900/12 bg-[var(--bits-surface)] p-8 shadow-[0_16px_38px_rgba(10,41,18,0.08)] transition-all duration-200 hover:-translate-y-1.5 hover:border-emerald-900/24 hover:shadow-[0_22px_52px_rgba(10,41,18,0.13)] dark:border-gray-800 dark:shadow-none dark:ring-1 dark:ring-gray-800 dark:hover:ring-bits-green/30"
     >
       <div className="absolute inset-auto -bottom-7 -right-[18px] h-[120px] w-[120px] rounded-full bg-[radial-gradient(circle,rgba(125,194,67,0.12),transparent_68%)] pointer-events-none dark:opacity-30" />
-      <div className="flex h-28 w-28 shrink-0 items-center justify-center overflow-hidden sm:h-32 sm:w-32">
+      <div className="flex h-28 w-28 shrink-0 items-center justify-center overflow-hidden rounded-2xl dark:bg-white/90 dark:p-2 sm:h-32 sm:w-32">
         <Image
           src={partner.logo}
           alt={partner.name}
@@ -70,7 +71,7 @@ export function PartnersAndClientsContent() {
   const { enabled } = useMotionSafe();
 
   return (
-    <div className="bg-[radial-gradient(circle_at_top,rgba(125,194,67,0.08),transparent_36%),linear-gradient(180deg,#fcfdfc,var(--bits-surface-muted))] dark:bg-gray-950">
+    <div className="bg-[radial-gradient(circle_at_top,rgba(125,194,67,0.08),transparent_36%),linear-gradient(180deg,#fcfdfc,var(--bits-surface-muted))] dark:bg-none dark:bg-gray-950">
       <section className="mx-auto max-w-site px-4 pt-28 pb-[42px] sm:px-6 lg:px-8 lg:pt-32">
         {enabled ? (
           <motion.div

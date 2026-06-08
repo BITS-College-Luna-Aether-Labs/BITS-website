@@ -1,3 +1,4 @@
+/** Undergraduate Admission — Ethiopian & foreign student requirements with numbered list cards */
 "use client";
 
 import Image from "next/image";

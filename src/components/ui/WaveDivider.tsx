@@ -1,3 +1,4 @@
+/** Decorative SVG wave — separates sections, flips via prop; respects reduced-motion via CSS animation pause */
 export function WaveDivider({ flip = false }: { flip?: boolean }) {
   return (
     <div

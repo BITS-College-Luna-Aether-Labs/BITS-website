@@ -1,3 +1,4 @@
+/** Workshop — March 2022 tech industry workshop recap */
 "use client";
 
 import { motion } from "framer-motion";
@@ -32,6 +33,7 @@ export function WorkshopContent() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          style={{ fontFamily: "'Times New Roman', Times, serif" }}
           className="space-y-10"
         >
           <div className="overflow-hidden rounded-2xl shadow-lg">
@@ -44,13 +46,13 @@ export function WorkshopContent() {
             />
           </div>
 
-          <p className="text-center text-lg leading-8 text-bits-text sm:text-xl sm:leading-9">
+          <p className="text-center text-xl leading-[2rem] text-bits-text sm:text-2xl sm:leading-[2.4rem]">
             On Saturday, March 26, 2022, BITS College hosted a Workshop &ldquo;Preparing for the Tech Industry
             through Higher Education&rdquo;. The workshop attracted more than 100 students who were interested in
             pursuing a career in the tech sector.
           </p>
 
-          <p className="text-center text-lg leading-8 text-bits-text sm:text-xl sm:leading-9">
+          <p className="text-center text-xl leading-[2rem] text-bits-text sm:text-2xl sm:leading-[2.4rem]">
             The workshop aimed to provide students with an overview of the skills and knowledge required for working
             in the tech industry, as well as the latest trends and best practices in each field. The students also
             had the opportunity to engage with the BITS College students (the ninjas) who are working on exciting

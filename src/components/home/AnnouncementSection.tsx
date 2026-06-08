@@ -1,3 +1,4 @@
+/** Announcement card — displays the National Exit Exam pass announcement image with hover animation */
 "use client";
 
 import Image from "next/image";

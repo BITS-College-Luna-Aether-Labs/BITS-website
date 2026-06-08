@@ -1,3 +1,4 @@
+/** Facilities — image gallery cards with carousel for each facility type, stats grid, CTA banner */
 "use client";
 
 import { motion } from "framer-motion";

@@ -1,3 +1,4 @@
+/** Graduate Admission — requirements for MSc IT Management with numbered list */
 "use client";
 
 import Image from "next/image";

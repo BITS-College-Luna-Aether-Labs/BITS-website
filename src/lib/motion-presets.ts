@@ -1,6 +1,7 @@
-// EASING CURVES
+/** Shared Framer Motion presets — easing curves, spring physics, hover transforms, and stagger delays */
 export const EASE_PREMIUM = [0.16, 1, 0.3, 1] as const;
 
+// SPRING PHYSICS
 // SPRING PHYSICS
 export const SPRING_GENTLE = {
   type: "spring" as const,
@@ -22,7 +23,7 @@ export const HOVER_SCALE_SM = { scale: 1.02 };
 export const TAP_SCALE = { scale: 0.97 };
 export const TAP_SCALE_SM = { scale: 0.98 };
 
-// ENHANCED CARD HOVER
+// CARD HOVER — uses CSS shadow custom property so dark/light switch without rework
 export const CARD_HOVER_LIGHT = {
   y: -3,
   boxShadow: "var(--shadow-card-hover-rise)",

@@ -6,6 +6,7 @@ import { MotionProvider } from "@/components/providers/MotionProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { THEME_SCRIPT } from "@/lib/theme";
 import { SITE } from "@/lib/constants/site";
+import { SOCIAL_LINKS } from "@/lib/constants/navigation";
 import "./globals.css";
 
 /** Google Fonts loaded as CSS variables for Tailwind font-family tokens */
@@ -46,10 +47,10 @@ export const metadata: Metadata = {
     description: SITE.description,
     images: [
       {
-        url: "/images/hero-student.webp",
-        width: 550,
-        height: 1088,
-        alt: "BITS College campus life",
+        url: "/images/About-Facilities/College%201.webp",
+        width: 1200,
+        height: 630,
+        alt: "BITS College campus",
       },
     ],
   },
@@ -62,9 +63,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  alternates: {
-    canonical: "/",
-  },
+
 };
 
 export default function RootLayout({
@@ -76,6 +75,52 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "EducationalOrganization",
+              name: SITE.name,
+              alternateName: "BITS College",
+              description: SITE.description,
+              url: SITE.url,
+              logo: `${SITE.url}/images/logo.png`,
+              telephone: SITE.phone,
+              email: SITE.email,
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Yeka Sub-City, Woreda 05",
+                addressLocality: "Addis Ababa",
+                addressCountry: "ET",
+              },
+              sameAs: SOCIAL_LINKS.map((l) => l.href),
+              knowsAbout: [
+                {
+                  "@type": "Course",
+                  name: "Master of Science in Information Technology Management",
+                  description: "Graduate program focusing on IT management, strategy, and leadership.",
+                  provider: { "@type": "EducationalOrganization", name: SITE.name },
+                  url: `${SITE.url}/graduate-program`,
+                },
+                {
+                  "@type": "Course",
+                  name: "Bachelor of Science in Software Engineering",
+                  description: "Undergraduate program covering software development, design, and engineering principles.",
+                  provider: { "@type": "EducationalOrganization", name: SITE.name },
+                  url: `${SITE.url}/software-engineering`,
+                },
+                {
+                  "@type": "Course",
+                  name: "Bachelor of Science in Information Technology and Systems",
+                  description: "Undergraduate program focused on IT infrastructure, systems analysis, and network management.",
+                  provider: { "@type": "EducationalOrganization", name: SITE.name },
+                  url: `${SITE.url}/information-technology-and-systems`,
+                },
+              ],
+            }),
+          }}
+        />
       </head>
       <body
         className={`${openSans.variable} ${robotoSlab.variable} ${playfairDisplay.variable} flex min-h-screen flex-col font-sans`}

@@ -1,8 +1,10 @@
 /** News & Events — card grid with video, image, and fallback content types */
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useState, useMemo } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type NewsItem = {
   title: string;
@@ -25,17 +27,13 @@ const newsItems: NewsItem[] = [
       src: "/images/News%20&%20Events/Data%20Analytics%20Workshop%20by%20the%20ITS%20Department.jpg",
       alt: "BITS College data analytics workshop audience",
     },
-    noButton: true,
-    href: "#",
   },
   {
     title: "Virtual Tour of BITS College",
-    noButton: true,
     date: "November 02, 2024",
     excerpt:
       "Take a virtual tour of BITS College! Explore our campus, state-of-the-art labs, student facilities, and learning spaces. Whether you\u2019re a prospective student or a curious visitor, this tour will give you a taste of the BITS College experience",
     videoId: "xzJXNyy6sRk",
-    href: "#",
   },
   {
     title: "Hackathon Stories",
@@ -43,8 +41,6 @@ const newsItems: NewsItem[] = [
     excerpt:
       "Hear how our participants collaborated and innovated during the BITS College Hackathon. Don\u2019t forget\u2014the winners will be revealed at the Tech Expo tomorrow!",
     videoSrc: "/images/News%20&%20Events/Hackathon%20Stories.mp4",
-    noButton: true,
-    href: "#",
   },
   {
     title: "Day 3 of the BITS College Hackathon",
@@ -52,8 +48,7 @@ const newsItems: NewsItem[] = [
     excerpt:
       "A Grand Finale! From coding breakthroughs to innovative solutions, Day 3 was nothing short of spectacular. Our participants showed incredible skill and teamwork, and we\u2019re proud to announce the winning project!",
     videoSrc: "/images/News%20&%20Events/Day%203%20of%20the%20BITS%20College%20Hackathon.mp4",
-    noButton: true,
-    href: "#",
+
   },
   {
     title: "Day 2 of the BITS College Hackathon",
@@ -61,8 +56,7 @@ const newsItems: NewsItem[] = [
     excerpt:
       "BITS College Hackathon is all about progress and innovation! Our participants are working hard to bring their ideas to life, and we\u2019re seeing some incredible teamwork and creativity! Stay tuned for more updates as we head into the final day!",
     videoSrc: "/images/News%20&%20Events/Day%202%20of%20the%20BITS%20College%20Hackathon.mp4",
-    noButton: true,
-    href: "#",
+
   },
   {
     title: "Day 1 of the BITS College Hackathon",
@@ -70,8 +64,7 @@ const newsItems: NewsItem[] = [
     excerpt:
       "Day 1 of the Hackathon is filled with creativity, problem-solving, and serious skills. Watch our teams collaborate and bring their ideas to life! Stay tuned for more epic moments tomorrow!",
     videoSrc: "/images/News%20&%20Events/Day%201%20of%20the%20BITS%20College%20Hackathon.mp4",
-    noButton: true,
-    href: "#",
+
   },
   {
     title: "BITS Workshop Highlights",
@@ -79,8 +72,7 @@ const newsItems: NewsItem[] = [
     excerpt:
       "A day of inspiration, career guidance, and so much energy! Watch these highlights to catch a glimpse of the event and the amazing vibes we had",
     videoSrc: "/images/News%20&%20Events/BITS%20Workshop%20Highlights.mp4",
-    noButton: true,
-    href: "#",
+
   },
   {
     title: "Highlights from the Digital Platform Ecosystem Workshop",
@@ -88,8 +80,7 @@ const newsItems: NewsItem[] = [
     excerpt:
       "The workshop was jointly organized by Bunna Bank, Serianu, Nib Bank and BITS College. Topics covered include: Cybersecurity and Digital Transformation, ChatGPT, Digital Banking Trends, CIO challenges in building Digital Platforms, Digital Ecosystem Trends in Logistics, and Digital Marketing",
     videoSrc: "/images/News%20&%20Events/Highlights%20from%20the%20Digital%20Platform%20Ecosystem%20Workshop.mp4",
-    noButton: true,
-    href: "#",
+
   },
   {
     title: "Workshop on Digital Platform Ecosystems",
@@ -111,7 +102,7 @@ const newsItems: NewsItem[] = [
       src: "/images/News%20&%20Events/Scholarship%20Recipients.webp",
       alt: "BITS College scholarship recipients group photo",
     },
-    href: "/scholarship-recepients/",
+    href: "/scholarship-recipients/",
   },
   {
     title: "Summer Bootcamp",
@@ -162,8 +153,6 @@ const newsItems: NewsItem[] = [
     date: "January 02, 2021",
     excerpt: "BITS College School of Systems and Technology Inauguration Ceremony",
     videoId: "wYdFxpqX0iM",
-    noButton: true,
-    href: "#",
   },
   {
     title: "Inauguration",
@@ -181,8 +170,7 @@ const newsItems: NewsItem[] = [
     excerpt:
       "BITS College is a private higher learning institution with a vision of promoting excellence in the production, growth and dissemination of advanced scientifice knowledge through teaching and research",
     videoId: "cN7qtSnViBc",
-    noButton: true,
-    href: "#",
+
   },
 ];
 
@@ -286,7 +274,68 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
   );
 }
 
+const ITEMS_PER_PAGE = 6;
+
+function Pagination({
+  current,
+  total,
+  onChange,
+}: {
+  current: number;
+  total: number;
+  onChange: (page: number) => void;
+}) {
+  if (total <= 1) return null;
+
+  return (
+    <nav className="mt-14 flex items-center justify-center gap-2" aria-label="News pagination">
+      <button
+        type="button"
+        onClick={() => onChange(current - 1)}
+        disabled={current === 1}
+        className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-bits-muted transition hover:border-bits-green hover:text-bits-green disabled:cursor-not-allowed disabled:opacity-30 dark:border-gray-700 dark:hover:border-bits-green"
+        aria-label="Previous page"
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+
+      {Array.from({ length: total }, (_, i) => i + 1).map((page) => (
+        <button
+          key={page}
+          type="button"
+          onClick={() => onChange(page)}
+          className={`flex h-10 w-10 items-center justify-center rounded-xl text-sm font-medium transition ${
+            page === current
+              ? "bg-bits-green text-white shadow-sm"
+              : "border border-slate-200 text-bits-text hover:border-bits-green hover:text-bits-green dark:border-gray-700 dark:hover:border-bits-green"
+          }`}
+          aria-current={page === current ? "page" : undefined}
+          aria-label={`Page ${page}`}
+        >
+          {page}
+        </button>
+      ))}
+
+      <button
+        type="button"
+        onClick={() => onChange(current + 1)}
+        disabled={current === total}
+        className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-bits-muted transition hover:border-bits-green hover:text-bits-green disabled:cursor-not-allowed disabled:opacity-30 dark:border-gray-700 dark:hover:border-bits-green"
+        aria-label="Next page"
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+    </nav>
+  );
+}
+
 export function NewsEventsContent() {
+  const [page, setPage] = useState(1);
+  const totalPages = useMemo(() => Math.ceil(newsItems.length / ITEMS_PER_PAGE), []);
+  const visibleItems = useMemo(
+    () => newsItems.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE),
+    [page]
+  );
   return (
     <div className="min-h-screen bg-[var(--bits-page)] text-bits-heading">
       <div id="content">
@@ -315,17 +364,22 @@ export function NewsEventsContent() {
         </section>
 
         <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid gap-10 sm:grid-cols-2"
-          >
-            {newsItems.map((item, index) => (
-              <NewsCard key={`${item.title}-${item.date}`} item={item} index={index} />
-            ))}
-          </motion.div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={page}
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              exit={{ opacity: 0, y: -12, transition: { duration: 0.2 } }}
+              className="grid gap-10 sm:grid-cols-2"
+            >
+              {visibleItems.map((item) => (
+                <NewsCard key={`${item.title}-${item.date}`} item={item} index={0} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
 
+          <Pagination current={page} total={totalPages} onChange={setPage} />
         </section>
       </div>
     </div>

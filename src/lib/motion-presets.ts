@@ -1,7 +1,6 @@
 /** Shared Framer Motion presets — easing curves, spring physics, hover transforms, and stagger delays */
-export const EASE_PREMIUM = [0.16, 1, 0.3, 1] as const;
+export const EASE_PREMIUM = [0.22, 1, 0.36, 1] as const;
 
-// SPRING PHYSICS
 // SPRING PHYSICS
 export const SPRING_GENTLE = {
   type: "spring" as const,

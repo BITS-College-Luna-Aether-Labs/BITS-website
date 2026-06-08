@@ -119,7 +119,7 @@ const PAGE_TITLES: Record<string, { title: string; description: string }> = {
     title: "Summer Bootcamp",
     description: "Bootcamp program designed to help trainees gain practical knowledge on industry standards, best practices, tools and technologies.",
   },
-  "scholarship-recepients": {
+  "scholarship-recipients": {
     title: "Merit Based Scholarship Recipients 2023/24",
     description: "BITS College awarded Merit-based Scholarships to three outstanding students.",
   },
@@ -135,7 +135,11 @@ export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const page = PAGE_TITLES[slug];
   if (!page) return {};
-  return { title: page.title, description: page.description };
+  return {
+    title: page.title,
+    description: page.description,
+    alternates: { canonical: `/${slug}` },
+  };
 }
 
 /** Page-group slugs used for content routing below */
@@ -223,7 +227,7 @@ export default async function DynamicPage({ params }: Props) {
     return <BootcampContent />;
   }
 
-  if (slug === "scholarship-recepients") {
+  if (slug === "scholarship-recipients") {
     return <ScholarshipRecipientsContent />;
   }
 

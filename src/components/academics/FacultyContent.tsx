@@ -3,11 +3,9 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import {
-  Users,
-  GraduationCap,
-} from "lucide-react";
+import { Users, GraduationCap } from "lucide-react";
 import { useState } from "react";
+import { EASE_PREMIUM } from "@/lib/motion-presets";
 
 type FacultyCard = {
   name: string;
@@ -39,8 +37,6 @@ const faculty: FacultyCard[] = [
   { name: "Tehut Tesfaye", role: "Lecturer", courses: ["Fundamentals of Data Analytics"], initials: "TE", image: `${IMG}Ms%20Tehut%20Tesfaye.png` },
 ];
 
-const EASE_PREMIUM = [0.22, 1, 0.36, 1] as const;
-
 function Card({ item, index }: { item: FacultyCard; index: number }) {
   const [showOverlay, setShowOverlay] = useState(false);
   const [touched, setTouched] = useState(false);
@@ -64,7 +60,7 @@ function Card({ item, index }: { item: FacultyCard; index: number }) {
           src={item.image}
           alt={item.name}
           fill
-          loading="eager"
+          loading={index < 4 ? "eager" : "lazy"}
           priority={index < 4}
           className="object-cover transition duration-700 group-hover:scale-110"
           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"

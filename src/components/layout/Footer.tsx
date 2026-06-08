@@ -110,7 +110,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="mb-3 text-lg font-semibold text-white">Quick Link</h2>
+            <h2 className="mb-3 text-lg font-semibold text-white">Quick Links</h2>
             <div className="mb-3 h-0.5 w-8 bg-bits-green" aria-hidden="true" />
             <ul className="space-y-2 text-[15px]">
               {FOOTER_QUICK_LINKS.map((link) => (

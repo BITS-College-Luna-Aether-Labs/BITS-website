@@ -81,6 +81,13 @@ function NavDropdown({
   const shouldReduce = useReducedMotion();
   const { hoverScaleSm } = useInteractionMotion();
   const hoverTimer = useRef<number | undefined>(undefined);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLUListElement>(null);
+
+  const close = useCallback(() => {
+    setOpen(false);
+    buttonRef.current?.focus();
+  }, []);
 
   const handleMouseEnter = useCallback(() => {
     window.clearTimeout(hoverTimer.current);
@@ -92,6 +99,67 @@ function NavDropdown({
     setOpen(false);
   }, []);
 
+  const handleButtonKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      switch (e.key) {
+        case "ArrowDown":
+          e.preventDefault();
+          if (!open) setOpen(true);
+          requestAnimationFrame(() => {
+            const links = menuRef.current?.querySelectorAll<HTMLAnchorElement>("a[role=menuitem]");
+            links?.[0]?.focus();
+          });
+          break;
+        case "ArrowUp":
+          e.preventDefault();
+          if (!open) setOpen(true);
+          requestAnimationFrame(() => {
+            const links = menuRef.current?.querySelectorAll<HTMLAnchorElement>("a[role=menuitem]");
+            links?.[links.length - 1]?.focus();
+          });
+          break;
+        case "Escape":
+          e.preventDefault();
+          close();
+          break;
+      }
+    },
+    [open, close]
+  );
+
+  const handleMenuKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      const links = menuRef.current?.querySelectorAll<HTMLAnchorElement>("a[role=menuitem]");
+      if (!links || links.length === 0) return;
+
+      const currentIndex = Array.from(links).findIndex((el) => el === document.activeElement);
+
+      switch (e.key) {
+        case "ArrowDown":
+          e.preventDefault();
+          links[(currentIndex + 1) % links.length]?.focus();
+          break;
+        case "ArrowUp":
+          e.preventDefault();
+          links[(currentIndex - 1 + links.length) % links.length]?.focus();
+          break;
+        case "Home":
+          e.preventDefault();
+          links[0]?.focus();
+          break;
+        case "End":
+          e.preventDefault();
+          links[links.length - 1]?.focus();
+          break;
+        case "Escape":
+          e.preventDefault();
+          close();
+          break;
+      }
+    },
+    [close]
+  );
+
   return (
     <li
       className="relative"
@@ -99,11 +167,13 @@ function NavDropdown({
       onMouseLeave={handleMouseLeave}
     >
       <motion.button
+        ref={buttonRef}
         type="button"
         className={`nav-link inline-flex items-center gap-0.5 whitespace-nowrap ${isActive ? "nav-link-active" : ""}`}
         aria-expanded={open}
         aria-haspopup="true"
         onClick={() => setOpen((v) => !v)}
+        onKeyDown={handleButtonKeyDown}
         whileHover={hoverScaleSm}
         transition={{ duration: 0.2 }}
       >
@@ -131,7 +201,9 @@ function NavDropdown({
       <AnimatePresence>
         {open && (
           <motion.ul
+            ref={menuRef}
             className="dropdown-panel"
+            onKeyDown={handleMenuKeyDown}
             {...(shouldReduce
               ? {}
               : {
@@ -183,6 +255,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const shouldReduce = useReducedMotion();
   const { hoverScaleSm, tapSm } = useInteractionMotion();
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   const onScroll = useCallback(() => {
     setScrolled(window.scrollY > 8);
@@ -199,6 +272,45 @@ export function Header() {
     return () => {
       document.body.style.overflow = "";
     };
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    const menu = mobileMenuRef.current;
+    if (!menu) return;
+
+    const focusable = menu.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    first?.focus();
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setMobileOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      if (focusable.length === 0) return;
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, [mobileOpen]);
 
   return (
@@ -336,6 +448,7 @@ export function Header() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            ref={mobileMenuRef}
             id="mobile-menu"
             className="border-t border-gray-100 bg-[var(--bits-page)] md:hidden dark:border-green-950 dark:bg-[#010a05]"
             initial={{ height: 0, opacity: 0 }}

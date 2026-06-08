@@ -23,6 +23,20 @@ const csp = [
 
 const nextConfig: NextConfig = {
   outputFileTracingRoot: process.cwd(),
+  async redirects() {
+    return [
+      {
+        source: "/scholarship-recepients",
+        destination: "/scholarship-recipients",
+        permanent: true,
+      },
+      {
+        source: "/scholarship-recepients/",
+        destination: "/scholarship-recipients",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

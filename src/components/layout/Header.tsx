@@ -70,10 +70,12 @@ function NavDropdown({
   label,
   items,
   isActive,
+  currentPath,
 }: {
   label: string;
   items: { label: string; href: string }[];
   isActive?: boolean;
+  currentPath: string;
 }) {
   const [open, setOpen] = useState(false);
   const shouldReduce = useReducedMotion();
@@ -154,7 +156,11 @@ function NavDropdown({
               >
                 <Link
                   href={child.href}
-                  className="block px-5 py-2.5 text-sm text-bits-muted transition-[color,transform] duration-200 ease-out hover:translate-x-0.5 hover:text-bits-green dark:text-gray-200 dark:hover:text-bits-green"
+                  className={`block px-5 py-2.5 text-sm transition-[color,transform] duration-200 ease-out hover:translate-x-0.5 hover:text-bits-green dark:hover:text-bits-green ${
+                    currentPath.startsWith(child.href)
+                      ? "font-medium text-bits-green"
+                      : "text-bits-muted dark:text-gray-200"
+                  }`}
                   role="menuitem"
                   onClick={() => setOpen(false)}
                 >
@@ -244,6 +250,7 @@ export function Header() {
                       label={item.label}
                       items={item.children}
                       isActive={isActive || childActive}
+                      currentPath={pathname}
                     />
                   );
                 }
@@ -371,7 +378,11 @@ export function Header() {
                           >
                             <Link
                               href={child.href}
-                              className="block rounded-lg px-3 py-2 text-sm text-bits-muted hover:text-bits-green dark:text-gray-200"
+                              className={`block rounded-lg px-3 py-2 text-sm ${
+                                pathname.startsWith(child.href)
+                                  ? "font-medium text-bits-green"
+                                  : "text-bits-muted hover:text-bits-green dark:text-gray-200"
+                              }`}
                               onClick={() => setMobileOpen(false)}
                             >
                               {child.label}

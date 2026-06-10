@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Open_Sans, Roboto_Slab, Playfair_Display } from "next/font/google";
+import localFont from "next/font/local";
+import { headers } from "next/headers";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MotionProvider } from "@/components/providers/MotionProvider";
@@ -9,24 +10,20 @@ import { SITE } from "@/lib/constants/site";
 import { SOCIAL_LINKS } from "@/lib/constants/navigation";
 import "./globals.css";
 
-/** Google Fonts loaded as CSS variables for Tailwind font-family tokens */
-const openSans = Open_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+const openSans = localFont({
+  src: "../fonts/open-sans-latin.woff2",
   variable: "--font-open-sans",
   display: "swap",
 });
 
-const robotoSlab = Roboto_Slab({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
+const robotoSlab = localFont({
+  src: "../fonts/roboto-slab-latin.woff2",
   variable: "--font-roboto-slab",
   display: "swap",
 });
 
-const playfairDisplay = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["700", "800"],
+const playfairDisplay = localFont({
+  src: "../fonts/playfair-display-latin.woff2",
   variable: "--font-playfair",
   display: "swap",
 });
@@ -66,16 +63,18 @@ export const metadata: Metadata = {
 
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const nonce = (await headers()).get("x-nonce") ?? "";
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <script nonce={nonce} dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
         <script
+          nonce={nonce}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({

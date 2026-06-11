@@ -38,7 +38,7 @@ export function InaugurationContent() {
         >
           <div className="overflow-hidden rounded-2xl shadow-lg">
             <Image
-              src="/images/News%20&%20Events/Inauguration.jpg"
+              src="/images/News-Events/Inauguration.jpg"
               alt="BITS College inauguration banner on the campus facade"
               width={1200}
               height={800}

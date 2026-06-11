@@ -6,19 +6,19 @@ import Image from "next/image";
 
 const workshopImages = [
   {
-    src: "/images/News%20&%20Events/WorkShop%201.jpg",
+    src: "/images/News-Events/Workshop%201.jpg",
     alt: "Summer bootcamp workshop session 1",
   },
   {
-    src: "/images/News%20&%20Events/Workshop%202.jpg",
+    src: "/images/News-Events/Workshop%202.jpg",
     alt: "Summer bootcamp workshop session 2",
   },
   {
-    src: "/images/News%20&%20Events/Workshop%203.jpg",
+    src: "/images/News-Events/Workshop%203.jpg",
     alt: "Summer bootcamp workshop session 3",
   },
   {
-    src: "/images/News%20&%20Events/Workshop%204.jpg",
+    src: "/images/News-Events/Workshop%204.jpg",
     alt: "Summer bootcamp workshop session 4",
   },
 ];
@@ -57,7 +57,7 @@ export function BootcampContent() {
         >
           <div className="overflow-hidden rounded-2xl shadow-lg">
             <Image
-              src="/images/News%20&%20Events/summer%20bootcamp.jpg"
+              src="/images/News-Events/summer%20bootcamp.jpg"
               alt="BITS College summer bootcamp workshop session"
               width={1200}
               height={800}

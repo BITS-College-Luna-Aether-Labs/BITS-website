@@ -38,7 +38,7 @@ export function StudentAppreciationNightContent() {
         >
           <div className="overflow-hidden rounded-2xl shadow-lg">
             <Image
-              src="/images/News%20&%20Events/Student%20Appreciation%20Night.webp"
+              src="/images/News-Events/Student%20Appreciation%20Night.webp"
               alt="BITS College student appreciation group photo"
               width={1200}
               height={800}

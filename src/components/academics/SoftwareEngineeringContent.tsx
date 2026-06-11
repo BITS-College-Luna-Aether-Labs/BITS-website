@@ -20,7 +20,7 @@ const itemVariants: Variants = {
   },
 };
 
-const IMG = "/images/Academics-Undergraduate%20Admissions%20/Software%20Engineering";
+const IMG = "/images/Academics-Undergraduate-Details/Software%20Engineering";
 
 export function SoftwareEngineeringContent() {
   return (
@@ -72,7 +72,7 @@ export function SoftwareEngineeringContent() {
           <motion.img
             src={`${IMG}%201.png`}
             alt="Software Engineering Overview"
-            className="mt-8 w-full rounded-2xl shadow-lg"
+            className="mt-8 w-2/3 mx-auto rounded-2xl shadow-lg"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}

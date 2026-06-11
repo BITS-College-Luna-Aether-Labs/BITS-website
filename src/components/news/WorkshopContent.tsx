@@ -38,7 +38,7 @@ export function WorkshopContent() {
         >
           <div className="overflow-hidden rounded-2xl shadow-lg">
             <Image
-              src="/images/News%20&%20Events/Workshop.jpg"
+              src="/images/News-Events/Workshop.jpg"
               alt="BITS College workshop presentation photo"
               width={1200}
               height={800}

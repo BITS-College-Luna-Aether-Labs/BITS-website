@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
 
-const IMG = "/images/Services-professional%20Training/";
+const IMG = "/images/Services-Professional-Training/";
 
 const trainings = [
   {

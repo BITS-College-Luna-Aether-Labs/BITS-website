@@ -16,7 +16,7 @@ type FacultyCard = {
   image?: string;
 };
 
-const IMG = "/images/Faculty%20Members/";
+const IMG = "/images/Faculty-Members/";
 
 const faculty: FacultyCard[] = [
   { name: "Dr. Rahel Bekele", role: "IS Professional", courses: ["Fundamentals of Database Systems", "Statistical", "Research Methods", "Business Intelligence"], initials: "RB", image: `${IMG}Dr%20Rahel%20Bekele.webp` },

@@ -38,7 +38,7 @@ export function CollegeDayContent() {
         >
           <div className="overflow-hidden rounded-2xl shadow-lg">
             <Image
-              src="/images/News%20&%20Events/BITS%20College%20Day.jpg"
+              src="/images/News-Events/BITS%20College%20Day.jpg"
               alt="BITS College day event activity photo"
               width={1200}
               height={800}

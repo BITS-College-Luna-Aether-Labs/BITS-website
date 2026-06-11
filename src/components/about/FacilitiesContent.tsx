@@ -80,7 +80,7 @@ const facilityImages: Record<string, string[]> = {
   ],
   "College Building": [
     "/images/About-Facilities/College%201.webp",
-    "/images/About-Facilities/COllege%202.webp",
+    "/images/About-Facilities/College%202.webp",
   ],
   "Online Learning": [
     "/images/About-Facilities/Online%20Learning%201.webp",

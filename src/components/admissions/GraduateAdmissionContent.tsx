@@ -54,7 +54,7 @@ export function GraduateAdmissionContent() {
 
             <div>
               <Image
-                src="/images/Academics-GraduateAdmissions/Information Technology Management.webp"
+                src="/images/Academics-GraduateAdmissions/Information%20Technology%20Management.webp"
                 alt="Graduate Admission"
                 width={600}
                 height={450}

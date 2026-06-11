@@ -20,7 +20,7 @@ const itemVariants: Variants = {
   },
 };
 
-const IMG = "/images/Academics-Undergraduate%20Admissions%20/ITS";
+const IMG = "/images/Academics-Undergraduate-Details/ITS";
 
 export function InformationTechnologySystemsContent() {
   return (

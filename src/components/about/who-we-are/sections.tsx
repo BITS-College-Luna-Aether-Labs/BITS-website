@@ -227,7 +227,7 @@ export function DeanTab() {
         <div className="mt-6 flex items-center gap-4">
           <div className="h-20 w-20 overflow-hidden rounded-full">
             <Image
-              src="/images/Faculty%20Members/Dr%20Tesfaye%20Biru.png"
+              src="/images/Faculty-Members/Dr%20Tesfaye%20Biru.png"
               alt="Dr Tesfaye Biru"
               width={80}
               height={80}

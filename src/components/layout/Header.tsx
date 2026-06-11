@@ -235,6 +235,7 @@ function NavDropdown({
                   }`}
                   role="menuitem"
                   onClick={() => setOpen(false)}
+                  {...(child.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 >
                   {child.label}
                 </Link>
@@ -497,6 +498,7 @@ export function Header() {
                                   : "text-bits-muted hover:text-bits-green dark:text-gray-200"
                               }`}
                               onClick={() => setMobileOpen(false)}
+                              {...(child.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                             >
                               {child.label}
                             </Link>

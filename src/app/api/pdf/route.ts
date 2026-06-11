@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
     process.cwd(),
     "public",
     "images",
-    "About-Who we are",
+    "About-Who-we-are",
     file
   );
 

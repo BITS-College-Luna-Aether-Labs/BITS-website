@@ -24,9 +24,10 @@ const newsItems: NewsItem[] = [
     excerpt:
       "Showcasing the life cycle of data analytics, starting from data processing, cleaning visualizing and gaining insight on data and making informed decisions",
     image: {
-      src: "/images/News%20&%20Events/Data%20Analytics%20Workshop%20by%20the%20ITS%20Department.jpg",
+      src: "/images/News-Events/Data%20Analytics%20Workshop%20by%20the%20ITS%20Department.jpg",
       alt: "BITS College data analytics workshop audience",
     },
+    href: "/bootcamp/",
   },
   {
     title: "Virtual Tour of BITS College",
@@ -40,47 +41,42 @@ const newsItems: NewsItem[] = [
     date: "October 16, 2024",
     excerpt:
       "Hear how our participants collaborated and innovated during the BITS College Hackathon. Don\u2019t forget\u2014the winners will be revealed at the Tech Expo tomorrow!",
-    videoSrc: "/images/News%20&%20Events/Hackathon%20Stories.mp4",
+    videoSrc: "/images/News-Events/Hackathon%20Stories.mp4",
   },
   {
     title: "Day 3 of the BITS College Hackathon",
     date: "October 14, 2024",
     excerpt:
       "A Grand Finale! From coding breakthroughs to innovative solutions, Day 3 was nothing short of spectacular. Our participants showed incredible skill and teamwork, and we\u2019re proud to announce the winning project!",
-    videoSrc: "/images/News%20&%20Events/Day%203%20of%20the%20BITS%20College%20Hackathon.mp4",
-
+    videoSrc: "/images/News-Events/Day%203%20of%20the%20BITS%20College%20Hackathon.mp4",
   },
   {
     title: "Day 2 of the BITS College Hackathon",
     date: "October 13, 2024",
     excerpt:
       "BITS College Hackathon is all about progress and innovation! Our participants are working hard to bring their ideas to life, and we\u2019re seeing some incredible teamwork and creativity! Stay tuned for more updates as we head into the final day!",
-    videoSrc: "/images/News%20&%20Events/Day%202%20of%20the%20BITS%20College%20Hackathon.mp4",
-
+    videoSrc: "/images/News-Events/Day%202%20of%20the%20BITS%20College%20Hackathon.mp4",
   },
   {
     title: "Day 1 of the BITS College Hackathon",
     date: "October 12, 2024",
     excerpt:
       "Day 1 of the Hackathon is filled with creativity, problem-solving, and serious skills. Watch our teams collaborate and bring their ideas to life! Stay tuned for more epic moments tomorrow!",
-    videoSrc: "/images/News%20&%20Events/Day%201%20of%20the%20BITS%20College%20Hackathon.mp4",
-
+    videoSrc: "/images/News-Events/Day%201%20of%20the%20BITS%20College%20Hackathon.mp4",
   },
   {
     title: "BITS Workshop Highlights",
     date: "September 29, 2024",
     excerpt:
       "A day of inspiration, career guidance, and so much energy! Watch these highlights to catch a glimpse of the event and the amazing vibes we had",
-    videoSrc: "/images/News%20&%20Events/BITS%20Workshop%20Highlights.mp4",
-
+    videoSrc: "/images/News-Events/BITS%20Workshop%20Highlights.mp4",
   },
   {
     title: "Highlights from the Digital Platform Ecosystem Workshop",
     date: "November 16, 2023",
     excerpt:
       "The workshop was jointly organized by Bunna Bank, Serianu, Nib Bank and BITS College. Topics covered include: Cybersecurity and Digital Transformation, ChatGPT, Digital Banking Trends, CIO challenges in building Digital Platforms, Digital Ecosystem Trends in Logistics, and Digital Marketing",
-    videoSrc: "/images/News%20&%20Events/Highlights%20from%20the%20Digital%20Platform%20Ecosystem%20Workshop.mp4",
-
+    videoSrc: "/images/News-Events/Highlights%20from%20the%20Digital%20Platform%20Ecosystem%20Workshop.mp4",
   },
   {
     title: "Workshop on Digital Platform Ecosystems",
@@ -88,7 +84,7 @@ const newsItems: NewsItem[] = [
     excerpt:
       "The workshop will bring together experts from different industries to discuss the latest trends and developments, share experiences and perspectives, and learn how to benefit from digital platforms.",
     image: {
-      src: "/images/News%20&%20Events/Workshop%20on%20Digital%20Platform%20Ecosystems.webp",
+      src: "/images/News-Events/Workshop%20on%20Digital%20Platform%20Ecosystems.webp",
       alt: "BITS College workshop on digital platform ecosystems",
     },
     href: "/bootcamp/",
@@ -99,7 +95,7 @@ const newsItems: NewsItem[] = [
     excerpt:
       "Congratulations to all our scholarship recipients! You have worked hard and achieved excellence in your academic and extracurricular pursuits. You deserve this recognition and support for your future endeavors. We are proud of you and your accomplishments!",
     image: {
-      src: "/images/News%20&%20Events/Scholarship%20Recipients.webp",
+      src: "/images/News-Events/Scholarship%20Recipients.webp",
       alt: "BITS College scholarship recipients group photo",
     },
     href: "/scholarship-recipients/",
@@ -110,7 +106,7 @@ const newsItems: NewsItem[] = [
     excerpt:
       "This bootcamp program is designed to help trainees gain practical knowledge on industry standards, best practices, tools and technologies.",
     image: {
-      src: "/images/News%20&%20Events/summer%20bootcamp.jpg",
+      src: "/images/News-Events/summer%20bootcamp.jpg",
       alt: "BITS College summer bootcamp workshop session",
     },
     href: "/bootcamp/",
@@ -121,7 +117,7 @@ const newsItems: NewsItem[] = [
     excerpt:
       "BITS College held a College Day, in which students works were demonstrated, discussions and panels were held and games and activities livened the day",
     image: {
-      src: "/images/News%20&%20Events/BITS%20College%20Day.jpg",
+      src: "/images/News-Events/BITS%20College%20Day.jpg",
       alt: "BITS College day event activity photo",
     },
     href: "/college-day/",
@@ -132,7 +128,7 @@ const newsItems: NewsItem[] = [
     excerpt:
       "On Saturday, March 26 2022, BITS College hosted a Workshop \u201cPreparing for the Tech Industry through Higher Education\u201d",
     image: {
-      src: "/images/News%20&%20Events/Workshop.jpg",
+      src: "/images/News-Events/Workshop.jpg",
       alt: "BITS College workshop presentation photo",
     },
     href: "/workshop/",
@@ -143,7 +139,7 @@ const newsItems: NewsItem[] = [
     excerpt:
       "BITS College hosted a Student Appreciation Night on Friday, December 12, 2021, to honor the accomplishments and contributions of its postgraduate students.",
     image: {
-      src: "/images/News%20&%20Events/Student%20Appreciation%20Night.webp",
+      src: "/images/News-Events/Student%20Appreciation%20Night.webp",
       alt: "BITS College student appreciation group photo",
     },
     href: "/student-appreciation-night/",
@@ -159,7 +155,7 @@ const newsItems: NewsItem[] = [
     date: "January 02, 2021",
     excerpt: "BITS College celebrated its inauguration on January 02, 2021.",
     image: {
-      src: "/images/News%20&%20Events/Inauguration.jpg",
+      src: "/images/News-Events/Inauguration.jpg",
       alt: "BITS College inauguration banner on the campus facade",
     },
     href: "/inauguration/",
@@ -170,7 +166,6 @@ const newsItems: NewsItem[] = [
     excerpt:
       "BITS College is a private higher learning institution with a vision of promoting excellence in the production, growth and dissemination of advanced scientifice knowledge through teaching and research",
     videoId: "cN7qtSnViBc",
-
   },
 ];
 
@@ -256,13 +251,13 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
             {item.excerpt}
           </p>
 
-          {!item.noButton && (
+          {item.href && (
             <div className="mt-auto pt-6">
               <Link
-                href={item.href ?? "#"}
+                href={item.href}
                 className="btn-outline-green inline-block transition-transform duration-200 hover:scale-105 active:scale-95"
-                target={item.href?.startsWith("http") ? "_blank" : undefined}
-                rel={item.href?.startsWith("http") ? "noopener noreferrer" : undefined}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
               >
                 Read More
               </Link>

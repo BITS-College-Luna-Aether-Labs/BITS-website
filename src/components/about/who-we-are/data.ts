@@ -27,12 +27,12 @@ export const ACCREDITATION_ITEMS = [
   {
     title: "Graduate Accreditation",
     description: "Documented recognition for graduate-level study and academic compliance.",
-    pdfUrl: "/images/About-Who%20we%20are/graduate_accreditation.pdf",
+    pdfUrl: "/images/About-Who-we-are/graduate_accreditation.pdf",
   },
   {
     title: "Undergraduate Accreditation",
     description: "Documented recognition for undergraduate-level programs and standards.",
-    pdfUrl: "/images/About-Who%20we%20are/undergraduate_accreditation.pdf",
+    pdfUrl: "/images/About-Who-we-are/undergraduate_accreditation.pdf",
   },
 ];
 

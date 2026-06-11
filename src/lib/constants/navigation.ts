@@ -41,7 +41,7 @@ export const NAV_ITEMS: NavItem[] = [
       { label: "Online Learning", href: "https://online.bitscollege.edu.et/" },
       {
         label: "Library",
-        href: "https://intranet.bitscollege.edu.et/library/?page_id=246",
+        href: "https://intranet.bitscollege.edu.et/library/",
       },
       { label: "Professional Trainings", href: "/short-trainings" },
     ],

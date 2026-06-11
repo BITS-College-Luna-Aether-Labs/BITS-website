@@ -16,7 +16,7 @@ const focuses = [
 export function GraduateProgramContent() {
   return (
     <div className="min-h-screen bg-[var(--bits-page)] text-bits-heading">
-      <section className="mx-auto flex min-h-[calc(100vh-64px)] items-center max-w-site px-4 sm:px-6 lg:min-h-[calc(100vh-76px)] lg:px-8">
+      <section className="mx-auto max-w-site px-4 py-[104px] sm:px-6 lg:px-8 lg:py-[120px]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -28,7 +28,7 @@ export function GraduateProgramContent() {
               <GraduationCap className="h-4 w-4" />
               Graduate Program
             </div>
-            <h1 className="text-3xl font-semibold tracking-tight text-bits-heading sm:text-4xl lg:text-5xl">
+            <h1 className="text-2xl font-semibold tracking-tight text-bits-heading sm:text-3xl lg:text-4xl">
               Information Technology Management
             </h1>
             <p className="mt-6 text-base font-medium text-bits-green-dark">

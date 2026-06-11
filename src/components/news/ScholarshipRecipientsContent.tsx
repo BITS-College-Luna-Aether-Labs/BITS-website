@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 
-const IMG = "/images/News%20&%20Events/";
+const IMG = "/images/News-Events/";
 
 const students = [
   {
@@ -110,7 +110,7 @@ export function ScholarshipRecipientsContent() {
         >
           <div className="overflow-hidden rounded-2xl shadow-lg">
             <Image
-              src="/images/News%20&%20Events/Scholarship%20Recipients.webp"
+              src="/images/News-Events/Scholarship%20Recipients.webp"
               alt="BITS College scholarship recipients group photo"
               width={1200}
               height={800}

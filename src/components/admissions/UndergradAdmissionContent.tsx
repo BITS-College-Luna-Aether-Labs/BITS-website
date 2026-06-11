@@ -56,7 +56,7 @@ export function UndergradAdmissionContent() {
 
             <div>
               <Image
-                src={`${IMG}Undergraduate 1.webp`}
+                src={`${IMG}Undergraduate%201.webp`}
                 alt="Undergraduate Admission"
                 width={600}
                 height={450}
@@ -70,7 +70,7 @@ export function UndergradAdmissionContent() {
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div className="relative aspect-[4/3] lg:order-first">
               <Image
-                src={`${IMG}Undergraduate 2.webp`}
+                src={`${IMG}Undergraduate%202.webp`}
                 alt="Undergraduate Admission"
                 fill
                 loading="lazy"

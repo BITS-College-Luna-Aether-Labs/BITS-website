@@ -11,7 +11,7 @@ import {
   MonitorSmartphone,
 } from "lucide-react";
 
-const IMG = "/images/Academics-UndergraduateAdmission/";
+const IMG = "/images/Academics-Undergraduate-Programs/";
 
 const programs = [
   {
@@ -95,7 +95,7 @@ function ProgramCard({ program }: { program: (typeof programs)[number] }) {
             </Link>
           </div>
 
-          <div className="group relative min-h-[240px]">
+          <div className="group relative min-h-[240px] overflow-hidden">
             {program.image && (
               <Image
                 src={program.image}

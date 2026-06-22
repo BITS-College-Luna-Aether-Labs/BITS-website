@@ -53,7 +53,6 @@ const highlights = [
 ];
 
 const stats = [
-  { label: "Learning spaces", value: "6+" },
   { label: "Campus systems", value: "24/7" },
   { label: "Digital access", value: "High" },
   { label: "Student support", value: "Active" },

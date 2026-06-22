@@ -35,10 +35,10 @@ const scholarships = [
 ];
 
 const types = [
-  "Merit-based Scholarship",
-  "Need-Based Scholarship",
-  "Female Scholarship",
-  "Work Study Program",
+  { label: "Merit-based Scholarship", id: "merit-based-scholarship" },
+  { label: "Need-Based Scholarship", id: "need-based-scholarship" },
+  { label: "Female Scholarship", id: "female-scholarship" },
+  { label: "Work Study Program", id: "work-study-program" },
 ];
 
 export function ScholarshipAidContent() {
@@ -74,12 +74,14 @@ export function ScholarshipAidContent() {
             </h2>
             <ul className="mt-6 grid gap-4 sm:grid-cols-2">
               {types.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-center gap-3 rounded-2xl border border-emerald-900/10 bg-[var(--bits-surface-muted)] px-5 py-4 text-sm font-medium text-bits-heading"
-                >
-                  <span className="h-2 w-2 rounded-full bg-bits-green-dark" />
-                  {item}
+                <li key={item.id}>
+                  <a
+                    href={`#${item.id}`}
+                    className="flex items-center gap-3 rounded-2xl border border-emerald-900/10 bg-[var(--bits-surface-muted)] px-5 py-4 text-sm font-medium text-bits-heading transition hover:border-emerald-900/20 hover:bg-emerald-50 hover:text-bits-green-dark"
+                  >
+                    <span className="h-2 w-2 rounded-full bg-bits-green-dark" />
+                    {item.label}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -88,61 +90,66 @@ export function ScholarshipAidContent() {
           {scholarships.map((item, index) => (
             <div
               key={item.title}
-              className={`grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center ${
-                index % 2 === 1 ? "lg:grid-cols-[0.9fr_1.1fr]" : ""
-              }`}
+              id={types[index]?.id}
+              className="scroll-mt-24"
             >
-              {index % 2 === 1 ? (
-                <>
-                  <div className="lg:order-first">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      width={800}
-                      height={600}
-                      priority={index === 0}
-                      loading={index === 0 ? undefined : "lazy"}
-                      sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 45vw"
-                      className={`${index === scholarships.length - 1 ? "w-full sm:w-[30%]" : "w-full sm:w-3/5"} h-auto mx-auto`}
-                    />
-                  </div>
-                  <div className="rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] p-8 shadow-[0_20px_80px_rgba(16,24,40,0.06)] sm:p-10">
-                    <h2 className="text-2xl font-semibold tracking-tight text-bits-heading sm:text-3xl">
-                      {item.title}
-                    </h2>
-                    {item.body.split("\n\n").map((paragraph, i) => (
-                      <p key={i} className="mt-5 text-base leading-8 text-bits-text">
-                        {paragraph}
-                      </p>
-                    ))}
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] p-8 shadow-[0_20px_80px_rgba(16,24,40,0.06)] sm:p-10">
-                    <h2 className="text-2xl font-semibold tracking-tight text-bits-heading sm:text-3xl">
-                      {item.title}
-                    </h2>
-                    {item.body.split("\n\n").map((paragraph, i) => (
-                      <p key={i} className="mt-5 text-base leading-8 text-bits-text">
-                        {paragraph}
-                      </p>
-                    ))}
-                  </div>
-                  <div>
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      width={800}
-                      height={600}
-                      priority={index === 0}
-                      loading={index === 0 ? undefined : "lazy"}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 45vw"
-                      className="w-full h-auto"
-                    />
-                  </div>
-                </>
-              )}
+              <div
+                className={`grid gap-10 lg:items-center lg:grid-cols-[1.1fr_0.9fr] ${
+                  index % 2 === 1 ? "lg:grid-cols-[0.9fr_1.1fr]" : ""
+                }`}
+              >
+                {index % 2 === 1 ? (
+                  <>
+                    <div className="lg:order-first">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        width={800}
+                        height={600}
+                        priority={index === 0}
+                        loading={index === 0 ? undefined : "lazy"}
+                        sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 45vw"
+                        className={`${index === scholarships.length - 1 ? "w-full sm:w-[30%]" : "w-full sm:w-3/5"} h-auto mx-auto`}
+                      />
+                    </div>
+                    <div className="rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] p-8 shadow-[0_20px_80px_rgba(16,24,40,0.06)] sm:p-10">
+                      <h2 className="text-2xl font-semibold tracking-tight text-bits-heading sm:text-3xl">
+                        {item.title}
+                      </h2>
+                      {item.body.split("\n\n").map((paragraph, i) => (
+                        <p key={i} className="mt-5 text-base leading-8 text-bits-text">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] p-8 shadow-[0_20px_80px_rgba(16,24,40,0.06)] sm:p-10">
+                      <h2 className="text-2xl font-semibold tracking-tight text-bits-heading sm:text-3xl">
+                        {item.title}
+                      </h2>
+                      {item.body.split("\n\n").map((paragraph, i) => (
+                        <p key={i} className="mt-5 text-base leading-8 text-bits-text">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                    <div>
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        width={800}
+                        height={600}
+                        priority={index === 0}
+                        loading={index === 0 ? undefined : "lazy"}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 45vw"
+                        className="w-full h-auto"
+                      />
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
           ))}
 

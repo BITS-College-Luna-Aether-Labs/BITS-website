@@ -62,45 +62,93 @@ export function AccreditationModal({ selectedPdf, onClose }: { selectedPdf: stri
 }
 
 export function OverviewTab() {
+  const overviewPanel = "bg-[#f3fbf0]";
   return (
-    <ContentCard key="overview">
+    <ContentCard key="overview" className="border-0 bg-[#f3fbf0] shadow-none dark:border-0">
       <SectionHeader icon={BookOpen} label="Overview" title="Overview" />
-      <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
-        <div className="space-y-5">
-          <div className="rounded-3xl bg-[linear-gradient(135deg,rgba(125,194,67,0.07),rgba(84,89,95,0.05))] p-5">
-            <p className="text-lg font-semibold text-bits-green-dark">Attributes behind the brand</p>
-            <p className="mt-3 leading-7 text-bits-text">
+
+      <div className="mx-auto mb-10 max-w-2xl">
+        <div className={`relative overflow-hidden rounded-[2.5rem] ${overviewPanel} p-8 text-center sm:p-10`}>
+          <h3 className="text-2xl font-bold text-bits-heading sm:text-3xl">BITS College</h3>
+          <p className="mt-1 text-sm font-medium text-bits-green sm:text-base">Private higher learning institution</p>
+          <p className="mx-auto mt-5 max-w-lg text-sm leading-7 text-bits-text sm:text-base sm:leading-7">
+            BITS began from a focused system development and training company and is pursuing a full-fledged
+            university vision through faculty expertise, academic design, and technology-forward delivery.
+          </p>
+          <div className="mx-auto mt-7 grid max-w-sm gap-3 sm:grid-cols-2 sm:gap-4">
+            <div className={`rounded-2xl ${overviewPanel} p-4`}>
+              <p className="text-xs uppercase tracking-[0.24em] text-bits-muted">Current</p>
+              <p className="mt-1 text-xl font-bold text-bits-heading">335+ Students</p>
+            </div>
+            <div className={`rounded-2xl ${overviewPanel} p-4`}>
+              <p className="text-xs uppercase tracking-[0.24em] text-bits-muted">Goal</p>
+              <p className="mt-1 text-xl font-bold text-bits-heading">Full-fledged University</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-auto mb-10">
+        <div className="overflow-hidden rounded-[2rem] bg-black">
+          <div className="relative aspect-video">
+            <iframe
+              src="https://www.youtube.com/embed/xzJXNyy6sRk?rel=0&autoplay=0&showinfo=0"
+              title="Virtual Tour of BITS College"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 h-full w-full"
+            />
+          </div>
+        </div>
+        <p className="mt-4 text-center text-2xl font-semibold tracking-wide text-bits-muted">
+          Virtual Tour of BITS College
+        </p>
+      </div>
+
+      <div className="mx-auto mb-10 flex justify-center">
+        <div className={`rounded-[2rem] ${overviewPanel} p-6 sm:p-8`}>
+          <div className="text-center">
+            <p className="text-lg font-semibold text-bits-green-dark sm:text-xl">Attributes behind the brand</p>
+            <p className="mx-auto mt-3 max-w-2xl leading-7 text-bits-text">
               The brand identity is built around the meaning of BITS, the visual logic of the logo, and a color
               pairing that communicates freshness, energy, creativity, and determination.
             </p>
-            <div className="mt-4 flex flex-wrap gap-4">
-              <div className="flex items-center gap-2 rounded-xl bg-white/60 px-3 py-2 dark:bg-gray-800/60">
-                <span className="h-4 w-4 rounded-full bg-[#7DC243]" />
-                <span className="text-sm text-bits-text">
-                  Green for <strong>freshness</strong>, <strong>energy</strong>, and <strong>online</strong>
-                </span>
-              </div>
-              <div className="flex items-center gap-2 rounded-xl bg-white/60 px-3 py-2 dark:bg-gray-800/60">
-                <span className="h-4 w-4 rounded-full bg-[#54595F]" />
-                <span className="text-sm text-bits-text">
-                  Gray for <strong>creativity</strong> & <strong>determination</strong>
-                </span>
-              </div>
+          </div>
+          <div className="mt-6 flex flex-wrap justify-center gap-4">
+            <div className={`flex items-center gap-2 rounded-xl ${overviewPanel} px-4 py-2.5`}>
+              <span className="h-4 w-4 rounded-full bg-[#7DC243] ring-2 ring-[#7DC243]/20" />
+              <span className="text-sm text-bits-text">
+                Green for <strong>freshness</strong>, <strong>energy</strong>, and <strong>online</strong>
+              </span>
+            </div>
+            <div className={`flex items-center gap-2 rounded-xl ${overviewPanel} px-4 py-2.5`}>
+              <span className="h-4 w-4 rounded-full bg-[#54595F] ring-2 ring-[#54595F]/20" />
+              <span className="text-sm text-bits-text">
+                Gray for <strong>creativity</strong> & <strong>determination</strong>
+              </span>
             </div>
           </div>
+        </div>
+      </div>
 
-          <div className="flex justify-center py-4 dark:rounded-xl dark:bg-white/90 dark:p-4">
+      <div className="mx-auto mb-10 flex justify-center">
+        <div className={`group rounded-[2rem] ${overviewPanel} p-6 sm:p-8`}>
+          <div className={`rounded-xl ${overviewPanel} p-4`}>
             <Image
               src="/images/logo.png"
               alt="BITS College Logo"
               width={400}
               height={400}
-              className="h-auto w-80 object-contain"
+              className="h-auto w-64 object-contain transition duration-300 group-hover:scale-105 sm:w-72"
             />
           </div>
+        </div>
+      </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="rounded-3xl border border-slate-200 bg-[var(--bits-surface)] p-5">
+      <div className="mx-auto">
+        <div className={`rounded-[2rem] ${overviewPanel} p-6 sm:p-8`}>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className={`rounded-2xl border border-[#dbeed3] ${overviewPanel} p-5`}>
               <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-bits-green">
                 <ShieldCheck className="h-5 w-5" />
               </div>
@@ -109,7 +157,7 @@ export function OverviewTab() {
                 Business, Innovation, Technology, and System.
               </p>
             </div>
-            <div className="rounded-3xl border border-slate-200 bg-[var(--bits-surface)] p-5">
+            <div className={`rounded-2xl border border-[#dbeed3] ${overviewPanel} p-5`}>
               <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-bits-green">
                 <Target className="h-5 w-5" />
               </div>
@@ -117,35 +165,6 @@ export function OverviewTab() {
               <p className="mt-2 text-sm leading-6 text-bits-text">
                 Learning and growth through connected knowledge in an infinity of combinations.
               </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative overflow-hidden rounded-3xl bg-[linear-gradient(180deg,rgba(125,194,67,0.09),rgba(125,194,67,0.02))] p-5 sm:p-6">
-          <div className="absolute right-0 top-0 h-36 w-36 rounded-full bg-emerald-400/10 blur-3xl" />
-          <div className="relative space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--bits-surface)] shadow-sm">
-                <span className="text-xl font-black text-bits-green-dark">B</span>
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-bits-heading">BITS College</p>
-                <p className="text-xs text-bits-muted">Private higher learning institution</p>
-              </div>
-            </div>
-            <p className="text-sm leading-7 text-bits-text">
-              BITS began from a focused system development and training company and is pursuing a full-fledged
-              university vision through faculty expertise, academic design, and technology-forward delivery.
-            </p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-2xl bg-[var(--bits-surface)]/90 p-4 shadow-sm backdrop-blur">
-                <p className="text-xs uppercase tracking-[0.24em] text-bits-muted">Current</p>
-                <p className="mt-1 text-lg font-semibold text-bits-heading">335+ Students</p>
-              </div>
-              <div className="rounded-2xl bg-[var(--bits-surface)]/90 p-4 shadow-sm backdrop-blur">
-                <p className="text-xs uppercase tracking-[0.24em] text-bits-muted">Goal</p>
-                <p className="mt-1 text-lg font-semibold text-bits-heading">Full-fledged University</p>
-              </div>
             </div>
           </div>
         </div>

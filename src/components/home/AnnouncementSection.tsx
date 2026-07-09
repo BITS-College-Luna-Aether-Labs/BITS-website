@@ -13,11 +13,11 @@ export function AnnouncementSection() {
   const { tapSm } = useInteractionMotion();
 
   return (
-    <section className="section-surface py-12 md:py-16" aria-label="College announcement">
+    <section className="section-surface py-8 md:py-10" aria-label="College announcement">
       <SectionReveal className="flex justify-center px-4 sm:px-6 lg:px-8">
         {enabled ? (
           <motion.div
-            className="gpu w-full max-w-sm"
+            className="gpu w-full max-w-[540px]"
             initial={{ opacity: 0, scale: 0.95, y: 12 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
@@ -38,7 +38,7 @@ export function AnnouncementSection() {
             />
           </motion.div>
         ) : (
-          <div className="w-full max-w-sm">
+          <div className="w-full max-w-[540px]">
             <Image
               src="/images/announcement.png"
               alt="BITS College is proud to announce that all students of Class of 2025 have passed their National Exit Examination"

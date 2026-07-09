@@ -15,18 +15,22 @@ export const WHY_BITS_CARDS = [
   {
     title: "High Quality Academic Programs",
     icon: "book",
+    href: "/undergraduate-program",
   },
   {
     title: "Qualified & Committed Staff",
     icon: "graduation",
+    href: "/faculty",
   },
   {
     title: "State-of-the-Art Infrastructure",
     icon: "building",
+    href: "/facilities",
   },
   {
     title: "Student-centered Teaching and Learning",
     icon: "community",
+    href: "/student-support",
   },
 ] as const;
 

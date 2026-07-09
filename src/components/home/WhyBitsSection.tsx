@@ -72,7 +72,7 @@ export function WhyBitsSection() {
               }}
             >
               {WHY_BITS_CARDS.map((card) => (
-                <motion.article
+                <motion.div
                   key={card.title}
                   className="feature-card gpu"
                   variants={{
@@ -86,27 +86,31 @@ export function WhyBitsSection() {
                   }}
                   whileTap={tapSm}
                 >
-                  <motion.div
-                    className="text-bits-green"
-                    whileHover={on ? { scale: 1.15, transition: SPRING_HOVER } : undefined}
-                  >
-                    <FeatureIcon name={card.icon} />
-                  </motion.div>
-                  <h3 className="mt-4 text-center text-sm font-bold leading-snug text-bits-heading">
-                    {card.title}
-                  </h3>
-                </motion.article>
+                  <Link href={card.href} className="flex flex-col items-center p-6">
+                    <motion.div
+                      className="text-bits-green"
+                      whileHover={on ? { scale: 1.15, transition: SPRING_HOVER } : undefined}
+                    >
+                      <FeatureIcon name={card.icon} />
+                    </motion.div>
+                    <h3 className="mt-4 text-center text-sm font-bold leading-snug text-bits-heading">
+                      {card.title}
+                    </h3>
+                  </Link>
+                </motion.div>
               ))}
             </motion.div>
           ) : (
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
               {WHY_BITS_CARDS.map((card) => (
-                <article key={card.title} className="feature-card feature-card-fallback">
-                  <FeatureIcon name={card.icon} />
-                  <h3 className="mt-4 text-center text-sm font-bold leading-snug text-bits-heading">
-                    {card.title}
-                  </h3>
-                </article>
+                <Link key={card.title} href={card.href} className="feature-card feature-card-fallback block">
+                  <article className="flex flex-col items-center p-6">
+                    <FeatureIcon name={card.icon} />
+                    <h3 className="mt-4 text-center text-sm font-bold leading-snug text-bits-heading">
+                      {card.title}
+                    </h3>
+                  </article>
+                </Link>
               ))}
             </div>
           )}

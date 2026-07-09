@@ -1,4 +1,4 @@
-/** Faculty — image cards with hover/touch overlay showing name, role, and courses taught */
+/** Instructors — image cards with hover/touch overlay showing name and tagline */
 "use client";
 
 import Image from "next/image";
@@ -9,8 +9,6 @@ import { EASE_PREMIUM } from "@/lib/motion-presets";
 
 type FacultyCard = {
   name: string;
-  role: string;
-  courses?: string[];
   tagline?: string;
   initials: string;
   image?: string;
@@ -19,22 +17,18 @@ type FacultyCard = {
 const IMG = "/images/Faculty-Members/";
 
 const faculty: FacultyCard[] = [
-  { name: "Dr. Rahel Bekele", role: "IS Professional", courses: ["Fundamentals of Database Systems", "Statistical", "Research Methods", "Business Intelligence"], initials: "RB", image: `${IMG}Dr%20Rahel%20Bekele.webp` },
-  { name: "Dr. Tesfaye Biru", role: "Software Developer", courses: ["Introduction to Computer Systems", "Service Innovation and Design", "IT Service Management"], initials: "TB", image: `${IMG}Dr%20Tesfaye%20Biru.png` },
-  { name: "Dr. Nigussie Tadesse", role: "Assistant Professor of Information Systems", courses: ["IT and Business Alignment", "IT Governance and Audit"], initials: "NT", image: `${IMG}Dr%20Nigussie%20Tadesse.png` },
-  { name: "Prof. Abebe Rorissa", role: "Professor of IS", courses: [], initials: "AR", image: `${IMG}Professor%20Abebe%20Rorissa.png` },
-  { name: "Betsegaw", role: "Lecturer", courses: ["Fundamentals of Programming", "Object Oriented Programming"], initials: "B", image: `${IMG}Mr%20Betsegaw.png` },
-  { name: "Henock Leulseged", role: "IS Professional", courses: ["Advanced Programming", "Object Oriented Programming"], initials: "HL", image: `${IMG}Mr%20Henock%20Leulseged.jpg` },
-  { name: "Kidus Menfese", role: "Lecturer", courses: ["Software Requirements Engineering", "Operating Systems"], initials: "KM", image: `${IMG}Mr%20Kidus%20Menfese.jpg` },
-  { name: "Elshaday Samuel", role: "Lecturer", courses: ["Calculus", "Data Communication and Networks I", "Introduction to Computer Systems", "Foundations of Data Analytics"], initials: "ES", image: `${IMG}Ms%20Elshaday%20Samuel.png` },
-  { name: "Michael Bekele", role: "Lecturer", courses: ["Fundamentals of Database Systems", "Data Structures and Algorithms", "Web Systems and Services", "Fundamentals of Data Analytics"], initials: "MB", image: `${IMG}Mr%20Michael%20Bekele.jpg` },
-  { name: "Elshaday Tesfaye", role: "Lecturer", courses: ["Introduction to Computer Systems", "Fundamentals of Programming"], initials: "ET", image: `${IMG}Ms%20Elshaday%20Tesfaye.png` },
-  { name: "Fasika Tegegn", role: "Lecturer", courses: ["Data Communications and Networks I", "Information Assurance and Security", "Ethical Computing", "Operating Systems"], initials: "FT", image: `${IMG}Mr%20Fasika%20Tegegn.png` },
-  { name: "Hana Gebeyehu", role: "Lecturer", courses: ["Enterprise Systems"], initials: "HG", image: `${IMG}Ms%20Hana%20Gebeyehu.png` },
-  { name: "Tibebu Tesfaye", role: "Lecturer", courses: ["Introduction to Computer Systems", "Fundamentals of Programming"], initials: "TT", image: `${IMG}Mr%20Tibebu%20Tesfaye.png` },
-  { name: "Birara Gebru", role: "Lecturer", courses: ["College English I", "College English II"], initials: "BG", image: `${IMG}Dr%20Birara%20Gebru.jpg` },
-  { name: "Anteneh Kassaye", role: "Lecturer", courses: ["Data Communications and Networks I", "Information Assurance and Security", "Electronics"], initials: "AK", image: `${IMG}Mr%20Anteneh%20Gebeyehu.png` },
-  { name: "Tehut Tesfaye", role: "Lecturer", courses: ["Fundamentals of Data Analytics"], initials: "TE", image: `${IMG}Ms%20Tehut%20Tesfaye.png` },
+  { name: "Dr. Tesfaye Biru", initials: "TB", image: `${IMG}Dr%20Tesfaye%20Biru.png` },
+  { name: "Henock Leulseged", initials: "HL", image: `${IMG}Mr%20Henock%20Leulseged.jpg` },
+  { name: "Dr. Nigussie Tadesse", initials: "NT", image: `${IMG}Dr%20Nigussie%20Tadesse.png` },
+  { name: "Hana Gebeyehu", initials: "HG", image: `${IMG}Ms%20Hana%20Gebeyehu.png` },
+  { name: "Dr. Rahel Bekele", initials: "RB", image: `${IMG}Dr%20Rahel%20Bekele.webp` },
+  { name: "Elshaday Tesfaye", initials: "ET", image: `${IMG}Ms%20Elshaday%20Tesfaye.png` },
+  { name: "Betsegaw", initials: "B", image: `${IMG}Mr%20Betsegaw.png` },
+  { name: "Prof. Abebe Rorissa", initials: "AR", image: `${IMG}Professor%20Abebe%20Rorissa.png` },
+  { name: "Tibebu Tesfaye", initials: "TT", image: `${IMG}Mr%20Tibebu%20Tesfaye.png` },
+  { name: "Birara Gebru", initials: "BG", image: `${IMG}Dr%20Birara%20Gebru.jpg` },
+  { name: "Anteneh Kassaye", initials: "AK", image: `${IMG}Mr%20Anteneh%20Kassaye.jpeg` },
+  { name: "Kidus Menfese", initials: "KM", image: `${IMG}Mr%20Kidus%20Menfese.jpg` },
 ];
 
 function Card({ item, index }: { item: FacultyCard; index: number }) {
@@ -71,6 +65,7 @@ function Card({ item, index }: { item: FacultyCard; index: number }) {
         </div>
       )}
 
+      {/* Overlay – centered name with enlarged text */}
       <motion.div
         initial={false}
         animate={{ opacity: show ? 1 : 0, y: show ? 0 : 12 }}
@@ -78,32 +73,24 @@ function Card({ item, index }: { item: FacultyCard; index: number }) {
         onMouseEnter={() => setShowOverlay(true)}
         onMouseLeave={() => { setShowOverlay(false); setTouched(false); }}
         onTouchStart={handleTouch}
-        className="absolute inset-0 flex cursor-default flex-col justify-end bg-gradient-to-t from-bits-green-dark/95 via-bits-green-dark/60 to-transparent p-5 sm:p-6"
+        className="absolute inset-0 flex cursor-default flex-col items-center justify-center bg-gradient-to-t from-bits-green-dark/95 via-bits-green-dark/60 to-transparent p-5 sm:p-6"
       >
-        <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0">
-            <h3 className="text-lg font-semibold leading-tight text-white">{item.name}</h3>
-            <p className="mt-1 text-sm font-medium text-emerald-200">{item.role}</p>
-          </div>
-          <div className="shrink-0 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/90 backdrop-blur-sm">
-            BITS
-          </div>
+        {/* BITS badge – top right */}
+        <div className="absolute right-4 top-4 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/90 backdrop-blur-sm">
+          BITS
         </div>
 
-        {item.courses && item.courses.length > 0 && (
-          <ul className="mt-3 space-y-1.5">
-            {item.courses.map((course) => (
-              <li key={course} className="flex items-start gap-2 text-sm leading-tight text-emerald-50/90">
-                <span className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-300" />
-                <span>{course}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {item.tagline && (
-          <p className="mt-3 text-sm leading-6 text-emerald-50/80">{item.tagline}</p>
-        )}
+        {/* Centered content */}
+        <div className="flex flex-col items-center text-center">
+          <h3 className="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+            {item.name}
+          </h3>
+          {item.tagline && (
+            <p className="mt-2 text-sm font-medium text-emerald-200/90 sm:text-base">
+              {item.tagline}
+            </p>
+          )}
+        </div>
       </motion.div>
     </motion.article>
   );
@@ -130,22 +117,20 @@ export function FacultyContent() {
                 <Users className="h-6 w-6" />
               </div>
               <h1 className="text-4xl font-semibold tracking-tight text-bits-heading sm:text-5xl lg:text-6xl">
-                Faculty
+                Instructors
               </h1>
             </div>
-
           </motion.div>
         </div>
       </section>
 
       <section className="mx-auto max-w-site px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="grid gap-5 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {faculty.map((item, index) => (
             <Card key={item.name} item={item} index={index} />
           ))}
         </div>
       </section>
-
     </div>
   );
 }

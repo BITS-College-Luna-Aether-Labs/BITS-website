@@ -202,10 +202,10 @@ export function FacilitiesContent() {
             <p className="mt-6 text-lg leading-8 text-bits-text">
               BITS&apos;s estimated cost of attendance is based on tuition fees and modest contribution to
               technology and other facilities that exist in the college. For more information on cost of
-              attendance, you may visit the online application and select the program you would like to join.
+              attendance, you may visit the online application and select the program you would like&nbsp;<span className="whitespace-nowrap">to join.</span>
             </p>
 
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
               {stats.map((stat, idx) => (
                 <motion.div
                   key={stat.label}
@@ -213,7 +213,7 @@ export function FacilitiesContent() {
                   initial="hidden"
                   animate="show"
                   custom={0.1 * idx}
-                  className="rounded-3xl border border-slate-200 bg-[var(--bits-surface)]/80 p-5 shadow-sm backdrop-blur dark:border-gray-700"
+                  className="min-w-[160px] flex-1 rounded-3xl border border-slate-200 bg-[var(--bits-surface)]/80 p-5 shadow-sm backdrop-blur dark:border-gray-700"
                 >
                   <p className="text-3xl font-semibold text-bits-green">{stat.value}</p>
                   <p className="mt-2 text-sm text-bits-text">{stat.label}</p>

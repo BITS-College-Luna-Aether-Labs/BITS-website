@@ -20,7 +20,7 @@ export const NAV_ITEMS: NavItem[] = [
   {
     label: "Academics",
     children: [
-      { label: "Faculty", href: "/faculty" },
+      { label: "Instructors", href: "/faculty" },
       { label: "Undergraduate Programs", href: "/undergraduate-program" },
       { label: "Graduate Programs", href: "/graduate-program" },
       { label: "Research", href: "/research" },

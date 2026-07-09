@@ -31,7 +31,7 @@ export function TuitionContent() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE_PREMIUM }}
-            className="max-w-3xl"
+            className="mx-auto max-w-3xl text-center"
           >
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-[var(--bits-surface)] px-4 py-2 text-sm font-medium text-bits-green-dark shadow-sm">
               <DollarSign className="h-4 w-4" />
@@ -76,6 +76,9 @@ export function TuitionContent() {
               </div>
             </div>
           ))}
+          <p className="text-center text-base leading-7 text-bits-muted">
+            BITS College has on average 16–18 credit hours per semester.
+          </p>
         </div>
       </section>
     </div>

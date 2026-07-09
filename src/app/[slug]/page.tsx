@@ -38,8 +38,8 @@ const PAGE_TITLES: Record<string, { title: string; description: string }> = {
     description: "Our industry partners and organizational clients.",
   },
   faculty: {
-    title: "Faculty",
-    description: "Meet our talented and committed academic faculty.",
+    title: "Instructors",
+    description: "Meet our talented and committed academic instructors.",
   },
   "undergraduate-program": {
     title: "Undergraduate Programs",

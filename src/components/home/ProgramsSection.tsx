@@ -130,6 +130,7 @@ export function ProgramsSection() {
                   alt="BITS student with backpack"
                   width={762}
                   height={1024}
+                  priority
                   className="relative z-10 mx-auto h-auto w-full max-w-[640px] object-contain md:max-w-[760px]"
                 />
               </motion.div>
@@ -139,6 +140,7 @@ export function ProgramsSection() {
                 alt="BITS student with backpack"
                 width={762}
                 height={1024}
+                priority
                 className="relative z-10 mx-auto h-auto w-full max-w-[640px] object-contain md:max-w-[760px]"
               />
             )}

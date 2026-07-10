@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { headers } from "next/headers";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MotionProvider } from "@/components/providers/MotionProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { ERROR_REPORTER_SCRIPT } from "@/lib/error-reporter";
 import { THEME_SCRIPT } from "@/lib/theme";
 import { SITE } from "@/lib/constants/site";
 import { SOCIAL_LINKS } from "@/lib/constants/navigation";
@@ -60,21 +60,28 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: [
+      { url: "/images/logo.png", sizes: "96x96", type: "image/png" },
+      { url: "/images/logo.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: { url: "/images/logo.png", sizes: "180x180", type: "image/png" },
+  },
+  manifest: "/site.webmanifest",
 
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const nonce = (await headers()).get("x-nonce") ?? "";
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script nonce={nonce} dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: ERROR_REPORTER_SCRIPT }} />
         <script
-          nonce={nonce}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({

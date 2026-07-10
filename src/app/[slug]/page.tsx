@@ -2,10 +2,7 @@
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
 import { WhoWeAreContent } from "@/components/about/WhoWeAreContent";
-import { FacilitiesContent } from "@/components/about/FacilitiesContent";
 import { PartnersAndClientsContent } from "@/components/about/PartnersAndClientsContent";
-import { FacultyContent } from "@/components/academics/FacultyContent";
-import { UndergraduateProgramContent } from "@/components/academics/UndergraduateProgramContent";
 import { GraduateProgramContent } from "@/components/academics/GraduateProgramContent";
 import { ResearchContent } from "@/components/academics/ResearchContent";
 import { SoftwareEngineeringContent } from "@/components/academics/SoftwareEngineeringContent";
@@ -14,7 +11,6 @@ import { UndergradAdmissionContent } from "@/components/admissions/UndergradAdmi
 import { GraduateAdmissionContent } from "@/components/admissions/GraduateAdmissionContent";
 import { ScholarshipAidContent } from "@/components/admissions/ScholarshipAidContent";
 import { TuitionContent } from "@/components/admissions/TuitionContent";
-import { StudentSupportContent } from "@/components/services/StudentSupportContent";
 import { ShortTrainingsContent } from "@/components/services/ShortTrainingsContent";
 import { NewsEventsContent } from "@/components/news/NewsEventsContent";
 import { InaugurationContent } from "@/components/news/InaugurationContent";
@@ -23,27 +19,19 @@ import { WorkshopContent } from "@/components/news/WorkshopContent";
 import { CollegeDayContent } from "@/components/news/CollegeDayContent";
 import { BootcampContent } from "@/components/news/BootcampContent";
 import { ScholarshipRecipientsContent } from "@/components/news/ScholarshipRecipientsContent";
+import { PrivacyPolicyContent } from "@/components/legals/PrivacyPolicyContent";
+import { TermsOfUseContent } from "@/components/legals/TermsOfUseContent";
+import { AccessibilityPolicyContent } from "@/components/legals/AccessibilityPolicyContent";
+import { DataProtectionPolicyContent } from "@/components/legals/DataProtectionPolicyContent";
 
 const PAGE_TITLES: Record<string, { title: string; description: string }> = {
   "who-we-are": {
     title: "Who We Are",
     description: "Learn about BITS College — our mission, vision, and community.",
   },
-  facilities: {
-    title: "Facilities",
-    description: "Explore our state-of-the-art campus facilities and learning spaces.",
-  },
   "partners-and-clients": {
     title: "Partners and Clients",
     description: "Our industry partners and organizational clients.",
-  },
-  faculty: {
-    title: "Instructors",
-    description: "Meet our talented and committed academic instructors.",
-  },
-  "undergraduate-program": {
-    title: "Undergraduate Programs",
-    description: "Undergraduate programs in software engineering and IT systems.",
   },
   "graduate-program": {
     title: "Graduate Programs",
@@ -64,10 +52,6 @@ const PAGE_TITLES: Record<string, { title: string; description: string }> = {
   "scholarship-aid": {
     title: "Scholarship & Aid",
     description: "Scholarship opportunities and financial aid information.",
-  },
-  "student-support": {
-    title: "Student Support",
-    description: "Support services available to BITS students.",
   },
   "short-trainings": {
     title: "Professional Trainings",
@@ -123,6 +107,22 @@ const PAGE_TITLES: Record<string, { title: string; description: string }> = {
     title: "Merit Based Scholarship Recipients 2023/24",
     description: "BITS College awarded Merit-based Scholarships to three outstanding students.",
   },
+  "privacy-policy": {
+    title: "Privacy Policy",
+    description: "How BITS College collects, uses, and protects your personal information.",
+  },
+  "terms-of-use": {
+    title: "Terms of Use",
+    description: "Terms and conditions governing the use of the BITS College website.",
+  },
+  "accessibility-policy": {
+    title: "Accessibility Policy",
+    description: "BITS College is committed to ensuring digital accessibility for all users.",
+  },
+  "data-protection-policy": {
+    title: "Data Protection Policy",
+    description: "How BITS College safeguards your personal data in compliance with applicable regulations.",
+  },
 };
 
 type Props = { params: Promise<{ slug: string }> };
@@ -143,10 +143,10 @@ export async function generateMetadata({ params }: Props) {
 }
 
 /** Page-group slugs used for content routing below */
-const ABOUT_PAGES = ["who-we-are", "facilities", "partners-and-clients"];
-const ACADEMICS_PAGES = ["faculty", "undergraduate-program", "graduate-program", "research"];
+const ABOUT_PAGES = ["who-we-are", "partners-and-clients"];
+const ACADEMICS_PAGES = ["graduate-program", "research"];
 const ADMISSIONS_PAGES = ["undergrad-admission", "graduate-admission", "scholarship-aid", "tuition"];
-const SERVICES_PAGES = ["student-support", "short-trainings"];
+const SERVICES_PAGES = ["short-trainings"];
 const NEWS_PAGES = ["college-news"];
 
 export default async function DynamicPage({ params }: Props) {
@@ -158,7 +158,6 @@ export default async function DynamicPage({ params }: Props) {
     return (
       <>
         {slug === "who-we-are" && <WhoWeAreContent />}
-        {slug === "facilities" && <FacilitiesContent />}
         {slug === "partners-and-clients" && <PartnersAndClientsContent />}
       </>
     );
@@ -167,8 +166,6 @@ export default async function DynamicPage({ params }: Props) {
   if (ACADEMICS_PAGES.includes(slug)) {
     return (
       <>
-        {slug === "faculty" && <FacultyContent />}
-        {slug === "undergraduate-program" && <UndergraduateProgramContent />}
         {slug === "graduate-program" && <GraduateProgramContent />}
         {slug === "research" && <ResearchContent />}
       </>
@@ -187,12 +184,7 @@ export default async function DynamicPage({ params }: Props) {
   }
 
   if (SERVICES_PAGES.includes(slug)) {
-    return (
-      <>
-        {slug === "student-support" && <StudentSupportContent />}
-        {slug === "short-trainings" && <ShortTrainingsContent />}
-      </>
-    );
+    return <ShortTrainingsContent />;
   }
 
   if (NEWS_PAGES.includes(slug)) {
@@ -229,6 +221,22 @@ export default async function DynamicPage({ params }: Props) {
 
   if (slug === "scholarship-recipients") {
     return <ScholarshipRecipientsContent />;
+  }
+
+  if (slug === "privacy-policy") {
+    return <PrivacyPolicyContent />;
+  }
+
+  if (slug === "terms-of-use") {
+    return <TermsOfUseContent />;
+  }
+
+  if (slug === "accessibility-policy") {
+    return <AccessibilityPolicyContent />;
+  }
+
+  if (slug === "data-protection-policy") {
+    return <DataProtectionPolicyContent />;
   }
 
   return (

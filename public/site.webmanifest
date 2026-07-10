@@ -1,0 +1,26 @@
+{
+  "name": "BITS College",
+  "short_name": "BITS",
+  "description": "BITS College offers well-designed academic programs in software engineering and IT Management with world-class facilities.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#7dc243",
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

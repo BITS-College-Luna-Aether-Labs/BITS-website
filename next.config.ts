@@ -5,6 +5,13 @@ const isDev = process.env.NODE_ENV !== "production";
 const nextConfig: NextConfig = {
   output: "standalone",
   outputFileTracingRoot: process.cwd(),
+  images: {
+    formats: ["image/avif", "image/webp"],
+    remotePatterns: [],
+  },
+  experimental: {
+    optimizePackageImports: ["lucide-react", "framer-motion"],
+  },
   async redirects() {
     return [
       {

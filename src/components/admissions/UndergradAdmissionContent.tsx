@@ -2,8 +2,10 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { GraduationCap } from "lucide-react";
+import { ArrowRight, GraduationCap } from "lucide-react";
+import { APPLY_URL } from "@/lib/constants/navigation";
 
 const requirements = [
   "A graduate of an accredited high school with the required pass mark set by the national examination agency to enter higher education AND the necessary pass mark in the College Entrance Examination.",
@@ -52,6 +54,16 @@ export function UndergradAdmissionContent() {
                   </li>
                 ))}
               </ul>
+
+                <Link
+                  href={APPLY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-bits-green-dark px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-bits-green"
+                >
+                  Apply Now
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
             </div>
 
             <div>
@@ -87,6 +99,16 @@ export function UndergradAdmissionContent() {
                 Admission of foreign students is based on the equivalence established by the
                 National Higher Education Relevance and Quality Assurance Agency.
               </p>
+
+                <Link
+                  href={APPLY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-bits-green-dark px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-bits-green"
+                >
+                  Apply Now
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
             </div>
           </div>
         </motion.div>

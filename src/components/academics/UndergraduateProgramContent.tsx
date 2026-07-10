@@ -95,7 +95,7 @@ function ProgramCard({ program }: { program: (typeof programs)[number] }) {
             </Link>
           </div>
 
-          <div className="group relative min-h-[240px] overflow-hidden">
+          <div className="group relative min-h-[240px] overflow-hidden rounded-[2rem]">
             {program.image && (
               <Image
                 src={program.image}

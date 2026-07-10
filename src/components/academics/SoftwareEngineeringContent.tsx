@@ -72,7 +72,7 @@ export function SoftwareEngineeringContent() {
           <motion.img
             src={`${IMG}%201.png`}
             alt="Software Engineering Overview"
-            className="mt-8 w-2/3 mx-auto rounded-2xl shadow-lg"
+            className="mt-8 w-2/3 mx-auto rounded-[2rem] shadow-lg"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -113,7 +113,7 @@ export function SoftwareEngineeringContent() {
           <motion.img
             src={`${IMG}%202.webp`}
             alt="Students learning Software Engineering"
-            className="w-full rounded-2xl shadow-lg"
+            className="w-full rounded-[2rem] shadow-lg"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -168,7 +168,7 @@ export function SoftwareEngineeringContent() {
           <motion.img
             src={`${IMG}%203.webp`}
             alt="Graduation Requirements"
-            className="w-full rounded-2xl shadow-lg"
+            className="w-full rounded-[2rem] shadow-lg"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}

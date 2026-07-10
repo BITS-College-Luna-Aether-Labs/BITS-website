@@ -13,6 +13,9 @@ export default function Error({
 }) {
   useEffect(() => {
     console.error(error);
+    try {
+      navigator.sendBeacon("/api/error", JSON.stringify({ type: "react-boundary", message: error.message, stack: error.stack?.slice(0, 500) }));
+    } catch { /* best-effort */ }
   }, [error]);
 
   return (

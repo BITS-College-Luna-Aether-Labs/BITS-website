@@ -47,16 +47,29 @@ export function Footer() {
       <div className="site-container py-10 md:py-12">
         <div className="grid gap-10 md:grid-cols-3 md:gap-8">
           <div>
-            <Image
-              src="/images/logo.png"
-              alt=""
-              width={240}
-              height={78}
-              className="mb-4 h-auto w-[220px] brightness-0 invert transition-opacity duration-300 hover:opacity-80"
-            />
-            <p className="text-sm italic text-bits-footer-text/90">
-              from collecting . . . to connecting . . .
-            </p>
+            <Link href="/" aria-label="BITS College home">
+              <Image
+                src="/images/logo.png"
+                alt="BITS College logo"
+                width={240}
+                height={78}
+                className="mb-4 w-[264px] brightness-0 invert transition-opacity duration-300 hover:opacity-80 sm:h-[94px]"
+              />
+            </Link>
+            <ul className="mt-6 space-y-1.5 text-[13px]">
+              <li>
+                <Link href="/privacy-policy" className="footer-link hover:text-bits-green">Privacy Policy</Link>
+              </li>
+              <li>
+                <Link href="/terms-of-use" className="footer-link hover:text-bits-green">Terms of Use</Link>
+              </li>
+              <li>
+                <Link href="/accessibility-policy" className="footer-link hover:text-bits-green">Accessibility Policy</Link>
+              </li>
+              <li>
+                <Link href="/data-protection-policy" className="footer-link hover:text-bits-green">Data Protection Policy</Link>
+              </li>
+            </ul>
           </div>
 
           <div>

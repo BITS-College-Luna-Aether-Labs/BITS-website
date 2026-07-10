@@ -326,7 +326,7 @@ export function Header() {
         <div className="hidden h-[72px] items-center gap-4 md:flex lg:h-[76px]">
           <MotionLink
             href="/"
-            className="shrink-0 dark:rounded-md dark:bg-white/90 dark:p-1 dark:backdrop-blur-sm"
+            className="shrink-0"
             aria-label="BITS College home"
             whileHover={hoverScaleSm}
             transition={{ duration: 0.2 }}
@@ -337,7 +337,7 @@ export function Header() {
               width={160}
               height={52}
               priority
-              className="h-auto w-[130px] transition-opacity duration-200 hover:opacity-85 lg:w-[150px]"
+              className="h-auto w-[130px] transition-opacity duration-200 hover:opacity-85 dark:brightness-0 dark:invert lg:w-[150px]"
             />
           </MotionLink>
 
@@ -404,14 +404,14 @@ export function Header() {
         </div>
 
         <div className="flex h-[64px] items-center justify-between gap-3 md:hidden">
-          <Link href="/" className="shrink-0 dark:rounded-md dark:bg-white/90 dark:p-1 dark:backdrop-blur-sm" aria-label="BITS College home">
+          <Link href="/" className="shrink-0" aria-label="BITS College home">
             <Image
               src="/images/logo.png"
               alt="BITS College logo"
               width={140}
               height={46}
               priority
-              className="h-auto w-[110px]"
+              className="h-auto w-[110px] dark:brightness-0 dark:invert"
             />
           </Link>
           <div className="flex items-center gap-2">

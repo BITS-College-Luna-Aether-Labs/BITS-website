@@ -19,13 +19,13 @@ const IMG = "/images/Faculty-Members/";
 const faculty: FacultyCard[] = [
   { name: "Dr. Tesfaye Biru", initials: "TB", image: `${IMG}Dr%20Tesfaye%20Biru.png` },
   { name: "Henock Leulseged", initials: "HL", image: `${IMG}Mr%20Henock%20Leulseged.jpg` },
-  { name: "Dr. Nigussie Tadesse", initials: "NT", image: `${IMG}Dr%20Nigussie%20Tadesse.png` },
-  { name: "Hana Gebeyehu", initials: "HG", image: `${IMG}Ms%20Hana%20Gebeyehu.png` },
+  { name: "Dr. Nigussie Tadesse", initials: "NT", image: `${IMG}Dr%20Nigussie%20Tadesse.jpeg` },
+  { name: "Hana Gebeyehu", initials: "HG", image: `${IMG}Ms%20Hana%20Gebeyehu.jpeg` },
   { name: "Dr. Rahel Bekele", initials: "RB", image: `${IMG}Dr%20Rahel%20Bekele.webp` },
   { name: "Elshaday Tesfaye", initials: "ET", image: `${IMG}Ms%20Elshaday%20Tesfaye.png` },
   { name: "Betsegaw", initials: "B", image: `${IMG}Mr%20Betsegaw.png` },
-  { name: "Prof. Abebe Rorissa", initials: "AR", image: `${IMG}Professor%20Abebe%20Rorissa.png` },
-  { name: "Tibebu Tesfaye", initials: "TT", image: `${IMG}Mr%20Tibebu%20Tesfaye.png` },
+  { name: "Prof. Abebe Rorissa", initials: "AR", image: `${IMG}Professor%20Abebe%20Rorissa.jpeg` },
+  { name: "Tibebu Tesfaye", initials: "TT", image: `${IMG}Mr%20Tibebu%20Tesfaye.jpeg` },
   { name: "Birara Gebru", initials: "BG", image: `${IMG}Dr%20Birara%20Gebru.jpg` },
   { name: "Anteneh Kassaye", initials: "AK", image: `${IMG}Mr%20Anteneh%20Kassaye.jpeg` },
   { name: "Kidus Menfese", initials: "KM", image: `${IMG}Mr%20Kidus%20Menfese.jpg` },
@@ -56,7 +56,7 @@ function Card({ item, index }: { item: FacultyCard; index: number }) {
           fill
           loading={index < 4 ? "eager" : "lazy"}
           priority={index < 4}
-          className="object-cover transition duration-700 group-hover:scale-110"
+          className="object-cover scale-[1.2] transition duration-700 group-hover:scale-[1.35]"
           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
         />
       ) : (

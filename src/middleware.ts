@@ -6,8 +6,18 @@ const ERROR_HASH = "'sha256-SFvwRvpSGNkVRKBwaqdtHPgB8Pxaikx+oEshBInp6oY='";
 
 const isDev = process.env.NODE_ENV !== "production";
 
+/** Edge-safe UUID v4 (crypto.randomUUID not in all Edge runtimes) */
+function uuidv4() {
+  const b = crypto.getRandomValues(new Uint8Array(16));
+  b[6] = (b[6] & 0x0f) | 0x40;
+  b[8] = (b[8] & 0x3f) | 0x80;
+  let s = "";
+  for (let i = 0; i < 16; i++) s += b[i].toString(16).padStart(2, "0");
+  return `${s.slice(0,8)}-${s.slice(8,12)}-${s.slice(12,16)}-${s.slice(16,20)}-${s.slice(20)}`;
+}
+
 export function middleware() {
-  const nonce = crypto.randomUUID();
+  const nonce = uuidv4();
   const response = NextResponse.next();
 
   const csp = [

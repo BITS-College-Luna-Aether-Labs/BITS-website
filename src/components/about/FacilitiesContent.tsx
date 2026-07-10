@@ -1,6 +1,7 @@
 /** Facilities — image gallery cards with carousel for each facility type, stats grid, CTA banner */
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import {
@@ -124,11 +125,14 @@ function FacilityCard({
       }`}
     >
       <div className={`relative ${reverse ? "lg:[direction:ltr]" : ""} p-4 sm:p-6`}>
-        <div className="relative overflow-hidden">
-          <img
+        <div className="relative h-72 w-full overflow-hidden">
+          <Image
             src={images[current]}
             alt={item.title}
-            className="h-72 w-full object-cover transition duration-500"
+            fill
+            className="object-cover transition duration-500"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent" />
 

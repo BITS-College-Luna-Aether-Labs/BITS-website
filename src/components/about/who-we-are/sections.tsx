@@ -13,7 +13,7 @@ import { MISSION_POINTS, VALUES, ACCREDITATION_ITEMS, SUPPORT_ITEMS } from "./da
 export function SectionHeader({ icon: Icon, label, title }: { icon: React.ElementType; label: string; title: string }) {
   return (
     <div className="mb-6 flex items-center gap-3">
-      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-50 text-bits-green">
+      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-50 text-bits-green dark:bg-emerald-950/40">
         <Icon className="h-5 w-5" />
       </div>
       <div>
@@ -62,51 +62,67 @@ export function AccreditationModal({ selectedPdf, onClose }: { selectedPdf: stri
 }
 
 export function OverviewTab() {
-  const overviewPanel = "bg-[#f3fbf0]";
   return (
-    <ContentCard key="overview" className="border-0 bg-[#f3fbf0] shadow-none dark:border-0">
+    <ContentCard key="overview">
       <SectionHeader icon={BookOpen} label="Overview" title="Overview" />
 
       <div className="mx-auto mb-10 max-w-2xl">
-        <div className={`relative overflow-hidden rounded-[2.5rem] ${overviewPanel} p-8 text-center sm:p-10`}>
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-[linear-gradient(135deg,rgba(125,194,67,0.08),var(--bits-surface))] p-8 text-center sm:p-10">
           <h3 className="text-2xl font-bold text-bits-heading sm:text-3xl">BITS College</h3>
           <p className="mt-1 text-sm font-medium text-bits-green sm:text-base">Private higher learning institution</p>
           <p className="mx-auto mt-5 max-w-lg text-sm leading-7 text-bits-text sm:text-base sm:leading-7">
             BITS began from a focused system development and training company and is pursuing a full-fledged
             university vision through faculty expertise, academic design, and technology-forward delivery.
           </p>
-          <div className="mx-auto mt-7 grid max-w-sm gap-3 sm:grid-cols-2 sm:gap-4">
-            <div className={`rounded-2xl ${overviewPanel} p-4`}>
+          <div className="mx-auto mt-7 grid max-w-xl gap-3 sm:grid-cols-2 sm:gap-4">
+            <div className="rounded-2xl bg-[var(--bits-surface-muted)] p-4">
               <p className="text-xs uppercase tracking-[0.24em] text-bits-muted">Current</p>
-              <p className="mt-1 text-xl font-bold text-bits-heading">335+ Students</p>
+              <p className="mt-2.5 text-xl font-bold text-bits-heading">335+ Students</p>
             </div>
-            <div className={`rounded-2xl ${overviewPanel} p-4`}>
+            <div className="rounded-2xl bg-[var(--bits-surface-muted)] p-4">
               <p className="text-xs uppercase tracking-[0.24em] text-bits-muted">Goal</p>
-              <p className="mt-1 text-xl font-bold text-bits-heading">Full-fledged University</p>
+              <p className="mt-2.5 text-xl font-bold text-bits-heading">Full-fledged University</p>
             </div>
           </div>
         </div>
       </div>
 
       <div className="mx-auto mb-10">
-        <div className="overflow-hidden rounded-[2rem] bg-black">
-          <div className="relative aspect-video">
-            <iframe
-              src="https://www.youtube.com/embed/xzJXNyy6sRk?rel=0&autoplay=0&showinfo=0"
-              title="Virtual Tour of BITS College"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="absolute inset-0 h-full w-full"
-            />
+        <div className="relative rounded-[2rem] p-[0.5px]">
+          <div className="absolute inset-0 -z-10 animate-[spin_3s_linear_infinite] rounded-[2rem] bg-[conic-gradient(from_0deg,rgba(125,194,67,0.8),transparent,rgba(125,194,67,0.8),transparent,rgba(125,194,67,0.8))]" aria-hidden="true" />
+          <div className="overflow-hidden rounded-[calc(2rem-0.5px)] bg-black">
+            <div className="relative aspect-video">
+              <iframe
+                src="https://www.youtube.com/embed/xzJXNyy6sRk?rel=0&autoplay=0&showinfo=0"
+                title="Virtual Tour of BITS College"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 h-full w-full"
+              />
+            </div>
           </div>
         </div>
-        <p className="mt-4 text-center text-2xl font-semibold tracking-wide text-bits-muted">
-          Virtual Tour of BITS College
+        <p className="group relative mt-4 inline-flex w-full justify-center text-center">
+          <span className="glow-text text-2xl font-semibold tracking-wide text-bits-muted">Virtual Tour of BITS College</span>
         </p>
+        <style>{`
+          .glow-text {
+            background: linear-gradient(90deg, var(--bits-muted) 0%, var(--bits-muted) 40%, rgba(125,194,67,1) 50%, var(--bits-muted) 60%, var(--bits-muted) 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glowSweep 3s ease-in-out infinite;
+          }
+          @keyframes glowSweep {
+            0% { background-position: 100% 50%; }
+            100% { background-position: -100% 50%; }
+          }
+        `}</style>
       </div>
 
       <div className="mx-auto mb-6 flex justify-center">
-        <div className="rounded-[2rem] bg-white p-6 sm:p-8">
+        <div className="rounded-[2rem] bg-[var(--bits-surface)] p-6 sm:p-8">
           <div className="text-center">
             <p className="text-lg font-semibold text-bits-green-dark sm:text-xl">Attributes behind the brand</p>
             <p className="mx-auto mt-3 max-w-2xl leading-7 text-bits-text">
@@ -114,16 +130,16 @@ export function OverviewTab() {
               pairing that communicates freshness, energy, creativity, and determination.
             </p>
           </div>
-          <div className="mt-6 flex flex-wrap justify-center gap-4">
-            <div className="flex items-center gap-2 rounded-xl bg-white px-4 py-2.5">
-              <span className="h-4 w-4 rounded-full bg-[#7DC243] ring-2 ring-[#7DC243]/20" />
-              <span className="text-sm text-bits-text">
+          <div className="mt-6 flex flex-wrap justify-center gap-5">
+            <div className="flex items-center gap-3 rounded-xl bg-[var(--bits-surface-muted)] px-6 py-4">
+              <span className="h-6 w-6 shrink-0 rounded-full bg-[#7DC243] ring-2 ring-[#7DC243]/20" />
+              <span className="text-lg text-bits-text">
                 Green for <strong>freshness</strong>, <strong>energy</strong>, and <strong>online</strong>
               </span>
             </div>
-            <div className="flex items-center gap-2 rounded-xl bg-white px-4 py-2.5">
-              <span className="h-4 w-4 rounded-full bg-[#54595F] ring-2 ring-[#54595F]/20" />
-              <span className="text-sm text-bits-text">
+            <div className="flex items-center gap-3 rounded-xl bg-[var(--bits-surface-muted)] px-6 py-4">
+              <span className="h-6 w-6 shrink-0 rounded-full bg-[#54595F] ring-2 ring-[#54595F]/20" />
+              <span className="text-lg text-bits-text">
                 Gray for <strong>creativity</strong> & <strong>determination</strong>
               </span>
             </div>
@@ -132,8 +148,8 @@ export function OverviewTab() {
       </div>
 
       <div className="mx-auto mb-6 flex justify-center">
-        <div className="group rounded-[2rem] bg-white p-6 sm:p-8">
-          <div className="rounded-xl bg-white p-4">
+        <div className="group rounded-[2rem] bg-[var(--bits-surface)] p-6 sm:p-8">
+          <div className="rounded-xl p-4">
             <Image
               src="/images/logo.png"
               alt="BITS College Logo"
@@ -146,10 +162,10 @@ export function OverviewTab() {
       </div>
 
       <div className="mx-auto">
-        <div className="rounded-[2rem] bg-white p-6 sm:p-8">
-          <div className="grid gap-2 sm:grid-cols-2">
-            <div className="rounded-2xl border border-[#dbeed3] bg-white p-5">
-              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-bits-green">
+        <div className="rounded-[2rem] bg-[var(--bits-surface)] p-6 sm:p-8">
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div className="rounded-2xl border border-emerald-950/8 bg-[var(--bits-surface-muted)] p-5">
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-bits-green dark:bg-emerald-950/40">
                 <ShieldCheck className="h-5 w-5" />
               </div>
               <p className="text-sm font-semibold text-bits-heading">BITS meaning</p>
@@ -157,8 +173,8 @@ export function OverviewTab() {
                 Business, Innovation, Technology, and System.
               </p>
             </div>
-            <div className="rounded-2xl border border-[#dbeed3] bg-white p-5">
-              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-bits-green">
+            <div className="rounded-2xl border border-emerald-950/8 bg-[var(--bits-surface-muted)] p-5">
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-bits-green dark:bg-emerald-950/40">
                 <Target className="h-5 w-5" />
               </div>
               <p className="text-sm font-semibold text-bits-heading">Logo narrative</p>
@@ -282,7 +298,7 @@ export function AccreditationTab({ onShowPdf }: { onShowPdf: (url: string) => vo
               </div>
               <ChevronRight className="mt-1 h-5 w-5 shrink-0 text-bits-muted transition group-hover:translate-x-1 group-hover:text-bits-green" />
             </div>
-            <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-bits-green-dark">
+            <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-bits-green-dark dark:bg-emerald-950/40 dark:text-bits-green">
               View document
             </div>
           </button>

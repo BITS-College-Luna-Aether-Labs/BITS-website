@@ -79,7 +79,7 @@ function WhoWeAreContentInner() {
                     key={section.id}
                     type="button"
                     onClick={() => setActiveSection(section.id)}
-                    className={`flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-sm font-medium transition hover:border-emerald-900/10 hover:bg-emerald-50 hover:text-bits-green ${
+                    className={`flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-sm font-medium transition hover:border-emerald-900/10 hover:bg-emerald-50 hover:text-bits-green dark:hover:bg-emerald-950/30 dark:hover:text-bits-green ${
                       activeSection === section.id
                         ? "border-black/20 bg-black/5 text-black dark:border-white/30 dark:bg-white/10 dark:text-white font-semibold"
                         : "border-transparent text-bits-text"
@@ -121,10 +121,10 @@ function WhoWeAreContentInner() {
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={activeSection}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.3, ease: EASE_PREMIUM }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
               >
                 {tabContent[activeSection]}
               </motion.div>

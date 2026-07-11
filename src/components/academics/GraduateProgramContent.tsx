@@ -26,7 +26,7 @@ export function GraduateProgramContent() {
           <div className="bg-gradient-to-br from-emerald-500/20 via-emerald-400/10 to-transparent p-6 sm:p-8 lg:p-12">
             {/* Centered badge + title */}
             <div className="mb-16 text-center">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-emerald-50 px-4 py-2 text-sm font-medium text-bits-green-dark shadow-sm dark:border-white/10 dark:bg-white/10 dark:text-bits-green">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-emerald-50 px-4 py-2 text-sm font-medium text-bits-green-dark shadow-sm dark:border-bits-green/20 dark:bg-bits-green/10 dark:text-bits-green">
                 <GraduationCap className="h-4 w-4" />
                 Graduate Program
               </div>
@@ -37,7 +37,7 @@ export function GraduateProgramContent() {
 
             {/* Side-by-side: focus list + image */}
             <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-              <div className="rounded-[1.5rem] border border-black/10 bg-[var(--bits-surface)]/75 p-6 backdrop-blur dark:border-white/10 sm:p-8">
+              <div className="rounded-[1.5rem] border border-black/10 bg-[var(--bits-surface)]/75 p-6 backdrop-blur dark:border-bits-green/20 sm:p-8">
                 <p className="text-xl font-medium text-bits-green-dark sm:text-2xl">
                   The M.Sc. Program In IT Management Focuses On:
                 </p>

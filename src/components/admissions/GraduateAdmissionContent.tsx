@@ -25,7 +25,7 @@ export function GraduateAdmissionContent() {
         >
           <div className="bg-gradient-to-br from-emerald-500/20 via-emerald-400/10 to-transparent p-6 sm:p-8">
             <div className="mb-6 text-center">
-              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-emerald-50 px-4 py-2 text-sm font-medium text-bits-green-dark shadow-sm dark:border-white/10 dark:bg-white/10 dark:text-bits-green">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-emerald-50 px-4 py-2 text-sm font-medium text-bits-green-dark shadow-sm dark:border-bits-green/20 dark:bg-bits-green/10 dark:text-bits-green">
                 <GraduationCap className="h-4 w-4" />
                 Graduate Admission
               </div>
@@ -38,7 +38,7 @@ export function GraduateAdmissionContent() {
               </p>
             </div>
             <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-              <div className="rounded-[1.5rem] border border-black/10 bg-[var(--bits-surface)]/75 p-5 backdrop-blur dark:border-white/10 sm:p-6">
+              <div className="rounded-[1.5rem] border border-black/10 bg-[var(--bits-surface)]/75 p-5 backdrop-blur dark:border-bits-green/20 sm:p-6">
                 <p className="text-base font-medium text-bits-heading">
                   In particular, the following requirements must be fulfilled.
                 </p>

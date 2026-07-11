@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 
 /** Pre-computed SHA-256 hashes for inline scripts (theme + error reporter) */
 const THEME_HASH = "'sha256-NhzUKfveOg7mcRyOHqfXa83QgUQOuo/uyYCLkLqe9CE='";
@@ -16,9 +16,8 @@ function uuidv4() {
   return `${s.slice(0,8)}-${s.slice(8,12)}-${s.slice(12,16)}-${s.slice(16,20)}-${s.slice(20)}`;
 }
 
-export function middleware() {
+export function middleware(request: NextRequest) {
   const nonce = uuidv4();
-  const response = NextResponse.next();
 
   const csp = [
     "default-src 'self'",
@@ -35,6 +34,14 @@ export function middleware() {
     ...(isDev ? [] : ["upgrade-insecure-requests"]),
   ].join("; ");
 
+  // Next.js must see the nonce on the REQUEST so it can stamp it onto
+  // its own hydration / streaming scripts (self.__next_f.push, etc.)
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-nonce", nonce);
+  requestHeaders.set("Content-Security-Policy", csp);
+
+  const response = NextResponse.next({ request: { headers: requestHeaders } });
+
   response.headers.set("Content-Security-Policy", csp);
   response.headers.set("x-nonce", nonce);
 
@@ -42,5 +49,5 @@ export function middleware() {
 }
 
 export const config = {
-  matcher: "/:path*",
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

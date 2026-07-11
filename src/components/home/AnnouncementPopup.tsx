@@ -66,15 +66,24 @@ function ConfettiBurst() {
   );
 }
 
-let shownDuringSession = false;
+const POPUP_STORAGE_KEY = "bits_announcement_shown";
 
 export function AnnouncementPopup() {
   const { enabled } = useMotionSafe();
-  const [open, setOpen] = useState(!shownDuringSession);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    shownDuringSession = true;
+    const alreadyShown = sessionStorage.getItem(POPUP_STORAGE_KEY);
+    if (!alreadyShown) {
+      setOpen(true);
+    }
   }, []);
+
+  useEffect(() => {
+    if (open) {
+      sessionStorage.setItem(POPUP_STORAGE_KEY, "1");
+    }
+  }, [open]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";

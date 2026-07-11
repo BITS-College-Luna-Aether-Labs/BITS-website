@@ -38,7 +38,7 @@ export function GraduateAdmissionContent() {
               </p>
             </div>
             <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-              <div className="rounded-[1.5rem] border border-black/10 bg-[var(--bits-surface)]/75 p-5 backdrop-blur dark:border-bits-green/20 sm:p-6">
+              <div className="rounded-[1.5rem] border border-black/10 bg-[var(--bits-surface)]/75 p-5 backdrop-blur dark:border-transparent sm:p-6">
                 <p className="text-base font-medium text-bits-heading">
                   In particular, the following requirements must be fulfilled.
                 </p>

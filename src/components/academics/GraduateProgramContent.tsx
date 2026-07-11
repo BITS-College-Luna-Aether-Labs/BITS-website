@@ -37,7 +37,7 @@ export function GraduateProgramContent() {
 
             {/* Side-by-side: focus list + image */}
             <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-              <div className="rounded-[1.5rem] border border-black/10 bg-[var(--bits-surface)]/75 p-6 backdrop-blur dark:border-bits-green/20 sm:p-8">
+              <div className="rounded-[1.5rem] border border-black/10 bg-[var(--bits-surface)]/75 p-6 backdrop-blur dark:border-transparent sm:p-8">
                 <p className="text-xl font-medium text-bits-green-dark sm:text-2xl">
                   The M.Sc. Program In IT Management Focuses On:
                 </p>

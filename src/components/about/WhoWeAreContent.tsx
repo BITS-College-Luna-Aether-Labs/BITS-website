@@ -85,7 +85,7 @@ function WhoWeAreContentInner() {
                         : "border-transparent text-bits-text"
                     }`}
                   >
-                    <span>{section.label}</span>
+                    <span className="truncate">{section.label}</span>
                     <ChevronRight className={`h-4 w-4 shrink-0 transition ${activeSection === section.id ? "text-black dark:text-white" : ""}`} />
                   </button>
                 ))}

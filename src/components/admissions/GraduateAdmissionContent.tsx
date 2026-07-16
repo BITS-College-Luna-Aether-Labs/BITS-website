@@ -25,7 +25,7 @@ export function GraduateAdmissionContent() {
         >
           <div className="bg-gradient-to-br from-emerald-500/20 via-emerald-400/10 to-transparent p-6 sm:p-8">
             <div className="mb-6 text-center">
-              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-emerald-50 px-4 py-2 text-sm font-medium text-bits-green-dark shadow-sm dark:border-bits-green/20 dark:bg-bits-green/10 dark:text-bits-green">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-emerald-50 px-4 py-2 text-sm font-medium text-bits-green-dark shadow-sm dark:border-transparent dark:bg-bits-green/10 dark:text-bits-green">
                 <GraduationCap className="h-4 w-4" />
                 Graduate Admission
               </div>

@@ -104,7 +104,7 @@ function HeroImage({ animate }: { animate?: boolean }) {
           width={550}
           height={1088}
           priority
-          className="h-auto w-full max-w-[157px] object-contain sm:max-w-[190px] md:max-w-[224px] lg:max-w-[246px]" style={{ transform: "scaleX(1.8432)" }}
+          className="h-auto w-full max-w-[157px] object-contain sm:max-w-[190px] md:max-w-[224px] lg:max-w-[246px]" style={{ transform: "scaleX(2.2118)" }}
         />
       </motion.div>
     </>

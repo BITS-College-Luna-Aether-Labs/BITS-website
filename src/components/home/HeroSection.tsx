@@ -99,10 +99,10 @@ function HeroImage({ animate }: { animate?: boolean }) {
           : {})}
       >
         <Image
-          src="/images/hero-landingpage.jpg"
+          src="/images/hero-landingpage.png"
           alt="BITS College landing page hero"
-          width={1224}
-          height={816}
+          width={550}
+          height={1088}
           priority
           className="h-auto w-full max-w-[157px] object-contain sm:max-w-[190px] md:max-w-[224px] lg:max-w-[246px]" style={{ transform: "scaleX(2.106) scaleY(2.016)" }}
         />

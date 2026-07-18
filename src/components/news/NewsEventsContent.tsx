@@ -2,6 +2,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { useState, useMemo } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -213,11 +214,12 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
               className="h-full w-full"
             />
           ) : hasImage ? (
-            <img
+            <Image
               src={item.image!.src}
               alt={item.image!.alt}
-              className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
-              loading="lazy"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover transition duration-500 group-hover:scale-110"
             />
           ) : (
             <div className="flex h-full items-center justify-center bg-gradient-to-br from-lime-50 to-slate-100 p-6 dark:from-gray-800 dark:to-gray-900">

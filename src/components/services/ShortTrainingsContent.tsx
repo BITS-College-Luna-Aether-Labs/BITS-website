@@ -63,14 +63,13 @@ export function ShortTrainingsContent() {
                 key={item.title}
                 className="overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.06)]"
               >
-                <div>
+                <div className="relative aspect-[4/3]">
                   <Image
                     src={item.image}
                     alt={item.title}
-                    width={0}
-                    height={0}
+                    fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="w-full h-auto"
+                    className="object-cover"
                   />
                 </div>
                 <div className="p-6 sm:p-8">

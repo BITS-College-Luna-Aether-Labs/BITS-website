@@ -179,27 +179,25 @@ export function StudentSupportContent() {
               </p>
             </div>
 
-            <div>
+            <div className="relative aspect-[4/3]">
               <Image
                 src={`${IMG}Student%20support%201.png`}
                 alt="Academic Support"
-                width={0}
-                height={0}
+                fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="w-full h-auto"
+                className="object-cover"
               />
             </div>
           </div>
 
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div className="lg:order-first">
+            <div className="relative aspect-[4/3] lg:order-first">
               <Image
                 src={`${IMG}Student%20support%202.webp`}
                 alt="Disability Support"
-                width={0}
-                height={0}
+                fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="w-full h-auto"
+                className="object-cover"
               />
             </div>
 

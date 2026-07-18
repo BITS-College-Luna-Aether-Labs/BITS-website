@@ -43,6 +43,7 @@ export function WorkshopContent() {
               width={1200}
               height={800}
               className="w-full object-cover"
+              priority
             />
           </div>
 

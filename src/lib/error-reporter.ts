@@ -1,5 +1,2 @@
 /** Client-side error reporter — captures runtime errors & unhandled promise rejections via sendBeacon */
 export const ERROR_REPORTER_SCRIPT = `(function(){function e(d){try{navigator.sendBeacon('/api/error',JSON.stringify(d))}catch(e){}}onerror=function(m,u,l,c,o){e({type:'error',message:m||'',url:u||'',line:l||0,col:c||0,stack:o&&o.stack?o.stack.slice(0,500):''})};onunhandledrejection=function(r){e({type:'unhandledrejection',message:r.reason&&r.reason.message||String(r.reason),stack:r.reason&&r.reason.stack?r.reason.stack.slice(0,500):''})}})()`;
-
-/** Pre-computed SHA-256 hash of ERROR_REPORTER_SCRIPT */
-export const ERROR_REPORTER_HASH = "'sha256-SFvwRvpSGNkVRKBwaqdtHPgB8Pxaikx+oEshBInp6oY='";

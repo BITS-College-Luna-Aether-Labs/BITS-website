@@ -30,6 +30,4 @@ export function persistTheme(theme: Theme) {
 }
 
 /** Runs before React hydration to prevent dark/light flash */
-export const THEME_SCRIPT = `
-(function(){try{var v=localStorage.getItem('bits_theme');document.documentElement.classList.toggle('dark',v==='dark')}catch(e){}})()
-`;
+export const THEME_SCRIPT = `(function(){try{var v=localStorage.getItem('bits_theme');document.documentElement.classList.toggle('dark',v==='dark')}catch(e){}})()`;

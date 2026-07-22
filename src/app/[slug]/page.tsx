@@ -19,10 +19,6 @@ import { WorkshopContent } from "@/components/news/WorkshopContent";
 import { CollegeDayContent } from "@/components/news/CollegeDayContent";
 import { BootcampContent } from "@/components/news/BootcampContent";
 import { ScholarshipRecipientsContent } from "@/components/news/ScholarshipRecipientsContent";
-import { PrivacyPolicyContent } from "@/components/legals/PrivacyPolicyContent";
-import { TermsOfUseContent } from "@/components/legals/TermsOfUseContent";
-import { AccessibilityPolicyContent } from "@/components/legals/AccessibilityPolicyContent";
-import { DataProtectionPolicyContent } from "@/components/legals/DataProtectionPolicyContent";
 
 const PAGE_TITLES: Record<string, { title: string; description: string }> = {
   "who-we-are": {
@@ -106,22 +102,6 @@ const PAGE_TITLES: Record<string, { title: string; description: string }> = {
   "scholarship-recipients": {
     title: "Merit Based Scholarship Recipients 2023/24",
     description: "BITS College awarded Merit-based Scholarships to three outstanding students.",
-  },
-  "privacy-policy": {
-    title: "Privacy Policy",
-    description: "How BITS College collects, uses, and protects your personal information.",
-  },
-  "terms-of-use": {
-    title: "Terms of Use",
-    description: "Terms and conditions governing the use of the BITS College website.",
-  },
-  "accessibility-policy": {
-    title: "Accessibility Policy",
-    description: "BITS College is committed to ensuring digital accessibility for all users.",
-  },
-  "data-protection-policy": {
-    title: "Data Protection Policy",
-    description: "How BITS College safeguards your personal data in compliance with applicable regulations.",
   },
 };
 
@@ -221,22 +201,6 @@ export default async function DynamicPage({ params }: Props) {
 
   if (slug === "scholarship-recipients") {
     return <ScholarshipRecipientsContent />;
-  }
-
-  if (slug === "privacy-policy") {
-    return <PrivacyPolicyContent />;
-  }
-
-  if (slug === "terms-of-use") {
-    return <TermsOfUseContent />;
-  }
-
-  if (slug === "accessibility-policy") {
-    return <AccessibilityPolicyContent />;
-  }
-
-  if (slug === "data-protection-policy") {
-    return <DataProtectionPolicyContent />;
   }
 
   return (

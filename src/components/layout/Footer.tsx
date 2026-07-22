@@ -56,20 +56,6 @@ export function Footer() {
                 className="mb-4 w-[264px] brightness-0 invert transition-opacity duration-300 hover:opacity-80 sm:h-[94px]"
               />
             </Link>
-            <ul className="mt-6 space-y-1.5 text-[13px]">
-              <li>
-                <Link href="/privacy-policy" className="footer-link hover:text-bits-green">Privacy Policy</Link>
-              </li>
-              <li>
-                <Link href="/terms-of-use" className="footer-link hover:text-bits-green">Terms of Use</Link>
-              </li>
-              <li>
-                <Link href="/accessibility-policy" className="footer-link hover:text-bits-green">Accessibility Policy</Link>
-              </li>
-              <li>
-                <Link href="/data-protection-policy" className="footer-link hover:text-bits-green">Data Protection Policy</Link>
-              </li>
-            </ul>
           </div>
 
           <div>

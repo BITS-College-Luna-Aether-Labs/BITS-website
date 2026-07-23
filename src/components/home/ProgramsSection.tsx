@@ -116,7 +116,7 @@ export function ProgramsSection() {
       aria-labelledby="programs-heading"
     >
       <div className="site-container">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           <SectionReveal className="relative order-2 lg:order-1">
             <div
               className="absolute -left-4 top-8 h-56 w-56 rounded-full bg-bits-green/20 md:h-72 md:w-72"

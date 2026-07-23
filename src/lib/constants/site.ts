@@ -44,7 +44,7 @@ export const PROGRAM_CARDS = [
   {
     title: "SOFTWARE ENGINEERING",
     subtitle: "Undergraduate Program",
-    href: "/software-engineering",
+    href: "/undergraduate-program",
     fullWidth: false,
   },
 ] as const;

@@ -1,4 +1,4 @@
-/** Programs — graduate program card with staggered entrance and fallback static variant */
+/** Programs — graduate + undergraduate program cards with staggered entrance and fallback static variant */
 "use client";
 
 import Image from "next/image";
@@ -11,8 +11,9 @@ import { SPRING_GENTLE, SPRING_HOVER, EASE_PREMIUM } from "@/lib/motion-presets"
 import { SectionReveal } from "@/components/ui/SectionReveal";
 
 const graduateProgram = PROGRAM_CARDS[0];
+const undergradPrograms = PROGRAM_CARDS.slice(1);
 
-function ProgramCardFallback() {
+function ProgramCardsList() {
   return (
     <div className="mt-8 space-y-4">
       <Link href={graduateProgram.href} className="program-card program-card-fallback block pl-6">
@@ -21,23 +22,46 @@ function ProgramCardFallback() {
         </h3>
         <p className="mt-1 text-sm text-bits-muted">{graduateProgram.subtitle}</p>
       </Link>
+      {undergradPrograms.length > 0 && (
+        <div className="grid gap-4 sm:grid-cols-2">
+          {undergradPrograms.map((program) => (
+            <Link
+              key={program.title}
+              href={program.href}
+              className="program-card program-card-fallback block h-full pl-6"
+            >
+              <h3 className="text-sm font-bold uppercase tracking-wide text-bits-heading">
+                {program.title}
+              </h3>
+              <p className="mt-1 text-sm text-bits-muted">{program.subtitle}</p>
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
-function ProgramCardAnimated() {
+function ProgramCardsAnimated() {
   const { tapSm } = useInteractionMotion();
 
   return (
     <motion.div
-      className="mt-8"
-      initial={{ opacity: 0, x: 20, scale: 0.97 }}
-      whileInView={{ opacity: 1, x: 0, scale: 1 }}
+      className="mt-8 space-y-4"
+      initial="hidden"
+      whileInView="visible"
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ ...SPRING_GENTLE, ease: EASE_PREMIUM }}
+      variants={{
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.12 } },
+      }}
     >
       <motion.div
         className="program-card gpu block pl-6"
+        variants={{
+          hidden: { opacity: 0, x: 20, scale: 0.97 },
+          visible: { opacity: 1, x: 0, scale: 1, transition: SPRING_GENTLE },
+        }}
         whileHover={{
           y: -4,
           boxShadow: "var(--shadow-card-hover-rise)",
@@ -52,6 +76,33 @@ function ProgramCardAnimated() {
           <p className="mt-1 text-sm text-bits-muted">{graduateProgram.subtitle}</p>
         </Link>
       </motion.div>
+      {undergradPrograms.length > 0 && (
+        <div className="grid gap-4 sm:grid-cols-2">
+          {undergradPrograms.map((program) => (
+            <motion.div
+              key={program.title}
+              className="program-card gpu block h-full pl-6"
+              variants={{
+                hidden: { opacity: 0, x: 20, scale: 0.97 },
+                visible: { opacity: 1, x: 0, scale: 1, transition: SPRING_GENTLE },
+              }}
+              whileHover={{
+                y: -4,
+                boxShadow: "var(--shadow-card-hover-rise)",
+                transition: SPRING_HOVER,
+              }}
+              whileTap={tapSm}
+            >
+              <Link href={program.href} className="block h-full">
+                <h3 className="text-sm font-bold uppercase tracking-wide text-bits-heading">
+                  {program.title}
+                </h3>
+                <p className="mt-1 text-sm text-bits-muted">{program.subtitle}</p>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      )}
     </motion.div>
   );
 }
@@ -113,7 +164,7 @@ export function ProgramsSection() {
                 principles with their connections to society.
               </p>
             </SectionReveal>
-            {enabled ? <ProgramCardAnimated /> : <ProgramCardFallback />}
+            {enabled ? <ProgramCardsAnimated /> : <ProgramCardsList />}
           </div>
         </div>
       </div>

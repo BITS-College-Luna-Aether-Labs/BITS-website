@@ -6,7 +6,6 @@ import { PartnersAndClientsContent } from "@/components/about/PartnersAndClients
 import { GraduateProgramContent } from "@/components/academics/GraduateProgramContent";
 import { ResearchContent } from "@/components/academics/ResearchContent";
 import { SoftwareEngineeringContent } from "@/components/academics/SoftwareEngineeringContent";
-import { InformationTechnologySystemsContent } from "@/components/academics/InformationTechnologySystemsContent";
 import { UndergradAdmissionContent } from "@/components/admissions/UndergradAdmissionContent";
 import { GraduateAdmissionContent } from "@/components/admissions/GraduateAdmissionContent";
 import { ScholarshipAidContent } from "@/components/admissions/ScholarshipAidContent";
@@ -60,10 +59,6 @@ const PAGE_TITLES: Record<string, { title: string; description: string }> = {
   "software-engineering": {
     title: "Software Engineering",
     description: "Undergraduate program in Software Engineering.",
-  },
-  "information-technology-and-systems": {
-    title: "Information Technology and Systems",
-    description: "Undergraduate program in Information Technology and Systems.",
   },
   tuition: {
     title: "Tuition",
@@ -173,10 +168,6 @@ export default async function DynamicPage({ params }: Props) {
 
   if (slug === "software-engineering") {
     return <SoftwareEngineeringContent />;
-  }
-
-  if (slug === "information-technology-and-systems") {
-    return <InformationTechnologySystemsContent />;
   }
 
   if (slug === "inauguration") {

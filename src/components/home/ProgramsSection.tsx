@@ -1,4 +1,4 @@
-/** Programs — graduate + undergraduate program cards with staggered entrance and fallback static variant */
+/** Programs — graduate program card with staggered entrance and fallback static variant */
 "use client";
 
 import Image from "next/image";
@@ -7,13 +7,12 @@ import { motion } from "framer-motion";
 import { PROGRAM_CARDS } from "@/lib/constants/site";
 import { useInteractionMotion } from "@/hooks/useInteractionMotion";
 import { useMotionSafe } from "@/hooks/useMotionSafe";
-import { SPRING_GENTLE, SPRING_HOVER, STAGGER_NORMAL, EASE_PREMIUM } from "@/lib/motion-presets";
+import { SPRING_GENTLE, SPRING_HOVER, EASE_PREMIUM } from "@/lib/motion-presets";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 
 const graduateProgram = PROGRAM_CARDS[0];
-const undergradPrograms = PROGRAM_CARDS.slice(1);
 
-function ProgramCardsList() {
+function ProgramCardFallback() {
   return (
     <div className="mt-8 space-y-4">
       <Link href={graduateProgram.href} className="program-card program-card-fallback block pl-6">
@@ -22,44 +21,23 @@ function ProgramCardsList() {
         </h3>
         <p className="mt-1 text-sm text-bits-muted">{graduateProgram.subtitle}</p>
       </Link>
-      <div className="grid gap-4 sm:grid-cols-2">
-        {undergradPrograms.map((program) => (
-          <Link
-            key={program.title}
-            href={program.href}
-            className="program-card program-card-fallback block h-full pl-6"
-          >
-            <h3 className="text-sm font-bold uppercase tracking-wide text-bits-heading">
-              {program.title}
-            </h3>
-            <p className="mt-1 text-sm text-bits-muted">{program.subtitle}</p>
-          </Link>
-        ))}
-      </div>
     </div>
   );
 }
 
-function ProgramCardsAnimated() {
+function ProgramCardAnimated() {
   const { tapSm } = useInteractionMotion();
 
   return (
     <motion.div
-      className="mt-8 space-y-4"
-      initial="hidden"
-      whileInView="visible"
+      className="mt-8"
+      initial={{ opacity: 0, x: 20, scale: 0.97 }}
+      whileInView={{ opacity: 1, x: 0, scale: 1 }}
       viewport={{ once: true, margin: "-60px" }}
-      variants={{
-        hidden: {},
-        visible: { transition: STAGGER_NORMAL },
-      }}
+      transition={{ ...SPRING_GENTLE, ease: EASE_PREMIUM }}
     >
       <motion.div
         className="program-card gpu block pl-6"
-        variants={{
-          hidden: { opacity: 0, x: 20, scale: 0.97 },
-          visible: { opacity: 1, x: 0, scale: 1, transition: SPRING_GENTLE },
-        }}
         whileHover={{
           y: -4,
           boxShadow: "var(--shadow-card-hover-rise)",
@@ -74,31 +52,6 @@ function ProgramCardsAnimated() {
           <p className="mt-1 text-sm text-bits-muted">{graduateProgram.subtitle}</p>
         </Link>
       </motion.div>
-      <div className="grid gap-4 sm:grid-cols-2">
-        {undergradPrograms.map((program) => (
-          <motion.div
-            key={program.title}
-            className="program-card gpu block h-full pl-6"
-            variants={{
-              hidden: { opacity: 0, x: 20, scale: 0.97 },
-              visible: { opacity: 1, x: 0, scale: 1, transition: SPRING_GENTLE },
-            }}
-            whileHover={{
-              y: -4,
-              boxShadow: "var(--shadow-card-hover-rise)",
-              transition: SPRING_HOVER,
-            }}
-            whileTap={tapSm}
-          >
-            <Link href={program.href} className="block h-full">
-              <h3 className="text-sm font-bold uppercase tracking-wide text-bits-heading">
-                {program.title}
-              </h3>
-              <p className="mt-1 text-sm text-bits-muted">{program.subtitle}</p>
-            </Link>
-          </motion.div>
-        ))}
-      </div>
     </motion.div>
   );
 }
@@ -160,7 +113,7 @@ export function ProgramsSection() {
                 principles with their connections to society.
               </p>
             </SectionReveal>
-            {enabled ? <ProgramCardsAnimated /> : <ProgramCardsList />}
+            {enabled ? <ProgramCardAnimated /> : <ProgramCardFallback />}
           </div>
         </div>
       </div>

@@ -41,18 +41,6 @@ export const PROGRAM_CARDS = [
     href: "/graduate-program",
     fullWidth: true,
   },
-  {
-    title: "SOFTWARE ENGINEERING",
-    subtitle: "Undergraduate Program",
-    href: "/software-engineering",
-    fullWidth: false,
-  },
-  {
-    title: "INFORMATION TECHNOLOGY AND SYSTEMS",
-    subtitle: "Undergraduate Program",
-    href: "/information-technology-and-systems",
-    fullWidth: false,
-  },
 ] as const;
 
 export const CONTACT_CARDS = [

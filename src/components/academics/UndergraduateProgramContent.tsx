@@ -1,15 +1,10 @@
-/** Undergraduate Programs — two program cards (SE, ITS) with staggered entrance and CTA links */
+/** Undergraduate Programs — single program card (SE) with staggered entrance and CTA link */
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  BookOpen,
-  Code2,
-  MonitorSmartphone,
-} from "lucide-react";
+import { ArrowRight, Code2 } from "lucide-react";
 
 const IMG = "/images/Academics-Undergraduate-Programs/";
 
@@ -24,17 +19,6 @@ const programs = [
     icon: Code2,
     badge: "SE",
     image: `${IMG}Software%20Engineering.jpg`,
-  },
-  {
-    title: "IT and Systems",
-    eyebrow: "Undergraduate Program",
-    description: "Pursue an undergraduate degree in information technology and systems if you want to be involved in network administration, database administration, and IT security and software application support.",
-    points: ["network administration", "database administration", "IT security and software application support"],
-    href: "/information-technology-and-systems",
-    accent: "from-sky-500/20 via-cyan-400/10 to-transparent",
-    icon: MonitorSmartphone,
-    badge: "ITS",
-    image: `${IMG}IT%20and%20Systems.webp`,
   },
 ];
 
@@ -143,7 +127,7 @@ export function UndergraduateProgramContent() {
                 Undergraduate Programs
               </h1>
               <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-bits-text sm:text-lg">
-                Two focused undergraduate pathways designed for students who want a
+                A focused undergraduate pathway designed for students who want a
                 practical, industry-oriented computing education.
               </p>
             </motion.div>

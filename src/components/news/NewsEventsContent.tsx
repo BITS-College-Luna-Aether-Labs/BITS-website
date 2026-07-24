@@ -21,7 +21,7 @@ type NewsItem = {
 const newsItems: NewsItem[] = [
   {
     title: "BITS College Celebrates the Graduation of the Class of 2026",
-    date: "July 19, 2026 GC",
+    date: "July 12, 2026 GC",
     excerpt:
       "BITS College celebrated the graduation of the Class of 2026, marking a memorable milestone for students in the Undergraduate Software Engineering and Postgraduate IT Management programs.\n\nThe graduation ceremony honored the graduates' academic achievements, dedication, and perseverance throughout their studies. The event brought together students, faculty, families, and invited guests to recognize this important accomplishment and celebrate the graduates as they embark on the next chapter of their academic and professional journeys.",
     videoSrc: "/images/News-Events/graduation.mp4",

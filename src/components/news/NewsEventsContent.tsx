@@ -4,8 +4,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useMemo, useRef } from "react";
-import { ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { useState, useMemo } from "react";
+import { ChevronLeft, ChevronRight, Loader2, Play } from "lucide-react";
 
 type NewsItem = {
   title: string;
@@ -189,15 +189,9 @@ const itemVariants = {
 
 function NewsCard({ item, index }: { item: NewsItem; index: number }) {
   const hasImage = Boolean(item.image?.src);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const handlePlay = () => {
-    if (videoRef.current) {
-      videoRef.current.play();
-      setIsPlaying(true);
-    }
-  };
+  const [isMediaLoaded, setIsMediaLoaded] = useState(false);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+  const [isIframeReady, setIsIframeReady] = useState(false);
 
   return (
     <motion.div variants={itemVariants}>
@@ -209,42 +203,89 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
         <div className="relative aspect-video w-full overflow-hidden bg-[var(--bits-surface-muted)]">
           {item.videoSrc ? (
             <>
-              <video
-                ref={videoRef}
-                src={item.videoSrc}
-                controls={isPlaying}
-                playsInline
-                preload="metadata"
-                className="h-full w-full object-cover"
-                title={item.title}
-              />
-              {!isPlaying && (
+              {!isMediaLoaded ? (
                 <button
                   type="button"
-                  onClick={handlePlay}
-                  className="absolute inset-0 z-10 flex items-center justify-center bg-black/30 transition-colors hover:bg-black/40"
-                  aria-label={`Play ${item.title}`}
+                  onClick={() => setIsMediaLoaded(true)}
+                  className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-slate-900/70 to-black/50 px-4 text-white transition-colors hover:from-slate-900/80 hover:to-black/60"
+                  aria-label={`Load video for ${item.title}`}
                 >
                   <span className="flex h-16 w-16 items-center justify-center rounded-full bg-bits-green/90 text-white shadow-lg transition-transform hover:scale-110">
                     <Play className="ml-1 h-7 w-7 fill-current" />
                   </span>
+                  <span className="flex items-center gap-2 text-sm font-medium">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Tap to load video
+                  </span>
                 </button>
+              ) : (
+                <>
+                  <video
+                    src={item.videoSrc}
+                    controls
+                    autoPlay
+                    playsInline
+                    preload="metadata"
+                    className="h-full w-full object-cover"
+                    title={item.title}
+                    onCanPlay={() => setIsVideoReady(true)}
+                  />
+                  {!isVideoReady && (
+                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/30">
+                      <span className="flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 text-sm font-medium text-white">
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Loading video
+                      </span>
+                    </div>
+                  )}
+                </>
               )}
             </>
           ) : item.videoId ? (
-            <iframe
-              src={`https://www.youtube.com/embed/${item.videoId}?rel=0`}
-              title={item.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="h-full w-full"
-            />
+            <>
+              {!isMediaLoaded ? (
+                <button
+                  type="button"
+                  onClick={() => setIsMediaLoaded(true)}
+                  className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black/30 px-4 text-white transition-colors hover:bg-black/40"
+                  aria-label={`Load YouTube video for ${item.title}`}
+                >
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(132,204,22,0.22),transparent_38%),linear-gradient(135deg,#0f172a_0%,#111827_50%,#020617_100%)]" />
+                  <span className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-bits-green/90 text-white shadow-lg transition-transform hover:scale-110">
+                    <Play className="ml-1 h-7 w-7 fill-current" />
+                  </span>
+                  <span className="relative z-10 text-sm font-medium">Tap to load video</span>
+                </button>
+              ) : (
+                <>
+                  <iframe
+                    src={`https://www.youtube.com/embed/${item.videoId}?rel=0&modestbranding=1`}
+                    title={item.title}
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="h-full w-full"
+                    onLoad={() => setIsIframeReady(true)}
+                  />
+                  {!isIframeReady && (
+                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/30">
+                      <span className="flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 text-sm font-medium text-white">
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Loading embed
+                      </span>
+                    </div>
+                  )}
+                </>
+              )}
+            </>
           ) : hasImage ? (
             <Image
               src={item.image!.src}
               alt={item.image!.alt}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
+              loading={index < 2 ? "eager" : "lazy"}
+              priority={index < 2}
               className="object-cover transition duration-500 group-hover:scale-110"
             />
           ) : (

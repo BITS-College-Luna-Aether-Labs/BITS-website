@@ -11,6 +11,7 @@ import { GraduateAdmissionContent } from "@/components/admissions/GraduateAdmiss
 import { ScholarshipAidContent } from "@/components/admissions/ScholarshipAidContent";
 import { TuitionContent } from "@/components/admissions/TuitionContent";
 import { ShortTrainingsContent } from "@/components/services/ShortTrainingsContent";
+import { LibraryContent } from "@/components/services/LibraryContent";
 import { NewsEventsContent } from "@/components/news/NewsEventsContent";
 import { InaugurationContent } from "@/components/news/InaugurationContent";
 import { StudentAppreciationNightContent } from "@/components/news/StudentAppreciationNightContent";
@@ -20,6 +21,10 @@ import { BootcampContent } from "@/components/news/BootcampContent";
 import { ScholarshipRecipientsContent } from "@/components/news/ScholarshipRecipientsContent";
 
 const PAGE_TITLES: Record<string, { title: string; description: string }> = {
+  library: {
+    title: "Library Services",
+    description: "BITS College library system offering physical and digital resources to enhance teaching, learning, and research.",
+  },
   "who-we-are": {
     title: "Who We Are",
     description: "Learn about BITS College — our mission, vision, and community.",
@@ -160,6 +165,10 @@ export default async function DynamicPage({ params }: Props) {
 
   if (SERVICES_PAGES.includes(slug)) {
     return <ShortTrainingsContent />;
+  }
+
+  if (slug === "library") {
+    return <LibraryContent />;
   }
 
   if (NEWS_PAGES.includes(slug)) {

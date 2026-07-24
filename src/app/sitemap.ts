@@ -17,6 +17,7 @@ const slugs: string[] = [
   "tuition",
   "student-support",
   "short-trainings",
+  "library",
   "college-news",
   "inauguration",
   "student-appreciation-night",

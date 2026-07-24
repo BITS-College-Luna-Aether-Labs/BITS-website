@@ -187,52 +187,6 @@ const itemVariants = {
   },
 };
 
-function VideoPoster({
-  title,
-  date,
-  label,
-  onClick,
-}: {
-  title: string;
-  date: string;
-  label: string;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="absolute inset-0 z-10 flex h-full w-full items-end justify-start overflow-hidden text-left text-white"
-      aria-label={label}
-    >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(132,204,22,0.24),transparent_34%),linear-gradient(135deg,#0f172a_0%,#111827_52%,#020617_100%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.06)_0%,rgba(2,6,23,0.12)_45%,rgba(2,6,23,0.82)_100%)]" />
-      <div className="relative z-10 flex w-full flex-col gap-4 p-5 sm:p-6">
-        <div className="flex items-center gap-2">
-          <span className="rounded-full bg-white/12 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/90 ring-1 ring-white/15">
-            Video
-          </span>
-          <span className="text-xs font-medium text-white/70">{date}</span>
-        </div>
-        <div className="max-w-[90%]">
-          <h3 className="text-2xl font-semibold leading-tight sm:text-3xl">{title}</h3>
-          <p className="mt-2 max-w-md text-sm leading-6 text-white/75">
-            Tap to load and play this video.
-          </p>
-        </div>
-        <div className="mt-1 flex items-center gap-3">
-          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-bits-green/90 text-white shadow-lg transition-transform duration-200 group-hover:scale-110">
-            <Play className="ml-1 h-6 w-6 fill-current" />
-          </span>
-          <span className="text-sm font-semibold tracking-wide text-white/90">
-            Open video
-          </span>
-        </div>
-      </div>
-    </button>
-  );
-}
-
 function NewsCard({ item, index }: { item: NewsItem; index: number }) {
   const hasImage = Boolean(item.image?.src);
   const [isMediaLoaded, setIsMediaLoaded] = useState(false);
@@ -249,45 +203,65 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
         <div className="relative aspect-video w-full overflow-hidden bg-[var(--bits-surface-muted)]">
           {item.videoSrc ? (
             <>
+              <video
+                src={item.videoSrc}
+                controls={isMediaLoaded}
+                autoPlay={!isMediaLoaded}
+                muted={!isMediaLoaded}
+                loop={!isMediaLoaded}
+                playsInline
+                preload={isMediaLoaded ? "metadata" : "auto"}
+                className="h-full w-full object-cover"
+                title={item.title}
+                onCanPlay={() => setIsVideoReady(true)}
+                onClick={() => setIsMediaLoaded(true)}
+              />
               {!isMediaLoaded ? (
-                <VideoPoster
-                  title={item.title}
-                  date={item.date}
-                  label={`Load video for ${item.title}`}
-                  onClick={() => setIsMediaLoaded(true)}
-                />
-              ) : (
-                <>
-                  <video
-                    src={item.videoSrc}
-                    controls
-                    autoPlay
-                    playsInline
-                    preload="metadata"
-                    className="h-full w-full object-cover"
-                    title={item.title}
-                    onCanPlay={() => setIsVideoReady(true)}
-                  />
-                  {!isVideoReady && (
-                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/30">
-                      <span className="flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 text-sm font-medium text-white">
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                        Loading video
-                      </span>
-                    </div>
-                  )}
-                </>
+                <div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,rgba(2,6,23,0.06)_0%,rgba(2,6,23,0.15)_45%,rgba(2,6,23,0.35)_100%)]" />
+              ) : null}
+              {!isVideoReady && (
+                <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/25">
+                  <span className="flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 text-sm font-medium text-white">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Loading video
+                  </span>
+                </div>
               )}
             </>
           ) : item.videoId ? (
             <>
               {!isMediaLoaded ? (
-                <VideoPoster
-                  title={item.title}
-                  date={item.date}
-                  label={`Load YouTube video for ${item.title}`}
+                <button
+                  type="button"
                   onClick={() => setIsMediaLoaded(true)}
-                />
+                  className="absolute inset-0 z-10 flex h-full w-full items-end justify-start overflow-hidden text-left text-white"
+                  aria-label={`Load YouTube video for ${item.title}`}
+                >
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(132,204,22,0.24),transparent_34%),linear-gradient(135deg,#0f172a_0%,#111827_52%,#020617_100%)]" />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.06)_0%,rgba(2,6,23,0.12)_45%,rgba(2,6,23,0.82)_100%)]" />
+                  <div className="relative z-10 flex w-full flex-col gap-4 p-5 sm:p-6">
+                    <div className="flex items-center gap-2">
+                      <span className="rounded-full bg-white/12 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/90 ring-1 ring-white/15">
+                        Video
+                      </span>
+                      <span className="text-xs font-medium text-white/70">{item.date}</span>
+                    </div>
+                    <div className="max-w-[90%]">
+                      <h3 className="text-2xl font-semibold leading-tight sm:text-3xl">{item.title}</h3>
+                      <p className="mt-2 max-w-md text-sm leading-6 text-white/75">
+                        Tap to load and play this video.
+                      </p>
+                    </div>
+                    <div className="mt-1 flex items-center gap-3">
+                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-bits-green/90 text-white shadow-lg transition-transform duration-200 group-hover:scale-110">
+                        <Play className="ml-1 h-6 w-6 fill-current" />
+                      </span>
+                      <span className="text-sm font-semibold tracking-wide text-white/90">
+                        Open video
+                      </span>
+                    </div>
+                  </div>
+                </button>
               ) : (
                 <>
                   <iframe

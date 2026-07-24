@@ -187,6 +187,52 @@ const itemVariants = {
   },
 };
 
+function VideoPoster({
+  title,
+  date,
+  label,
+  onClick,
+}: {
+  title: string;
+  date: string;
+  label: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="absolute inset-0 z-10 flex h-full w-full items-end justify-start overflow-hidden text-left text-white"
+      aria-label={label}
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(132,204,22,0.24),transparent_34%),linear-gradient(135deg,#0f172a_0%,#111827_52%,#020617_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.06)_0%,rgba(2,6,23,0.12)_45%,rgba(2,6,23,0.82)_100%)]" />
+      <div className="relative z-10 flex w-full flex-col gap-4 p-5 sm:p-6">
+        <div className="flex items-center gap-2">
+          <span className="rounded-full bg-white/12 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/90 ring-1 ring-white/15">
+            Video
+          </span>
+          <span className="text-xs font-medium text-white/70">{date}</span>
+        </div>
+        <div className="max-w-[90%]">
+          <h3 className="text-2xl font-semibold leading-tight sm:text-3xl">{title}</h3>
+          <p className="mt-2 max-w-md text-sm leading-6 text-white/75">
+            Tap to load and play this video.
+          </p>
+        </div>
+        <div className="mt-1 flex items-center gap-3">
+          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-bits-green/90 text-white shadow-lg transition-transform duration-200 group-hover:scale-110">
+            <Play className="ml-1 h-6 w-6 fill-current" />
+          </span>
+          <span className="text-sm font-semibold tracking-wide text-white/90">
+            Open video
+          </span>
+        </div>
+      </div>
+    </button>
+  );
+}
+
 function NewsCard({ item, index }: { item: NewsItem; index: number }) {
   const hasImage = Boolean(item.image?.src);
   const [isMediaLoaded, setIsMediaLoaded] = useState(false);
@@ -204,20 +250,12 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
           {item.videoSrc ? (
             <>
               {!isMediaLoaded ? (
-                <button
-                  type="button"
+                <VideoPoster
+                  title={item.title}
+                  date={item.date}
+                  label={`Load video for ${item.title}`}
                   onClick={() => setIsMediaLoaded(true)}
-                  className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-slate-900/70 to-black/50 px-4 text-white transition-colors hover:from-slate-900/80 hover:to-black/60"
-                  aria-label={`Load video for ${item.title}`}
-                >
-                  <span className="flex h-16 w-16 items-center justify-center rounded-full bg-bits-green/90 text-white shadow-lg transition-transform hover:scale-110">
-                    <Play className="ml-1 h-7 w-7 fill-current" />
-                  </span>
-                  <span className="flex items-center gap-2 text-sm font-medium">
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    Tap to load video
-                  </span>
-                </button>
+                />
               ) : (
                 <>
                   <video
@@ -244,18 +282,12 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
           ) : item.videoId ? (
             <>
               {!isMediaLoaded ? (
-                <button
-                  type="button"
+                <VideoPoster
+                  title={item.title}
+                  date={item.date}
+                  label={`Load YouTube video for ${item.title}`}
                   onClick={() => setIsMediaLoaded(true)}
-                  className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black/30 px-4 text-white transition-colors hover:bg-black/40"
-                  aria-label={`Load YouTube video for ${item.title}`}
-                >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(132,204,22,0.22),transparent_38%),linear-gradient(135deg,#0f172a_0%,#111827_50%,#020617_100%)]" />
-                  <span className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-bits-green/90 text-white shadow-lg transition-transform hover:scale-110">
-                    <Play className="ml-1 h-7 w-7 fill-current" />
-                  </span>
-                  <span className="relative z-10 text-sm font-medium">Tap to load video</span>
-                </button>
+                />
               ) : (
                 <>
                   <iframe

@@ -4,8 +4,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useMemo } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useMemo, useRef } from "react";
+import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 
 type NewsItem = {
   title: string;
@@ -189,6 +189,15 @@ const itemVariants = {
 
 function NewsCard({ item, index }: { item: NewsItem; index: number }) {
   const hasImage = Boolean(item.image?.src);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handlePlay = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
 
   return (
     <motion.div variants={itemVariants}>
@@ -197,16 +206,31 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
         whileHover={{ y: -6, boxShadow: "0 20px 25px rgba(0, 0, 0, 0.12)", transition: { duration: 0.25, ease: "easeOut" } }}
         className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-[var(--bits-surface)] shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card-hover cursor-pointer dark:border-gray-800 dark:shadow-none dark:ring-1 dark:ring-gray-800 dark:hover:ring-bits-green/30"
       >
-        <div className="relative h-96 overflow-hidden bg-[var(--bits-surface-muted)]">
+        <div className="relative aspect-video w-full overflow-hidden bg-[var(--bits-surface-muted)]">
           {item.videoSrc ? (
-            <video
-              src={item.videoSrc}
-              controls
-              playsInline
-              preload="metadata"
-              className="h-full w-full object-contain"
-              title={item.title}
-            />
+            <>
+              <video
+                ref={videoRef}
+                src={item.videoSrc}
+                controls={isPlaying}
+                playsInline
+                preload="metadata"
+                className="h-full w-full object-cover"
+                title={item.title}
+              />
+              {!isPlaying && (
+                <button
+                  type="button"
+                  onClick={handlePlay}
+                  className="absolute inset-0 z-10 flex items-center justify-center bg-black/30 transition-colors hover:bg-black/40"
+                  aria-label={`Play ${item.title}`}
+                >
+                  <span className="flex h-16 w-16 items-center justify-center rounded-full bg-bits-green/90 text-white shadow-lg transition-transform hover:scale-110">
+                    <Play className="ml-1 h-7 w-7 fill-current" />
+                  </span>
+                </button>
+              )}
+            </>
           ) : item.videoId ? (
             <iframe
               src={`https://www.youtube.com/embed/${item.videoId}?rel=0`}

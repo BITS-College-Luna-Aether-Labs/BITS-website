@@ -202,6 +202,8 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
             <video
               src={item.videoSrc}
               controls
+              playsInline
+              preload="metadata"
               className="h-full w-full object-contain"
               title={item.title}
             />
@@ -231,7 +233,7 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
               </div>
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         </div>
 
         <div className="flex flex-1 flex-col justify-center p-7">

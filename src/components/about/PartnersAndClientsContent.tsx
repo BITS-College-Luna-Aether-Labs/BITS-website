@@ -19,7 +19,7 @@ const partners: Partner[] = [
     name: "MKS Addis",
     href: "https://mksaddis.com",
     logo: "/images/About-partner/Mk%20Adiss%20Logo.png",
-    description: "Software Development Company Partner",
+    description: "Software Development Company",
   },
   {
     name: "Bunna Bank",
@@ -31,7 +31,19 @@ const partners: Partner[] = [
     name: "Serianu",
     href: "https://serianu.com",
     logo: "/images/About-partner/serianu-logoo.png",
-    description: "Cyber Security Partner",
+    description: "Cyber Security Company",
+  },
+  {
+    name: "Custor",
+    href: "https://custor-eth.com/",
+    logo: "/images/About-partner/custor.gif",
+    description: "Information Technology and System Company",
+  },
+  {
+    name: "USI",
+    href: "https://usiafrica.com/",
+    logo: "/images/About-partner/USI-Logi.png",
+    description: "Information Technology and System Company",
   },
 ];
 

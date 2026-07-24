@@ -3,7 +3,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { BookOpen, ExternalLink, Library as LibraryIcon, Users, Laptop } from "lucide-react";
+import { BookOpen, ExternalLink, Library as LibraryIcon, Users } from "lucide-react";
 import { EASE_PREMIUM } from "@/lib/motion-presets";
 
 const fadeUp = {
@@ -83,31 +83,6 @@ export function LibraryContent() {
                     <p className="text-xs text-bits-muted">Per Facility</p>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Digital Library Card */}
-            <div className="rounded-[2rem] border border-emerald-900/15 bg-gradient-to-br from-emerald-50/80 via-[var(--bits-surface)] to-[var(--bits-surface)] p-8 shadow-sm dark:border-gray-700 dark:from-gray-900 dark:via-gray-900/80 dark:to-gray-900 sm:p-10">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-100/80 px-3 py-1.5 text-xs font-semibold text-bits-green-dark dark:bg-emerald-950 dark:text-emerald-300">
-                <Laptop className="h-4 w-4" />
-                Digital Access
-              </div>
-              <p className="text-base leading-8 text-bits-text sm:text-lg">
-                To complement the physical facilities, the college has established a digital library system that allows students and academic staff to access online resources conveniently. The digital library portal is available at:
-              </p>
-              <p className="mt-3 font-mono text-sm text-bits-green-dark dark:text-emerald-400 break-all font-semibold">
-                https://intranet.bitscollege.edu.et/library/
-              </p>
-
-              <div className="mt-8">
-                <a
-                  href="https://intranet.bitscollege.edu.et/library/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 rounded-full bg-bits-green px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-emerald-900/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-bits-green-dark active:translate-y-0"
-                >
-                  Visit Digital Library <ExternalLink className="h-4 w-4" />
-                </a>
               </div>
             </div>
           </motion.div>

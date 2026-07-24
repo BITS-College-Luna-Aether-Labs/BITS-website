@@ -60,7 +60,10 @@ export const FOOTER_QUICK_LINKS = [
     label: "Undergraduate Accreditation",
     href: "/who-we-are?section=accreditation",
   },
-  { label: "Graduate Accreditation", href: "/who-we-are?section=accreditation" },
+  {
+    label: "Graduate Accreditation",
+    href: "/who-we-are?section=accreditation",
+  },
 ];
 
 export const SOCIAL_LINKS = [

@@ -53,6 +53,10 @@ const PAGE_TITLES: Record<string, { title: string; description: string }> = {
     title: "Scholarship & Aid",
     description: "Scholarship opportunities and financial aid information.",
   },
+  tuition: {
+    title: "Tuition",
+    description: "Tuition and fee information.",
+  },
   "short-trainings": {
     title: "Professional Trainings",
     description: "Short-term professional training programs.",
@@ -64,10 +68,6 @@ const PAGE_TITLES: Record<string, { title: string; description: string }> = {
   "software-engineering": {
     title: "Software Engineering",
     description: "Undergraduate program in Software Engineering.",
-  },
-  tuition: {
-    title: "Tuition",
-    description: "Tuition and fee information.",
   },
   "undergraduate-accreditation": {
     title: "Undergraduate Accreditation",

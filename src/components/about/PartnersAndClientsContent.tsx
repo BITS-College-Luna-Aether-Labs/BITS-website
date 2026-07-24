@@ -37,7 +37,7 @@ const partners: Partner[] = [
     name: "Custor",
     href: "https://custor-eth.com/",
     logo: "/images/About-partner/custor.gif",
-    description: "Information Technology and System Company",
+    description: "Software Development Company",
   },
   {
     name: "USI",
@@ -80,7 +80,7 @@ function PartnerCard({
             transition: { delay: index * 0.09, duration: 0.55, ease: EASE_PREMIUM },
           }
         : {})}
-      className="group relative flex flex-col items-center overflow-hidden rounded-[26px] border border-emerald-900/12 bg-[var(--bits-surface)] p-8 shadow-[0_16px_38px_rgba(10,41,18,0.08)] transition-all duration-200 hover:-translate-y-1.5 hover:border-emerald-900/24 hover:shadow-[0_22px_52px_rgba(10,41,18,0.13)] dark:border-gray-800 dark:shadow-none dark:ring-1 dark:ring-gray-800 dark:hover:ring-bits-green/30"
+      className="group relative flex flex-col items-center overflow-hidden rounded-[26px] border border-emerald-900/12 bg-[var(--bits-surface)] p-8 shadow-[0_16px_38px_rgba(10,41,18,0.08)] transition-all duration-200 cursor-pointer hover:-translate-y-1.5 hover:border-bits-green/40 hover:shadow-[0_22px_52px_rgba(10,41,18,0.13)] dark:border-gray-800 dark:shadow-none dark:ring-1 dark:ring-gray-800 dark:hover:ring-bits-green/40"
     >
       {/* Decorative glow */}
       <div className="absolute inset-auto -bottom-7 -right-[18px] h-[120px] w-[120px] rounded-full bg-[radial-gradient(circle,rgba(125,194,67,0.12),transparent_68%)] pointer-events-none dark:opacity-30" />
@@ -102,6 +102,9 @@ function PartnerCard({
         <span className="mt-6 text-sm font-semibold text-bits-heading">
           {partner.name}
         </span>
+        <span className="mt-2 text-xs text-bits-green opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+          Visit →
+        </span>
       </div>
 
       {/* Overlay – light green gradient (no blue/teal) */}
@@ -120,6 +123,9 @@ function PartnerCard({
         <p className="text-2xl font-semibold leading-tight text-white sm:text-3xl lg:text-4xl">
           {partner.description}
         </p>
+        <div className="mt-6 inline-flex items-center gap-3 rounded-full border border-white bg-white px-8 py-4 text-base font-bold text-green-700 shadow-lg">
+          Visit Website →
+        </div>
         {/* Optional small badge */}
         <div className="absolute right-4 top-4 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/90 backdrop-blur-sm">
           Partner

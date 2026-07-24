@@ -3,7 +3,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { BookOpen, ExternalLink, Library as LibraryIcon, Users } from "lucide-react";
+import { BookOpen, ExternalLink, Library as LibraryIcon } from "lucide-react";
 import { EASE_PREMIUM } from "@/lib/motion-presets";
 
 const fadeUp = {
@@ -62,28 +62,6 @@ export function LibraryContent() {
               <p className="text-base leading-8 text-bits-text sm:text-lg">
                 BITS College maintains a structured library system consisting of both physical and digital resources to enhance teaching, learning, and research activities. The college has two standard libraries located on the 2nd and 4th floors, with each facility having a maximum seating capacity of 80 students. These libraries provide dedicated study areas and access to essential academic materials.
               </p>
-
-              {/* Stats Highlights */}
-              <div className="mt-8 grid grid-cols-2 gap-4 border-t border-slate-100 pt-6 dark:border-gray-800">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-100/60 text-bits-green-dark dark:bg-emerald-950 dark:text-emerald-400">
-                    <LibraryIcon className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="text-xl font-bold text-bits-heading">2 Libraries</p>
-                    <p className="text-xs text-bits-muted">2nd & 4th Floors</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-100/60 text-bits-green-dark dark:bg-emerald-950 dark:text-emerald-400">
-                    <Users className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="text-xl font-bold text-bits-heading">80 Capacity</p>
-                    <p className="text-xs text-bits-muted">Per Facility</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </motion.div>
 

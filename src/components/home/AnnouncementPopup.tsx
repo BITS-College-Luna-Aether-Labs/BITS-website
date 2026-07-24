@@ -184,7 +184,7 @@ export function AnnouncementPopup() {
                   </motion.p>
 
                   <motion.div
-                    className="flex flex-wrap items-center gap-2 pt-0.5"
+                    className="flex flex-col items-center gap-3 pt-2"
                     initial={enabled ? { opacity: 0, y: 10 } : false}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.45, delay: 0.25, ease: "easeOut" }}
@@ -192,7 +192,7 @@ export function AnnouncementPopup() {
                     <Link
                       href="/college-news"
                       onClick={() => setOpen(false)}
-                      className="btn-solid-green inline-flex items-center justify-center !px-7 !py-3 !text-sm font-bold shadow-lg shadow-bits-green/25 transition-transform hover:scale-105 active:scale-95"
+                      className="btn-solid-green inline-flex min-w-[190px] items-center justify-center !px-8 !py-3.5 !text-base font-bold shadow-lg shadow-bits-green/25 transition-transform hover:scale-105 active:scale-95"
                     >
                       Read More
                     </Link>

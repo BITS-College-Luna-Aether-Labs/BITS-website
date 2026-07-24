@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { Sparkles, GraduationCap, X, PartyPopper, ScrollText } from "lucide-react";
 import { useMotionSafe } from "@/hooks/useMotionSafe";
 import { EASE_PREMIUM, SPRING_GENTLE } from "@/lib/motion-presets";
@@ -188,15 +189,15 @@ export function AnnouncementPopup() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.45, delay: 0.25, ease: "easeOut" }}
                   >
-                    <button
-                      type="button"
+                    <Link
+                      href="/college-news"
                       onClick={() => setOpen(false)}
-                      className="btn-solid-green !px-4 !py-1.5 !text-xs"
+                      className="btn-solid-green inline-flex items-center justify-center !px-7 !py-3 !text-sm font-bold shadow-lg shadow-bits-green/25 transition-transform hover:scale-105 active:scale-95"
                     >
-                      Close
-                    </button>
+                      Read More
+                    </Link>
                     <span className="text-xs text-bits-muted dark:text-slate-400">
-                      Tap close to continue to the site.
+                      Explore the graduation story and latest news.
                     </span>
                   </motion.div>
                 </div>

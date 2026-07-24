@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState, useMemo } from "react";
-import { ChevronLeft, ChevronRight, Loader2, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight, Loader2, Pause, Play } from "lucide-react";
 
 type NewsItem = {
   title: string;
@@ -19,6 +19,14 @@ type NewsItem = {
 };
 
 const newsItems: NewsItem[] = [
+  {
+    title: "BITS College Celebrates the Graduation of the Class of 2026",
+    date: "July 19, 2026 GC",
+    excerpt:
+      "BITS College celebrated the graduation of the Class of 2026, marking a memorable milestone for students in the Undergraduate Software Engineering and Postgraduate IT Management programs.\n\nThe graduation ceremony honored the graduates' academic achievements, dedication, and perseverance throughout their studies. The event brought together students, faculty, families, and invited guests to recognize this important accomplishment and celebrate the graduates as they embark on the next chapter of their academic and professional journeys.",
+    videoSrc: "/images/News-Events/graduation.mp4",
+    noButton: true,
+  },
   {
     title: "Data Analytics Workshop by the ITS Department",
     date: "March 22, 2025",
@@ -191,9 +199,25 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
   const hasImage = Boolean(item.image?.src);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [isMediaLoaded, setIsMediaLoaded] = useState(false);
   const [isVideoReady, setIsVideoReady] = useState(false);
-  const [isIframeReady, setIsIframeReady] = useState(false);
+
+  const pauseOtherVideos = (currentVideo: HTMLVideoElement) => {
+    document.querySelectorAll<HTMLVideoElement>("video[data-news-video]").forEach((video) => {
+      if (video !== currentVideo) video.pause();
+    });
+  };
+
+  const toggleVideo = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      pauseOtherVideos(video);
+      void video.play();
+    } else {
+      video.pause();
+    }
+  };
 
   return (
     <motion.div variants={itemVariants}>
@@ -208,109 +232,56 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
               <video
                 ref={videoRef}
                 src={item.videoSrc}
-                controls={isMediaLoaded}
+                data-news-video
                 playsInline
-                preload="metadata"
-                className="h-full w-full object-cover"
+                preload="auto"
+                className="h-full w-full cursor-pointer object-cover"
                 title={item.title}
-                onCanPlay={() => setIsVideoReady(true)}
-                onPlay={() => setIsVideoPlaying(true)}
-                onPause={() => setIsVideoPlaying(false)}
-                onClick={() => {
-                  const video = videoRef.current;
-                  if (!video) return;
-                  if (video.paused) {
-                    void video.play();
-                  } else {
-                    video.pause();
-                  }
-                  setIsMediaLoaded(true);
+                onLoadedData={() => setIsVideoReady(true)}
+                onPlay={() => {
+                  pauseOtherVideos(videoRef.current!);
+                  setIsVideoPlaying(true);
                 }}
+                onPause={() => setIsVideoPlaying(false)}
+                onEnded={() => setIsVideoPlaying(false)}
+                onClick={toggleVideo}
               />
-              {!isVideoPlaying && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    const video = videoRef.current;
-                    if (!video) return;
-                    setIsMediaLoaded(true);
-                    void video.play();
-                  }}
-                  className="absolute inset-0 z-10 flex items-center justify-center bg-black/20 transition-colors hover:bg-black/30"
-                  aria-label={`Play or resume ${item.title}`}
-                >
-                  <span className="flex h-16 w-16 items-center justify-center rounded-full bg-bits-green/90 text-white shadow-lg transition-transform hover:scale-110">
-                    <Play className="ml-1 h-7 w-7 fill-current" />
+              <button
+                type="button"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  toggleVideo();
+                }}
+                className={`group/video absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition-all duration-200 ${
+                  isVideoPlaying
+                    ? "pointer-events-none opacity-0 group-hover:pointer-events-auto group-hover:opacity-100"
+                    : "opacity-100"
+                }`}
+                aria-label={`${isVideoPlaying ? "Pause" : "Play"} ${item.title}`}
+              >
+                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-bits-green/90 text-white shadow-lg transition-transform hover:scale-110">
+                  {isVideoPlaying ? <Pause className="h-7 w-7 fill-current" /> : <Play className="ml-1 h-7 w-7 fill-current" />}
                   </span>
-                </button>
-              )}
+              </button>
               {!isVideoReady && (
-                <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/25">
+                <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-black/25">
                   <span className="flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 text-sm font-medium text-white">
                     <Loader2 className="h-4 w-4 animate-spin" />
                     Loading video
                   </span>
                 </div>
               )}
-              {!isMediaLoaded ? (
-                <div className="pointer-events-none absolute inset-0 z-[5] bg-[linear-gradient(180deg,rgba(2,6,23,0.06)_0%,rgba(2,6,23,0.15)_45%,rgba(2,6,23,0.35)_100%)]" />
-              ) : null}
             </>
           ) : item.videoId ? (
             <>
-              {!isMediaLoaded ? (
-                <button
-                  type="button"
-                  onClick={() => setIsMediaLoaded(true)}
-                  className="absolute inset-0 z-10 flex h-full w-full items-end justify-start overflow-hidden text-left text-white"
-                  aria-label={`Load YouTube video for ${item.title}`}
-                >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(132,204,22,0.24),transparent_34%),linear-gradient(135deg,#0f172a_0%,#111827_52%,#020617_100%)]" />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.06)_0%,rgba(2,6,23,0.12)_45%,rgba(2,6,23,0.82)_100%)]" />
-                  <div className="relative z-10 flex w-full flex-col gap-4 p-5 sm:p-6">
-                    <div className="flex items-center gap-2">
-                      <span className="rounded-full bg-white/12 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/90 ring-1 ring-white/15">
-                        Video
-                      </span>
-                      <span className="text-xs font-medium text-white/70">{item.date}</span>
-                    </div>
-                    <div className="max-w-[90%]">
-                      <h3 className="text-2xl font-semibold leading-tight sm:text-3xl">{item.title}</h3>
-                      <p className="mt-2 max-w-md text-sm leading-6 text-white/75">
-                        Tap to load and play this video.
-                      </p>
-                    </div>
-                    <div className="mt-1 flex items-center gap-3">
-                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-bits-green/90 text-white shadow-lg transition-transform duration-200 group-hover:scale-110">
-                        <Play className="ml-1 h-6 w-6 fill-current" />
-                      </span>
-                      <span className="text-sm font-semibold tracking-wide text-white/90">
-                        Open video
-                      </span>
-                    </div>
-                  </div>
-                </button>
-              ) : (
-                <>
-                  <iframe
-                    src={`https://www.youtube.com/embed/${item.videoId}?rel=0&modestbranding=1`}
-                    title={item.title}
-                    loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="h-full w-full"
-                    onLoad={() => setIsIframeReady(true)}
-                  />
-                  {!isIframeReady && (
-                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/30">
-                      <span className="flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 text-sm font-medium text-white">
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                        Loading embed
-                      </span>
-                    </div>
-                  )}
-                </>
-              )}
+              <iframe
+                src={`https://www.youtube.com/embed/${item.videoId}?rel=0&modestbranding=1&enablejsapi=1`}
+                title={item.title}
+                loading="eager"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="h-full w-full"
+              />
             </>
           ) : hasImage ? (
             <Image
@@ -350,7 +321,7 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
             {item.title}
           </h3>
 
-          <p className="mt-3 line-clamp-4 text-base leading-relaxed text-bits-text">
+          <p className={`mt-3 text-base leading-relaxed text-bits-text ${item.noButton ? "whitespace-pre-line" : "line-clamp-4"}`}>
             {item.excerpt}
           </p>
 

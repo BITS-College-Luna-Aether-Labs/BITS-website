@@ -4,7 +4,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useMemo } from "react";
+import { useRef, useState, useMemo } from "react";
 import { ChevronLeft, ChevronRight, Loader2, Play } from "lucide-react";
 
 type NewsItem = {
@@ -189,6 +189,8 @@ const itemVariants = {
 
 function NewsCard({ item, index }: { item: NewsItem; index: number }) {
   const hasImage = Boolean(item.image?.src);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isMediaLoaded, setIsMediaLoaded] = useState(false);
   const [isVideoReady, setIsVideoReady] = useState(false);
   const [isIframeReady, setIsIframeReady] = useState(false);
@@ -204,21 +206,44 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
           {item.videoSrc ? (
             <>
               <video
+                ref={videoRef}
                 src={item.videoSrc}
                 controls={isMediaLoaded}
-                autoPlay={!isMediaLoaded}
-                muted={!isMediaLoaded}
-                loop={!isMediaLoaded}
                 playsInline
-                preload={isMediaLoaded ? "metadata" : "auto"}
+                preload="metadata"
                 className="h-full w-full object-cover"
                 title={item.title}
                 onCanPlay={() => setIsVideoReady(true)}
-                onClick={() => setIsMediaLoaded(true)}
+                onPlay={() => setIsVideoPlaying(true)}
+                onPause={() => setIsVideoPlaying(false)}
+                onClick={() => {
+                  const video = videoRef.current;
+                  if (!video) return;
+                  if (video.paused) {
+                    void video.play();
+                  } else {
+                    video.pause();
+                  }
+                  setIsMediaLoaded(true);
+                }}
               />
-              {!isMediaLoaded ? (
-                <div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,rgba(2,6,23,0.06)_0%,rgba(2,6,23,0.15)_45%,rgba(2,6,23,0.35)_100%)]" />
-              ) : null}
+              {!isVideoPlaying && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    const video = videoRef.current;
+                    if (!video) return;
+                    setIsMediaLoaded(true);
+                    void video.play();
+                  }}
+                  className="absolute inset-0 z-10 flex items-center justify-center bg-black/20 transition-colors hover:bg-black/30"
+                  aria-label={`Play or resume ${item.title}`}
+                >
+                  <span className="flex h-16 w-16 items-center justify-center rounded-full bg-bits-green/90 text-white shadow-lg transition-transform hover:scale-110">
+                    <Play className="ml-1 h-7 w-7 fill-current" />
+                  </span>
+                </button>
+              )}
               {!isVideoReady && (
                 <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/25">
                   <span className="flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 text-sm font-medium text-white">
@@ -227,6 +252,9 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
                   </span>
                 </div>
               )}
+              {!isMediaLoaded ? (
+                <div className="pointer-events-none absolute inset-0 z-[5] bg-[linear-gradient(180deg,rgba(2,6,23,0.06)_0%,rgba(2,6,23,0.15)_45%,rgba(2,6,23,0.35)_100%)]" />
+              ) : null}
             </>
           ) : item.videoId ? (
             <>

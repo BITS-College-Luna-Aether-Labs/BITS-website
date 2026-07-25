@@ -124,7 +124,7 @@ export default async function RootLayout({
                   name: "Bachelor of Science in Information Technology and Systems",
                   description: "Undergraduate program focused on IT infrastructure, systems analysis, and network management.",
                   provider: { "@type": "EducationalOrganization", name: SITE.name },
-                  url: `${SITE.url}/information-technology-and-systems`,
+                  url: `${SITE.url}/undergraduate-program`,
                 },
               ],
             }),

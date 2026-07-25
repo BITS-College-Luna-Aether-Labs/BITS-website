@@ -4,7 +4,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Loader2, Pause, Play } from "lucide-react";
 
 type NewsItem = {
@@ -179,35 +179,81 @@ const newsItems: NewsItem[] = [
 ];
 
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.15 },
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 1, y: 12 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.55, ease: "easeOut" },
+    transition: { duration: 0.45, ease: "easeOut" },
   },
 };
 
-function NewsCard({ item, index }: { item: NewsItem; index: number }) {
-  const hasImage = Boolean(item.image?.src);
+function YouTubeFacade({ videoId, title }: { videoId: string; title: string }) {
+  const [activated, setActivated] = useState(false);
+
+  if (activated) {
+    return (
+      <iframe
+        src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&autoplay=1`}
+        title={title}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        className="h-full w-full"
+      />
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={() => setActivated(true)}
+      className="relative h-full w-full cursor-pointer"
+      aria-label={`Play ${title}`}
+    >
+      {/* Native img avoids /_next/image proxy hop for third-party thumbs */}
+      <img
+        src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <span className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full">
+        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-bits-green/90 text-white shadow-lg transition-transform hover:scale-110">
+          <Play className="ml-1 h-7 w-7 fill-current" />
+        </span>
+      </span>
+    </button>
+  );
+}
+
+function LocalVideo({ src, title }: { src: string; title: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isVideoReady, setIsVideoReady] = useState(false);
+  const [pendingPlay, setPendingPlay] = useState(false);
 
-  const pauseOtherVideos = (currentVideo: HTMLVideoElement) => {
+  const pauseOtherVideos = useCallback((currentVideo: HTMLVideoElement) => {
     document.querySelectorAll<HTMLVideoElement>("video[data-news-video]").forEach((video) => {
       if (video !== currentVideo) video.pause();
     });
-  };
+  }, []);
 
   const toggleVideo = () => {
+    if (!shouldLoad) {
+      setShouldLoad(true);
+      setPendingPlay(true);
+      return;
+    }
+
     const video = videoRef.current;
     if (!video) return;
 
@@ -219,6 +265,93 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
     }
   };
 
+  useEffect(() => {
+    if (!shouldLoad || !pendingPlay) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    const tryPlay = () => {
+      pauseOtherVideos(video);
+      void video.play();
+      setPendingPlay(false);
+    };
+
+    if (video.readyState >= 2) {
+      tryPlay();
+      return;
+    }
+
+    video.addEventListener("loadeddata", tryPlay, { once: true });
+    return () => video.removeEventListener("loadeddata", tryPlay);
+  }, [shouldLoad, pendingPlay, pauseOtherVideos]);
+
+  return (
+    <>
+      {shouldLoad ? (
+        <video
+          ref={videoRef}
+          src={src}
+          data-news-video
+          playsInline
+          preload="metadata"
+          className="h-full w-full cursor-pointer object-cover"
+          title={title}
+          onLoadedData={() => setIsVideoReady(true)}
+          onPlay={() => {
+            if (videoRef.current) pauseOtherVideos(videoRef.current);
+            setIsVideoPlaying(true);
+          }}
+          onPause={() => setIsVideoPlaying(false)}
+          onEnded={() => setIsVideoPlaying(false)}
+          onClick={toggleVideo}
+        />
+      ) : (
+        <div
+          className="h-full w-full cursor-pointer bg-[var(--bits-surface-muted)]"
+          onClick={toggleVideo}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              toggleVideo();
+            }
+          }}
+          role="button"
+          tabIndex={0}
+          aria-label={`Play ${title}`}
+        />
+      )}
+      <button
+        type="button"
+        onClick={(event) => {
+          event.stopPropagation();
+          toggleVideo();
+        }}
+        className={`group/video absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition-all duration-200 ${
+          isVideoPlaying
+            ? "pointer-events-none opacity-0 group-hover:pointer-events-auto group-hover:opacity-100"
+            : "opacity-100"
+        }`}
+        aria-label={`${isVideoPlaying ? "Pause" : "Play"} ${title}`}
+      >
+        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-bits-green/90 text-white shadow-lg transition-transform hover:scale-110">
+          {isVideoPlaying ? <Pause className="h-7 w-7 fill-current" /> : <Play className="ml-1 h-7 w-7 fill-current" />}
+        </span>
+      </button>
+      {shouldLoad && !isVideoReady && (
+        <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-black/25">
+          <span className="flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 text-sm font-medium text-white">
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Loading video
+          </span>
+        </div>
+      )}
+    </>
+  );
+}
+
+function NewsCard({ item, index }: { item: NewsItem; index: number }) {
+  const hasImage = Boolean(item.image?.src);
+
   return (
     <motion.div variants={itemVariants}>
       <motion.div
@@ -228,69 +361,17 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
       >
         <div className="relative aspect-video w-full overflow-hidden bg-[var(--bits-surface-muted)]">
           {item.videoSrc ? (
-            <>
-              <video
-                ref={videoRef}
-                src={item.videoSrc}
-                data-news-video
-                playsInline
-                preload="auto"
-                className="h-full w-full cursor-pointer object-cover"
-                title={item.title}
-                onLoadedData={() => setIsVideoReady(true)}
-                onPlay={() => {
-                  pauseOtherVideos(videoRef.current!);
-                  setIsVideoPlaying(true);
-                }}
-                onPause={() => setIsVideoPlaying(false)}
-                onEnded={() => setIsVideoPlaying(false)}
-                onClick={toggleVideo}
-              />
-              <button
-                type="button"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  toggleVideo();
-                }}
-                className={`group/video absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition-all duration-200 ${
-                  isVideoPlaying
-                    ? "pointer-events-none opacity-0 group-hover:pointer-events-auto group-hover:opacity-100"
-                    : "opacity-100"
-                }`}
-                aria-label={`${isVideoPlaying ? "Pause" : "Play"} ${item.title}`}
-              >
-                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-bits-green/90 text-white shadow-lg transition-transform hover:scale-110">
-                  {isVideoPlaying ? <Pause className="h-7 w-7 fill-current" /> : <Play className="ml-1 h-7 w-7 fill-current" />}
-                  </span>
-              </button>
-              {!isVideoReady && (
-                <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-black/25">
-                  <span className="flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 text-sm font-medium text-white">
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    Loading video
-                  </span>
-                </div>
-              )}
-            </>
+            <LocalVideo src={item.videoSrc} title={item.title} />
           ) : item.videoId ? (
-            <>
-              <iframe
-                src={`https://www.youtube.com/embed/${item.videoId}?rel=0&modestbranding=1&enablejsapi=1`}
-                title={item.title}
-                loading="eager"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="h-full w-full"
-              />
-            </>
+            <YouTubeFacade videoId={item.videoId} title={item.title} />
           ) : hasImage ? (
             <Image
               src={item.image!.src}
               alt={item.image!.alt}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              loading={index < 2 ? "eager" : "lazy"}
-              priority={index < 2}
+              loading={index < 1 ? "eager" : "lazy"}
+              priority={index < 1}
               className="object-cover transition duration-500 group-hover:scale-110"
             />
           ) : (
@@ -317,9 +398,9 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
             <span className="text-sm font-semibold text-bits-green-dark">{item.date}</span>
           </div>
 
-          <h3 className="break-words text-3xl font-bold text-bits-heading transition-colors duration-300 group-hover:text-bits-green">
+          <h2 className="break-words text-3xl font-bold text-bits-heading transition-colors duration-300 group-hover:text-bits-green">
             {item.title}
-          </h3>
+          </h2>
 
           <p className={`mt-3 text-base leading-relaxed text-bits-text ${item.noButton ? "whitespace-pre-line" : "line-clamp-4"}`}>
             {item.excerpt}
@@ -333,6 +414,7 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
                 target={item.href.startsWith("http") ? "_blank" : undefined}
                 rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
               >
+                <span className="sr-only">{item.title}: </span>
                 Read More
               </Link>
             </div>
@@ -405,6 +487,7 @@ export function NewsEventsContent() {
     () => newsItems.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE),
     [page]
   );
+
   return (
     <div className="min-h-screen bg-[var(--bits-page)] text-bits-heading">
       <div id="content">
@@ -414,12 +497,8 @@ export function NewsEventsContent() {
           <div className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-emerald-200 mix-blend-multiply opacity-20 blur-3xl dark:bg-bits-green-dark/10 dark:opacity-30" />
 
           <div className="relative mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="text-center"
-            >
+            {/* Static hero — opacity must stay 1 for LCP (Framer initial:0 blocked paint for ~17s) */}
+            <div className="text-center">
               <h1 className="text-4xl font-bold tracking-tight text-bits-heading sm:text-5xl lg:text-6xl">
                 <span className="bg-gradient-to-r from-lime-700 to-emerald-700 bg-clip-text text-transparent dark:from-bits-green dark:to-bits-gold-light">
                   News & Events
@@ -428,7 +507,7 @@ export function NewsEventsContent() {
               <p className="mx-auto mt-5 max-w-2xl text-lg leading-7 text-bits-text">
                 Stay updated with the latest happenings at BITS College. Discover workshops, hackathons, achievements, and inspiring stories from our community.
               </p>
-            </motion.div>
+            </div>
           </div>
         </section>
 
@@ -439,11 +518,11 @@ export function NewsEventsContent() {
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              exit={{ opacity: 0, y: -12, transition: { duration: 0.2 } }}
+              exit={{ opacity: 1, y: -8, transition: { duration: 0.15 } }}
               className="grid gap-10 sm:grid-cols-2"
             >
-              {visibleItems.map((item) => (
-                <NewsCard key={`${item.title}-${item.date}`} item={item} index={0} />
+              {visibleItems.map((item, index) => (
+                <NewsCard key={`${item.title}-${item.date}`} item={item} index={index} />
               ))}
             </motion.div>
           </AnimatePresence>

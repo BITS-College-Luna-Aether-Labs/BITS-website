@@ -116,7 +116,7 @@ export function GetInTouchSection() {
                   key={`${card.type}-${card.label}`}
                   className={`flex w-full justify-center px-2 ${index === 1 ? "md:px-0" : ""}`}
                   variants={{
-                    hidden: { opacity: 0, y: 32, scale: 0.93 },
+                    hidden: { opacity: 1, y: 16, scale: 0.98 },
                     visible: { opacity: 1, y: 0, scale: 1, transition: SPRING_GENTLE },
                   }}
                 >

@@ -6,7 +6,7 @@ import { Sparkles, ChevronRight, Users, GraduationCap } from "lucide-react";
 import { EASE_PREMIUM } from "@/lib/motion-presets";
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { SECTIONS } from "@/components/about/who-we-are/data";
+import { SECTIONS, ACCREDITATION_ITEMS } from "@/components/about/who-we-are/data";
 import {
   OverviewTab,
   MissionTab,
@@ -34,6 +34,14 @@ function WhoWeAreContentInner() {
     if (section && SECTIONS.some((s) => s.id === section)) {
       setActiveSection(section);
     }
+
+    const doc = searchParams.get("doc");
+    if (section === "accreditation" && doc) {
+      const match = ACCREDITATION_ITEMS.find((item) =>
+        item.title.toLowerCase().includes(doc.toLowerCase())
+      );
+      if (match) setSelectedPdf(match.pdfUrl);
+    }
   }, [searchParams]);
 
   const tabContent: Record<string, React.ReactNode> = {
@@ -49,9 +57,9 @@ function WhoWeAreContentInner() {
       <section className="relative overflow-hidden border-b border-emerald-950/5 bg-[radial-gradient(circle_at_top_left,rgba(125,194,67,0.08),transparent_35%),linear-gradient(180deg,var(--bits-surface),var(--bits-surface-muted))]">
         <div className="mx-auto max-w-site px-4 pt-24 pb-8 sm:px-6 lg:px-8 lg:pt-28 lg:pb-10">
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 1, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: EASE_PREMIUM }}
+            transition={{ duration: 0.45, ease: EASE_PREMIUM }}
             className="max-w-3xl"
           >
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-[var(--bits-surface)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-bits-green shadow-sm">

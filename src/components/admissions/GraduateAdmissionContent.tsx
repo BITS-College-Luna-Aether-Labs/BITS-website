@@ -18,7 +18,7 @@ export function GraduateAdmissionContent() {
     <div className="min-h-screen bg-[var(--bits-page)] text-bits-heading">
       <section className="mx-auto max-w-site px-4 pt-24 pb-16 sm:px-6 lg:px-8 lg:pt-32 lg:pb-24">
         <motion.article
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 1, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="group overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_60px_-28px_rgba(15,23,42,0.28)]"

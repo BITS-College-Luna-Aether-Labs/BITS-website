@@ -12,7 +12,7 @@ const CONFETTI_COLORS = ["#7DC243", "#d4af37", "#b48c1e", "#ffffff", "#6aad38"];
 
 function ConfettiBurst() {
   const particles = useMemo(() =>
-    Array.from({ length: 80 }, (_, i) => ({
+    Array.from({ length: 28 }, (_, i) => ({
       id: i,
       color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
       size: 10 + Math.random() * 18,
@@ -75,9 +75,26 @@ export function AnnouncementPopup() {
 
   useEffect(() => {
     const alreadyShown = sessionStorage.getItem(POPUP_STORAGE_KEY);
-    if (!alreadyShown) {
-      setOpen(true);
+    if (alreadyShown) return;
+
+    // Defer until after first paint / idle so popup JS does not compete with LCP
+    let idleId: number | undefined;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+    const show = () => setOpen(true);
+
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      idleId = window.requestIdleCallback(show, { timeout: 2800 });
+    } else {
+      timeoutId = setTimeout(show, 1800);
     }
+
+    return () => {
+      if (idleId !== undefined && "cancelIdleCallback" in window) {
+        window.cancelIdleCallback(idleId);
+      }
+      if (timeoutId !== undefined) clearTimeout(timeoutId);
+    };
   }, []);
 
   useEffect(() => {
@@ -194,6 +211,7 @@ export function AnnouncementPopup() {
                       onClick={() => setOpen(false)}
                       className="btn-solid-green inline-flex min-w-[190px] items-center justify-center !px-8 !py-3.5 !text-base font-bold shadow-lg shadow-bits-green/25 transition-transform hover:scale-105 active:scale-95"
                     >
+                      <span className="sr-only">College news: </span>
                       Read More
                     </Link>
                     <span className="text-xs text-bits-muted dark:text-slate-400">

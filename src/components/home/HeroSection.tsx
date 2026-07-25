@@ -10,8 +10,7 @@ import { EASE_PREMIUM, SPRING_GENTLE } from "@/lib/motion-presets";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 
 function HeroContent({ animate }: { animate?: boolean }) {
-  const { hoverScaleSm, tapSm, on } = useInteractionMotion();
-  const Cta = animate ? motion.a : "a";
+  const { on } = useInteractionMotion();
 
   return (
     <>
@@ -101,10 +100,14 @@ function HeroImage({ animate }: { animate?: boolean }) {
         <Image
           src="/images/hero-landingpage.png"
           alt="BITS College landing page hero"
-          width={1600}
-          height={1066}
+          width={640}
+          height={426}
           priority
-          className="h-auto w-full max-w-[157px] object-contain sm:max-w-[190px] md:max-w-[224px] lg:max-w-[246px]" style={{ transform: "scaleX(2.106) scaleY(2.016)" }}
+          fetchPriority="high"
+          sizes="(max-width: 640px) 330px, (max-width: 1024px) 470px, 520px"
+          quality={70}
+          className="h-auto w-full max-w-[157px] object-contain sm:max-w-[190px] md:max-w-[224px] lg:max-w-[246px]"
+          style={{ transform: "scaleX(2.106) scaleY(2.016)" }}
         />
       </motion.div>
     </>
@@ -121,35 +124,34 @@ export function HeroSection() {
     >
       <div className="site-container relative pb-8 pt-10 md:pb-12 md:pt-16 lg:pt-20">
         <div className="grid items-center gap-7 lg:grid-cols-2 lg:gap-10">
-          {enabled ? (
-            <motion.div
-              className="z-10 max-w-xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ ...SPRING_GENTLE, delay: 0.1 }}
-            >
-              <HeroContent animate />
-            </motion.div>
-          ) : (
-            <div className="z-10 max-w-xl">
+          {/* Keep opacity at 1 so LCP/FCP text is not delayed by Framer SSR initial styles */}
+          <div className="z-10 max-w-xl">
+            {enabled ? (
+              <motion.div
+                initial={{ opacity: 1, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ ...SPRING_GENTLE, delay: 0.05 }}
+              >
+                <HeroContent animate />
+              </motion.div>
+            ) : (
               <HeroContent />
-            </div>
-          )}
+            )}
+          </div>
 
-          {enabled ? (
-            <motion.div
-              className="relative flex justify-center lg:justify-end"
-              initial={{ opacity: 0, x: 32 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ ...SPRING_GENTLE, delay: 0.25 }}
-            >
-              <HeroImage animate />
-            </motion.div>
-          ) : (
-            <div className="relative flex justify-center lg:justify-end">
+          <div className="relative flex justify-center lg:justify-end">
+            {enabled ? (
+              <motion.div
+                initial={{ opacity: 1, x: 16 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ ...SPRING_GENTLE, delay: 0.1 }}
+              >
+                <HeroImage animate />
+              </motion.div>
+            ) : (
               <HeroImage />
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
       <WaveDivider />

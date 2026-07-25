@@ -12,7 +12,8 @@ const config: Config = {
       colors: {
         bits: {
           green: "#7DC243",
-          "green-dark": "#6aad38",
+          "green-dark": "#3f6b1c",
+          "green-solid": "#4a7c28",
           gold: "#b48c1e",
           "gold-light": "#d4af37",
           gray: "#54595F",

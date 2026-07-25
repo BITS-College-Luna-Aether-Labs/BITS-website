@@ -65,6 +65,7 @@ function PartnerCard({
   };
 
   const show = showOverlay || touched;
+  const isGif = partner.logo.toLowerCase().endsWith(".gif");
 
   const Card = enabled ? motion.a : "a";
 
@@ -75,9 +76,10 @@ function PartnerCard({
       rel="noopener noreferrer"
       {...(enabled
         ? {
-            initial: { opacity: 0, y: 24 },
+            // Keep opacity at 1 — Framer initial:0 caused ~9s LCP element delay / SI 17s
+            initial: { opacity: 1, y: 12 },
             animate: { opacity: 1, y: 0 },
-            transition: { delay: index * 0.09, duration: 0.55, ease: EASE_PREMIUM },
+            transition: { delay: index * 0.05, duration: 0.4, ease: EASE_PREMIUM },
           }
         : {})}
       className="group relative flex flex-col items-center overflow-hidden rounded-[26px] border border-emerald-900/12 bg-[var(--bits-surface)] p-8 shadow-[0_16px_38px_rgba(10,41,18,0.08)] transition-all duration-200 cursor-pointer hover:-translate-y-1.5 hover:border-bits-green/40 hover:shadow-[0_22px_52px_rgba(10,41,18,0.13)] dark:border-gray-800 dark:shadow-none dark:ring-1 dark:ring-gray-800 dark:hover:ring-bits-green/40"
@@ -96,6 +98,9 @@ function PartnerCard({
             alt={partner.name}
             width={120}
             height={120}
+            sizes="128px"
+            loading={index < 2 ? "eager" : "lazy"}
+            unoptimized={isGif}
             className="h-full w-full object-contain"
           />
         </div>
@@ -143,9 +148,9 @@ export function PartnersAndClientsContent() {
       <section className="mx-auto max-w-site px-4 pt-28 pb-[42px] sm:px-6 lg:px-8 lg:pt-32">
         {enabled ? (
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 1, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: EASE_PREMIUM }}
+            transition={{ duration: 0.45, ease: EASE_PREMIUM }}
           >
             <h1 className="text-[clamp(2.2rem,4vw,4.2rem)] font-semibold leading-[1.02] tracking-tight text-bits-green-dark">
               Partners & Clients

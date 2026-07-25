@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useInteractionMotion } from "@/hooks/useInteractionMotion";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { APPLY_URL, NAV_ITEMS } from "@/lib/constants/navigation";
+import { APPLY_URL, NAV_ITEMS, isActiveHref } from "@/lib/constants/navigation";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { SPRING_GENTLE, EASE_PREMIUM } from "@/lib/motion-presets";
 
@@ -83,6 +83,8 @@ function NavDropdown({
   const hoverTimer = useRef<number | undefined>(undefined);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLUListElement>(null);
+  const rootRef = useRef<HTMLLIElement>(null);
+  const menuId = `nav-menu-${label.toLowerCase().replace(/\s+/g, "-")}`;
 
   const close = useCallback(() => {
     setOpen(false);
@@ -96,8 +98,21 @@ function NavDropdown({
 
   const handleMouseLeave = useCallback(() => {
     window.clearTimeout(hoverTimer.current);
-    setOpen(false);
+    hoverTimer.current = window.setTimeout(() => setOpen(false), 150);
   }, []);
+
+  useEffect(() => {
+    if (!open) return;
+
+    function handlePointerDown(e: MouseEvent) {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handlePointerDown);
+    return () => document.removeEventListener("mousedown", handlePointerDown);
+  }, [open]);
 
   const handleButtonKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
@@ -162,6 +177,7 @@ function NavDropdown({
 
   return (
     <li
+      ref={rootRef}
       className="relative"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -172,6 +188,7 @@ function NavDropdown({
         className={`nav-link inline-flex items-center gap-0.5 whitespace-nowrap ${isActive ? "nav-link-active" : ""}`}
         aria-expanded={open}
         aria-haspopup="true"
+        aria-controls={menuId}
         onClick={() => setOpen((v) => !v)}
         onKeyDown={handleButtonKeyDown}
         whileHover={hoverScaleSm}
@@ -202,6 +219,7 @@ function NavDropdown({
         {open && (
           <motion.ul
             ref={menuRef}
+            id={menuId}
             className="dropdown-panel"
             onKeyDown={handleMenuKeyDown}
             {...(shouldReduce
@@ -229,7 +247,7 @@ function NavDropdown({
                 <Link
                   href={child.href}
                   className={`block px-5 py-2.5 text-sm transition-[color,transform] duration-200 ease-out hover:translate-x-0.5 hover:text-bits-green dark:hover:text-bits-green ${
-                    currentPath.startsWith(child.href)
+                    isActiveHref(currentPath, child.href)
                       ? "font-medium text-bits-green"
                       : "text-bits-muted dark:text-gray-200"
                   }`}
@@ -347,14 +365,11 @@ export function Header() {
           >
             <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 lg:gap-x-6">
               {NAV_ITEMS.map((item, index) => {
-                const isActive =
-                  item.href === "/"
-                    ? pathname === "/"
-                    : Boolean(item.href && pathname.startsWith(item.href));
+                const isActive = item.href ? isActiveHref(pathname, item.href) : false;
 
                 if (item.children) {
-                  const childActive = item.children.some(
-                    (child) => child.href && pathname.startsWith(child.href)
+                  const childActive = item.children.some((child) =>
+                    isActiveHref(pathname, child.href)
                   );
 
                   return (
@@ -374,7 +389,7 @@ export function Header() {
                     {...(shouldReduce
                       ? {}
                       : {
-                          initial: { opacity: 0, y: -8 },
+                          initial: { opacity: 1, y: -4 },
                           animate: { opacity: 1, y: 0 },
                           transition: { delay: index * 0.05, ...SPRING_GENTLE },
                         })}
@@ -470,7 +485,7 @@ export function Header() {
                       <Link
                         href={item.href}
                         className={`block rounded-lg px-3 py-2.5 text-base ${
-                          pathname === item.href ? "nav-link-active font-medium" : "nav-link"
+                          isActiveHref(pathname, item.href) ? "nav-link-active font-medium" : "nav-link"
                         }`}
                         onClick={() => setMobileOpen(false)}
                       >
@@ -493,7 +508,7 @@ export function Header() {
                             <Link
                               href={child.href}
                               className={`block rounded-lg px-3 py-2 text-sm ${
-                                pathname.startsWith(child.href)
+                                isActiveHref(pathname, child.href)
                                   ? "font-medium text-bits-green"
                                   : "text-bits-muted hover:text-bits-green dark:text-gray-200"
                               }`}

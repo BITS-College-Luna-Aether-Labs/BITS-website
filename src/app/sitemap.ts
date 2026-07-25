@@ -10,7 +10,6 @@ const slugs: string[] = [
   "graduate-program",
   "research",
   "software-engineering",
-  "information-technology-and-systems",
   "undergrad-admission",
   "graduate-admission",
   "scholarship-aid",

@@ -1,56 +1,144 @@
-# Security Policy — BITS College Frontend
+# Security
 
-## Overview
+Security model for the BITS College public frontend. Aligns with live `src/middleware.ts` and `next.config.ts`.
 
-This Next.js frontend follows OWASP-aligned practices and the project `policies and rules.md` requirements.
+**Author:** [NathenaelTamirat](https://github.com/NathenaelTamirat) · **Audited:** July 2026
 
-## Content Security Policy (CSP)
+---
 
-Configured in `next.config.ts` for all routes:
+## 1. Threat model (summary)
 
-- `default-src 'self'`
-- `script-src 'self' 'unsafe-inline'` (+ `'unsafe-eval'` in development only) — required for Next.js App Router hydration scripts; without this, the page renders blank because inline RSC bootstrap scripts are blocked
-- `style-src 'self' 'unsafe-inline'` (Tailwind runtime; no third-party style CDNs)
-- `img-src 'self' https://www.bitscollege.edu.et data: blob:`
-- `object-src 'none'`, `frame-ancestors 'none'`, `base-uri 'self'`
-- `form-action` limited to self and the official applications portal
-- `upgrade-insecure-requests` in production
+| Asset | Risk | Mitigation |
+|---|---|---|
+| Public HTML/JS | XSS / script injection | CSP with nonces + script hashes; React escaping |
+| PDF endpoint | Path traversal / arbitrary file read | Strict filename allowlist |
+| Clickjacking | UI redress | `X-Frame-Options` + CSP `frame-ancestors` |
+| Transport | MITM | HSTS in production; Nginx TLS |
+| Privacy | Unwanted cookies | No theme cookies; theme uses `localStorage` only |
+| Apply portal | Tabnabbing | `rel="noopener noreferrer"` on external tabs |
 
-## Secure Headers
+This site has **no authentication**, **no PII store**, and **no admin UI**.
 
-Also set via `next.config.ts`:
+---
 
-- `X-Content-Type-Options: nosniff`
-- `X-Frame-Options: DENY`
-- `Referrer-Policy: strict-origin-when-cross-origin`
-- `Permissions-Policy` (geolocation, microphone, camera disabled)
-- `Strict-Transport-Security` (production deployments over HTTPS)
+## 2. Content Security Policy
 
-## Rendering Safety
+CSP is built **per request** in `src/middleware.ts` and set on both request and response headers.
 
-- No `dangerouslySetInnerHTML` for user content.
-- React auto-escapes all dynamic text.
-- No third-party analytics or chat widgets bundled.
+### 2.1 Policy shape
 
-## Authentication & Data
+| Directive | Value |
+|---|---|
+| `default-src` | `'self'` |
+| `script-src` | `'self'` + `'nonce-<uuid>'` + SHA-256 hashes for theme + error reporter; **`'unsafe-eval'` only in development** |
+| `style-src` | `'self' 'unsafe-inline'` |
+| `img-src` | `'self' data: blob: https://i.ytimg.com` |
+| `font-src` | `'self' data:` |
+| `connect-src` | `'self'` (covers `/api/error` beacons) |
+| `object-src` | `'none'` |
+| `base-uri` | `'self'` |
+| `form-action` | `'self' https://applications.bitscollege.edu.et` |
+| `frame-src` | `'self' https://www.youtube.com https://www.youtube-nocookie.com` |
+| `frame-ancestors` | `'self'` |
+| `upgrade-insecure-requests` | Production only |
 
-This homepage is public. No session tokens or PII are stored client-side beyond theme preference.
+### 2.2 Inline scripts
 
-## Dependencies
+Root layout injects two inline scripts with the middleware nonce:
 
-- Lockfile: `package-lock.json`
-- Run `npm audit` before production releases.
-- Prefer well-maintained packages (Next.js, React, Framer Motion, Tailwind).
+1. `THEME_SCRIPT` — dark-mode bootstrap (`src/lib/theme.ts`)
+2. `ERROR_REPORTER_SCRIPT` — global error beacon (`src/lib/error-reporter.ts`)
 
-## External Links
+Hashes in middleware must stay in sync if those strings change:
 
-Apply and external service links use `rel="noopener noreferrer"` when opened in a new tab.
+- Theme: `'sha256-NhzUKfveOg7mcRyOHqfXa83QgUQOuo/uyYCLkLqe9CE='`
+- Error: `'sha256-SFvwRvpSGNkVRKBwaqdtHPgB8Pxaikx+oEshBInp6oY='`
 
-## Environment
+JSON-LD in layout is also nonce-stamped.
 
-- Secrets must live in deployment environment variables, never in client bundles.
-- Separate development and production configurations.
+### 2.3 Matcher
 
-## Reporting
+Middleware skips: `api`, `_next/static`, `_next/image`, `favicon.ico`, `robots.txt`, `llms.txt`, `sitemap.xml`, and static file extensions (`png|jpg|jpeg|gif|webp|svg|ico|mp4|pdf|woff2`).
 
-Report security issues to the BITS College IT team via `info@bitscollege.edu.et`.
+---
+
+## 3. HTTP security headers
+
+From `next.config.ts`:
+
+| Source | Headers |
+|---|---|
+| `/images/:path*` | `Cache-Control: public, max-age=31536000, immutable` |
+| `/(.*)` | `X-Content-Type-Options: nosniff` |
+| | `X-Frame-Options: SAMEORIGIN` |
+| | `Referrer-Policy: strict-origin-when-cross-origin` |
+| | `Permissions-Policy: geolocation=(), microphone=(), camera=()` |
+| | `Strict-Transport-Security` (production only): `max-age=63072000; includeSubDomains; preload` |
+
+`/api/pdf` responses also set `X-Frame-Options: SAMEORIGIN` for iframe embedding.
+
+Nginx may add `X-Robots-Tag` and DNS prefetch — see [DEPLOYMENT.md](./DEPLOYMENT.md).
+
+---
+
+## 4. Application controls
+
+### 4.1 Rendering
+
+- No `dangerouslySetInnerHTML` for user-supplied content (only trusted inline scripts / JSON-LD in layout).
+- React escapes dynamic text by default.
+- No third-party analytics or chat widgets in the bundle.
+
+### 4.2 PDF API
+
+```ts
+ALLOWED_FILES = {
+  "graduate_accreditation.pdf",
+  "undergraduate_accreditation.pdf",
+}
+```
+
+Unknown or missing `file` → `404`. Files read only from `public/images/About-Who-we-are/`.
+
+### 4.3 External links
+
+Apply and social destinations use `target="_blank"` + `rel="noopener noreferrer"` where applicable.
+
+### 4.4 Client storage
+
+| Key | Purpose |
+|---|---|
+| `bits_theme` | `"light"` \| `"dark"` preference |
+| `bits_announcement_shown` | Session flag for graduation popup |
+
+No secrets in client storage.
+
+---
+
+## 5. Dependencies
+
+- Prefer Bun lockfile (`bun.lock`) for reproducible Docker installs.
+- Run `bun audit` / `npm audit` before production releases.
+- Keep Next.js and React on current patched minors.
+
+---
+
+## 6. Reporting
+
+Report vulnerabilities to BITS College IT via `info@bitscollege.edu.et`.
+
+---
+
+## 7. Checklist before go-live
+
+- [ ] CSP hashes match current `THEME_SCRIPT` / `ERROR_REPORTER_SCRIPT`
+- [ ] HTTPS + HSTS verified behind Nginx
+- [ ] `/api/pdf` rejects non-allowlisted names
+- [ ] No `.env` secrets committed (none required today)
+- [ ] Docker app runs as non-root `nextjs` user
+- [ ] Firewall exposes only 22/80/443
+- [ ] `output: "standalone"` present if deploying via current Dockerfile
+
+---
+
+*Security notes by **NathenaelTamirat** · July 2026*

@@ -51,9 +51,9 @@ export function Footer() {
               <Image
                 src="/images/logo.png"
                 alt="BITS College logo"
-                width={240}
-                height={78}
-                className="mb-4 w-[264px] brightness-0 invert transition-opacity duration-300 hover:opacity-80 sm:h-[94px]"
+                width={264}
+                height={86}
+                className="mb-4 h-auto w-[264px] brightness-0 invert transition-opacity duration-300 hover:opacity-80"
               />
             </Link>
           </div>
@@ -65,7 +65,7 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${SITE.email}`}
-                  className="footer-link inline-flex items-start gap-2 text-bits-green hover:opacity-80"
+                  className="footer-link inline-flex items-start gap-2 text-[#b8e08a] hover:opacity-80"
                 >
                   <MailIcon className="mt-0.5 h-4 w-4 shrink-0" />
                   {SITE.email}
@@ -113,7 +113,7 @@ export function Footer() {
             <div className="mb-3 h-0.5 w-8 bg-bits-green" aria-hidden="true" />
             <ul className="space-y-2 text-[15px]">
               {FOOTER_QUICK_LINKS.map((link) => (
-                <li key={link.href}>
+                <li key={link.label}>
                   <Link
                     href={link.href}
                     className="footer-link inline-block transition-all duration-200 ease-out hover:text-bits-green hover:translate-x-1"

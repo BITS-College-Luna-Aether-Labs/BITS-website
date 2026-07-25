@@ -12,7 +12,7 @@ export function TuitionContent() {
       <section className="relative overflow-hidden border-b border-emerald-950/10 bg-[linear-gradient(180deg,rgba(125,194,67,0.06),var(--bits-page))]">
         <div className="mx-auto max-w-site px-4 pt-28 pb-16 sm:px-6 lg:px-8 lg:pt-32 lg:pb-20">
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 1, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE_PREMIUM }}
             className="mx-auto max-w-3xl text-center"
@@ -31,7 +31,7 @@ export function TuitionContent() {
       <section className="mx-auto max-w-site px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15, duration: 0.6, ease: EASE_PREMIUM }}
             className="rounded-3xl border border-emerald-950/10 bg-[var(--bits-surface)] p-8 shadow-[0_16px_38px_rgba(10,41,18,0.08)] dark:border-gray-800 dark:shadow-none sm:p-12"

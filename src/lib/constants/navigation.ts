@@ -7,6 +7,14 @@ type NavItem = {
 
 export const APPLY_URL = "https://applications.bitscollege.edu.et";
 
+/** Active-route match without prefix false-positives (ignores query strings). */
+export function isActiveHref(pathname: string, href: string): boolean {
+  if (!href || href.startsWith("http")) return false;
+  const path = href.split("?")[0] || "/";
+  if (path === "/") return pathname === "/";
+  return pathname === path || pathname.startsWith(`${path}/`);
+}
+
 export const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
   {
@@ -58,11 +66,11 @@ export const FOOTER_QUICK_LINKS = [
   { label: "Graduate Program Admission", href: "/graduate-admission" },
   {
     label: "Undergraduate Accreditation",
-    href: "/who-we-are?section=accreditation",
+    href: "/who-we-are?section=accreditation&doc=undergraduate",
   },
   {
     label: "Graduate Accreditation",
-    href: "/who-we-are?section=accreditation",
+    href: "/who-we-are?section=accreditation&doc=graduate",
   },
 ];
 

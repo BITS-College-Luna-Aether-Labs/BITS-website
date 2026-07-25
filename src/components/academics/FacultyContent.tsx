@@ -82,9 +82,9 @@ function Card({ item, index }: { item: FacultyCard; index: number }) {
 
         {/* Centered content */}
         <div className="flex flex-col items-center text-center">
-          <h3 className="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+          <h2 className="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
             {item.name}
-          </h3>
+          </h2>
           {item.tagline && (
             <p className="mt-2 text-sm font-medium text-emerald-200/90 sm:text-base">
               {item.tagline}
@@ -103,7 +103,7 @@ export function FacultyContent() {
         <div className="absolute inset-0 opacity-30 [background:radial-gradient(circle_at_top_left,rgba(6,95,70,0.3),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.2),transparent_35%)]" />
         <div className="relative mx-auto max-w-site px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, ease: EASE_PREMIUM }}
             className="max-w-3xl"

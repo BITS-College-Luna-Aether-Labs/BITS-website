@@ -59,7 +59,7 @@ function ProgramCardsAnimated() {
       <motion.div
         className="program-card gpu block pl-6"
         variants={{
-          hidden: { opacity: 0, x: 20, scale: 0.97 },
+          hidden: { opacity: 1, x: 12, scale: 0.99 },
           visible: { opacity: 1, x: 0, scale: 1, transition: SPRING_GENTLE },
         }}
         whileHover={{
@@ -83,7 +83,7 @@ function ProgramCardsAnimated() {
               key={program.title}
               className="program-card gpu block h-full pl-6"
               variants={{
-                hidden: { opacity: 0, x: 20, scale: 0.97 },
+                hidden: { opacity: 1, x: 12, scale: 0.99 },
                 visible: { opacity: 1, x: 0, scale: 1, transition: SPRING_GENTLE },
               }}
               whileHover={{
@@ -124,7 +124,7 @@ export function ProgramsSection() {
             />
             {enabled ? (
               <motion.div
-                initial={{ opacity: 0, x: -24, scale: 0.97 }}
+                initial={{ opacity: 1, x: -12, scale: 0.99 }}
                 whileInView={{ opacity: 1, x: 0, scale: 1 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ ...SPRING_GENTLE, ease: EASE_PREMIUM }}
@@ -134,7 +134,9 @@ export function ProgramsSection() {
                   alt="BITS student with backpack"
                   width={762}
                   height={1024}
-                  priority
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 90vw, 760px"
+                  quality={75}
                   className="relative z-10 mx-auto h-auto w-full max-w-[640px] object-contain md:max-w-[760px]"
                 />
               </motion.div>
@@ -144,7 +146,9 @@ export function ProgramsSection() {
                 alt="BITS student with backpack"
                 width={762}
                 height={1024}
-                priority
+                loading="lazy"
+                sizes="(max-width: 1024px) 90vw, 760px"
+                quality={75}
                 className="relative z-10 mx-auto h-auto w-full max-w-[640px] object-contain md:max-w-[760px]"
               />
             )}

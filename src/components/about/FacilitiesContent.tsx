@@ -89,11 +89,11 @@ const facilityImages: Record<string, string[]> = {
 };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
+  hidden: { opacity: 1, y: 16 },
   show: (delay = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { delay, duration: 0.7, ease: EASE_PREMIUM },
+    transition: { delay, duration: 0.55, ease: EASE_PREMIUM },
   }),
 };
 
@@ -132,7 +132,8 @@ function FacilityCard({
             fill
             className="object-cover transition duration-500"
             sizes="(max-width: 1024px) 100vw, 50vw"
-            loading="lazy"
+            loading={index === 0 ? "eager" : "lazy"}
+            priority={index === 0}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent" />
 
@@ -141,6 +142,7 @@ function FacilityCard({
               <button
                 type="button"
                 onClick={prev}
+                aria-label={`Previous ${item.title} photo`}
                 className="absolute left-3 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-slate-800 shadow transition hover:bg-white"
               >
                 <ChevronLeft className="h-5 w-5" />
@@ -148,6 +150,7 @@ function FacilityCard({
               <button
                 type="button"
                 onClick={next}
+                aria-label={`Next ${item.title} photo`}
                 className="absolute right-3 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-slate-800 shadow transition hover:bg-white"
               >
                 <ChevronRight className="h-5 w-5" />
@@ -219,7 +222,7 @@ export function FacilitiesContent() {
                   custom={0.1 * idx}
                   className="min-w-[160px] flex-1 rounded-3xl border border-slate-200 bg-[var(--bits-surface)]/80 p-5 shadow-sm backdrop-blur dark:border-gray-700"
                 >
-                  <p className="text-3xl font-semibold text-bits-green">{stat.value}</p>
+                  <p className="text-3xl font-semibold text-bits-green-dark">{stat.value}</p>
                   <p className="mt-2 text-sm text-bits-text">{stat.label}</p>
                 </motion.div>
               ))}
@@ -269,7 +272,7 @@ export function FacilitiesContent() {
             href="https://applications.bitscollege.edu.et"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-bits-green px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/20 transition hover:-translate-y-0.5 hover:bg-bits-green-dark lg:mt-0"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-[var(--bits-green-solid)] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/20 transition hover:-translate-y-0.5 hover:bg-bits-green-dark lg:mt-0"
           >
             Open application <ArrowRight className="h-4 w-4" />
           </a>

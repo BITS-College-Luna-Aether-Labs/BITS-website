@@ -42,7 +42,7 @@ export function ShortTrainingsContent() {
     <div className="min-h-screen bg-[var(--bits-page)] text-bits-heading">
       <section className="mx-auto max-w-site px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="space-y-16"

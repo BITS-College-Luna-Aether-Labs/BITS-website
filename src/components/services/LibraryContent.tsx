@@ -7,7 +7,7 @@ import { BookOpen, ExternalLink, Library as LibraryIcon } from "lucide-react";
 import { EASE_PREMIUM } from "@/lib/motion-presets";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 1, y: 24 },
   show: (delay = 0) => ({
     opacity: 1,
     y: 0,

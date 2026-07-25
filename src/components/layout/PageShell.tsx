@@ -18,7 +18,7 @@ export function PageShell({
     <div className="bg-[var(--bits-page)] pt-[72px] lg:pt-[80px]">
       <motion.div
         className="site-container py-12 md:py-16"
-        initial={{ opacity: 0 }}
+        initial={{ opacity: 1 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
       >
@@ -35,7 +35,7 @@ export function PageShell({
         {children && (
           <motion.div
             className="mt-10"
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 1, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...SPRING_GENTLE, delay: 0.15 }}
           >

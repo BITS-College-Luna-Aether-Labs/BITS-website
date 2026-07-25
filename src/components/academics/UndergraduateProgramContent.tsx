@@ -23,12 +23,12 @@ const programs = [
 ];
 
 const container = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   show: { opacity: 1, transition: { staggerChildren: 0.12 } },
 };
 
 const itemAnim = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 1, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
 };
 
@@ -46,9 +46,9 @@ function ProgramCard({ program }: { program: (typeof programs)[number] }) {
             <p className="text-xs font-semibold tracking-[0.28em] text-bits-green-dark uppercase">
               {program.eyebrow}
             </p>
-            <h3 className="mt-3 text-2xl font-semibold tracking-tight text-bits-heading sm:text-3xl">
+            <h2 className="mt-3 text-2xl font-semibold tracking-tight text-bits-heading sm:text-3xl">
               {program.title}
-            </h3>
+            </h2>
           </div>
           <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--bits-surface)]/80 text-bits-green-dark shadow-sm">
             <Icon className="h-6 w-6" />
@@ -74,8 +74,9 @@ function ProgramCard({ program }: { program: (typeof programs)[number] }) {
               href={program.href}
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-bits-green-dark px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-bits-green"
             >
+              <span className="sr-only">{program.title}: </span>
               Read More
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
 

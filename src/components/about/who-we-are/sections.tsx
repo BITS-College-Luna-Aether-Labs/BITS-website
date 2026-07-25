@@ -2,13 +2,52 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useState } from "react";
 import {
   Award, BookOpen, ChevronRight, GraduationCap, HeartHandshake,
-  Sparkles, Target, Users, ShieldCheck, X,
+  Play, Sparkles, Target, Users, ShieldCheck, X,
 } from "lucide-react";
 import { EASE_PREMIUM } from "@/lib/motion-presets";
 import { PDFViewer } from "@/components/ui/PDFViewer";
 import { MISSION_POINTS, VALUES, ACCREDITATION_ITEMS, SUPPORT_ITEMS } from "./data";
+
+function YouTubeFacade({ videoId, title }: { videoId: string; title: string }) {
+  const [activated, setActivated] = useState(false);
+
+  if (activated) {
+    return (
+      <iframe
+        src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&autoplay=1`}
+        title={title}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        className="absolute inset-0 h-full w-full"
+      />
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={() => setActivated(true)}
+      className="absolute inset-0 h-full w-full cursor-pointer"
+      aria-label={`Play ${title}`}
+    >
+      <img
+        src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <span className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full">
+        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-bits-green/90 text-white shadow-lg">
+          <Play className="ml-1 h-7 w-7 fill-current" />
+        </span>
+      </span>
+    </button>
+  );
+}
 
 export function SectionHeader({ icon: Icon, label, title }: { icon: React.ElementType; label: string; title: string }) {
   return (
@@ -50,6 +89,7 @@ export function AccreditationModal({ selectedPdf, onClose }: { selectedPdf: stri
           <button
             type="button"
             onClick={onClose}
+            aria-label="Close accreditation document"
             className="flex h-8 w-8 items-center justify-center rounded-full text-bits-muted transition hover:bg-bits-surface-muted hover:text-bits-heading"
           >
             <X className="h-5 w-5" />
@@ -92,13 +132,7 @@ export function OverviewTab() {
           <div className="absolute inset-0 -z-10 animate-[spin_3s_linear_infinite] rounded-[2rem] bg-[conic-gradient(from_0deg,rgba(125,194,67,0.8),transparent,rgba(125,194,67,0.8),transparent,rgba(125,194,67,0.8))]" aria-hidden="true" />
           <div className="overflow-hidden rounded-[calc(2rem-0.5px)] bg-black">
             <div className="relative aspect-video">
-              <iframe
-                src="https://www.youtube.com/embed/xzJXNyy6sRk?rel=0&autoplay=0&showinfo=0"
-                title="Virtual Tour of BITS College"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="absolute inset-0 h-full w-full"
-              />
+              <YouTubeFacade videoId="xzJXNyy6sRk" title="Virtual Tour of BITS College" />
             </div>
           </div>
         </div>

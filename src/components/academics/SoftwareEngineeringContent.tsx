@@ -4,7 +4,7 @@
 import { motion, Variants } from "framer-motion";
 
 const containerVariants: Variants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
     transition: { staggerChildren: 0.1, delayChildren: 0.2 },
@@ -12,7 +12,7 @@ const containerVariants: Variants = {
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 1, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
@@ -27,7 +27,7 @@ export function SoftwareEngineeringContent() {
     <div className="min-h-screen bg-[var(--bits-page)] text-bits-heading">
       {/* Hero */}
       <motion.section
-        initial={{ opacity: 0 }}
+        initial={{ opacity: 1 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
         className="relative overflow-hidden pt-[72px] pb-16 sm:pb-24 lg:pt-[80px]"

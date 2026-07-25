@@ -5,7 +5,16 @@ const isDev = process.env.NODE_ENV !== "production";
 const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
-    remotePatterns: [],
+    // Cap widths — default deviceSizes includes 3840 which overserved the hero on mobile
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+        pathname: "/vi/**",
+      },
+    ],
   },
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion"],
@@ -22,10 +31,34 @@ const nextConfig: NextConfig = {
         destination: "/scholarship-recipients",
         permanent: true,
       },
+      {
+        source: "/undergraduate-accreditation",
+        destination: "/who-we-are?section=accreditation&doc=undergraduate",
+        permanent: true,
+      },
+      {
+        source: "/graduate-accreditation",
+        destination: "/who-we-are?section=accreditation&doc=graduate",
+        permanent: true,
+      },
+      {
+        source: "/information-technology-and-systems",
+        destination: "/undergraduate-program",
+        permanent: true,
+      },
     ];
   },
   async headers() {
     return [
+      {
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
       {
         source: "/(.*)",
         headers: [

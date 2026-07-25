@@ -54,7 +54,11 @@ export function WhyBitsSection() {
                 instruction, it also gives our students a secure setting in which
                 they can reach, grow, and make the most of their full potential.
               </p>
-              <Link href="/who-we-are" className="btn-solid-green mt-6 inline-flex">
+              <Link
+                href="/who-we-are"
+                className="btn-solid-green mt-6 inline-flex"
+                aria-label="Learn more about Who We Are at BITS College"
+              >
                 Learn More
               </Link>
             </div>
@@ -76,7 +80,7 @@ export function WhyBitsSection() {
                   key={card.title}
                   className="feature-card gpu"
                   variants={{
-                    hidden: { opacity: 0, y: 24, scale: 0.95 },
+                    hidden: { opacity: 1, y: 16, scale: 0.98 },
                     visible: { opacity: 1, y: 0, scale: 1, transition: SPRING_GENTLE },
                   }}
                   whileHover={{

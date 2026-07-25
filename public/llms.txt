@@ -1,0 +1,13 @@
+# BITS College
+
+> BITS College (School of Systems and Technology) — private higher learning institution in Addis Ababa, Ethiopia offering Software Engineering and IT Management programs.
+
+- [Home](https://www.bitscollege.edu.et/): Main landing page
+- [Who We Are](https://www.bitscollege.edu.et/who-we-are): Mission, vision, accreditation
+- [Undergraduate Programs](https://www.bitscollege.edu.et/undergraduate-program): Software Engineering
+- [Graduate Programs](https://www.bitscollege.edu.et/graduate-program): IT Management
+- [Admissions](https://www.bitscollege.edu.et/undergrad-admission): Undergraduate admission
+- [News & Events](https://www.bitscollege.edu.et/college-news): College news and events
+- [Apply](https://applications.bitscollege.edu.et): Applications portal
+
+Optional contact: info@bitscollege.edu.et · +251-982-363636

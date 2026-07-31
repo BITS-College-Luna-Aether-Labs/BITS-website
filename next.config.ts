@@ -3,6 +3,8 @@ import type { NextConfig } from "next";
 const isDev = process.env.NODE_ENV !== "production";
 
 const nextConfig: NextConfig = {
+  // The Dockerfile runs the standalone server (bun server.js) from .next/standalone
+  output: "standalone",
   images: {
     formats: ["image/avif", "image/webp"],
     // Cap widths — default deviceSizes includes 3840 which overserved the hero on mobile

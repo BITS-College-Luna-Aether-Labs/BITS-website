@@ -39,6 +39,13 @@ const ALLOWED_ATTR = [
 ];
 
 export function sanitizeHtml(html: string): string {
+  if (typeof window === "undefined") {
+    // SSR: DOMPurify requires a DOM (no `sanitize` on the server). The CMS
+    // already sanitizes at write time, so return the content as-is here; the
+    // browser applies the allowlist again on hydration.
+    return html;
+  }
+
   return DOMPurify.sanitize(html, {
     ALLOWED_TAGS,
     ALLOWED_ATTR,

@@ -3,6 +3,8 @@
  * Talks to BITS-CMS over the public internet. Never exposed to the browser
  * (no NEXT_PUBLIC_* prefix) — only the Next.js server fetches from here.
  */
+import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import type {
   CmsPostListItem,
   CmsPostDetail,
@@ -36,7 +38,6 @@ async function cmsFetch<T>(path: string): Promise<T> {
     const res = await fetch(url, {
       signal: controller.signal,
       headers: { Accept: "application/json" },
-      cache: "no-store",
     });
 
     if (!res.ok) {
@@ -109,39 +110,52 @@ function resolvePostDetail(post: CmsPostDetail): CmsPostDetail {
 }
 
 // ─── Public API ──────────────────────────────────────────────────────────────
+// Each function is wrapped in unstable_cache (revalidate: 60) so CMS responses
+// are actually cached. This is required because every consumer is a dynamic
+// route (it reads searchParams/params/nextUrl): with the default fetchCache
+// "auto", Next.js never caches fetches that are reached after a Request-time
+// API, so "export const revalidate = 60" alone had no effect.
 
-export async function getPublishedPosts(
-  page = 1,
-  limit = 10,
-): Promise<{
-  posts: CmsPostListItem[];
-  pagination: { page: number; limit: number; total: number };
-}> {
-  const res = await cmsFetch<CmsPaginatedEnvelope<CmsPostListItem[]>>(
-    `/api/posts?page=${page}&limit=${limit}`,
-  );
+export const getPublishedPosts = unstable_cache(
+  async (page = 1, limit = 10) => {
+    const res = await cmsFetch<CmsPaginatedEnvelope<CmsPostListItem[]>>(
+      `/api/posts?page=${page}&limit=${limit}`,
+    );
 
-  return {
-    posts: res.data.map(resolvePostListItem),
-    pagination: res.pagination,
-  };
-}
+    return {
+      posts: res.data.map(resolvePostListItem),
+      pagination: res.pagination,
+    };
+  },
+  ["cms-posts"],
+  { revalidate: 60 },
+);
 
-export async function getPostBySlug(
-  slug: string,
-): Promise<CmsPostDetail> {
-  const res = await cmsFetch<CmsEnvelope<CmsPostDetail>>(
-    `/api/posts/${encodeURIComponent(slug)}`,
-  );
+// Wrapped in React cache() so generateMetadata and the page body share a single
+// CMS call within one request (unstable_cache alone doesn't dedupe those two).
+export const getPostBySlug = cache(
+  unstable_cache(
+    async (slug: string) => {
+      const res = await cmsFetch<CmsEnvelope<CmsPostDetail>>(
+        `/api/posts/${encodeURIComponent(slug)}`,
+      );
 
-  return resolvePostDetail(res.data);
-}
+      return resolvePostDetail(res.data);
+    },
+    ["cms-post"],
+    { revalidate: 60 },
+  ),
+);
 
-export async function getAllPublishedSlugs(): Promise<string[]> {
-  // Fetch all posts (high limit) to get slugs for the sitemap
-  const res = await cmsFetch<CmsPaginatedEnvelope<CmsPostListItem[]>>(
-    `/api/posts?page=1&limit=500`,
-  );
+export const getAllPublishedSlugs = unstable_cache(
+  async () => {
+    // Fetch all posts (high limit) to get slugs for the sitemap
+    const res = await cmsFetch<CmsPaginatedEnvelope<CmsPostListItem[]>>(
+      `/api/posts?page=1&limit=500`,
+    );
 
-  return res.data.map((post) => post.slug);
-}
+    return res.data.map((post) => post.slug);
+  },
+  ["cms-slugs"],
+  { revalidate: 60 },
+);

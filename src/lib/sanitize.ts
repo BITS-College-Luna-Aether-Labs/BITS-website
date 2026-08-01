@@ -1,10 +1,13 @@
 /**
- * Client-side HTML sanitization — defense in depth.
- * The CMS sanitizes at write time (B2), but this is the only place in the
- * homepage that renders third-party-sourced HTML via dangerouslySetInnerHTML.
- * Uses the same allowlist as the CMS Studio's sanitize.ts for consistency.
+ * HTML sanitization — defense in depth for third-party-sourced CMS content.
+ * The CMS sanitizes at write time, but this is the only place in the homepage
+ * that renders CMS HTML via dangerouslySetInnerHTML. Uses isomorphic-dompurify
+ * (jsdom-backed on the server, plain DOMPurify in the browser) so the SSR pass
+ * — including the pre-hydration HTML of the "use client" PostDetailClient —
+ * is sanitized too, not just the post-hydration DOM. The allowlist mirrors
+ * BITS-CMS/src/Utils/sanitizeHtml.ts.
  */
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 
 const ALLOWED_TAGS = [
   "p",
@@ -39,13 +42,6 @@ const ALLOWED_ATTR = [
 ];
 
 export function sanitizeHtml(html: string): string {
-  if (typeof window === "undefined") {
-    // SSR: DOMPurify requires a DOM (no `sanitize` on the server). The CMS
-    // already sanitizes at write time, so return the content as-is here; the
-    // browser applies the allowlist again on hydration.
-    return html;
-  }
-
   return DOMPurify.sanitize(html, {
     ALLOWED_TAGS,
     ALLOWED_ATTR,

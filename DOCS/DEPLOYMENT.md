@@ -179,11 +179,10 @@ Next.js only produces that folder if `next.config.ts` opts into it — and `next
 
 ### 4.3 Confirm the nginx config's domain
 
-`nginx/conf.d/bits.conf` ships already configured for the real production hostname — both `server_name` directives read `www.bitscollege.edu.et` — so there is **no placeholder left to replace**. Only touch this file if you're deploying under a different domain:
+`nginx/conf.d/bits.conf` ships already configured for the real production hostname — both `server_name` directives read `www.bitscollege.edu.et` — so there is **no placeholder left to replace**. If you are deploying under a different hostname, update that file to match your actual domain before requesting the certificate in Section 4.6.
+
 ```bash
 grep -n "server_name" nginx/conf.d/bits.conf   # should show www.bitscollege.edu.et
-# if you use a different hostname, replace it in both server blocks:
-sed -i 's/www.bitscollege.edu.et/your-real-domain/g' nginx/conf.d/bits.conf
 ```
 Whatever hostname you settle on here must exactly match the domain you request the certificate for in Section 4.6.
 
@@ -327,8 +326,8 @@ The `app` container has a Docker-level healthcheck already configured in `docker
 ### Build failures
 
 **Symptom:** `docker compose build` fails with something like `COPY failed: file not found` mentioning `.next/standalone`.
-**Cause:** `output: "standalone"` is missing from `next.config.ts`. This should not happen with the current code — the setting is already present (Section 4.2) — so it points to a local edit or a checkout from before the setting was added.
-**Solution:** confirm `output: "standalone"` is present in `next.config.ts`, then re-run `docker compose up -d --build`.
+**Cause:** `output: "standalone"` is missing from `next.config.ts`. In the current repository this should not happen — the setting is already present (Section 4.2) — so this points to a local edit or a checkout from before the setting was added, not a normal deployment risk on the current codebase.
+**Solution:** confirm `output: "standalone"` is present in `next.config.ts`, restore it if your local checkout removed it, then re-run `docker compose up -d --build`.
 
 **Symptom:** build fails during `bun install` with a lockfile mismatch error.
 **Cause:** `package.json` was edited without updating `bun.lock`, and the Dockerfile uses `bun install --frozen-lockfile` (which refuses to auto-update the lockfile).

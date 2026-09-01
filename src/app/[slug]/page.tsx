@@ -6,7 +6,6 @@ import { ResearchContent } from "@/components/academics/ResearchContent";
 import { SoftwareEngineeringContent } from "@/components/academics/SoftwareEngineeringContent";
 import { UndergradAdmissionContent } from "@/components/admissions/UndergradAdmissionContent";
 import { GraduateAdmissionContent } from "@/components/admissions/GraduateAdmissionContent";
-import { ScholarshipAidContent } from "@/components/admissions/ScholarshipAidContent";
 import { TuitionContent } from "@/components/admissions/TuitionContent";
 import { ShortTrainingsContent } from "@/components/services/ShortTrainingsContent";
 import { LibraryContent } from "@/components/services/LibraryContent";
@@ -37,10 +36,6 @@ const PAGE_TITLES: Record<string, { title: string; description: string }> = {
   "graduate-admission": {
     title: "Graduate Admission",
     description: "Admission requirements and process for graduate applicants.",
-  },
-  "scholarship-aid": {
-    title: "Scholarship & Aid",
-    description: "Scholarship opportunities and financial aid information.",
   },
   tuition: {
     title: "Tuition",
@@ -101,7 +96,7 @@ export async function generateMetadata({ params }: Props) {
 
 /** Page-group slugs used for content routing below */
 const ACADEMICS_PAGES = ["graduate-program", "research"];
-const ADMISSIONS_PAGES = ["undergrad-admission", "graduate-admission", "scholarship-aid", "tuition"];
+const ADMISSIONS_PAGES = ["undergrad-admission", "graduate-admission", "tuition"];
 const SERVICES_PAGES = ["short-trainings"];
 
 export default async function DynamicPage({ params }: Props) {
@@ -123,7 +118,6 @@ export default async function DynamicPage({ params }: Props) {
       <>
         {slug === "undergrad-admission" && <UndergradAdmissionContent />}
         {slug === "graduate-admission" && <GraduateAdmissionContent />}
-        {slug === "scholarship-aid" && <ScholarshipAidContent />}
         {slug === "tuition" && <TuitionContent />}
       </>
     );

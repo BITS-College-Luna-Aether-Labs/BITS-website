@@ -313,9 +313,8 @@ News MP4s are the largest bandwidth cost.
 
 ## 12. Known gaps (current)
 
-1. **`output: "standalone"`** — Dockerfile copies `.next/standalone`, but `next.config.ts` does not currently declare it. Add before Docker production builds.
-2. **`AnnouncementSection`** — unused on home; candidate for removal or reuse.
-3. **ITS undergrad page** — removed; permanent redirect to `/undergraduate-program`. JSON-LD still names the program with that URL.
+1. **`AnnouncementSection`** — unused on home; candidate for removal or reuse.
+2. **ITS undergrad page** — removed; permanent redirect to `/undergraduate-program`. JSON-LD still names the program with that URL.
 
 ---
 

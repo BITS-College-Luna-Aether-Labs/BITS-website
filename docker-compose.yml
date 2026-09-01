@@ -11,6 +11,7 @@ services:
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
       - PORT=3333
+      - CMS_API_URL=${CMS_API_URL:-https://api.bitscollege.edu.et}
     expose:
       - "3333"
     networks:

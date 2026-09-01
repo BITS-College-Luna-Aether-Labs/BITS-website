@@ -318,7 +318,7 @@ Changing content = edit TypeScript or replace files in `public/images/`.
 | Start | `bun run start` | Production server `:3333` |
 | Docker | `docker compose up` | `app` + `nginx` + `certbot` |
 
-Dockerfile expects `.next/standalone`. Ensure `output: "standalone"` in `next.config.ts` before Docker builds — see [DEPLOYMENT.md](./DEPLOYMENT.md).
+Dockerfile expects `.next/standalone` — `output: "standalone"` is already set in `next.config.ts` — see [DEPLOYMENT.md](./DEPLOYMENT.md).
 
 ---
 

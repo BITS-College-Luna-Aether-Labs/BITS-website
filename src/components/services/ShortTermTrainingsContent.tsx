@@ -29,7 +29,7 @@ const fadeUp = {
   }),
 };
 
-function TrainingCard({ label, icon, index }: { label: string; icon: string; index: number }) {
+function TrainingItem({ label, icon, index }: { label: string; icon: string; index: number }) {
   return (
     <motion.div
       variants={fadeUp}
@@ -37,9 +37,9 @@ function TrainingCard({ label, icon, index }: { label: string; icon: string; ind
       whileInView="show"
       viewport={{ once: true }}
       custom={index * 0.06}
-      className="group flex items-center gap-4 rounded-2xl border border-emerald-900/10 bg-white px-5 py-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-bits-green/30 hover:shadow-[0_8px_24px_rgba(16,24,40,0.09)] dark:border-gray-800 dark:bg-gray-900 dark:hover:border-bits-green/30"
+      className="group flex items-center gap-4 rounded-2xl border border-emerald-900/10 bg-[var(--bits-page)] px-5 py-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-bits-green/30 hover:shadow-[0_8px_24px_rgba(16,24,40,0.09)] dark:border-gray-700 dark:bg-gray-800 dark:hover:border-bits-green/30"
     >
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-xl dark:bg-gray-800">
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-xl dark:bg-gray-700">
         {icon}
       </span>
       <span className="text-sm font-medium leading-6 text-bits-text group-hover:text-bits-heading">
@@ -78,57 +78,10 @@ export function ShortTermTrainingsContent() {
         </div>
       </section>
 
-      {/* Facility images */}
-      <section className="mx-auto max-w-site px-4 pt-16 sm:px-6 lg:px-8">
-        <div className="grid gap-6 sm:grid-cols-2">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            custom={0}
-            className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-emerald-900/10 shadow-[0_20px_80px_rgba(16,24,40,0.06)]"
-          >
-            <Image
-              src="/images/About-Facilities/Computer%20Labs%201.jpg"
-              alt="BITS College Computer Labs"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover transition duration-500 hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-            <div className="absolute bottom-5 left-6">
-              <span className="rounded-full bg-bits-green-dark/90 px-3 py-1 text-xs font-semibold text-white">Computer Labs</span>
-            </div>
-          </motion.div>
-
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            custom={0.08}
-            className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-emerald-900/10 shadow-[0_20px_80px_rgba(16,24,40,0.06)]"
-          >
-            <Image
-              src="/images/About-Facilities/Class%20Room%201.jpg"
-              alt="BITS College Class Room"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover transition duration-500 hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-            <div className="absolute bottom-5 left-6">
-              <span className="rounded-full bg-bits-green-dark/90 px-3 py-1 text-xs font-semibold text-white">Class Rooms</span>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       <section className="mx-auto max-w-site px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-        <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
 
-          {/* Beginner card */}
+          {/* Beginner card — title → description → image → items */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -137,7 +90,8 @@ export function ShortTermTrainingsContent() {
             custom={0}
             className="overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.06)]"
           >
-            <div className="bg-gradient-to-br from-emerald-500/15 via-emerald-400/8 to-transparent px-8 py-7">
+            {/* Title + description */}
+            <div className="bg-gradient-to-br from-emerald-500/15 via-emerald-400/8 to-transparent px-8 pt-8 pb-6">
               <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/80 px-3 py-1.5 text-xs font-semibold text-bits-green-dark shadow-sm dark:border-gray-700 dark:bg-gray-900/80">
                 <BookOpen className="h-3.5 w-3.5" />
                 Level 1
@@ -149,15 +103,31 @@ export function ShortTermTrainingsContent() {
                 Foundational programs for those starting their tech journey.
               </p>
             </div>
+
+            {/* Image */}
+            <div className="relative aspect-[16/9] w-full overflow-hidden">
+              <Image
+                src="/images/About-Facilities/Computer%20Labs%201.jpg"
+                alt="BITS College Computer Labs"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover transition duration-500 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+            </div>
+
+            {/* Divider */}
             <div className="h-px bg-gradient-to-r from-emerald-900/10 via-emerald-900/5 to-transparent dark:from-gray-700" />
+
+            {/* Training items */}
             <div className="flex flex-col gap-3 p-6 sm:p-8">
               {beginnerTrainings.map((item, index) => (
-                <TrainingCard key={item.label} label={item.label} icon={item.icon} index={index} />
+                <TrainingItem key={item.label} label={item.label} icon={item.icon} index={index} />
               ))}
             </div>
           </motion.div>
 
-          {/* Advanced card */}
+          {/* Advanced card — title → description → image → items */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -166,7 +136,8 @@ export function ShortTermTrainingsContent() {
             custom={0.1}
             className="overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.06)]"
           >
-            <div className="bg-gradient-to-br from-lime-500/15 via-lime-400/8 to-transparent px-8 py-7">
+            {/* Title + description */}
+            <div className="bg-gradient-to-br from-lime-500/15 via-lime-400/8 to-transparent px-8 pt-8 pb-6">
               <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-lime-200 bg-white/80 px-3 py-1.5 text-xs font-semibold text-bits-green-dark shadow-sm dark:border-gray-700 dark:bg-gray-900/80">
                 <Zap className="h-3.5 w-3.5" />
                 Level 2
@@ -178,10 +149,26 @@ export function ShortTermTrainingsContent() {
                 In-depth programs for professionals looking to specialize.
               </p>
             </div>
+
+            {/* Image */}
+            <div className="relative aspect-[16/9] w-full overflow-hidden">
+              <Image
+                src="/images/About-Facilities/Class%20Room%201.jpg"
+                alt="BITS College Class Room"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover transition duration-500 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+            </div>
+
+            {/* Divider */}
             <div className="h-px bg-gradient-to-r from-emerald-900/10 via-emerald-900/5 to-transparent dark:from-gray-700" />
+
+            {/* Training items */}
             <div className="flex flex-col gap-3 p-6 sm:p-8">
               {advancedTrainings.map((item, index) => (
-                <TrainingCard key={item.label} label={item.label} icon={item.icon} index={index} />
+                <TrainingItem key={item.label} label={item.label} icon={item.icon} index={index} />
               ))}
             </div>
           </motion.div>

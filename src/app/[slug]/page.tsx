@@ -8,6 +8,7 @@ import { UndergradAdmissionContent } from "@/components/admissions/UndergradAdmi
 import { GraduateAdmissionContent } from "@/components/admissions/GraduateAdmissionContent";
 import { TuitionContent } from "@/components/admissions/TuitionContent";
 import { ShortTrainingsContent } from "@/components/services/ShortTrainingsContent";
+import { ShortTermTrainingsContent } from "@/components/services/ShortTermTrainingsContent";
 import { LibraryContent } from "@/components/services/LibraryContent";
 import { InaugurationContent } from "@/components/news/InaugurationContent";
 import { StudentAppreciationNightContent } from "@/components/news/StudentAppreciationNightContent";
@@ -44,6 +45,10 @@ const PAGE_TITLES: Record<string, { title: string; description: string }> = {
   "short-trainings": {
     title: "Professional Trainings",
     description: "Short-term professional training programs.",
+  },
+  "short-term-trainings": {
+    title: "Short-Term Training",
+    description: "Technical and advanced short-term training programs at BITS College.",
   },
   "software-engineering": {
     title: "Software Engineering",
@@ -97,7 +102,7 @@ export async function generateMetadata({ params }: Props) {
 /** Page-group slugs used for content routing below */
 const ACADEMICS_PAGES = ["graduate-program", "research"];
 const ADMISSIONS_PAGES = ["undergrad-admission", "graduate-admission", "tuition"];
-const SERVICES_PAGES = ["short-trainings"];
+const SERVICES_PAGES = ["short-trainings", "short-term-trainings"];
 
 export default async function DynamicPage({ params }: Props) {
   const { slug } = await params;
@@ -124,6 +129,7 @@ export default async function DynamicPage({ params }: Props) {
   }
 
   if (SERVICES_PAGES.includes(slug)) {
+    if (slug === "short-term-trainings") return <ShortTermTrainingsContent />;
     return <ShortTrainingsContent />;
   }
 

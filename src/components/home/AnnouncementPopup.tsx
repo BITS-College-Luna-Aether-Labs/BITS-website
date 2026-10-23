@@ -185,7 +185,7 @@ export function AnnouncementPopup() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.45, delay: 0.05, ease: "easeOut" }}
                   >
-                    Congratulations Class of 2026
+                    Short-Term Training 2026
                   </motion.h2>
 
                   <motion.p
@@ -195,9 +195,7 @@ export function AnnouncementPopup() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.45, delay: 0.15, ease: "easeOut" }}
                   >
-                    Software Engineering - First Degree<br className="hidden sm:inline" />
-                    <span className="inline sm:hidden"> </span>
-                     IT Management - Second Degree
+                    We are starting Short-Term Training 2026
                   </motion.p>
 
                   <motion.div
@@ -207,15 +205,15 @@ export function AnnouncementPopup() {
                     transition={{ duration: 0.45, delay: 0.25, ease: "easeOut" }}
                   >
                     <Link
-                      href="/college-news"
+                      href="/short-term-trainings"
                       onClick={() => setOpen(false)}
                       className="btn-solid-green inline-flex min-w-[190px] items-center justify-center !px-8 !py-3.5 !text-base font-bold shadow-lg shadow-bits-green/25 transition-transform hover:scale-105 active:scale-95"
                     >
-                      <span className="sr-only">College news: </span>
-                      Read More
+                      <span className="sr-only">Short-Term Training: </span>
+                      Learn More
                     </Link>
                     <span className="text-xs text-bits-muted dark:text-slate-400">
-                      Explore the graduation story and latest news.
+                      Explore our beginner and advanced tracks.
                     </span>
                   </motion.div>
                 </div>
@@ -249,32 +247,15 @@ export function AnnouncementPopup() {
                 >
                   <ScrollText className="h-4 w-4" />
                 </motion.div>
-                <div className="relative z-10 flex flex-col items-center gap-2.5">
-                  <div className="relative h-20 w-20">
-                    <Image
-                      src="/images/logo.png"
-                      alt=""
-                      fill
-                      priority
-                      className="object-contain opacity-90 drop-shadow-[0_8px_20px_rgba(0,0,0,0.15)]"
-                    />
-                  </div>
-                  <motion.div
-                    className="rounded-xl border border-white/40 bg-white/70 px-3 py-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-md dark:bg-black/30"
-                    initial={enabled ? { opacity: 0, y: 8 } : false}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-bits-green text-white shadow-sm shadow-bits-green/30">
-                        <GraduationCap className="h-4 w-4" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-bits-muted dark:text-slate-300">BITS College</p>
-                        <p className="text-xs font-semibold text-bits-heading dark:text-white">Class of 2026</p>
-                      </div>
-                    </div>
-                  </motion.div>
+                <div className="relative z-10 overflow-hidden rounded-xl">
+                  <Image
+                    src="/images/Pop-up card.jpeg"
+                    alt="Short-Term Training 2026"
+                    width={368}
+                    height={220}
+                    priority
+                    className="w-full object-cover"
+                  />
                 </div>
               </motion.div>
             </div>

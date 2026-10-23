@@ -45,12 +45,13 @@ export const NAV_ITEMS: NavItem[] = [
     label: "Services",
     children: [
       { label: "Student Support", href: "/student-support" },
-      { label: "Online Learning", href: "https://online.bitscollege.edu.et/" },
+      { label: "E-Learning", href: "https://e-learning.bitscollege.edu.et/my/" },
       {
         label: "Library",
         href: "/library",
       },
       { label: "Professional Trainings", href: "/short-trainings" },
+      { label: "Short-Term Training", href: "/short-term-trainings" },
     ],
   },
   { label: "News & Events", href: "/college-news" },

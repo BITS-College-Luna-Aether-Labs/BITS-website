@@ -2,9 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
-import { Sparkles, GraduationCap, X } from "lucide-react";
+import { Sparkles, GraduationCap, X, BookOpen, Zap } from "lucide-react";
 import { useMotionSafe } from "@/hooks/useMotionSafe";
 import { EASE_PREMIUM, SPRING_GENTLE } from "@/lib/motion-presets";
 
@@ -171,7 +170,7 @@ export function AnnouncementPopup() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.05, ease: "easeOut" }}
                 >
-                  Short-Term Training 2026
+                  We started Short-Term Training
                 </motion.h2>
 
                 <motion.p
@@ -181,25 +180,40 @@ export function AnnouncementPopup() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.12, ease: "easeOut" }}
                 >
-                  We are starting Short-Term Training 2026
+                  Explore our beginner and advanced tracks below.
                 </motion.p>
               </div>
 
-              {/* Image — full width, no padding */}
+              {/* Training levels content */}
               <motion.div
-                className="relative w-full overflow-hidden"
-                initial={enabled ? { opacity: 0 } : false}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.18, ease: "easeOut" }}
+                className="flex flex-col gap-2 px-4 pb-2"
+                initial={enabled ? { opacity: 0, y: 8 } : false}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.18, ease: "easeOut" }}
               >
-                <Image
-                  src="/images/Pop-up card.jpeg"
-                  alt="Short-Term Training 2026"
-                  width={572}
-                  height={210}
-                  priority
-                  className="w-full object-cover"
-                />
+                {/* Level 1 */}
+                <div className="rounded-xl border border-emerald-900/10 bg-emerald-50/60 p-3 dark:border-gray-700 dark:bg-gray-800/60">
+                  <div className="mb-1 flex items-center gap-2">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-bits-green px-2 py-0.5 text-[10px] font-semibold text-white">
+                      <BookOpen className="h-2.5 w-2.5" />
+                      Level 1
+                    </span>
+                  </div>
+                  <p className="text-sm font-semibold text-bits-heading dark:text-white">Technical / Beginners Trainings</p>
+                  <p className="mt-0.5 text-xs leading-5 text-bits-text dark:text-slate-400">Foundational programs for those starting their tech journey.</p>
+                </div>
+
+                {/* Level 2 */}
+                <div className="rounded-xl border border-lime-200/60 bg-lime-50/60 p-3 dark:border-gray-700 dark:bg-gray-800/60">
+                  <div className="mb-1 flex items-center gap-2">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-bits-green-dark px-2 py-0.5 text-[10px] font-semibold text-white">
+                      <Zap className="h-2.5 w-2.5" />
+                      Level 2
+                    </span>
+                  </div>
+                  <p className="text-sm font-semibold text-bits-heading dark:text-white">Advanced / Specialized Trainings</p>
+                  <p className="mt-0.5 text-xs leading-5 text-bits-text dark:text-slate-400">In-depth programs for professionals looking to specialize.</p>
+                </div>
               </motion.div>
 
               {/* Learn More — at the bottom */}

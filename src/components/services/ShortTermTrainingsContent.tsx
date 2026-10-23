@@ -1,23 +1,112 @@
 /** Short-Term Trainings — beginner and advanced/specialized training cards */
 "use client";
 
+import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { BookOpen, Zap } from "lucide-react";
 
+function IconFigma() {
+  return (
+    <svg viewBox="0 0 38 57" fill="none" className="h-6 w-6">
+      <path d="M19 28.5A9.5 9.5 0 1 1 28.5 19 9.5 9.5 0 0 1 19 28.5z" fill="#1ABCFE"/>
+      <path d="M9.5 57A9.5 9.5 0 0 1 9.5 38H19v9.5A9.5 9.5 0 0 1 9.5 57z" fill="#0ACF83"/>
+      <path d="M19 0H9.5A9.5 9.5 0 0 0 9.5 19H19z" fill="#FF7262"/>
+      <path d="M19 0h9.5a9.5 9.5 0 0 1 0 19H19z" fill="#F24E1E"/>
+      <path d="M28.5 19H19v19h9.5a9.5 9.5 0 0 0 0-19z" fill="#A259FF"/>
+    </svg>
+  );
+}
+
+function IconWeb() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+      <circle cx="12" cy="12" r="10" stroke="#2563EB" strokeWidth="1.5"/>
+      <path d="M12 2C12 2 8 7 8 12s4 10 4 10M12 2c0 0 4 5 4 10s-4 10-4 10M2 12h20" stroke="#2563EB" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function IconNetwork() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+      <rect x="9" y="2" width="6" height="4" rx="1" fill="#059669"/>
+      <rect x="2" y="18" width="6" height="4" rx="1" fill="#059669"/>
+      <rect x="16" y="18" width="6" height="4" rx="1" fill="#059669"/>
+      <path d="M12 6v4M12 10H5v4M12 10h7v4" stroke="#059669" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function IconAnalytics() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+      <path d="M3 20h18M5 20V14m4 6V10m4 10V6m4 14v-8" stroke="#D97706" strokeWidth="2" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function IconAI() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+      <path d="M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 0 6h-1v1a4 4 0 0 1-8 0v-1H7a3 3 0 0 1 0-6h1V6a4 4 0 0 1 4-4z" fill="#7C3AED" opacity=".15"/>
+      <circle cx="12" cy="12" r="3" fill="#7C3AED"/>
+      <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12" stroke="#7C3AED" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function IconAdvancedAnalytics() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+      <path d="M3 20h18M5 20V10m4 10V6m4 10V2m4 18v-6" stroke="#0891B2" strokeWidth="2" strokeLinecap="round"/>
+      <circle cx="19" cy="6" r="2" fill="#0891B2"/>
+    </svg>
+  );
+}
+
+function IconPython() {
+  return (
+    <svg viewBox="0 0 256 255" className="h-6 w-6">
+      <defs>
+        <linearGradient id="pyA" x1="12%" y1="12%" x2="88%" y2="88%">
+          <stop offset="0" stopColor="#387EB8"/>
+          <stop offset="1" stopColor="#366994"/>
+        </linearGradient>
+        <linearGradient id="pyB" x1="12%" y1="12%" x2="88%" y2="88%">
+          <stop offset="0" stopColor="#FFE052"/>
+          <stop offset="1" stopColor="#FFC331"/>
+        </linearGradient>
+      </defs>
+      <path d="M126.9 0C62.4 0 66.3 27.3 66.3 27.3l.1 28.3h61.7v8.5H41.6S0 59.1 0 124.2s37.3 62.8 37.3 62.8h22.3v-30.2s-1.2-37.3 36.7-37.3h63.2s35.5.6 35.5-34.3V35.4S200.5 0 126.9 0zm-35 20.2a11.5 11.5 0 1 1 0 23 11.5 11.5 0 0 1 0-23z" fill="url(#pyA)"/>
+      <path d="M129.1 254.8c64.5 0 60.6-27.3 60.6-27.3l-.1-28.3h-61.7v-8.5h86.5s41.6 5 41.6-60.1-37.3-62.8-37.3-62.8h-22.3v30.2s1.2 37.3-36.7 37.3H96.5s-35.5-.6-35.5 34.3v57.8s-5.4 35.4 68.1 35.4zm35-20.2a11.5 11.5 0 1 1 0-23 11.5 11.5 0 0 1 0 23z" fill="url(#pyB)"/>
+    </svg>
+  );
+}
+
+function IconMobile() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+      <rect x="5" y="2" width="14" height="20" rx="3" stroke="#16A34A" strokeWidth="1.5"/>
+      <circle cx="12" cy="18" r="1" fill="#16A34A"/>
+      <path d="M9 5h6" stroke="#16A34A" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
 const beginnerTrainings = [
-  { label: "Graphic design and digital content creation", icon: "🎨" },
-  { label: "Web Development", icon: "🌐" },
-  { label: "System and Network Administration", icon: "🖧" },
-  { label: "Data Analytics Basics", icon: "📊" },
+  { label: "Graphic design and digital content creation", icon: <IconFigma /> },
+  { label: "Web Development", icon: <IconWeb /> },
+  { label: "System and Network Administration", icon: <IconNetwork /> },
+  { label: "Data Analytics Basics", icon: <IconAnalytics /> },
 ];
 
 const advancedTrainings = [
-  { label: "Practical and responsible use of AI", icon: "🤖" },
-  { label: "Advanced Data Analytics", icon: "📈" },
-  { label: "Python Programming / Basics", icon: "🐍" },
-  { label: "Python Programming / Advanced", icon: "⚡" },
-  { label: "Mobile App Development", icon: "📱" },
+  { label: "Practical and responsible use of AI", icon: <IconAI /> },
+  { label: "Advanced Data Analytics", icon: <IconAdvancedAnalytics /> },
+  { label: "Python Programming / Basics", icon: <IconPython /> },
+  { label: "Python Programming / Advanced", icon: <IconPython /> },
+  { label: "Mobile App Development", icon: <IconMobile /> },
 ];
 
 const fadeUp = {
@@ -29,7 +118,7 @@ const fadeUp = {
   }),
 };
 
-function TrainingItem({ label, icon, index }: { label: string; icon: string; index: number }) {
+function TrainingItem({ label, icon, index }: { label: string; icon: React.ReactNode; index: number }) {
   return (
     <motion.div
       variants={fadeUp}
@@ -39,7 +128,7 @@ function TrainingItem({ label, icon, index }: { label: string; icon: string; ind
       custom={index * 0.06}
       className="group flex items-center gap-4 rounded-2xl border border-emerald-900/10 bg-[var(--bits-page)] px-5 py-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-bits-green/30 hover:shadow-[0_8px_24px_rgba(16,24,40,0.09)] dark:border-gray-700 dark:bg-gray-800 dark:hover:border-bits-green/30"
     >
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-xl dark:bg-gray-700">
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-50 dark:bg-gray-700">
         {icon}
       </span>
       <span className="text-sm font-medium leading-6 text-bits-text group-hover:text-bits-heading">

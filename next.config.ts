@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         hostname: "i.ytimg.com",
         pathname: "/vi/**",
       },
+      {
+        protocol: "https",
+        hostname: "api.bitscollege.edu.et",
+        pathname: "/api/media/**",
+      },
     ],
   },
   experimental: {

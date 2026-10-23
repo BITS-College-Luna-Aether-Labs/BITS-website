@@ -67,7 +67,7 @@ function ConfettiBurst() {
   );
 }
 
-const POPUP_STORAGE_KEY = "bits_announcement_shown";
+const POPUP_STORAGE_KEY = "bits_announcement_v2";
 
 export function AnnouncementPopup() {
   const { enabled } = useMotionSafe();

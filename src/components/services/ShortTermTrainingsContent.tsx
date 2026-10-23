@@ -1,6 +1,7 @@
 /** Short-Term Trainings — beginner and advanced/specialized training cards */
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { BookOpen, Zap } from "lucide-react";
 
@@ -73,6 +74,53 @@ export function ShortTermTrainingsContent() {
             <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-bits-text">
               Practical, focused programs designed to build real-world skills — from foundational tech to cutting-edge specializations.
             </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Facility images */}
+      <section className="mx-auto max-w-site px-4 pt-16 sm:px-6 lg:px-8">
+        <div className="grid gap-6 sm:grid-cols-2">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            custom={0}
+            className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-emerald-900/10 shadow-[0_20px_80px_rgba(16,24,40,0.06)]"
+          >
+            <Image
+              src="/images/About-Facilities/Computer%20Labs%201.jpg"
+              alt="BITS College Computer Labs"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover transition duration-500 hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+            <div className="absolute bottom-5 left-6">
+              <span className="rounded-full bg-bits-green-dark/90 px-3 py-1 text-xs font-semibold text-white">Computer Labs</span>
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            custom={0.08}
+            className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-emerald-900/10 shadow-[0_20px_80px_rgba(16,24,40,0.06)]"
+          >
+            <Image
+              src="/images/About-Facilities/Class%20Room%201.jpg"
+              alt="BITS College Class Room"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover transition duration-500 hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+            <div className="absolute bottom-5 left-6">
+              <span className="rounded-full bg-bits-green-dark/90 px-3 py-1 text-xs font-semibold text-white">Class Rooms</span>
+            </div>
           </motion.div>
         </div>
       </section>

@@ -126,7 +126,7 @@ export function AnnouncementPopup() {
         >
           {enabled && <ConfettiBurst />}
           {/* Wrapper — non-overflow so the close button can sit outside the card */}
-          <div className="relative w-[92vw] max-w-[440px]">
+          <div className="relative w-[95vw] max-w-[572px]">
             {/* Close button */}
             <motion.button
               type="button"
@@ -149,14 +149,14 @@ export function AnnouncementPopup() {
               <div className="h-1 w-full bg-gradient-to-r from-transparent via-bits-green to-transparent" aria-hidden="true" />
 
               {/* Title + subtitle */}
-              <div className="relative flex flex-col items-center gap-2 px-6 pb-4 pt-6 text-center sm:px-8 sm:pt-8">
+              <div className="relative flex flex-col items-center gap-1 px-4 pb-2 pt-4 text-center">
                 <motion.div
                   className="absolute left-3 top-3 text-bits-green/15"
                   aria-hidden="true"
                   animate={enabled ? { rotate: [0, 10, 0] } : undefined}
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <Sparkles className="h-8 w-8" />
+                  <Sparkles className="h-6 w-6" />
                 </motion.div>
 
                 <div className="inline-flex items-center gap-1.5 rounded-full bg-bits-green px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.25em] text-white shadow-sm">
@@ -166,7 +166,7 @@ export function AnnouncementPopup() {
 
                 <motion.h2
                   id="announcement-title"
-                  className="text-xl font-bold leading-tight text-bits-heading dark:text-white sm:text-2xl"
+                  className="text-lg font-bold leading-tight text-bits-heading dark:text-white sm:text-xl"
                   initial={enabled ? { opacity: 0, y: 8 } : false}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.05, ease: "easeOut" }}
@@ -176,7 +176,7 @@ export function AnnouncementPopup() {
 
                 <motion.p
                   id="announcement-subtitle"
-                  className="text-sm leading-6 text-bits-text dark:text-slate-300"
+                  className="text-xs leading-5 text-bits-text dark:text-slate-300"
                   initial={enabled ? { opacity: 0, y: 8 } : false}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.12, ease: "easeOut" }}
@@ -195,8 +195,8 @@ export function AnnouncementPopup() {
                 <Image
                   src="/images/Pop-up card.jpeg"
                   alt="Short-Term Training 2026"
-                  width={440}
-                  height={300}
+                  width={572}
+                  height={210}
                   priority
                   className="w-full object-cover"
                 />
@@ -204,7 +204,7 @@ export function AnnouncementPopup() {
 
               {/* Learn More — at the bottom */}
               <motion.div
-                className="flex flex-col items-center gap-2 px-6 py-6 sm:px-8"
+                className="flex flex-col items-center gap-1 px-4 py-3"
                 initial={enabled ? { opacity: 0, y: 8 } : false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.25, ease: "easeOut" }}
@@ -212,7 +212,7 @@ export function AnnouncementPopup() {
                 <Link
                   href="/short-term-trainings"
                   onClick={() => setOpen(false)}
-                  className="btn-solid-green inline-flex w-full items-center justify-center !px-8 !py-3.5 !text-base font-bold shadow-lg shadow-bits-green/25 transition-transform hover:scale-105 active:scale-95"
+                  className="btn-solid-green inline-flex w-full items-center justify-center !px-6 !py-2.5 !text-sm font-bold shadow-lg shadow-bits-green/25 transition-transform hover:scale-105 active:scale-95"
                 >
                   Learn More
                 </Link>

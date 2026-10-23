@@ -39,6 +39,7 @@ export const NAV_ITEMS: NavItem[] = [
     children: [
       { label: "Undergraduate Admission", href: "/undergrad-admission" },
       { label: "Graduate Admission", href: "/graduate-admission" },
+      { label: "Scholarship & Aid", href: "/scholarship-aid" },
     ],
   },
   {

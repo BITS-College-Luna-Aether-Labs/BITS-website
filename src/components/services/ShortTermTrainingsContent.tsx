@@ -126,12 +126,12 @@ function TrainingItem({ label, icon, index }: { label: string; icon: React.React
       whileInView="show"
       viewport={{ once: true }}
       custom={index * 0.06}
-      className="group flex items-center gap-4 rounded-2xl border border-emerald-900/10 bg-[var(--bits-page)] px-5 py-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-bits-green/30 hover:shadow-[0_8px_24px_rgba(16,24,40,0.09)] dark:border-gray-700 dark:bg-gray-800 dark:hover:border-bits-green/30"
+      className="group flex items-center gap-3 rounded-xl border border-emerald-900/10 bg-[var(--bits-page)] px-4 py-3 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-bits-green/30 hover:shadow-[0_8px_24px_rgba(16,24,40,0.09)] dark:border-gray-700 dark:bg-gray-800 dark:hover:border-bits-green/30"
     >
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-50 dark:bg-gray-700">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-50 dark:bg-gray-700">
         {icon}
       </span>
-      <span className="text-sm font-medium leading-6 text-bits-text group-hover:text-bits-heading">
+      <span className="text-xs font-medium leading-5 text-bits-text group-hover:text-bits-heading">
         {label}
       </span>
     </motion.div>
@@ -145,30 +145,30 @@ export function ShortTermTrainingsContent() {
       <section className="relative overflow-hidden border-b border-emerald-950/10 bg-gradient-to-b from-emerald-50 to-[var(--bits-page)] dark:from-gray-900 dark:to-black">
         <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-lime-200/40 blur-3xl dark:bg-bits-green/10" />
         <div className="pointer-events-none absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-emerald-100/50 blur-3xl dark:bg-bits-green-dark/10" />
-        <div className="relative mx-auto max-w-site px-4 pb-14 pt-24 sm:px-6 lg:px-8 lg:pb-20 lg:pt-32">
+        <div className="relative mx-auto max-w-4xl px-4 pb-10 pt-20 sm:px-6 lg:px-8 lg:pb-14 lg:pt-24">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             animate="show"
             custom={0}
-            className="mx-auto max-w-2xl text-center"
+            className="mx-auto max-w-xl text-center"
           >
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-[var(--bits-surface)]/80 px-4 py-2 text-sm font-medium text-bits-green-dark shadow-sm dark:border-gray-700">
-              <BookOpen className="h-4 w-4" />
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-[var(--bits-surface)]/80 px-3 py-1.5 text-xs font-medium text-bits-green-dark shadow-sm dark:border-gray-700">
+              <BookOpen className="h-3.5 w-3.5" />
               Services · Short-Term Training
             </div>
-            <h1 className="text-4xl font-semibold tracking-tight text-bits-heading sm:text-5xl lg:text-6xl">
+            <h1 className="text-3xl font-semibold tracking-tight text-bits-heading sm:text-4xl lg:text-5xl">
               Short-Term Training
             </h1>
-            <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-bits-text">
+            <p className="mx-auto mt-4 max-w-lg text-base leading-7 text-bits-text">
               Practical, focused programs designed to build real-world skills — from foundational tech to cutting-edge specializations.
             </p>
           </motion.div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-site px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
+      <section className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
 
           {/* Beginner card — title → description → image → items */}
           <motion.div
@@ -180,21 +180,21 @@ export function ShortTermTrainingsContent() {
             className="overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.06)]"
           >
             {/* Title + description */}
-            <div className="bg-gradient-to-br from-emerald-500/15 via-emerald-400/8 to-transparent px-8 pt-8 pb-6">
-              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/80 px-3 py-1.5 text-xs font-semibold text-bits-green-dark shadow-sm dark:border-gray-700 dark:bg-gray-900/80">
-                <BookOpen className="h-3.5 w-3.5" />
+            <div className="bg-gradient-to-br from-emerald-500/15 via-emerald-400/8 to-transparent px-6 pt-6 pb-4">
+              <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-white/80 px-2.5 py-1 text-xs font-semibold text-bits-green-dark shadow-sm dark:border-gray-700 dark:bg-gray-900/80">
+                <BookOpen className="h-3 w-3" />
                 Level 1
               </div>
-              <h2 className="text-2xl font-semibold tracking-tight text-bits-heading sm:text-3xl">
+              <h2 className="text-xl font-semibold tracking-tight text-bits-heading sm:text-2xl">
                 Technical / Beginners Trainings
               </h2>
-              <p className="mt-2 text-sm leading-6 text-bits-text">
+              <p className="mt-1.5 text-xs leading-5 text-bits-text">
                 Foundational programs for those starting their tech journey.
               </p>
             </div>
 
             {/* Image */}
-            <div className="relative aspect-[16/9] w-full overflow-hidden">
+            <div className="relative aspect-[2/1] w-full overflow-hidden">
               <Image
                 src="/images/About-Facilities/Computer%20Labs%201.jpg"
                 alt="BITS College Computer Labs"
@@ -209,7 +209,7 @@ export function ShortTermTrainingsContent() {
             <div className="h-px bg-gradient-to-r from-emerald-900/10 via-emerald-900/5 to-transparent dark:from-gray-700" />
 
             {/* Training items */}
-            <div className="flex flex-col gap-3 p-6 sm:p-8">
+            <div className="flex flex-col gap-2 p-4 sm:p-5">
               {beginnerTrainings.map((item, index) => (
                 <TrainingItem key={item.label} label={item.label} icon={item.icon} index={index} />
               ))}
@@ -226,21 +226,21 @@ export function ShortTermTrainingsContent() {
             className="overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_20px_80px_rgba(16,24,40,0.06)]"
           >
             {/* Title + description */}
-            <div className="bg-gradient-to-br from-lime-500/15 via-lime-400/8 to-transparent px-8 pt-8 pb-6">
-              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-lime-200 bg-white/80 px-3 py-1.5 text-xs font-semibold text-bits-green-dark shadow-sm dark:border-gray-700 dark:bg-gray-900/80">
-                <Zap className="h-3.5 w-3.5" />
+            <div className="bg-gradient-to-br from-lime-500/15 via-lime-400/8 to-transparent px-6 pt-6 pb-4">
+              <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-lime-200 bg-white/80 px-2.5 py-1 text-xs font-semibold text-bits-green-dark shadow-sm dark:border-gray-700 dark:bg-gray-900/80">
+                <Zap className="h-3 w-3" />
                 Level 2
               </div>
-              <h2 className="text-2xl font-semibold tracking-tight text-bits-heading sm:text-3xl">
+              <h2 className="text-xl font-semibold tracking-tight text-bits-heading sm:text-2xl">
                 Advanced / Specialized Trainings
               </h2>
-              <p className="mt-2 text-sm leading-6 text-bits-text">
+              <p className="mt-1.5 text-xs leading-5 text-bits-text">
                 In-depth programs for professionals looking to specialize.
               </p>
             </div>
 
             {/* Image */}
-            <div className="relative aspect-[16/9] w-full overflow-hidden">
+            <div className="relative aspect-[2/1] w-full overflow-hidden">
               <Image
                 src="/images/About-Facilities/Class%20Room%201.jpg"
                 alt="BITS College Class Room"
@@ -255,7 +255,7 @@ export function ShortTermTrainingsContent() {
             <div className="h-px bg-gradient-to-r from-emerald-900/10 via-emerald-900/5 to-transparent dark:from-gray-700" />
 
             {/* Training items */}
-            <div className="flex flex-col gap-3 p-6 sm:p-8">
+            <div className="flex flex-col gap-2 p-4 sm:p-5">
               {advancedTrainings.map((item, index) => (
                 <TrainingItem key={item.label} label={item.label} icon={item.icon} index={index} />
               ))}

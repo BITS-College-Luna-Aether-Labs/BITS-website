@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Sparkles, GraduationCap, X, PartyPopper, ScrollText } from "lucide-react";
+import { Sparkles, GraduationCap, X } from "lucide-react";
 import { useMotionSafe } from "@/hooks/useMotionSafe";
 import { EASE_PREMIUM, SPRING_GENTLE } from "@/lib/motion-presets";
 
@@ -126,140 +126,101 @@ export function AnnouncementPopup() {
         >
           {enabled && <ConfettiBurst />}
           {/* Wrapper — non-overflow so the close button can sit outside the card */}
-          <div className="relative inline-block">
-            {/* Close button — fully outside the card,5px gap from top-right corner */}
+          <div className="relative w-[92vw] max-w-[440px]">
+            {/* Close button */}
             <motion.button
               type="button"
               onClick={() => setOpen(false)}
-              className="absolute z-50 inline-flex items-center justify-center rounded-full border-2 border-bits-green bg-bits-green/10 text-white shadow-lg shadow-bits-green/30 backdrop-blur-sm hover:bg-bits-green hover:text-white dark:border-bits-green dark:bg-bits-green/20 dark:text-white dark:hover:bg-bits-green right-0 h-12 w-12 max-md:-top-[79px] max-md:-right-[16px] max-md:h-16 max-md:w-16 sm:-right-[49px] sm:-top-[64px]"
+              className="absolute -right-3 -top-3 z-50 flex h-10 w-10 items-center justify-center rounded-full border-2 border-bits-green bg-white text-bits-green shadow-lg shadow-bits-green/30 hover:bg-bits-green hover:text-white dark:bg-gray-900 dark:text-bits-green dark:hover:bg-bits-green dark:hover:text-white sm:-right-5 sm:-top-5"
               aria-label="Close announcement"
-              animate={{ backgroundColor: ["rgba(125,194,67,1)", "rgba(125,194,67,0)", "rgba(125,194,67,1)"] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               whileHover={{ scale: 1.15 }}
             >
-              <X className="h-[30px] w-[30px]" />
+              <X className="h-5 w-5" />
             </motion.button>
 
             <motion.div
-              className="relative max-w-[400px] w-full overflow-hidden rounded-[1.5rem] border border-white/15 bg-[radial-gradient(circle_at_top_left,rgba(125,194,67,0.22),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(180,140,30,0.16),transparent_30%),linear-gradient(180deg,#fbfff7,rgba(255,255,255,0.98))] shadow-[0_30px_120px_rgba(0,0,0,0.28)] dark:border-white/10 dark:bg-[radial-gradient(circle_at_top_left,rgba(125,194,67,0.18),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(180,140,30,0.12),transparent_30%),linear-gradient(180deg,#0d120f,rgba(10,10,10,0.98))]"
+              className="relative w-full overflow-hidden rounded-[1.5rem] border border-white/15 bg-white shadow-[0_30px_120px_rgba(0,0,0,0.28)] dark:border-white/10 dark:bg-gray-950"
               initial={enabled ? { y: 40, scale: 0.92, opacity: 0 } : false}
               animate={{ y: 0, scale: 1, opacity: 1 }}
               exit={enabled ? { y: 24, scale: 0.94, opacity: 0 } : undefined}
               transition={{ ...SPRING_GENTLE, ease: EASE_PREMIUM }}
             >
-              <motion.div
-              className="absolute -right-6 -top-6 h-16 w-16 rounded-full bg-bits-green/20 blur-3xl"
-              aria-hidden="true"
-              animate={enabled ? { scale: [1, 1.12, 1], opacity: [0.25, 0.45, 0.25] } : undefined}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <motion.div
-              className="absolute -bottom-8 -left-8 h-20 w-20 rounded-full bg-bits-gold/20 blur-3xl"
-              aria-hidden="true"
-              animate={enabled ? { scale: [1, 1.08, 1], opacity: [0.2, 0.35, 0.2] } : undefined}
-              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            />
-            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-bits-green to-transparent" aria-hidden="true" />
+              {/* Top green accent line */}
+              <div className="h-1 w-full bg-gradient-to-r from-transparent via-bits-green to-transparent" aria-hidden="true" />
 
-            <div className="relative z-10 flex flex-col">
-              <div className="relative flex items-center overflow-hidden px-5 pt-10 pb-5 sm:px-6 sm:pt-12">
+              {/* Title + subtitle */}
+              <div className="relative flex flex-col items-center gap-2 px-6 pb-4 pt-6 text-center sm:px-8 sm:pt-8">
                 <motion.div
-                  className="absolute left-3 top-3 text-bits-green/20 dark:text-bits-green/15"
+                  className="absolute left-3 top-3 text-bits-green/15"
                   aria-hidden="true"
                   animate={enabled ? { rotate: [0, 10, 0] } : undefined}
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <Sparkles className="h-10 w-10" />
+                  <Sparkles className="h-8 w-8" />
                 </motion.div>
 
-                <div className="relative z-10 flex w-full flex-col items-center gap-2.5 text-center">
-                  <div className="inline-flex w-fit items-center gap-1.5 rounded-full bg-bits-green px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.25em] text-white shadow-sm">
-                    <GraduationCap className="h-3 w-3" />
-                    Important Announcement
-                  </div>
-
-                  <motion.h2
-                    id="announcement-title"
-                    className="font-display text-2xl font-bold leading-[1.05] text-bits-heading sm:text-3xl dark:text-white"
-                    initial={enabled ? { opacity: 0, y: 10 } : false}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.45, delay: 0.05, ease: "easeOut" }}
-                  >
-                    Short-Term Training 2026
-                  </motion.h2>
-
-                  <motion.p
-                    id="announcement-subtitle"
-                    className="text-base font-semibold leading-tight text-bits-text sm:text-lg dark:text-slate-200"
-                    initial={enabled ? { opacity: 0, y: 10 } : false}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.45, delay: 0.15, ease: "easeOut" }}
-                  >
-                    We are starting Short-Term Training 2026
-                  </motion.p>
-
-                  <motion.div
-                    className="flex flex-col items-center gap-3 pt-2"
-                    initial={enabled ? { opacity: 0, y: 10 } : false}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.45, delay: 0.25, ease: "easeOut" }}
-                  >
-                    <Link
-                      href="/short-term-trainings"
-                      onClick={() => setOpen(false)}
-                      className="btn-solid-green inline-flex min-w-[190px] items-center justify-center !px-8 !py-3.5 !text-base font-bold shadow-lg shadow-bits-green/25 transition-transform hover:scale-105 active:scale-95"
-                    >
-                      <span className="sr-only">Short-Term Training: </span>
-                      Learn More
-                    </Link>
-                    <span className="text-xs text-bits-muted dark:text-slate-400">
-                      Explore our beginner and advanced tracks.
-                    </span>
-                  </motion.div>
+                <div className="inline-flex items-center gap-1.5 rounded-full bg-bits-green px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.25em] text-white shadow-sm">
+                  <GraduationCap className="h-3 w-3" />
+                  Important Announcement
                 </div>
+
+                <motion.h2
+                  id="announcement-title"
+                  className="text-xl font-bold leading-tight text-bits-heading dark:text-white sm:text-2xl"
+                  initial={enabled ? { opacity: 0, y: 8 } : false}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.05, ease: "easeOut" }}
+                >
+                  Short-Term Training 2026
+                </motion.h2>
+
+                <motion.p
+                  id="announcement-subtitle"
+                  className="text-sm leading-6 text-bits-text dark:text-slate-300"
+                  initial={enabled ? { opacity: 0, y: 8 } : false}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.12, ease: "easeOut" }}
+                >
+                  We are starting Short-Term Training 2026
+                </motion.p>
               </div>
 
+              {/* Image — full width, no padding */}
               <motion.div
-                className="relative overflow-hidden bg-[linear-gradient(180deg,rgba(125,194,67,0.16),rgba(180,140,30,0.1))] p-3.5 sm:p-4"
-                initial={enabled ? { opacity: 0, y: 12 } : false}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.12, ease: "easeOut" }}
+                className="relative w-full overflow-hidden"
+                initial={enabled ? { opacity: 0 } : false}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.18, ease: "easeOut" }}
               >
-                <motion.div
-                  className="absolute -right-3 -top-3 h-12 w-12 rounded-full border border-white/30 bg-white/20 backdrop-blur-sm pointer-events-none"
-                  aria-hidden="true"
-                  animate={enabled ? { y: [0, -6, 0], scale: [1, 1.08, 1] } : undefined}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                <Image
+                  src="/images/Pop-up card.jpeg"
+                  alt="Short-Term Training 2026"
+                  width={440}
+                  height={300}
+                  priority
+                  className="w-full object-cover"
                 />
-                <motion.div
-                  className="absolute left-5 bottom-5 text-white/70 pointer-events-none"
-                  aria-hidden="true"
-                  animate={enabled ? { y: [0, -8, 0], rotate: [-4, 4, -4] } : undefined}
-                  transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <PartyPopper className="h-4 w-4" />
-                </motion.div>
-                <motion.div
-                  className="absolute right-5 bottom-5 text-white/60 pointer-events-none"
-                  aria-hidden="true"
-                  animate={enabled ? { y: [0, -8, 0], rotate: [4, -4, 4] } : undefined}
-                  transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut", delay: 0.25 }}
-                >
-                  <ScrollText className="h-4 w-4" />
-                </motion.div>
-                <div className="relative z-10 overflow-hidden rounded-xl">
-                  <Image
-                    src="/images/Pop-up card.jpeg"
-                    alt="Short-Term Training 2026"
-                    width={368}
-                    height={220}
-                    priority
-                    className="w-full object-cover"
-                  />
-                </div>
               </motion.div>
-            </div>
-          </motion.div>
+
+              {/* Learn More — at the bottom */}
+              <motion.div
+                className="flex flex-col items-center gap-2 px-6 py-6 sm:px-8"
+                initial={enabled ? { opacity: 0, y: 8 } : false}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.25, ease: "easeOut" }}
+              >
+                <Link
+                  href="/short-term-trainings"
+                  onClick={() => setOpen(false)}
+                  className="btn-solid-green inline-flex w-full items-center justify-center !px-8 !py-3.5 !text-base font-bold shadow-lg shadow-bits-green/25 transition-transform hover:scale-105 active:scale-95"
+                >
+                  Learn More
+                </Link>
+                <span className="text-xs text-bits-muted dark:text-slate-400">
+                  Explore our beginner and advanced tracks.
+                </span>
+              </motion.div>
+            </motion.div>
           </div>
         </motion.div>
       )}

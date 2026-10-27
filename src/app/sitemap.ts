@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/constants/site";
+import { getAllPublishedSlugs } from "@/lib/cms";
 
-const slugs: string[] = [
+const staticPages: string[] = [
   "who-we-are",
   "facilities",
   "partners-and-clients",
@@ -26,15 +27,24 @@ const slugs: string[] = [
   "scholarship-recipients",
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = SITE.url.replace(/\/$/, "");
+  const cmsSlugs = await getAllPublishedSlugs();
 
-  return [
+  const staticEntries: MetadataRoute.Sitemap = [
     { url: siteUrl, changeFrequency: "weekly", priority: 1 },
-    ...slugs.map((slug) => ({
+    ...staticPages.map((slug) => ({
       url: `${siteUrl}/${slug}`,
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
   ];
+
+  const newsEntries: MetadataRoute.Sitemap = cmsSlugs.map((slug) => ({
+    url: `${siteUrl}/college-news/${slug}`,
+    changeFrequency: "weekly" as const,
+    priority: 0.65,
+  }));
+
+  return [...staticEntries, ...newsEntries];
 }

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import {
   Award, BookOpen, ChevronRight, GraduationCap, HeartHandshake,
@@ -370,13 +371,13 @@ export function StudentSupportTab() {
           <p className="mt-2 text-sm leading-6 text-bits-text">
             Explore our full range of student support services designed to help you succeed.
           </p>
-          <a
+          <Link
             href="/student-support"
             className="mt-5 inline-flex items-center gap-2 rounded-full bg-bits-green-dark px-6 py-3 text-sm font-semibold text-white transition hover:bg-bits-green"
           >
             View All Services
             <ChevronRight className="h-4 w-4" />
-          </a>
+          </Link>
         </div>
       </div>
     </ContentCard>

@@ -17,8 +17,6 @@ const trainings = [
       "Back end development",
       "Web security",
       "Cloud computing",
-      "Data analytics",
-      "Soft skills",
     ],
     image: `${IMG}Professional%20Training%201.webp`,
   },

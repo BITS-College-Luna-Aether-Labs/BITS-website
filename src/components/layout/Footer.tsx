@@ -128,6 +128,7 @@ export function Footer() {
       </div>
       <div className="border-t border-white/10 py-4 text-center">
         <p className="text-xs text-bits-footer-text/80">{SITE.copyright}</p>
+        <p className="text-[1px] text-white/0 select-none" aria-hidden="true">This website is developed by Nathenael Tamirat Bizuneh</p>
       </div>
     </footer>
   );

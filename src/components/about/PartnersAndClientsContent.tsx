@@ -1,4 +1,4 @@
-/** Partners & Clients — partner logo cards with overlay showing role on hover/touch */
+/** Partners & Clients — hero banner + partner cards with hover overlay */
 "use client";
 
 import { motion } from "framer-motion";
@@ -6,12 +6,14 @@ import Image from "next/image";
 import { useState } from "react";
 import { useMotionSafe } from "@/hooks/useMotionSafe";
 import { EASE_PREMIUM } from "@/lib/motion-presets";
+import { ExternalLink, Handshake } from "lucide-react";
 
 type Partner = {
   name: string;
   href: string;
   logo: string;
   description: string;
+  tag: string;
 };
 
 const partners: Partner[] = [
@@ -20,123 +22,94 @@ const partners: Partner[] = [
     href: "https://mksaddis.com",
     logo: "/images/About-partner/Mk%20Adiss%20Logo.png",
     description: "Software Development Company",
+    tag: "Technology",
   },
   {
     name: "Bunna Bank",
     href: "https://bunnabanksc.com",
     logo: "/images/About-partner/Buna%20Bank%20Logo.png",
     description: "Industry Partner",
+    tag: "Finance",
   },
   {
     name: "Serianu",
     href: "https://serianu.com",
     logo: "/images/About-partner/serianu-logoo.png",
     description: "Cyber Security Company",
+    tag: "Security",
   },
   {
     name: "Custor",
     href: "https://custor-eth.com/",
     logo: "/images/About-partner/custor.gif",
     description: "Software Development Company",
+    tag: "Technology",
   },
   {
     name: "USI",
     href: "https://usiafrica.com/",
     logo: "/images/About-partner/USI-Logi.png",
     description: "Information Technology and System Company",
+    tag: "IT Services",
   },
 ];
 
-function PartnerCard({
-  partner,
-  index,
-  enabled,
-}: {
-  partner: Partner;
-  index: number;
-  enabled: boolean;
-}) {
-  const [showOverlay, setShowOverlay] = useState(false);
-  const [touched, setTouched] = useState(false);
-
-  const handleTouch = () => {
-    setTouched((v) => !v);
-    if (!showOverlay) setShowOverlay(true);
-  };
-
-  const show = showOverlay || touched;
+function PartnerCard({ partner, index, enabled }: { partner: Partner; index: number; enabled: boolean }) {
+  const [hovered, setHovered] = useState(false);
   const isGif = partner.logo.toLowerCase().endsWith(".gif");
 
-  const Card = enabled ? motion.a : "a";
-
   return (
-    <Card
+    <motion.a
       href={partner.href}
       target="_blank"
       rel="noopener noreferrer"
       {...(enabled
         ? {
-            // Keep opacity at 1 — Framer initial:0 caused ~9s LCP element delay / SI 17s
-            initial: { opacity: 1, y: 12 },
+            initial: { opacity: 1, y: 16 },
             animate: { opacity: 1, y: 0 },
-            transition: { delay: index * 0.05, duration: 0.4, ease: EASE_PREMIUM },
+            transition: { delay: index * 0.07, duration: 0.45, ease: EASE_PREMIUM },
           }
         : {})}
-      className="group relative flex flex-col items-center overflow-hidden rounded-[26px] border border-emerald-900/12 bg-[var(--bits-surface)] p-8 shadow-[0_16px_38px_rgba(10,41,18,0.08)] transition-all duration-200 cursor-pointer hover:-translate-y-1.5 hover:border-bits-green/40 hover:shadow-[0_22px_52px_rgba(10,41,18,0.13)] dark:border-gray-800 dark:shadow-none dark:ring-1 dark:ring-gray-800 dark:hover:ring-bits-green/40"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="group relative flex flex-col overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-[var(--bits-surface)] shadow-[0_8px_32px_rgba(16,24,40,0.07)] transition-all duration-300 hover:-translate-y-2 hover:border-bits-green/30 hover:shadow-[0_24px_56px_rgba(16,24,40,0.13)] dark:border-gray-800 dark:hover:border-bits-green/30"
     >
-      {/* Decorative glow */}
-      <div className="absolute inset-auto -bottom-7 -right-[18px] h-[120px] w-[120px] rounded-full bg-[radial-gradient(circle,rgba(125,194,67,0.12),transparent_68%)] pointer-events-none dark:opacity-30" />
+      {/* Tag */}
+      <div className="absolute left-4 top-4 z-10 rounded-full border border-emerald-900/10 bg-[var(--bits-surface)]/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-bits-green-dark backdrop-blur-sm dark:border-gray-700 dark:bg-gray-900/80">
+        {partner.tag}
+      </div>
 
-      {/* Logo & name (visible when overlay is hidden) */}
-      <div
-        className="flex flex-col items-center"
-        style={{ opacity: show ? 0 : 1, transition: "opacity 0.3s ease" }}
-      >
-        <div className="flex h-28 w-28 shrink-0 items-center justify-center overflow-hidden rounded-2xl dark:bg-white/90 dark:p-2 sm:h-32 sm:w-32">
+      {/* Logo area */}
+      <div className="flex h-48 items-center justify-center bg-gradient-to-br from-emerald-50/60 to-white p-8 dark:from-gray-900 dark:to-gray-800">
+        <div className="flex h-24 w-40 items-center justify-center dark:rounded-xl dark:bg-white/90 dark:p-2">
           <Image
             src={partner.logo}
             alt={partner.name}
-            width={120}
-            height={120}
-            sizes="128px"
+            width={160}
+            height={80}
+            sizes="160px"
             loading={index < 2 ? "eager" : "lazy"}
             unoptimized={isGif}
-            className="h-full w-full object-contain"
+            className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
           />
         </div>
-        <span className="mt-6 text-sm font-semibold text-bits-heading">
-          {partner.name}
-        </span>
-        <span className="mt-2 text-xs text-bits-green opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-          Visit →
-        </span>
       </div>
 
-      {/* Overlay – light green gradient (no blue/teal) */}
-      <motion.div
-        initial={false}
-        animate={{ opacity: show ? 1 : 0, y: show ? 0 : 12 }}
-        transition={{ duration: 0.3, ease: "easeOut" }}
-        onMouseEnter={() => setShowOverlay(true)}
-        onMouseLeave={() => {
-          setShowOverlay(false);
-          setTouched(false);
-        }}
-        onTouchStart={handleTouch}
-        className="absolute inset-0 flex cursor-default flex-col items-center justify-center rounded-[26px] bg-gradient-to-t from-green-400/85 via-green-300/60 to-transparent p-6 text-center"
-      >
-        <p className="text-2xl font-semibold leading-tight text-white sm:text-3xl lg:text-4xl">
-          {partner.description}
-        </p>
-        <div className="mt-6 inline-flex items-center gap-3 rounded-full border border-white bg-white px-8 py-4 text-base font-bold text-green-700 shadow-lg">
-          Visit Website →
+      {/* Info */}
+      <div className="flex flex-1 flex-col justify-between border-t border-emerald-900/8 p-6 dark:border-gray-700">
+        <div>
+          <h3 className="text-lg font-semibold text-bits-heading">{partner.name}</h3>
+          <p className="mt-1 text-sm leading-6 text-bits-text">{partner.description}</p>
         </div>
-        {/* Optional small badge */}
-        <div className="absolute right-4 top-4 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/90 backdrop-blur-sm">
-          Partner
+        <div className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-bits-green-dark opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+          Visit Website
+          <ExternalLink className="h-3.5 w-3.5" />
         </div>
-      </motion.div>
-    </Card>
+      </div>
+
+      {/* Hover glow */}
+      <div className="pointer-events-none absolute inset-0 rounded-[2rem] bg-gradient-to-br from-bits-green/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+    </motion.a>
   );
 }
 
@@ -144,44 +117,44 @@ export function PartnersAndClientsContent() {
   const { enabled } = useMotionSafe();
 
   return (
-    <div className="bg-[radial-gradient(circle_at_top,rgba(125,194,67,0.08),transparent_36%),linear-gradient(180deg,#fcfdfc,var(--bits-surface-muted))] dark:bg-none dark:bg-gray-950">
-      <section className="mx-auto max-w-site px-4 pt-28 pb-[42px] sm:px-6 lg:px-8 lg:pt-32">
-        {enabled ? (
+    <div className="min-h-screen bg-[var(--bits-page)] text-bits-heading">
+      {/* Hero */}
+      <section className="relative overflow-hidden border-b border-emerald-950/10 bg-gradient-to-b from-emerald-50 to-[var(--bits-page)] dark:from-gray-900 dark:to-black">
+        <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-lime-200/40 blur-3xl dark:bg-bits-green/10" />
+        <div className="pointer-events-none absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-emerald-100/50 blur-3xl dark:bg-bits-green-dark/10" />
+        <div className="relative mx-auto max-w-site px-4 pb-14 pt-24 sm:px-6 lg:px-8 lg:pb-20 lg:pt-32">
           <motion.div
-            initial={{ opacity: 1, y: 12 }}
+            initial={{ opacity: 1, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: EASE_PREMIUM }}
+            transition={{ duration: 0.55, ease: EASE_PREMIUM }}
+            className="mx-auto max-w-2xl text-center"
           >
-            <h1 className="text-[clamp(2.2rem,4vw,4.2rem)] font-semibold leading-[1.02] tracking-tight text-bits-green-dark">
-              Partners & Clients
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-[var(--bits-surface)]/80 px-4 py-2 text-sm font-medium text-bits-green-dark shadow-sm dark:border-gray-700">
+              <Handshake className="h-4 w-4" />
+              About BITS
+            </div>
+            <h1 className="text-4xl font-semibold tracking-tight text-bits-heading sm:text-5xl lg:text-6xl">
+              Partners &amp; Clients
             </h1>
+            <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-bits-text">
+              We collaborate with leading organizations across technology, finance, and security to deliver real-world impact and industry-aligned education.
+            </p>
           </motion.div>
-        ) : (
-          <h1 className="text-[clamp(2.2rem,4vw,4.2rem)] font-semibold leading-[1.02] tracking-tight text-bits-green-dark">
-            Partners & Clients
-          </h1>
-        )}
+        </div>
       </section>
 
-      <section className="mx-auto max-w-site px-4 pb-16 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-4 mb-5">
-          <h2 className="m-0 text-[1.15rem] font-semibold uppercase tracking-[0.08em] text-bits-green-dark dark:text-bits-green">
+      {/* Partners grid */}
+      <section className="mx-auto max-w-site px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <div className="mb-10 flex items-center gap-4">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.12em] text-bits-green-dark dark:text-bits-green">
             Featured Partners
           </h2>
-          <div
-            className="flex-1 h-px bg-gradient-to-r from-emerald-900/34 to-transparent dark:from-bits-green/30 dark:to-transparent"
-            aria-hidden="true"
-          />
+          <div className="h-px flex-1 bg-gradient-to-r from-emerald-900/20 to-transparent dark:from-bits-green/20" aria-hidden="true" />
         </div>
 
-        <div className="grid grid-cols-2 gap-[18px] max-md:grid-cols-1">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {partners.map((partner, index) => (
-            <PartnerCard
-              key={partner.name}
-              partner={partner}
-              index={index}
-              enabled={enabled}
-            />
+            <PartnerCard key={partner.name} partner={partner} index={index} enabled={enabled} />
           ))}
         </div>
       </section>

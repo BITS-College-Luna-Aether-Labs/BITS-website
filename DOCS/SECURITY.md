@@ -137,7 +137,7 @@ Report vulnerabilities to BITS College IT via `info@bitscollege.edu.et`.
 - [ ] No `.env` secrets committed (none required today)
 - [ ] Docker app runs as non-root `nextjs` user
 - [ ] Firewall exposes only 22/80/443
-- [ ] `output: "standalone"` still present in `next.config.ts` (the Dockerfile deploys via the standalone server)
+- [ ] `output: "standalone"` present if deploying via current Dockerfile
 
 ---
 

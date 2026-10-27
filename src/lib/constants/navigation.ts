@@ -39,19 +39,19 @@ export const NAV_ITEMS: NavItem[] = [
     children: [
       { label: "Undergraduate Admission", href: "/undergrad-admission" },
       { label: "Graduate Admission", href: "/graduate-admission" },
-      { label: "Scholarship & Aid", href: "/scholarship-aid" },
     ],
   },
   {
     label: "Services",
     children: [
       { label: "Student Support", href: "/student-support" },
-      { label: "Online Learning", href: "https://online.bitscollege.edu.et/" },
+      { label: "E-Learning", href: "https://e-learning.bitscollege.edu.et/my/" },
       {
         label: "Library",
         href: "/library",
       },
       { label: "Professional Trainings", href: "/short-trainings" },
+      { label: "Short-Term Training", href: "/short-term-trainings" },
     ],
   },
   { label: "News & Events", href: "/college-news" },

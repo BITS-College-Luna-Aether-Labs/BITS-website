@@ -13,7 +13,7 @@ import type {
 } from "./cms-types";
 import { STATIC_NEWS_POSTS } from "./constants/news";
 
-function getCmsApiUrl(): string {
+export function getCmsApiUrl(): string {
   return process.env.CMS_API_URL ?? "http://localhost:3000";
 }
 const FETCH_TIMEOUT_MS = 3_500;
@@ -79,9 +79,20 @@ async function cmsFetch<T>(path: string): Promise<T> {
 
 function resolveMediaUrl(url: string | null): string | null {
   if (!url) return null;
-  if (url.startsWith("http") || url.startsWith("/")) return url;
+  if (url.startsWith("http")) return url;
+  if (url.startsWith("/api/media")) {
+    const baseUrl = getCmsApiUrl();
+    return `${baseUrl}${url}`;
+  }
+  if (url.startsWith("/")) return url;
   const baseUrl = getCmsApiUrl();
-  return `${baseUrl}${url.startsWith("/") ? "" : "/"}${url}`;
+  return `${baseUrl}/${url}`;
+}
+
+function resolveContentMedia(html: string): string {
+  if (!html) return html;
+  const baseUrl = getCmsApiUrl();
+  return html.replace(/src=["']\/api\/media\/(\d+)["']/g, `src="${baseUrl}/api/media/$1"`);
 }
 
 function resolvePostMedia(media: CmsPostMedia): CmsPostMedia {
@@ -93,7 +104,11 @@ function resolveReadMoreMedia(media: CmsReadMoreMedia): CmsReadMoreMedia {
 }
 
 function resolvePostListItem(post: CmsPostListItem): CmsPostListItem {
-  return { ...post, media: resolvePostMedia(post.media) };
+  return {
+    ...post,
+    content: resolveContentMedia(post.content),
+    media: resolvePostMedia(post.media),
+  };
 }
 
 function resolvePostDetail(post: CmsPostDetail): CmsPostDetail {
@@ -102,6 +117,7 @@ function resolvePostDetail(post: CmsPostDetail): CmsPostDetail {
     readMore: post.readMore
       ? {
           ...post.readMore,
+          content: resolveContentMedia(post.readMore.content),
           media: post.readMore.media.map(resolveReadMoreMedia),
         }
       : null,
